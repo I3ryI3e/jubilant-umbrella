@@ -1,6 +1,11 @@
 package State_Machine;
 
-public class Wait_Action extends Basic_State {
+import Model.Game;
 
+public class Wait_Action extends State_Adapter {
+
+    public Wait_Action(Game g){
+        super(g);
+    }
     
 }

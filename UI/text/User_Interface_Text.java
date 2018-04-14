@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 
 public class User_Interface_Text {
-    private Game game;
+    private Siege_Game game;
     
-    public User_Interface_Text(Game g){
+    public User_Interface_Text(Siege_Game g){
         this.game=g;
     }
     
@@ -46,7 +46,7 @@ public class User_Interface_Text {
         }
     }
     public static void main() {
-        Game origin = new Game();
+        Siege_Game origin = new Siege_Game();
         User_Interface_Text ui_text = new User_Interface_Text(origin);
         ui_text.run();
     }
