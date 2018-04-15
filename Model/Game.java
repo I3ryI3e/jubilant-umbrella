@@ -1,10 +1,17 @@
 package Model;
 
-import java.util.Set;
+import java.util.List;
+
+
 
 public class Game {
     private Player player;
     private Enemy enemy;
-    private Set<Card> deck;
-    private Set<Card> discard;
+    private List<Card> deck;
+    private List<Card> discard;
+
+    public Game(){
+        this.player= new Player();
+        this.enemy= new Enemy();
+    }
 }
