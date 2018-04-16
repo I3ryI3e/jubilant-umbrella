@@ -45,7 +45,4 @@ public class Enemy {
         if(siege_tower >= 0 && siege_tower < 5)
             this.siege_tower = siege_tower;
     }
-    
-    
-    
 }
