@@ -26,13 +26,72 @@ public class Siege_Game {
     public State_Adapter getState() {
         return state;
     }
+    
+    public boolean is_ladder(int pos){
+        return (game.getEnemy().getLadder() == pos);
+    }
+    
+    public boolean is_battering_ram(int pos){
+        return (game.getEnemy().getBattering_ram() == pos);
+    }
+    
+    public boolean is_siege_tower(int pos){
+        return (game.getEnemy().getSiege_tower() == pos);
+    }
 
     public boolean can_archers(){
-        if(game.getEnemy().getLadder() == game.getEnemy().getBattering_ram() && game.getEnemy().getSiege_tower() == 4)
-            return false;
+        return !(is_ladder(4) && is_battering_ram(4) && is_siege_tower(4));
     }
     
     public void archers(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean can_boilling(){
+        return (is_ladder(1) || is_battering_ram(1) || is_siege_tower(1));
+    }
+    
+    public void boilling(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean can_close_combat(){
+        return (is_ladder(0) || is_battering_ram(0) || is_siege_tower(0));
+    }
+    
+    public void close_combat(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean can_coupure(){
+        return (game.getPlayer().getWall() != 4);
+    }
+
+    public void coupure(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean can_rally(){
+        return (game.getPlayer().getMorale() != 4);
+    }
+    
+    public void rally(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean can_supply(){
+        return (game.getPlayer().getTunnel() == 3 && game.getPlayer().getRaided_supplies() != 2);
+    }
+    
+    public void supply(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean can_sabotage(){
+        return (game.getPlayer().getTunnel() == 3);
+    }
+    
+    public void sabotage(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

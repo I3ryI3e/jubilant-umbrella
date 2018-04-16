@@ -45,4 +45,8 @@ public class Enemy {
         if(siege_tower >= 0 && siege_tower < 5)
             this.siege_tower = siege_tower;
     }
+    
+    public String enemy_location(){
+        return ("Track positions: Ladder -> " + getLadder() + "  Baterring Ram -> " + getBattering_ram() + "Siege Tower -> " + getSiege_tower());
+    }
 }

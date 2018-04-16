@@ -4,7 +4,6 @@ import Model.*;
 import State_Machine.*;
 import java.util.Scanner;
 
-
 public class User_Interface_Text {
     private Siege_Game game;
     private boolean quit = false;
@@ -39,15 +38,22 @@ public class User_Interface_Text {
                 break;
         }  
     }
+    
     public void wait_action_text(){
         int option;
         System.out.println("\n9 CARD SIEGE!!\n");
-        System.out.println("\t1- Archers Attack\n\t2- Boilling Water Attack\n\t3- Close Combat Attack\n\t4- Coupure\n\t"
-                + "5- Rally Troops\n\t6- Tunnel Movement\n\t7- Supply Raid\n\t8- Sabotage\n\n\n9- Save Game");
+        System.out.println((game.can_archers()?"\t1- Archers Attack\n":"") + (game.can_boilling()?"\t2- Boilling Water Attack\n":"") + 
+                (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.can_coupure()?"\t4- Coupure\n":"") + 
+                (game.can_rally()?"\t5- Rally Troops\n":"") + "\t6- Tunnel Movement\n" + (game.can_supply()?"\t7- Supply Raid\n":"") + 
+                (game.can_sabotage()?"\t8- Sabotage\n":"") + "\n\n9- Save Game");
         option = read_int();
         int dice = (int) (Math.random()*5+1);
         switch(option){
             case 1:
+                System.out.println(game.getGame().getEnemy().enemy_location());
+                System.out.println("Which one to atack:  " + (!game.is_ladder(4)?"1- Ladder":"") +
+                        (!game.is_battering_ram(4)?"2- Battering Ram":"") + (!game.is_siege_tower(4)?"3- Siege Tower":""));
+                //  FINNISH THIS!!!
                 game.archers(dice);
                 break;
             case 2:
@@ -74,6 +80,7 @@ public class User_Interface_Text {
                 break;
         }
     }
+    
 //    public void draw_card_text(){
 //        
 //    }
@@ -88,8 +95,8 @@ public class User_Interface_Text {
                 wait_action_text();
             }
         }
-        
     }
+    
     public static void main() {
         Siege_Game origin = new Siege_Game();
         User_Interface_Text ui_text = new User_Interface_Text(origin);

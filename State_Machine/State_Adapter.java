@@ -1,4 +1,3 @@
-
 package State_Machine;
 
 import Model.Game;
@@ -21,9 +20,4 @@ public class State_Adapter implements States {
     public States Start_Game() {
         return this;
     }
-    
-   
-    
-
-    
 }
