@@ -5,8 +5,8 @@ import java.util.List;
 
 
 public class Game {
-    private Player player;
-    private Enemy enemy;
+    private final Player player;
+    private final Enemy enemy;
     private List<Card> deck;
     private List<Card> discard;
 
