@@ -1,8 +1,14 @@
 package Model;
 
 public abstract class Event {
-    private String text;
+    private final String text;
     
-    abstract String getText();
+    public Event(String t){
+        text=t;
+    }
+    public String getText(){
+        return text;
+    }
     abstract public void runEvent(Siege_Game game);
 }
+
