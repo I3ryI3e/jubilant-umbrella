@@ -6,12 +6,12 @@ import java.util.List;
 
 public class Day {
     private final int n_player_actions;
-    private final ArrayList<Enemy_Attack> enemy_attack;
-    private final ArrayList<Event> action;
+    private final List<Enemy_Attack> enemy_attack;
+    private final Event event;
     
-    public Day(int npa, List <Enemy_Attack> ea, List <Event> a){        
+    public Day(int npa, List<Enemy_Attack> ea, Event a){        
         this.n_player_actions = npa;
         enemy_attack= new ArrayList<>(ea);
-        action = new ArrayList<>(a);
+        event = a;
     }
 }

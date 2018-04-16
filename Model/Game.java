@@ -1,8 +1,10 @@
 package Model;
 
+import Card_Events.Trebuchet_Attack;
+import Model.*;
+import Model.Constants.Enemy_Attack;
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Game {
     private final Player player;
@@ -21,5 +23,22 @@ public class Game {
 
     public Enemy getEnemy() {
         return enemy;
+    }
+    private Card create_card_1(){
+        Card card = new Card(1);
+        List <Enemy_Attack> aux = new ArrayList<>();
+        aux.add(Enemy_Attack.NONE);
+        Day day = new Day(3,aux,new Trebuchet_Attack());
+        card.addDay(day);
+        day= new Day(2,aux,new Trebuchet_Attack());
+        card.addDay(day);
+        day = new Day(1,aux,new Trebuchet_Attack());
+        card.addDay(day);
+        return card;
+    }
+    
+    void setup() {
+        deck.add(create_card_1());
+        
     }
 }
