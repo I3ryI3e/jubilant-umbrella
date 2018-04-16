@@ -1,13 +1,17 @@
 package Model;
 
+import Model.Constants.Enemy_Attack;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Day {
     private final int n_player_actions;
-    private final int enemy_attack;                                                   // 0 - None; 1- Ladder; 3- Ram; 5- Siege; 7-Sword
-    private final Event action;
+    private final ArrayList<Enemy_Attack> enemy_attack;                                                 
+    private final ArrayList<Event> action;
     
-    public Day(int npa, int ea, Event a){        
+    public Day(int npa, List <Enemy_Attack> ea, List <Event> a){        
         this.n_player_actions = npa;
-        this.enemy_attack = ea;
-        this.action = a;
+        enemy_attack= new ArrayList<>(ea);
+        action = new ArrayList<>(a);
     }
 }
