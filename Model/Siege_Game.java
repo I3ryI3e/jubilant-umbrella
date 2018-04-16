@@ -27,7 +27,12 @@ public class Siege_Game {
         return state;
     }
 
+    public boolean can_archers(){
+        if(game.getEnemy().getLadder() == game.getEnemy().getBattering_ram() && game.getEnemy().getSiege_tower() == 4)
+            return false;
+    }
     
-    
-    
+    public void archers(int dice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

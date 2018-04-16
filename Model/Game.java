@@ -14,4 +14,12 @@ public class Game {
         this.player= new Player();
         this.enemy= new Enemy();
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Enemy getEnemy() {
+        return enemy;
+    }
 }
