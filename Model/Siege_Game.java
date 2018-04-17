@@ -42,8 +42,8 @@ public class Siege_Game {
         return !(is_ladder(4) && is_battering_ram(4) && is_siege_tower(4));
     }
     
-    public void archers(int dice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void archers(int dice, int enemy_mov) {
+        
     }
 
     public boolean can_boilling(){
