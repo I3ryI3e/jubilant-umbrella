@@ -24,4 +24,10 @@ public class State_Adapter implements States {
     public States archers(){
         return this;
     }
+
+    @Override
+    public States setActions(int na) {
+        return this;
+    }
+    
 }

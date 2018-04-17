@@ -15,7 +15,7 @@ public class Day implements Constants{
     }
     
     public void do_Day(Siege_Game game){
-        game.getGame().getPlayer().setActions(n_player_actions);
-        game.getGame().getEnemy().
+        game.setActions(n_player_actions);
+        game.//
     }
 }

@@ -1,6 +1,8 @@
 package Model;
 
+import Model.Constants.Enemy_Attack;
 import State_Machine.*;
+import java.util.List;
 
 public class Siege_Game {
     private Game game;
@@ -99,5 +101,11 @@ public class Siege_Game {
     }
     public void archers(){
         setState(state.archers());
+    }
+    public void setActions(int na){
+        setState(state.setActions(na));
+    }
+    public void makeAttack(List<Enemy_Attack> ea){
+        
     }
 }

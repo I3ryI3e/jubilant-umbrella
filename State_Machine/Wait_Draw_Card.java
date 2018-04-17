@@ -13,4 +13,12 @@ public class Wait_Draw_Card extends State_Adapter {
     public States Draw_Card(){
         return new Wait_Action(getGame());
     }
+
+    @Override
+    public States setActions(int na) {
+        getGame().getPlayer().setActions(na);
+        return this;
+    }
+    
+    
 }
