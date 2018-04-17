@@ -2,7 +2,7 @@ package Model;
 
 import State_Machine.*;
 
-public class Siege_Game {
+public class Siege_Game implements Constants{
     private Game game;
     private States state;
 
@@ -40,10 +40,6 @@ public class Siege_Game {
 
     public boolean can_archers(){
         return !(is_ladder(4) && is_battering_ram(4) && is_siege_tower(4));
-    }
-    
-    public void archers(int dice, int enemy_mov) {
-        
     }
 
     public boolean can_boilling(){
@@ -97,7 +93,7 @@ public class Siege_Game {
     public void setup() {
         game.setup();
     }
-    public void archers(){
-        setState(state.archers());
+    public void archers(int dice, Enemy_Attack enemy_mov){
+        setState(state.archers(dice, enemy_mov));
     }
 }

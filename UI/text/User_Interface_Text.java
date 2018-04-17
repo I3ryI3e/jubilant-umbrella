@@ -4,7 +4,7 @@ import Model.*;
 import State_Machine.*;
 import java.util.Scanner;
 
-public class User_Interface_Text {
+public class User_Interface_Text implements Constants{
     private Siege_Game game;
     private boolean quit = false;
     
@@ -40,7 +40,8 @@ public class User_Interface_Text {
     }
     
     public void wait_action_text(){
-        int option, aux;
+        int option;
+        Enemy_Attack aux;
         System.out.println("\nPlayer Action:\n");
         System.out.println((game.can_archers()?"\t1- Archers Attack\n":"") + (game.can_boilling()?"\t2- Boilling Water Attack\n":"") + 
                 (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.can_coupure()?"\t4- Coupure\n":"") + 
@@ -82,7 +83,7 @@ public class User_Interface_Text {
         }
     }
     
-    private int archers() throws MyException{
+    private Enemy_Attack archers() throws MyException{
         int opt;
         System.out.println(game.getGame().getEnemy().enemy_location());
         System.out.println("Which one to atack:  " + (!game.is_ladder(4)?"\t1- Ladder\n":"") +
@@ -91,7 +92,13 @@ public class User_Interface_Text {
         if(opt != 1 && opt != 2 && opt != 3){
             throw new MyException();
         }
-        return opt;
+        switch(opt){
+            case 1:
+                return Enemy_Attack.LADDERS;
+            case 2:
+                return Enemy_Attack.BATTERING_RAM;
+        }
+        return Enemy_Attack.SIEGE_TOWER;
     }
     
 //    public void draw_card_text(){

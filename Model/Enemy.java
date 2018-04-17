@@ -25,16 +25,13 @@ public class Enemy {
         for (Enemy_Attack enemy_Attack : ea) {
             switch(enemy_Attack){
                 case LADDERS:
-                    if(ladder>0)
-                        ladder--;
+                    setLadder(getLadder()-1);
                     break;
                 case BATTERING_RAM:
-                    if(battering_ram >0)
-                        battering_ram--;
+                    setBattering_ram(getBattering_ram()-1);
                     break;
                 case SIEGE_TOWER:
-                    if(siege_tower >0)
-                        siege_tower--;
+                    setSiege_tower(getSiege_tower()-1);
                     break;
                 default:
                     break;
