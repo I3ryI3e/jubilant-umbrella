@@ -1,11 +1,10 @@
 package Model;
 
-import State_Machine.Initial_State;
-import State_Machine.State_Adapter;
+import State_Machine.*;
 
 public class Siege_Game {
     private Game game;
-    private State_Adapter state;
+    private States state;
 
     public Siege_Game(){
         this.game = new Game();
@@ -15,7 +14,7 @@ public class Siege_Game {
         this.game = game;
     }
 
-    public void setState(State_Adapter state) {
+    private void setState(States state) {
         this.state = state;
     }
 
@@ -23,7 +22,7 @@ public class Siege_Game {
         return game;
     }
 
-    public State_Adapter getState() {
+    public States getState() {
         return state;
     }
     
@@ -97,5 +96,8 @@ public class Siege_Game {
 
     public void setup() {
         game.setup();
+    }
+    public void archers(){
+        setState(state.archers());
     }
 }

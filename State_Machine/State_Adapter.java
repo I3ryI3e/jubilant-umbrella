@@ -20,4 +20,8 @@ public class State_Adapter implements States {
     public States Start_Game() {
         return this;
     }
+    @Override
+    public States archers(){
+        return this;
+    }
 }

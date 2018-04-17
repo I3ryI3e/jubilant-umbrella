@@ -6,6 +6,7 @@ public class Player {
     private int wall;
     private int tunnel;
     private int raided_supplies;
+    private int actions;
     
     public Player(){
         this.supply = this.morale = this.wall = 4;
@@ -16,6 +17,12 @@ public class Player {
         return supply;
     }
 
+    public int getActions(){
+        return actions;
+    }
+    public void setActions(int a){
+        actions = a;
+    }
     public void setSupply(int supply) {
         if(supply >= 0 && supply < 5)
             this.supply = supply;

@@ -1,5 +1,8 @@
 package Model;
 
+import Model.Constants.Enemy_Attack;
+import java.util.List;
+
 public class Enemy {
     private int trebutchet;
     private int ladder;
@@ -17,6 +20,26 @@ public class Enemy {
     public void setTrebutchet(int trebutchet) {
         if(trebutchet > 0 && trebutchet < 4)
             this.trebutchet = trebutchet;
+    }
+    public void make_Attack(List<Enemy_Attack> ea){
+        for (Enemy_Attack enemy_Attack : ea) {
+            switch(enemy_Attack){
+                case LADDERS:
+                    if(ladder>0)
+                        ladder--;
+                    break;
+                case BATTERING_RAM:
+                    if(battering_ram >0)
+                        battering_ram--;
+                    break;
+                case SIEGE_TOWER:
+                    if(siege_tower >0)
+                        siege_tower--;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public int getLadder() {

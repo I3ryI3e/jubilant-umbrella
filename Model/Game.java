@@ -1,7 +1,6 @@
 package Model;
 
 import Card_Events.Trebuchet_Attack;
-import Model.*;
 import Model.Constants.Enemy_Attack;
 import java.util.ArrayList;
 import java.util.List;
