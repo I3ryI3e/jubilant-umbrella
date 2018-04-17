@@ -93,8 +93,9 @@ public class Siege_Game {
     
     public void sabotage(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public void setup() {
-        this.game.setup();
+        game.setup();
     }
 }

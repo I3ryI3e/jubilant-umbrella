@@ -37,7 +37,7 @@ public class Game {
         return card;
     }
     
-    void setup() {
+    public void setup() {
         deck.add(create_card_1());
         
     }

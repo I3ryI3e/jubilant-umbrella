@@ -1,10 +1,9 @@
 package Model;
 
-import Model.Constants.Enemy_Attack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day {
+public class Day implements Constants{
     private final int n_player_actions;
     private final List<Enemy_Attack> enemy_attack;
     private final Event event;
