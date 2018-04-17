@@ -40,8 +40,8 @@ public class User_Interface_Text {
     }
     
     public void wait_action_text(){
-        int option;
-        System.out.println("\n9 CARD SIEGE!!\n");
+        int option, aux;
+        System.out.println("\nPlayer Action:\n");
         System.out.println((game.can_archers()?"\t1- Archers Attack\n":"") + (game.can_boilling()?"\t2- Boilling Water Attack\n":"") + 
                 (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.can_coupure()?"\t4- Coupure\n":"") + 
                 (game.can_rally()?"\t5- Rally Troops\n":"") + "\t6- Tunnel Movement\n" + (game.can_supply()?"\t7- Supply Raid\n":"") + 
@@ -50,11 +50,12 @@ public class User_Interface_Text {
         int dice = (int) (Math.random()*5+1);
         switch(option){
             case 1:
-                System.out.println(game.getGame().getEnemy().enemy_location());
-                System.out.println("Which one to atack:  " + (!game.is_ladder(4)?"1- Ladder":"") +
-                        (!game.is_battering_ram(4)?"2- Battering Ram":"") + (!game.is_siege_tower(4)?"3- Siege Tower":""));
-                //  FINNISH THIS!!!
-                game.archers(dice);
+                try{
+                    aux = archers();
+                }catch(MyException e){
+                    break;
+                }
+                    game.archers(dice, aux);
                 break;
             case 2:
                 game.boilling(dice);
@@ -79,6 +80,18 @@ public class User_Interface_Text {
             default:
                 break;
         }
+    }
+    
+    private int archers() throws MyException{
+        int opt;
+        System.out.println(game.getGame().getEnemy().enemy_location());
+        System.out.println("Which one to atack:  " + (!game.is_ladder(4)?"\t1- Ladder\n":"") +
+                (!game.is_battering_ram(4)?"\t2- Battering Ram\n":"") + (!game.is_siege_tower(4)?"\t3- Siege Tower\n":"") + "\t4- Return\n");
+        opt = read_int();
+        if(opt != 1 && opt != 2 && opt != 3){
+            throw new MyException();
+        }
+        return opt;
     }
     
 //    public void draw_card_text(){
