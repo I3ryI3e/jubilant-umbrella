@@ -1,7 +1,7 @@
 package Model;
 
 public class Player {
-    private int supply;
+    private int supplies;
     private int morale;
     private int wall;
     private int tunnel;
@@ -9,12 +9,12 @@ public class Player {
     private int actions;
     
     public Player(){
-        this.supply = this.morale = this.wall = 4;
+        this.supplies = this.morale = this.wall = 4;
         this.tunnel = this.raided_supplies = 0;
     }
     
-    public int getSupply() {
-        return supply;
+    public int getSupplies() {
+        return supplies;
     }
 
     public int getActions(){
@@ -23,13 +23,13 @@ public class Player {
     public void setActions(int a){
         actions = a;
     }
-    public void setSupply(int supply) {
-        if(supply >= 0 && supply < 5)
-            this.supply = supply;
-        else if(supply < 0)
-            this.supply = 0;
-        else if(supply > 4)
-            this.supply = 4;
+    public void setSupplies(int supplies) {
+        if(supplies >= 0 && supplies < 5)
+            this.supplies = supplies;
+        else if(supplies < 0)
+            this.supplies = 0;
+        else if(supplies > 4)
+            this.supplies = 4;
     }
 
     public int getMorale() {

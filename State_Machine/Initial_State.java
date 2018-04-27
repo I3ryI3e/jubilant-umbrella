@@ -9,7 +9,7 @@ public class Initial_State extends State_Adapter {
     }
 
     @Override
-    public States Start_Game() {
+    public States New_Game() {
         return new Wait_Draw_Card(getGame());
     }
     

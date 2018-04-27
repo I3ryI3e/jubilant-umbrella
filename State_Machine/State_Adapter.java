@@ -8,26 +8,22 @@ public class State_Adapter implements States, Constants {
     public State_Adapter(Game g){
         this.game=g;
     }
-    public Game getGame(){
-        return game;
-    }
+    public Game getGame(){return game;}
     @Override
-    public States Draw_Card() {
-        return this;
-    }
-
+    public States Draw_Card() {return this;}
     @Override
-    public States Start_Game() {
-        return this;
-    }
+    public States New_Game() {return this;}
     @Override
-    public States archers(int dice, Enemy_Attack enemy_mov){
-        return this;
-    }
-
+    public States archers(int dice, Enemy_Attack enemy_mov){return this;}
     @Override
-    public States setActions(int na) {
-        return this;
-    }
+    public States setActions(int na) {return this;}
+    @Override
+    public States Rally_Troops() {return this;}
+    @Override
+    public States Boiling() {return this;}
+    @Override
+    public States Tunnel() {return this;}
+    @Override
+    public States Apply_Action_Rules() {return this;}
     
 }
