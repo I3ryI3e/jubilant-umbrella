@@ -3,15 +3,17 @@ package Model;
 import Model.Constants.Enemy_Attack;
 import java.util.List;
 
-public class Enemy {
+public class Enemy implements Constants {
     private int trebutchet;
-    private int ladder;
-    private int battering_ram;
-    private int siege_tower;
+    private Track ladder;
+    private Track battering_ram;
+    private Track siege_tower;
 
     public Enemy(){
         this.trebutchet = 3;
-        this.battering_ram = this.ladder = this.siege_tower = 4;
+        ladder = new Track(new Ladder());
+        battering_ram = new Track(new Ram());
+        siege_tower= new Track(new Siege());
     }
     public int getTrebutchet() {
         return trebutchet;
@@ -32,6 +34,9 @@ public class Enemy {
                     break;
                 case SIEGE_TOWER:
                     setSiege_tower(getSiege_tower()-1);
+                    break;
+                case SWORD: 
+                    //TODO!!!!!!
                     break;
                 default:
                     break;

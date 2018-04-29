@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Card {
+public abstract class Card implements Constants {
     private final int card_number;
     private final ArrayList<Day> days;
     
@@ -17,9 +17,9 @@ public class Card {
         //FAZER TRY CATCH THROW SHIT STUFF WHATEVER
     }
     
-    public boolean addDay(Day nd){
+    public final boolean addDay(Day nd){
         if(days.size() < 3){
-         days.add(nd);
+         days.add(days.size(), nd);
          return true;
         }
         return false;

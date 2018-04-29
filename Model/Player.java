@@ -1,16 +1,18 @@
 package Model;
 
 public class Player {
-    private int supplies;
-    private int morale;
-    private int wall;
+    private Track supplies;
+    private Track morale;
+    private Track wall;
     private int tunnel;
     private int raided_supplies;
     private int actions;
     
     public Player(){
-        this.supplies = this.morale = this.wall = 4;
-        this.tunnel = this.raided_supplies = 0;
+        supplies = new Track(new Supply());
+        morale = new Track(new Morale());
+        wall = new Track(new Wall());
+        this.tunnel = this.raided_supplies = this.actions= 0;
     }
     
     public int getSupplies() {
