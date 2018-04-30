@@ -56,23 +56,23 @@ public class Player {
             this.raided_supplies = 2;
     }
 
-    public void goForwardWall() { //TODO
-        wall.goForward();
+    public void raiseWall() { 
+        wall.raise();
     }
-    public void goForwardSuppies(){
-        supplies.goForward();
+    public void raiseSuppies(){
+        supplies.raise();
     }
-    public void goForwardMorale(){
-        morale.goForward();
+    public void raiseMorale(){
+        morale.raise();
     }
-    public void goBackwardWall(){
-        wall.goBackward();
+    public void decreaseWall(){
+        wall.decrease();
     }
-    public void goBackwardSupplies(){
-        supplies.goBackward();
+    public void decreaseSupplies(){
+        supplies.decrease();
     }
-    public void goBackwardMorale(){
-        morale.goBackward();
+    public void decreaseMorale(){
+        morale.decrease();
     }
 
     public boolean isWallStartingSpace() throws MyException {
@@ -81,4 +81,15 @@ public class Player {
     public boolean isMoraleStartingSpace() throws MyException{
         return morale.getPiecePosition() == morale.getTrackSize()-1;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(wall);
+        aux.append(morale);
+        aux.append(supplies);
+        aux.append(actions);
+        return aux.toString();
+    }
+    
 }

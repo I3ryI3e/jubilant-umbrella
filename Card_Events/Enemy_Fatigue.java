@@ -7,7 +7,7 @@ import Model.Siege_Game;
 public class Enemy_Fatigue extends Event {
 
     public Enemy_Fatigue() {
-        super("+1 to Coupure, Raid and Sabotage actions.");
+        super("{ENEMY FATIGUE}\n+1 to Coupure, Raid and Sabotage actions.");
     }
 
     @Override

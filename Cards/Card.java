@@ -17,6 +17,7 @@ public abstract class Card implements Constants {
         if(day > 0 && day < days.size())
             return days.get(day);
         //FAZER TRY CATCH THROW SHIT STUFF WHATEVER
+        return days.get(0); //TESTES!
     }
     
     public final boolean addDay(Day nd){
@@ -26,4 +27,15 @@ public abstract class Card implements Constants {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append("Card Number: ").append(card_number).append("\n");
+        for (int i = 0; i < days.size(); i++) {
+            aux.append(days.get(i));
+        }
+        return aux.toString();
+    }
+    
 }

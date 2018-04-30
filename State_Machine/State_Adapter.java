@@ -21,7 +21,7 @@ public class State_Adapter implements States, Constants {
     public States Boiling() {return this;}
     @Override
     public States Tunnel() {return this;}
-    @Overridex
+    @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
     @Override
     public States archers() {return this;}
@@ -29,5 +29,5 @@ public class State_Adapter implements States, Constants {
     public States returnWaitAction() {return this;}
     @Override
     public States ReduceMoralEvent() {return this;}
-    
+
 }

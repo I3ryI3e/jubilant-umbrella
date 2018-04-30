@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Faith extends Event{
 
     public Faith() {
-        super("+1 to attacks on Battering Ram, Ladders and Morale action.");
+        super("{FAITH}\n+1 to attacks on Battering Ram, Ladders and Morale action.");
     }
 
     @Override

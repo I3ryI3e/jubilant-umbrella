@@ -43,5 +43,11 @@ public abstract class Event {
         return 0;
     }
     abstract public void runEvent(Siege_Game game);
+
+    @Override
+    public String toString() {
+        return text + "\n";
+    }
+    
 }
 

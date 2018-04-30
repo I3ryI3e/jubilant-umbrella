@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Gate_Fortified extends Event {
 
     public Gate_Fortified() {
-        super("+1 to attacks on Battering Rams.");
+        super("{GATE FORTIFIED}\n+1 to attacks on Battering Rams.");
     }
 
     @Override

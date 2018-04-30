@@ -93,6 +93,7 @@ public class Siege_Game implements Constants{
 
     public void setup() {
         game.setup();
+        setState(state.New_Game());
     }
     public void stateArchers(){
         setState(state.archers());
@@ -115,5 +116,11 @@ public class Siege_Game implements Constants{
     public void ReduceMoralEvent() {
         setState(state.ReduceMoralEvent());
     }
+
+    @Override
+    public String toString() {
+        return game.toString();
+    }
+    
     
 }

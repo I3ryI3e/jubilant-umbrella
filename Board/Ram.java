@@ -7,5 +7,10 @@ public class Ram implements Weapon {
     public int getPower() {
         return 3;
     }
+
+    @Override
+    public String getName() {
+        return "Battering Ram";
+    }
     
 }

@@ -30,7 +30,7 @@ public class User_Interface_Text implements Constants{
                 game.setup();
                 break;
             case 2:
-                game.load();
+                //game.load();
                 break;
             case 3:
                 quit = true;
@@ -60,7 +60,7 @@ public class User_Interface_Text implements Constants{
                 game.rally();
                 break;
             case 6:
-                game.tunnel();
+                //game.tunnel();
                 break;
             case 7:
                 game.supply();
@@ -90,12 +90,12 @@ public class User_Interface_Text implements Constants{
         try {
             str.append(game.canRally()?"\t5- Rally Troops\n":"");
         } catch (MyException e) {}
-        try {
-            str.append(game.canSupply()?"\t7- Supply Raid\n":"");
-        } catch (MyException e) {}
-        try {
-            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
-        } catch (MyException e) {}
+//        try {
+//            str.append(game.canSupply()?"\t7- Supply Raid\n":"");
+//        } catch (MyException e) {}
+//        try {
+//            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
+//        } catch (MyException e) {}
         
         str.append("\n\t9- Save game\n");
         
@@ -132,17 +132,20 @@ public class User_Interface_Text implements Constants{
         }
     }
     
-//    public void draw_card_text(){
-//        
-//    }
+    public void draw_card_text(){
+        System.out.println(game);
+        int opt=read_int(); 
+    }
     
     public void run(){
-        
-        States state = game.getState();
+        States state =null;
         while(!quit){
+            state = game.getState();
             if( state instanceof Initial_State){
                 initial_text();
-            }else if ( state instanceof Wait_Action){
+            }else if (state instanceof Wait_Draw_Card){
+                draw_card_text();
+            }else if( state instanceof Wait_Action){
                 wait_action_text();
             }else if ( state instanceof Wait_Archers) {
                 archersText();
@@ -150,7 +153,7 @@ public class User_Interface_Text implements Constants{
         }
     }
     
-    public static void main() {
+    public static void main(String[] args) {
         Siege_Game origin = new Siege_Game();
         User_Interface_Text ui_text = new User_Interface_Text(origin);
         ui_text.run();

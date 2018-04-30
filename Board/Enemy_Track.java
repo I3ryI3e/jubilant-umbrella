@@ -13,16 +13,16 @@ public class Enemy_Track extends Track {
         track = new ArrayList<>(TAM_TRACKS_ENEMY);
         int i =0;
         for (; i < N_ENEMY_CLOSE_COMBAT; i++) {
-            track.set(i, new Close_Combat_Square());
+            track.add(i, new Close_Combat_Square());
         }
         for(; i < N_ENEMY_CLOSE_COMBAT+N_ENEMY_CIRCLES;i++){
-            track.set(i, new Circle());
+            track.add(i, new Circle());
         }
         for(; i< TAM_TRACKS_ENEMY;i++){
             if(i==TAM_TRACKS_ENEMY-1){
-                track.set(i,new Square(p));
+                track.add(i,new Square(p));
             }else
-                track.set(i, new Square());
+                track.add(i, new Square());
         }
         
     }

@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Repaired_Trebuchet extends Event{
 
     public Repaired_Trebuchet() {
-        super("Add 1 Trebuchet (max 3).\n+1 to Coupure action.");
+        super("{REPAIRED TREBUCHET}\nAdd 1 Trebuchet (max 3).\n+1 to Coupure action.");
     }
     
 

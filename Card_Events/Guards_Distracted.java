@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Guards_Distracted extends Event{
 
     public Guards_Distracted() {
-        super("+1 to Sabotage action.\n+1 to Morale action.");
+        super("{GUARDS DISTRACTED}\n+1 to Sabotage action.\n+1 to Morale action.");
     }
 
     @Override

@@ -7,7 +7,7 @@ import Model.Siege_Game;
 public class Flaming_Arrows extends Event {
 
     public Flaming_Arrows() {
-        super("+1 to attacks on Siege Tower.");
+        super("{FLAMING ARROWS}\n+1 to attacks on Siege Tower.");
     }
 
     @Override

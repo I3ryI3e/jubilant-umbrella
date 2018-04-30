@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Determined_Enemy extends Event {
 
     public Determined_Enemy() {
-        super("-1 to attacks on Battering Ram");
+        super("{DETERMINED ENEMY}\n-1 to attacks on Battering Ram");
     }
 
     @Override

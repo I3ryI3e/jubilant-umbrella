@@ -7,7 +7,7 @@ import Model.Siege_Game;
 public class Cover_of_Darkness extends Event {
 
     public Cover_of_Darkness() {
-        super("+1 to Raid and Sabotage actions.");
+        super("{COVER OF DARKNESS}\n+1 to Raid and Sabotage actions.");
     }
 
     @Override

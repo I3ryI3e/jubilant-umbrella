@@ -16,4 +16,16 @@ public class Day implements Constants{
     public Event getEvent(){
         return event;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder aux=new StringBuilder();
+        aux.append("Number Player Actions: ").append(n_player_actions).append("\n");
+        for (int i = 0; i < enemy_attack.size(); i++) {
+            aux.append(enemy_attack.get(i).toString()).append("\n");   
+        }
+        aux.append(event).append("\n");
+        return aux.toString();
+    }
+    
 }

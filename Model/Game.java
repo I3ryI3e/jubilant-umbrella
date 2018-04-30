@@ -4,6 +4,8 @@ import Board.Enemy;
 import Board.Player;
 import Cards.*;
 import Model.Constants.Enemy_Attack;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class Game {
     public Game(){
         this.player= new Player();
         this.enemy= new Enemy();
+        deck = new ArrayList<>();
+        discard = new ArrayList<>();
         this.game_day = 0;
     }
     
@@ -44,6 +48,7 @@ public class Game {
         deck.add(4,new Card5());
         deck.add(5,new Card6());
         deck.add(6,new Card7());
+        Collections.shuffle(deck);
     }
     public void archers(Enemy_Attack enemy_mov) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
@@ -68,6 +73,17 @@ public class Game {
 
     public void removeSiegeFromGame() {
         enemy.removeSiegeFromGame();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(player);
+        aux.append(enemy);
+        for (int i = 0; i < deck.size(); i++) {
+            aux.append(deck.get(i).toString());
+        }
+        return aux.toString();
     }
     
 }

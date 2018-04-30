@@ -101,4 +101,15 @@ public class Enemy implements Constants {
     public void goBackwardSiegeTower(){
         siege_tower.goBackward();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(ladder);
+        aux.append(battering_ram);
+        aux.append(siege_tower);
+        aux.append("Trebuchet =").append(trebutchet).append("\n");
+        return aux.toString();
+    }
+    
 }

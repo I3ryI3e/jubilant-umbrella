@@ -4,6 +4,8 @@ package Board;
 import Model.Constants;
 import Model.MyException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class Track implements Constants {
     protected List<Position> track;
@@ -23,4 +25,15 @@ public abstract class Track implements Constants {
     public int getTrackSize(){
         return track.size();
     }
+
+    @Override
+    public String toString() {
+        try {
+            return track.get(getPiecePosition()).getPiece().getName() + " is on " + getPiecePosition() + " position\n";
+        } catch (MyException ex) {
+            Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Erro nas Tracks to String";
+    }
+    
 }

@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Collapsed extends Event {
 
     public Collapsed() {
-        super("Siege Tower removed from game if on starting space");
+        super("{COLLAPSED}\nSiege Tower removed from game if on starting space");
     }
 
     @Override

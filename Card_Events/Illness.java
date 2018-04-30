@@ -7,7 +7,7 @@ import Model.Siege_Game;
 public class Illness extends Event {
 
     public Illness() {
-        super("Reduce Morale by 1.\nReduce Supplies by 1.");
+        super("{ILLNESS}\nReduce Morale by 1.\nReduce Supplies by 1.");
     }
 
     @Override

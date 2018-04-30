@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Volley_of_Arrows extends Event{
 
     public Volley_of_Arrows() {
-        super("+1 to all attacks");
+        super("{VALLEY OF ARROWS}\n+1 to all attacks");
     }
 
     @Override

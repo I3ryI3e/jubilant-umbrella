@@ -24,4 +24,7 @@ public abstract class Position {
         piece = null;
         return aux;
     }
+    public Piece getPiece(){
+        return piece;
+    }
 }

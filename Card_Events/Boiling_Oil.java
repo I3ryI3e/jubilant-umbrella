@@ -6,7 +6,7 @@ import Model.Siege_Game;
 public class Boiling_Oil extends Event {
 
     public Boiling_Oil() {
-        super("+2 to attack on enemies on circle spaces.");
+        super("{BOILING OIL}\n+2 to attack on enemies on circle spaces.");
     }
 
     @Override
