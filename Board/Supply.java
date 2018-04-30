@@ -1,4 +1,4 @@
-package Model;
+package Board;
 
 public class Supply implements Piece{
     

@@ -44,9 +44,9 @@ public class User_Interface_Text implements Constants{
         Enemy_Attack aux;
         System.out.println("\nPlayer Action:\n");
         System.out.println((game.can_archers()?"\t1- Archers Attack\n":"") + (game.can_boilling()?"\t2- Boilling Water Attack\n":"") + 
-                (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.can_coupure()?"\t4- Coupure\n":"") + 
-                (game.can_rally()?"\t5- Rally Troops\n":"") + "\t6- Tunnel Movement\n" + (game.can_supply()?"\t7- Supply Raid\n":"") + 
-                (game.can_sabotage()?"\t8- Sabotage\n":"") + "\n\n9- Save Game");
+                (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.canCoupure()?"\t4- Coupure\n":"") + 
+                (game.canRally()?"\t5- Rally Troops\n":"") + "\t6- Tunnel Movement\n" + (game.canSupply()?"\t7- Supply Raid\n":"") + 
+                (game.canSabotage()?"\t8- Sabotage\n":"") + "\n\n9- Save Game");
         option = read_int();
         int dice = (int) (Math.random()*5+1);
         switch(option){
@@ -62,7 +62,7 @@ public class User_Interface_Text implements Constants{
                 game.boilling(dice);
                 break;
             case 3:
-                game.close_combat(dice);
+                game.closeCombat(dice);
                 break;
             case 4:
                 game.coupure(dice);
@@ -85,9 +85,9 @@ public class User_Interface_Text implements Constants{
     
     private Enemy_Attack archers() throws MyException{
         int opt;
-        System.out.println(game.getGame().getEnemy().enemy_location());
-        System.out.println("Which one to atack:  " + (!game.is_ladder(4)?"\t1- Ladder\n":"") +
-                (!game.is_battering_ram(4)?"\t2- Battering Ram\n":"") + (!game.is_siege_tower(4)?"\t3- Siege Tower\n":"") + "\t4- Return\n");
+        System.out.println(game.getGame().getEnemy().enemyLocation());
+        System.out.println("Which one to atack:  " + (!game.isLadder(4)?"\t1- Ladder\n":"") +
+                (!game.isBatteringRam(4)?"\t2- Battering Ram\n":"") + (!game.isSiegeTower(4)?"\t3- Siege Tower\n":"") + "\t4- Return\n");
         opt = read_int();
         if(opt != 1 && opt != 2 && opt != 3){
             throw new MyException();

@@ -1,8 +1,10 @@
 package Model;
 
-import Card_Events.Trebuchet_Attack;
+import Board.Enemy;
+import Board.Player;
+import Cards.*;
 import Model.Constants.Enemy_Attack;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Game {
@@ -34,39 +36,37 @@ public class Game {
         return enemy;
     }
     
-    private Card create_card_1(){
-        Card card = new Card(1);
-        List <Enemy_Attack> aux = new ArrayList<>();
-        aux.add(Enemy_Attack.NONE);
-        Day day = new Day(3,aux,new Trebuchet_Attack());
-        card.addDay(day);
-        day= new Day(2,aux,new Trebuchet_Attack());
-        card.addDay(day);
-        day = new Day(1,aux,new Trebuchet_Attack());
-        card.addDay(day);
-        return card;
-    }
-    
     public void setup() {
-        deck.add(create_card_1());
-        
+        deck.add(0,new Card1());
+        deck.add(1,new Card2());
+        deck.add(2,new Card3());
+        deck.add(3,new Card4());
+        deck.add(4,new Card5());
+        deck.add(5,new Card6());
+        deck.add(6,new Card7());
     }
-    public void archers(int dice, Enemy_Attack enemy_mov) {
-        if(discard.get(0).getDayX(getGame_day()) instanceof Day_Constant)
-            dice += discard.get(0).getDayX(getGame_day()).have_atack_changes(enemy_mov);
-        switch(enemy_mov){
+    public void archers(int dice, Enemy_Attack enemy_mov) { // TODO!! 
+        switch(enemy_mov){                                  // NOT QUITE RIGHT! DICE MODIFICATIONS DON'T ACCOUNT FOR POSITION
             case LADDERS:
+                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
                 if(dice > 2)
-                    enemy.setLadder(enemy.getLadder()-1);
+                    enemy.goBackwardLadder();
                 break;
             case BATTERING_RAM:
+                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
                 if(dice > 3)
-                    enemy.setBattering_ram(enemy.getBattering_ram()-1);
+                    enemy.goBackwardBatteringRam();
                 break;
             case SIEGE_TOWER:
+                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
                 if(dice > 4)
-                    enemy.setSiege_tower(enemy.getSiege_tower()-1);
+                    enemy.goBackwardSiegeTower();
                 break;
         }
     }
+
+    public void removeSiegeFromGame() {
+        enemy.removeSiegeFromGame();
+    }
+    
 }

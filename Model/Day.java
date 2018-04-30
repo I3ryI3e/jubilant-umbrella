@@ -13,9 +13,7 @@ public class Day implements Constants{
         enemy_attack= new ArrayList<>(ea);
         event = a;
     }
-    
-    public void do_Day(Siege_Game game){
-        game.setActions(n_player_actions);
-        game.//
+    public Event getEvent(){
+        return event;
     }
 }

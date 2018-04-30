@@ -11,7 +11,7 @@ public class Collapsed extends Event {
 
     @Override
     public void runEvent(Siege_Game game) {
-        //TODO
+        game.removeSiegeFromGame();
     }
     
 }

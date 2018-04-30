@@ -1,4 +1,4 @@
-package Model;
+package Board;
 
 public class Morale implements Piece {
     

@@ -1,5 +1,7 @@
-package Model;
+package Cards;
 
+import Model.Constants;
+import Model.Day;
 import java.util.ArrayList;
 
 public abstract class Card implements Constants {

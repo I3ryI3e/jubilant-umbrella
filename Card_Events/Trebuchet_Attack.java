@@ -14,15 +14,16 @@ public class Trebuchet_Attack extends Event {
     public void runEvent(Siege_Game game) {
         switch(game.getGame().getEnemy().getTrebutchet()){
             case 3:
-                game.getGame().getPlayer().setWall(game.getGame().getPlayer().getWall()-2);
+                game.getGame().getPlayer().goForwardWall();
+                game.getGame().getPlayer().goForwardWall();
                 break;
             case 2:
-                game.getGame().getPlayer().setWall(game.getGame().getPlayer().getWall()-1);
+                game.getGame().getPlayer().goForwardWall();
                 break;
             case 1:
                 int option = (int)(Math.random()*5+1);
                 if(option == 4 || option == 5 || option == 6)
-                   game.getGame().getPlayer().setWall(game.getGame().getPlayer().getWall()-1);
+                   game.getGame().getPlayer().goForwardWall();
                 break;
         }
     }

@@ -1,7 +1,9 @@
 
-package Model;
+package Cards;
 
 import Card_Events.*;
+import Model.Constants;
+import Model.Day;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,7 @@
 
-package Model;
+package Board;
+
+import Board.Weapon;
 
 public class Ladder implements Weapon {
 
@@ -7,5 +9,6 @@ public class Ladder implements Weapon {
     public int getPower() {
         return 2;
     }
+    
     
 }

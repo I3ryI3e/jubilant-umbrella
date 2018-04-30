@@ -1,5 +1,5 @@
 
-package Model;
+package Board;
 
 public class Siege implements Weapon {
 

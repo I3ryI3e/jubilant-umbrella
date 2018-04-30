@@ -28,67 +28,67 @@ public class Siege_Game implements Constants{
         return state;
     }
     
-    public boolean is_ladder(int pos){
-        return (game.getEnemy().getLadder() == pos);
+    public boolean isLadder(int pos) throws MyException{
+        return game.getEnemy().getLadderPosition()==pos;
     }
     
-    public boolean is_battering_ram(int pos){
-        return (game.getEnemy().getBattering_ram() == pos);
+    public boolean isBatteringRam(int pos) throws MyException{
+        return game.getEnemy().getBatteringRamPosition()==pos;
     }
     
-    public boolean is_siege_tower(int pos){
-        return (game.getEnemy().getSiege_tower() == pos);
+    public boolean isSiegeTower(int pos) throws MyException{
+        return game.getEnemy().getSiegeTowerPosition()==pos;
     }
 
-    public boolean can_archers(){
-        return !(is_ladder(4) && is_battering_ram(4) && is_siege_tower(4));
+    public boolean can_archers() throws MyException{
+        return !(isLadder(4) && isBatteringRam(4) && isSiegeTower(4));
     }
 
-    public boolean can_boilling(){
-        return (is_ladder(1) || is_battering_ram(1) || is_siege_tower(1));
+    public boolean can_boilling() throws MyException{
+        return (isLadder(1) || isBatteringRam(1) || isSiegeTower(1));
     }
     
     public void boilling(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean can_close_combat(){
-        return (is_ladder(0) || is_battering_ram(0) || is_siege_tower(0));
+    public boolean can_close_combat() throws MyException{
+        return (isLadder(0) || isBatteringRam(0) || isSiegeTower(0));
     }
     
-    public void close_combat(int dice) {
+    public void closeCombat(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public boolean can_coupure(){
-        return (game.getPlayer().getWall() != 4);
+    public boolean canCoupure() throws MyException{
+        return game.getPlayer().isWallStartingSpace();
     }
 
     public void coupure(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean can_rally(){
-        return (game.getPlayer().getMorale() != 4);
+    public boolean canRally() throws MyException{
+        return game.getPlayer().isMoraleStartingSpace();
     }
     
     public void rally(int dice) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean can_supply(){
+    public boolean canSupply(){ //TODO
         return (game.getPlayer().getTunnel() == 3 && game.getPlayer().getRaided_supplies() != 2);
     }
     
-    public void supply(int dice) {
+    public void supply(int dice) { //TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean can_sabotage(){
+    public boolean canSabotage(){ //TODO
         return (game.getPlayer().getTunnel() == 3);
     }
     
-    public void sabotage(int dice) {
+    public void sabotage(int dice) { //TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -101,7 +101,8 @@ public class Siege_Game implements Constants{
     public void setActions(int na){
         setState(state.setActions(na));
     }
-    public void makeAttack(List<Enemy_Attack> ea){
-        
+
+    public void removeSiegeFromGame() {
+        game.removeSiegeFromGame();
     }
 }
