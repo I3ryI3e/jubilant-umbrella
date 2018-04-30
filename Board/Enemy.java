@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Enemy implements Constants {
     private int trebutchet;
-    private Track ladder;
-    private Track battering_ram;
-    private Track siege_tower;
+    private Enemy_Track ladder;
+    private Enemy_Track battering_ram;
+    private Enemy_Track siege_tower;
 
     public Enemy(){
         this.trebutchet = 3;
-        ladder = new Track(new Ladder());
-        battering_ram = new Track(new Ram());
-        siege_tower= new Track(new Siege());
+        ladder = new Enemy_Track(new Ladder());
+        battering_ram = new Enemy_Track(new Ram());
+        siege_tower= new Enemy_Track(new Siege());
     }
     public int getTrebutchet() {
         return trebutchet;

@@ -11,4 +11,5 @@ public interface States {
     public States Boiling();
     public States Tunnel();
     public States Apply_Action_Rules();
+    public States ReduceMoralEvent();
 }

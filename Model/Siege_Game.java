@@ -105,4 +105,9 @@ public class Siege_Game implements Constants{
     public void removeSiegeFromGame() {
         game.removeSiegeFromGame();
     }
+
+    public void ReduceMoralEvent() {
+        setState(state.ReduceMoralEvent());
+    }
+    
 }

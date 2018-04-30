@@ -11,7 +11,7 @@ public class Death_of_a_Leader extends Event{
 
     @Override
     public void runEvent(Siege_Game game) {
-        //TODO
+        game.ReduceMoralEvent();
     }
     
 }

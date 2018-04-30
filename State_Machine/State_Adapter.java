@@ -25,5 +25,8 @@ public class State_Adapter implements States, Constants {
     public States Tunnel() {return this;}
     @Override
     public States Apply_Action_Rules() {return this;}
+    @Override
+    public States ReduceMoralEvent() {return this;}
+    
     
 }
