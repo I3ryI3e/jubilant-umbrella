@@ -12,4 +12,5 @@ public interface States extends Constants{
     public States Tunnel();
     public States Apply_Action_Rules(Enemy_Attack ea);
     public States returnWaitAction();
+    public States ReduceMoralEvent();
 }
