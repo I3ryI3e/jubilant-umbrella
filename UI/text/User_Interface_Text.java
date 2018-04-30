@@ -41,64 +41,95 @@ public class User_Interface_Text implements Constants{
     
     public void wait_action_text(){
         int option;
-        Enemy_Attack aux;
-        System.out.println("\nPlayer Action:\n");
-        System.out.println((game.can_archers()?"\t1- Archers Attack\n":"") + (game.can_boilling()?"\t2- Boilling Water Attack\n":"") + 
-                (game.can_close_combat()?"\t3- Close Combat Attack\n":"") + (game.canCoupure()?"\t4- Coupure\n":"") + 
-                (game.canRally()?"\t5- Rally Troops\n":"") + "\t6- Tunnel Movement\n" + (game.canSupply()?"\t7- Supply Raid\n":"") + 
-                (game.canSabotage()?"\t8- Sabotage\n":"") + "\n\n9- Save Game");
+        System.out.println(wait_action_text_menu());
         option = read_int();
-        int dice = (int) (Math.random()*5+1);
         switch(option){
             case 1:
-                try{
-                    aux = archers();
-                }catch(MyException e){
-                    break;
-                }
-                    game.archers(dice, aux);
+                game.stateArchers();
                 break;
             case 2:
-                game.boilling(dice);
+                game.boilling();
                 break;
             case 3:
-                game.closeCombat(dice);
+                game.closeCombat();
                 break;
             case 4:
-                game.coupure(dice);
+                game.coupure();
                 break;
             case 5:
-                game.rally(dice);
+                game.rally();
                 break;
             case 6:
                 game.tunnel();
                 break;
             case 7:
-                game.supply(dice);
+                game.supply();
                 break;
             case 8:
-                game.sabotage(dice);
+                game.sabotage();
             default:
                 break;
         }
     }
     
-    private Enemy_Attack archers() throws MyException{
+    public String wait_action_text_menu(){
+        StringBuilder str = new StringBuilder();
+        str.append("\nPlayer Action:\n");
+        try {
+            str.append((game.can_archers()?"\t1- Archers Attack\n":""));
+        } catch (MyException e) {}
+        try {
+            str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
+        } catch (MyException e) {}
+        try {
+            str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
+        } catch (MyException e) {}
+        try {
+            str.append(game.canCoupure()?"\t4- Coupure\n":"");
+        } catch (MyException e) {}
+        try {
+            str.append(game.canRally()?"\t5- Rally Troops\n":"");
+        } catch (MyException e) {}
+        try {
+            str.append(game.canSupply()?"\t7- Supply Raid\n":"");
+        } catch (MyException e) {}
+        try {
+            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
+        } catch (MyException e) {}
+        
+        str.append("\n\t9- Save game\n");
+        
+        return str.toString();
+    }
+    
+    private void archersText() {
         int opt;
+        StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy().enemyLocation());
-        System.out.println("Which one to atack:  " + (!game.isLadder(4)?"\t1- Ladder\n":"") +
-                (!game.isBatteringRam(4)?"\t2- Battering Ram\n":"") + (!game.isSiegeTower(4)?"\t3- Siege Tower\n":"") + "\t4- Return\n");
+        try {
+            str.append((game.isLadder(TAM_TRACKS_ENEMY-1)?"\t1- Ladder\n":""));
+        } catch (MyException e) {}
+        try {
+            str.append((game.isBatteringRam(TAM_TRACKS_ENEMY-1)?"\t2- Battering Ram\n":""));
+        } catch (MyException e) {}
+        try {
+            str.append((game.isSiegeTower(TAM_TRACKS_ENEMY-1)?"\t3- Siege Tower\n":""));
+        } catch (MyException e) {}
+        str.append("\t4- return\n");
+        System.out.println(str.toString());
+        
         opt = read_int();
-        if(opt != 1 && opt != 2 && opt != 3){
-            throw new MyException();
-        }
+        
         switch(opt){
             case 1:
-                return Enemy_Attack.LADDERS;
+                game.archers(Enemy_Attack.LADDERS);
             case 2:
-                return Enemy_Attack.BATTERING_RAM;
+                game.archers(Enemy_Attack.BATTERING_RAM);
+            case 3:
+                game.archers(Enemy_Attack.SIEGE_TOWER);
+            case 4:
+                game.returnWaitAction();
         }
-        return Enemy_Attack.SIEGE_TOWER;
     }
     
 //    public void draw_card_text(){
@@ -113,6 +144,8 @@ public class User_Interface_Text implements Constants{
                 initial_text();
             }else if ( state instanceof Wait_Action){
                 wait_action_text();
+            }else if ( state instanceof Wait_Archers) {
+                archersText();
             }
         }
     }

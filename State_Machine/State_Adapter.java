@@ -14,8 +14,6 @@ public class State_Adapter implements States, Constants {
     @Override
     public States New_Game() {return this;}
     @Override
-    public States archers(int dice, Enemy_Attack enemy_mov){return this;}
-    @Override
     public States setActions(int na) {return this;}
     @Override
     public States Rally_Troops() {return this;}
@@ -24,6 +22,10 @@ public class State_Adapter implements States, Constants {
     @Override
     public States Tunnel() {return this;}
     @Override
-    public States Apply_Action_Rules() {return this;}
+    public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
+    @Override
+    public States archers() {return this;}
+    @Override
+    public States returnWaitAction() {return this;}
     
 }

@@ -45,7 +45,8 @@ public class Game {
         deck.add(5,new Card6());
         deck.add(6,new Card7());
     }
-    public void archers(int dice, Enemy_Attack enemy_mov) { // TODO!! 
+    public void archers(Enemy_Attack enemy_mov) { // TODO!! 
+        int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
         switch(enemy_mov){                                  // NOT QUITE RIGHT! DICE MODIFICATIONS DON'T ACCOUNT FOR POSITION
             case LADDERS:
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();

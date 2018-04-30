@@ -8,9 +8,8 @@ public class Wait_Action extends State_Adapter implements Constants{
         super(g);
     }
     @Override
-    public States archers(int dice, Enemy_Attack enemy_mov) {
-        getGame().archers(dice, enemy_mov);
-        return this;
+    public States archers() {
+        return new Wait_Archers(getGame());
     }
 
     @Override

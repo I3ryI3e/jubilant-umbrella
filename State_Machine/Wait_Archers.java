@@ -9,8 +9,14 @@ public class Wait_Archers extends State_Adapter{
     }
 
     @Override
-    public States Apply_Action_Rules() {
-        return super.Apply_Action_Rules(); //To change body of generated methods, choose Tools | Templates.
+    public States Apply_Action_Rules(Enemy_Attack ea) {
+        getGame().archers(ea);
+        return new Wait_Action(getGame());
+    }
+
+    @Override
+    public States returnWaitAction() {
+        return new Wait_Action(getGame());
     }
     
 }
