@@ -18,7 +18,7 @@ public class Player {
     }
     
     public int getSupplies() throws MyException {
-        return supplies.getPiecePosition();
+        return supplies.getPiecePositionNumber();
     }
 
     public int getActions(){
@@ -29,11 +29,11 @@ public class Player {
     }
 
     public int getMorale() throws MyException {
-        return morale.getPiecePosition();
+        return morale.getPiecePositionNumber();
     }
 
     public int getWall() throws MyException {
-        return wall.getPiecePosition();
+        return wall.getPiecePositionNumber();
     }
     
     public int getTunnel() {
@@ -76,10 +76,10 @@ public class Player {
     }
 
     public boolean isWallStartingSpace() throws MyException {
-        return wall.getPiecePosition()== wall.getTrackSize()-1;
+        return wall.getPiecePositionNumber()== wall.getTrackSize()-1;
     }
     public boolean isMoraleStartingSpace() throws MyException{
-        return morale.getPiecePosition() == morale.getTrackSize()-1;
+        return morale.getPiecePositionNumber() == morale.getTrackSize()-1;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class Enemy_Track extends Track {
     public void goForward() {
         int pos;
         try {
-            pos = getPiecePosition();
+            pos = getPiecePositionNumber();
         } catch (MyException ex) {
             return;
         }
@@ -43,13 +43,29 @@ public class Enemy_Track extends Track {
     public void goBackward() {
         int pos;
         try{
-            pos = getPiecePosition();
+            pos = getPiecePositionNumber();
         } catch (MyException ex){
             return;
         }
         if(pos<track.size()-1){
             track.get(pos+1).setPiece(track.get(pos).removePiece());
         }
+    }
+
+    Position getPiecePosition(int piecePosition) {
+        return track.get(piecePosition);
+    }
+
+    int getStrength() throws MyException {
+        Position aux=getPiecePosition(getPiecePositionNumber());
+        if(aux instanceof Close_Combat_Square)
+            return 4;
+        else if(aux.getPiece() instanceof Ladder)
+            return 2;
+        else if (aux.getPiece() instanceof Ram)
+            return 3;
+        else
+            return 4;
     }
     
 }

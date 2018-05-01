@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game {
     private Player player;
@@ -54,19 +56,49 @@ public class Game {
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
         switch(enemy_mov){                                  // NOT QUITE RIGHT! DICE MODIFICATIONS DON'T ACCOUNT FOR POSITION
             case LADDER:
+        {
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
-                if(dice > 2)
+            }
+        }
+        {
+            try {
+                if(dice > getEnemy().getLadderStrength())
                     enemy.goBackwardLadder();
+            } catch (MyException ex) {}
+        }
                 break;
             case BATTERING_RAM:
+        {
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
-                if(dice > 3)
+            }
+        }
+        {
+            try {
+                if(dice > getEnemy().getBatteringRamStrength())
                     enemy.goBackwardBatteringRam();
+            } catch (MyException ex) {}
+        }
                 break;
             case SIEGE_TOWER:
+        {
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
-                if(dice > 4)
+            }
+        }
+        {
+            try {
+                if(dice > getEnemy().getSiegeTowerStrength())
                     enemy.goBackwardSiegeTower();
+            } catch (MyException ex) {}
+        }
                 break;
         }
     }

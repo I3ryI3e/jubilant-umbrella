@@ -20,7 +20,7 @@ public class Player_Track extends Track{
     void raise() {
         int pos;
         try{
-            pos = getPiecePosition();
+            pos = getPiecePositionNumber();
         } catch (MyException ex){
             return;
         }
@@ -32,7 +32,7 @@ public class Player_Track extends Track{
     void decrease() {
         int pos;
         try {
-            pos = getPiecePosition();
+            pos = getPiecePositionNumber();
         } catch (MyException ex) {
             return;
         }

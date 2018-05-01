@@ -4,8 +4,6 @@ package Board;
 import Model.Constants;
 import Model.MyException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class Track implements Constants {
     protected List<Position> track;
@@ -14,7 +12,7 @@ public abstract class Track implements Constants {
         if(track.get(0).hasPiece())
                 track.get(0).removePiece();
     }
-    public int getPiecePosition() throws MyException{                           //If doesn't exists a piece.
+    public int getPiecePositionNumber() throws MyException{                           //If doesn't exists a piece.
         for (int i = 0; i < track.size(); i++) {
             if(track.get(i).hasPiece())
                 return i;
@@ -29,11 +27,10 @@ public abstract class Track implements Constants {
     @Override
     public String toString() {
         try {
-            return track.get(getPiecePosition()).getPiece().getName() + " is on " + getPiecePosition() + " position\n";
+            return track.get(getPiecePositionNumber()).getPiece().getName() + " is on " + getPiecePositionNumber() + " position\n";
         } catch (MyException ex) {
-            Logger.getLogger(Track.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
         }
-        return "Erro nas Tracks to String";
     }
     
 }

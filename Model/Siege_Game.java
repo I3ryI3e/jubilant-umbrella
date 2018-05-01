@@ -28,15 +28,15 @@ public class Siege_Game implements Constants{
     }
     
     public boolean isLadder(int pos) throws MyException{
-        return game.getEnemy().getLadderPosition()==pos;
+        return game.getEnemy().getLadderNumberPosition()==pos;
     }
     
     public boolean isBatteringRam(int pos) throws MyException{
-        return game.getEnemy().getBatteringRamPosition()==pos;
+        return game.getEnemy().getBatteringRamNumberPosition()==pos;
     }
     
     public boolean isSiegeTower(int pos) throws MyException{
-        return game.getEnemy().getSiegeTowerPosition()==pos;
+        return game.getEnemy().getSiegeTowerNumberPosition()==pos;
     }
 
     public boolean can_archers() throws MyException{

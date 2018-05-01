@@ -46,33 +46,33 @@ public class Enemy implements Constants {
         }
     }
 
-    public int getLadderPosition() throws MyException {
-        return ladder.getPiecePosition();
+    public int getLadderNumberPosition() throws MyException {
+        return ladder.getPiecePositionNumber();
     }
 
-    public int getBatteringRamPosition() throws MyException {
-        return battering_ram.getPiecePosition();
+    public int getBatteringRamNumberPosition() throws MyException {
+        return battering_ram.getPiecePositionNumber();
     }
 
-    public int getSiegeTowerPosition() throws MyException {
-        return siege_tower.getPiecePosition();
+    public int getSiegeTowerNumberPosition() throws MyException {
+        return siege_tower.getPiecePositionNumber();
     }
     
     public String enemyLocation(){
         StringBuilder aux = new StringBuilder();
         aux.append("Track positions:");
         try {
-            aux.append(" Ladder -> ").append(getLadderPosition());
+            aux.append(" Ladder -> ").append(getLadderNumberPosition());
         } catch (MyException e) {
             aux.append(" Ladder doesn't exist.");
         }
         try {
-            aux.append(" Battering Ram -> ").append(getBatteringRamPosition());
+            aux.append(" Battering Ram -> ").append(getBatteringRamNumberPosition());
         } catch (MyException e) {
             aux.append(" Battering Ram doesn't exist.");
         }
         try {
-            aux.append(" Siege Tower -> ").append(getLadderPosition());
+            aux.append(" Siege Tower -> ").append(getLadderNumberPosition());
         } catch (MyException e) {
             aux.append(" Siege Tower doesn't exist.");
         }
@@ -121,17 +121,17 @@ public class Enemy implements Constants {
     private void swordAttack(){
         int lp, bp, sp;
         try {
-            lp = getLadderPosition();
+            lp = getLadderNumberPosition();
         } catch (MyException e) {
             lp=0;
         }
         try {
-            bp = getBatteringRamPosition();
+            bp = getBatteringRamNumberPosition();
         } catch (MyException e) {
             sp=0;
         }
         try {
-            sp = getSiegeTowerPosition();
+            sp = getSiegeTowerNumberPosition();
         } catch (MyException e) {
             sp=0;
         }
@@ -146,6 +146,30 @@ public class Enemy implements Constants {
         aux.append(siege_tower);
         aux.append("Trebuchet =").append(trebutchet).append("\n");
         return aux.toString();
+    }
+
+    public Position getLadderPosition() throws MyException {
+        return ladder.getPiecePosition(ladder.getPiecePositionNumber());
+    }
+
+    public int getLadderStrength() throws MyException {
+        return ladder.getStrength();
+    }
+
+    public int getBatteringRamStrength() throws MyException {
+        return battering_ram.getStrength();
+    }
+
+    public int getSiegeTowerStrength() throws MyException {
+        return siege_tower.getStrength();
+    }
+
+    public Position getBatteringRamPosition() throws MyException {
+        return battering_ram.getPiecePosition(ladder.getPiecePositionNumber());
+    }
+
+    public Position getSiegeTowerPosition() throws MyException {
+        return siege_tower.getPiecePosition(siege_tower.getPiecePositionNumber());
     }
     
 }

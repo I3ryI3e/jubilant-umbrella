@@ -1,6 +1,8 @@
 
 package Board;
 
+import Model.Event;
+
 public abstract class Position {
     private Piece piece;
 
@@ -26,5 +28,9 @@ public abstract class Position {
     }
     public Piece getPiece(){
         return piece;
+    }
+
+    public int getPositionModifier(Event event){
+        return 0;
     }
 }

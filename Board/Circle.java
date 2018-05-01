@@ -1,7 +1,7 @@
 
 package Board;
 
-import Board.Piece;
+import Model.Event;
 
 public class Circle extends Position {
             
@@ -10,6 +10,11 @@ public class Circle extends Position {
     }
     public Circle(Piece p){
         super(p);
+    }
+
+    @Override
+    public int getPositionModifier(Event event) {
+        return event.getCircleAttackMod();
     }
     
     
