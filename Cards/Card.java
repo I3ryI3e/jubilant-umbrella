@@ -30,7 +30,7 @@ public abstract class Card implements Constants {
     }
     
     public void resolve(int game_day, Game game) {
-        days.get(game_day-1).resolve(game);
+        days.get(game_day).resolve(game);
     }
 
     @Override

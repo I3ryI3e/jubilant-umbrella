@@ -1,6 +1,7 @@
 package Card_Events;
 
 import Model.Event;
+import Model.Game;
 import Model.Siege_Game;
 
 public class Volley_of_Arrows extends Event{
@@ -10,7 +11,7 @@ public class Volley_of_Arrows extends Event{
     }
 
     @Override
-    public void runEvent(Siege_Game game) {
+    public void runEvent(Game game) {
     }
 
     @Override

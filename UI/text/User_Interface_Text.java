@@ -41,6 +41,8 @@ public class User_Interface_Text implements Constants{
     
     public void wait_action_text(){
         int option;
+        System.out.println(game.drawBoards());
+        System.out.println(game.drawCardDay());
         System.out.println(wait_action_text_menu());
         option = read_int();
         switch(option){
@@ -67,8 +69,12 @@ public class User_Interface_Text implements Constants{
                 break;
             case 8:
                 game.sabotage();
-            default:
                 break;
+            case 9:
+                //game.save();
+                break;
+            case 10:
+                quit = true;
         }
     }
     
@@ -97,7 +103,7 @@ public class User_Interface_Text implements Constants{
 //            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
 //        } catch (MyException e) {}
         
-        str.append("\n\t9- Save game\n");
+        str.append("\t9- Save game\n" + "\n\t10- Quit\n");
         
         return str.toString();
     }
@@ -105,15 +111,15 @@ public class User_Interface_Text implements Constants{
     private void archersText() {
         int opt;
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getEnemy().enemyLocation());
+        System.out.println(game.getGame().getEnemy());
         try {
-            str.append((game.isLadder(TAM_TRACKS_ENEMY-1)?"\t1- Ladder\n":""));
+            str.append((game.isLadder(TAM_TRACKS_ENEMY-1)?"":"\t1- Ladder\n"));
         } catch (MyException e) {}
         try {
-            str.append((game.isBatteringRam(TAM_TRACKS_ENEMY-1)?"\t2- Battering Ram\n":""));
+            str.append((game.isBatteringRam(TAM_TRACKS_ENEMY-1)?"":"\t2- Battering Ram\n"));
         } catch (MyException e) {}
         try {
-            str.append((game.isSiegeTower(TAM_TRACKS_ENEMY-1)?"\t3- Siege Tower\n":""));
+            str.append((game.isSiegeTower(TAM_TRACKS_ENEMY-1)?"":"\t3- Siege Tower\n"));
         } catch (MyException e) {}
         str.append("\t4- return\n");
         System.out.println(str.toString());
@@ -138,7 +144,7 @@ public class User_Interface_Text implements Constants{
         option = read_int();
         switch(option){
             case 1:
-                
+                game.drawCard();
                 break;
             case 2:
                 //game.saave();
@@ -155,6 +161,7 @@ public class User_Interface_Text implements Constants{
         States state =null;
         while(!quit){
             state = game.getState();
+            game.checkLossAnd2Enemy();
             if( state instanceof Initial_State){
                 initial_text();
             }else if (state instanceof Wait_Draw_Card){

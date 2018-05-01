@@ -2,6 +2,7 @@
 package Card_Events;
 
 import Model.Event;
+import Model.Game;
 import Model.Siege_Game;
 
 public class Enemy_Fatigue extends Event {
@@ -11,7 +12,7 @@ public class Enemy_Fatigue extends Event {
     }
 
     @Override
-    public void runEvent(Siege_Game game) {
+    public void runEvent(Game game) {
     }
 
     @Override

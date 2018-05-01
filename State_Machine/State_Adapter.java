@@ -28,6 +28,12 @@ public class State_Adapter implements States, Constants {
     @Override
     public States returnWaitAction() {return this;}
     @Override
-    public States ReduceMoralEvent() {return this;}
+    public States checkLossAnd2Enemy() {
+        if(getGame().checkLoss())
+            return new Game_Over(getGame());
+        if(getGame().TwoEnemyLine())
+            return new Two_Enemy_Attack(getGame());
+        return this;
+    }
 
 }

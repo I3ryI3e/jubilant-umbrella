@@ -57,28 +57,6 @@ public class Enemy implements Constants {
     public int getSiegeTowerNumberPosition() throws MyException {
         return siege_tower.getPiecePositionNumber();
     }
-    
-    public String enemyLocation(){
-        StringBuilder aux = new StringBuilder();
-        aux.append("Track positions:");
-        try {
-            aux.append(" Ladder -> ").append(getLadderNumberPosition());
-        } catch (MyException e) {
-            aux.append(" Ladder doesn't exist.");
-        }
-        try {
-            aux.append(" Battering Ram -> ").append(getBatteringRamNumberPosition());
-        } catch (MyException e) {
-            aux.append(" Battering Ram doesn't exist.");
-        }
-        try {
-            aux.append(" Siege Tower -> ").append(getLadderNumberPosition());
-        } catch (MyException e) {
-            aux.append(" Siege Tower doesn't exist.");
-        }
-        
-        return aux.toString();
-    }
 
     public void removeSiegeFromGame() {
         siege_tower.removeFromGame();
@@ -119,7 +97,7 @@ public class Enemy implements Constants {
     }
     
     private void swordAttack(){
-        int lp, bp, sp;
+        int lp, bp, sp, aux;
         try {
             lp = getLadderNumberPosition();
         } catch (MyException e) {
@@ -128,24 +106,28 @@ public class Enemy implements Constants {
         try {
             bp = getBatteringRamNumberPosition();
         } catch (MyException e) {
-            sp=0;
+            bp=0;
         }
         try {
             sp = getSiegeTowerNumberPosition();
         } catch (MyException e) {
             sp=0;
         }
-        
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder aux = new StringBuilder();
-        aux.append(ladder);
-        aux.append(battering_ram);
-        aux.append(siege_tower);
-        aux.append("Trebuchet =").append(trebutchet).append("\n");
-        return aux.toString();
+        if(lp >= bp && lp >= sp){
+            aux = lp;
+        }else if(lp > bp && lp < sp){
+            aux = sp;
+        }else if(bp > sp){
+            aux = bp;
+        }else{
+            aux = sp;
+        }
+        if(lp == aux)
+            goForwardLadder();
+        if(bp == aux)
+            goForwardBatteringRam();
+        if(sp == aux)
+            goForwardSiegeTower();
     }
 
     public Position getLadderPosition() throws MyException {
@@ -171,5 +153,34 @@ public class Enemy implements Constants {
     public Position getSiegeTowerPosition() throws MyException {
         return siege_tower.getPiecePosition(siege_tower.getPiecePositionNumber());
     }
+
+    public boolean isNumEnemyInCloseCombat(int num) {
+        int aux=0;
+        try {
+            if(getLadderNumberPosition() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        try {
+            if(getBatteringRamNumberPosition() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        try {
+            if(getSiegeTowerNumberPosition() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        return (aux == num);
+    }
     
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(ladder);
+        aux.append(battering_ram);
+        aux.append(siege_tower);
+        aux.append("Trebuchet = ").append(trebutchet).append("\n");
+        return aux.toString();
+    }
 }

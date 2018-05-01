@@ -29,6 +29,7 @@ public class Day implements Constants{
     public void resolve(Game game) {
         game.setPlayerActions(getN_player_actions());
         game.enemyAttack(getEnemy_attack());
+        getEvent().runEvent(game);
     }
     
     @Override

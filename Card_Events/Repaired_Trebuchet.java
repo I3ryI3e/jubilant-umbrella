@@ -1,6 +1,7 @@
 package Card_Events;
 
 import Model.Event;
+import Model.Game;
 import Model.Siege_Game;
 
 public class Repaired_Trebuchet extends Event{
@@ -11,7 +12,7 @@ public class Repaired_Trebuchet extends Event{
     
 
     @Override
-    public void runEvent(Siege_Game game) {
+    public void runEvent(Game game) {
         //TODO
     }
 

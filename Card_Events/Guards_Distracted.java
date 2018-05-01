@@ -1,6 +1,7 @@
 package Card_Events;
 
 import Model.Event;
+import Model.Game;
 import Model.Siege_Game;
 
 public class Guards_Distracted extends Event{
@@ -10,7 +11,7 @@ public class Guards_Distracted extends Event{
     }
 
     @Override
-    public void runEvent(Siege_Game game) {
+    public void runEvent(Game game) {
     }
 
     @Override

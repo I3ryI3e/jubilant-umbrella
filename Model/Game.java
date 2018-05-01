@@ -6,10 +6,7 @@ import Cards.*;
 import Model.Constants.Enemy_Attack;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game {
     private Player player;
@@ -19,6 +16,8 @@ public class Game {
     private List<Card> discard;
 
     public Game(){
+        this.player= new Player();
+        this.enemy= new Enemy();
         deck = new ArrayList<>();
         discard = new ArrayList<>();
     }
@@ -139,5 +138,27 @@ public class Game {
         for(int i=0;i<enemy_attack.size();i++){
             getEnemy().enemyAttack(enemy_attack.get(i));
         }
+    }
+
+    public boolean checkLoss() {
+        return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));
+    }
+
+    public boolean TwoEnemyLine() {
+        return (getEnemy().isNumEnemyInCloseCombat(2));
+    }
+
+    public void ReduceMoralEvent() {
+        getPlayer().decreaseMorale();
+    }
+
+    public String drawBoards() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(getPlayer()).append("\n\n").append(getEnemy()).append("\n\n");
+        return aux.toString();
+    }
+
+    public String drawCardDay() {
+        return discard.get(0).getDayX(game_day).toString();
     }
 }

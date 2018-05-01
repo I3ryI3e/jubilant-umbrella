@@ -42,7 +42,7 @@ public abstract class Event {
     public int getBoilingWaterMod(){
         return 0;
     }
-    abstract public void runEvent(Siege_Game game);
+    abstract public void runEvent(Game game);
 
     @Override
     public String toString() {

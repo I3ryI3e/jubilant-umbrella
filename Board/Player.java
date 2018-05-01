@@ -1,6 +1,8 @@
 package Board;
 
 import Model.MyException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Player {
     private final Player_Track supplies;
@@ -82,6 +84,26 @@ public class Player {
         return morale.getPiecePositionNumber() == morale.getTrackSize()-1;
     }
 
+    public boolean checkLoss() {
+        int aux=0;
+        try {
+            if(getSupplies() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        try {
+            if(getMorale() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        try {
+            if(getWall() == 0){
+                ++aux;
+            }
+        } catch (MyException ex) {}
+        return (aux > 1);
+    }
+    
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
@@ -90,6 +112,5 @@ public class Player {
         aux.append(supplies);
         aux.append("Number of Player Actions: ").append(actions).append("\n");
         return aux.toString();
-    }
-    
+    }    
 }

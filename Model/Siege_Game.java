@@ -115,14 +115,21 @@ public class Siege_Game implements Constants{
         setState(state.returnWaitAction());
     }
 
-    public void ReduceMoralEvent() {
-        setState(state.ReduceMoralEvent());
+    public void checkLossAnd2Enemy() {
+        setState(state.checkLossAnd2Enemy());
     }
-
+    
     @Override
     public String toString() {
         return game.toString();
+    }    
+
+    public String drawBoards() {
+        return game.drawBoards();
     }
-    
+
+    public String drawCardDay() {
+        return game.drawCardDay();
+    }
     
 }
