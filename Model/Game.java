@@ -10,18 +10,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class Game {
-    private final Player player;
-    private final Enemy enemy;
+    private Player player;
+    private Enemy enemy;
     private int game_day;
     private List<Card> deck;
     private List<Card> discard;
 
     public Game(){
-        this.player= new Player();
-        this.enemy= new Enemy();
         deck = new ArrayList<>();
         discard = new ArrayList<>();
-        this.game_day = 0;
     }
     
     public int getGame_day(){
@@ -41,6 +38,9 @@ public class Game {
     }
     
     public void setup() {
+        this.player= new Player();
+        this.enemy= new Enemy();
+        this.game_day = 0;
         deck.add(0,new Card1());
         deck.add(1,new Card2());
         deck.add(2,new Card3());
@@ -53,7 +53,7 @@ public class Game {
     public void archers(Enemy_Attack enemy_mov) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
         switch(enemy_mov){                                  // NOT QUITE RIGHT! DICE MODIFICATIONS DON'T ACCOUNT FOR POSITION
-            case LADDERS:
+            case LADDER:
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
                 if(dice > 2)
                     enemy.goBackwardLadder();
@@ -85,5 +85,27 @@ public class Game {
         }
         return aux.toString();
     }
-    
+
+    public void drawAndResolveCard() {
+        drawCard();
+        resolveCard();
+    }
+
+    private void drawCard() {
+        discard.add(0, deck.remove(0));
+    }
+
+    private void resolveCard() {
+        discard.get(0).resolve(getGame_day(), this);
+    }
+
+    void setPlayerActions(int n_player_actions) {
+        getPlayer().setActions(n_player_actions);
+    }
+
+    void enemyAttack(List<Enemy_Attack> enemy_attack) {
+        for(int i=0;i<enemy_attack.size();i++){
+            getEnemy().enemyAttack(enemy_attack.get(i));
+        }
+    }
 }

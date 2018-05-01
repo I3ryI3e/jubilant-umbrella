@@ -19,7 +19,7 @@ public class Card7 extends Card {
         addDay(new Day(2,aux,new Iron_Shields()));
         aux.clear();
         aux.add(Constants.Enemy_Attack.BATTERING_RAM);
-        aux.add(Constants.Enemy_Attack.LADDERS);
+        aux.add(Constants.Enemy_Attack.LADDER);
         aux.add(Constants.Enemy_Attack.SIEGE_TOWER);
         addDay(new Day(2,aux,new Faith()));
     }

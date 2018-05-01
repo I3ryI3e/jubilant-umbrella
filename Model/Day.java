@@ -13,10 +13,24 @@ public class Day implements Constants{
         enemy_attack= new ArrayList<>(ea);
         event = a;
     }
+
+    public List<Enemy_Attack> getEnemy_attack() {
+        return enemy_attack;
+    }
+
+    public int getN_player_actions() {
+        return n_player_actions;
+    }
+    
     public Event getEvent(){
         return event;
     }
-
+    
+    public void resolve(Game game) {
+        game.setPlayerActions(getN_player_actions());
+        game.enemyAttack(getEnemy_attack());
+    }
+    
     @Override
     public String toString() {
         StringBuilder aux=new StringBuilder();
@@ -27,5 +41,4 @@ public class Day implements Constants{
         aux.append(event).append("\n");
         return aux.toString();
     }
-    
 }

@@ -15,7 +15,7 @@ public class Card6 extends Card {
         aux.add(Constants.Enemy_Attack.SWORD);
         addDay(new Day(3,aux,new Cover_of_Darkness()));
         aux.clear();
-        aux.add(Constants.Enemy_Attack.LADDERS);
+        aux.add(Constants.Enemy_Attack.LADDER);
         addDay(new Day(3,aux,new Enemy_Fatigue()));
         aux.clear();
         aux.add(Constants.Enemy_Attack.SIEGE_TOWER);

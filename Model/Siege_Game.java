@@ -94,6 +94,9 @@ public class Siege_Game implements Constants{
     public void setup() {
         setState(state.New_Game());
     }
+    public void drawCard(){
+        setState(state.Draw_Card());
+    }
     public void stateArchers(){
         setState(state.archers());
     }

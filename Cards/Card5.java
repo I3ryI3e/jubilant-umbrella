@@ -16,10 +16,10 @@ public class Card5 extends Card {
         addDay(new Day(3,aux,new Volley_of_Arrows()));
         aux.clear();
         aux.add(Constants.Enemy_Attack.BATTERING_RAM);
-        aux.add(Constants.Enemy_Attack.LADDERS);
+        aux.add(Constants.Enemy_Attack.LADDER);
         addDay(new Day(2,aux,new Collapsed()));
         aux.clear();
-        aux.add(Constants.Enemy_Attack.LADDERS);
+        aux.add(Constants.Enemy_Attack.LADDER);
         addDay(new Day(2,aux,new Repaired_Trebuchet()));
     }
     

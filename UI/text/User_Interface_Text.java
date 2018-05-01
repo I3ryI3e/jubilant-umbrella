@@ -122,7 +122,7 @@ public class User_Interface_Text implements Constants{
         
         switch(opt){
             case 1:
-                game.archers(Enemy_Attack.LADDERS);
+                game.archers(Enemy_Attack.LADDER);
             case 2:
                 game.archers(Enemy_Attack.BATTERING_RAM);
             case 3:
@@ -133,8 +133,22 @@ public class User_Interface_Text implements Constants{
     }
     
     public void draw_card_text(){
-        System.out.println(game);
-        int opt=read_int(); 
+        int option;
+        System.out.println("\n\t1- Draw card\n" + "\t2- Save game\n" + "\t3- Load game\n" + "\t4- Quit\n");
+        option = read_int();
+        switch(option){
+            case 1:
+                
+                break;
+            case 2:
+                //game.saave();
+                break;
+            case 3:
+                //game.load();
+                break;
+            case 4:
+                return;
+        }
     }
     
     public void run(){

@@ -28,7 +28,7 @@ public class Enemy implements Constants {
     public void makeAttack(List<Enemy_Attack> ea){
         for (Enemy_Attack enemy_Attack : ea) {
             switch(enemy_Attack){
-                case LADDERS:
+                case LADDER:
                     ladder.goForward();
                     break;
                 case BATTERING_RAM:
@@ -102,6 +102,42 @@ public class Enemy implements Constants {
         siege_tower.goBackward();
     }
 
+    public void enemyAttack(Enemy_Attack ea) {
+        switch(ea){
+            case LADDER:
+                goForwardLadder();
+                break;
+            case BATTERING_RAM:
+                goForwardBatteringRam();
+                break;
+            case SIEGE_TOWER:
+                goForwardSiegeTower();
+                break;
+            case SWORD:
+                swordAttack();
+        }
+    }
+    
+    private void swordAttack(){
+        int lp, bp, sp;
+        try {
+            lp = getLadderPosition();
+        } catch (MyException e) {
+            lp=0;
+        }
+        try {
+            bp = getBatteringRamPosition();
+        } catch (MyException e) {
+            sp=0;
+        }
+        try {
+            sp = getSiegeTowerPosition();
+        } catch (MyException e) {
+            sp=0;
+        }
+        
+    }
+    
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();

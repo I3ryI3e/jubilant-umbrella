@@ -2,6 +2,7 @@ package Cards;
 
 import Model.Constants;
 import Model.Day;
+import Model.Game;
 import java.util.ArrayList;
 
 public abstract class Card implements Constants {
@@ -26,6 +27,10 @@ public abstract class Card implements Constants {
          return true;
         }
         return false;
+    }
+    
+    public void resolve(int game_day, Game game) {
+        days.get(game_day-1).resolve(game);
     }
 
     @Override

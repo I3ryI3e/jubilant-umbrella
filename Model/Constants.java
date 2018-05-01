@@ -4,7 +4,7 @@ package Model;
 public interface Constants {
     
     public enum Enemy_Attack{
-        NONE,LADDERS,BATTERING_RAM,SIEGE_TOWER,SWORD
+        NONE,LADDER,BATTERING_RAM,SIEGE_TOWER,SWORD
     }
     
     public int N_ENEMY_SQUARES=3;
