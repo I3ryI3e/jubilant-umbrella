@@ -88,7 +88,7 @@ public class Player {
         aux.append(wall);
         aux.append(morale);
         aux.append(supplies);
-        aux.append(actions);
+        aux.append("Number of Player Actions: ").append(actions).append("\n");
         return aux.toString();
     }
     
