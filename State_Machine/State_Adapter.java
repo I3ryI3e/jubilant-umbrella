@@ -36,4 +36,10 @@ public class State_Adapter implements States, Constants {
         return this;
     }
 
+    @Override
+    public States endTurn() {
+        return this;
+    }
+    
+
 }

@@ -74,6 +74,9 @@ public class User_Interface_Text implements Constants{
                 //game.save();
                 break;
             case 10:
+                game.endTurn();
+                break;
+            case 11:
                 quit = true;
         }
     }
@@ -103,7 +106,7 @@ public class User_Interface_Text implements Constants{
 //            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
 //        } catch (MyException e) {}
         
-        str.append("\t9- Save game\n" + "\n\t10- Quit\n");
+        str.append("\t9- Save game\n\t10- End Turn\n" + "\n\t11- Quit\n");
         
         return str.toString();
     }

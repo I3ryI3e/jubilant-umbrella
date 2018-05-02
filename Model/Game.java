@@ -14,16 +14,24 @@ public class Game {
     private int game_day;
     private List<Card> deck;
     private List<Card> discard;
+    private boolean canUseSupllyToOneMoreAction;
 
     public Game(){
         this.player= new Player();
         this.enemy= new Enemy();
-        deck = new ArrayList<>();
-        discard = new ArrayList<>();
+        this.deck = new ArrayList<>();
+        this.discard = new ArrayList<>();
+        this.canUseSupllyToOneMoreAction=true;
     }
     
     public int getGame_day(){
         return game_day;
+    }
+    public boolean getCanUseSupply(){
+        return canUseSupllyToOneMoreAction;
+    }
+    public void changeCanUseSupply(){
+        this.canUseSupllyToOneMoreAction = !this.canUseSupllyToOneMoreAction;
     }
     
     public void setGame_day(int game_day){
@@ -127,6 +135,7 @@ public class Game {
     }
 
     private void resolveCard() {
+        //TODO FAZER ENEMY_LINE_CHECK! TALVEZ FAZER A CLASS TUNNEL
         discard.get(0).resolve(getGame_day(), this);
     }
 
@@ -160,5 +169,19 @@ public class Game {
 
     public String drawCardDay() {
         return discard.get(0).getDayX(game_day).toString();
+    }
+
+    public void endTurn() {
+        if(deck.isEmpty()){
+            reputAllCardsIntoDeck();
+            setGame_day(getGame_day()+1);
+        }
+    }
+
+    private void reputAllCardsIntoDeck() {
+        for (int i = 0; i < discard.size(); i++) {
+            deck.add(i,discard.get(discard.size()-i));
+        }
+        discard.clear();
     }
 }

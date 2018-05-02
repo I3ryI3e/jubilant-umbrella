@@ -131,5 +131,9 @@ public class Siege_Game implements Constants{
     public String drawCardDay() {
         return game.drawCardDay();
     }
+
+    public void endTurn() { //TODO
+       setState(state.endTurn());
+    }
     
 }
