@@ -7,7 +7,7 @@ public class Player implements Serializable{
     private final Player_Track supplies;
     private final Player_Track morale;
     private final Player_Track wall;
-    private int tunnel;
+    private final Tunnel_Track tunnel;
     private int raided_supplies;
     private int actions;
     
@@ -15,7 +15,8 @@ public class Player implements Serializable{
         supplies = new Player_Track(new Supply());
         morale = new Player_Track(new Morale());
         wall = new Player_Track(new Wall());
-        this.tunnel = this.raided_supplies = this.actions= 0;
+        tunnel = new Tunnel_Track(new Soldier());
+        this.raided_supplies = this.actions= 0;
     }
     
     public int getSupplies() throws MyException {
@@ -36,15 +37,7 @@ public class Player implements Serializable{
     public int getWall() throws MyException {
         return wall.getPiecePositionNumber();
     }
-    
-    public int getTunnel() {
-        return tunnel;
-    }
 
-    public void setTunnel(int tunnel) {
-        if(tunnel >= 0 && tunnel <4)
-            this.tunnel = tunnel;
-    }
 
     public int getRaided_supplies() {
         return raided_supplies;
