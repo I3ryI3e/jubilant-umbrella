@@ -2,8 +2,9 @@
 package Board;
 
 import Card_Events.Event;
+import java.io.Serializable;
 
-public abstract class Position {
+public abstract class Position implements Serializable{
     private Piece piece;
 
     public Position() {

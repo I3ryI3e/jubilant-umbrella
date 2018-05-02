@@ -2,7 +2,9 @@ package Card_Events;
 
 import Model.Game;
 
-public abstract class Event {
+import java.io.Serializable;
+
+public abstract class Event implements Serializable{
     private final String text;
     
     public Event(String t){

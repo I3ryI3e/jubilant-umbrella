@@ -3,9 +3,10 @@ package Board;
 
 import Model.Constants;
 import Model.MyException;
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Track implements Constants {
+public abstract class Track implements Constants, Serializable{
     protected List<Position> track;
 
     public void removeFromGame() {

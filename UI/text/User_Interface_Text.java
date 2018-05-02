@@ -2,7 +2,10 @@ package UI.text;
 
 import Model.*;
 import State_Machine.*;
+import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class User_Interface_Text implements Constants{
     private Siege_Game game;
@@ -11,6 +14,10 @@ public class User_Interface_Text implements Constants{
     public User_Interface_Text(Siege_Game g){
         this.game=g;
     }
+
+    public void setGame(Siege_Game game) {
+        this.game = game;
+    }
     
     private int read_int(){
         Scanner in = new Scanner(System.in);
@@ -18,6 +25,11 @@ public class User_Interface_Text implements Constants{
             in.next();
         }
         return in.nextInt();
+    }
+    
+    private String read_Text(){
+        Scanner in = new Scanner(System.in);
+        return in.nextLine();
     }
 
     public void initial_text(){
@@ -30,7 +42,7 @@ public class User_Interface_Text implements Constants{
                 game.setup();
                 break;
             case 2:
-                //game.load();
+                load_text();
                 break;
             case 3:
                 quit = true;
@@ -71,7 +83,7 @@ public class User_Interface_Text implements Constants{
                 game.sabotage();
                 break;
             case 9:
-                //game.save();
+                save_text();
                 break;
             case 10:
                 game.endTurn();
@@ -150,10 +162,10 @@ public class User_Interface_Text implements Constants{
                 game.drawCard();
                 break;
             case 2:
-                //game.saave();
+                save_text();
                 break;
             case 3:
-                //game.load();
+                load_text();
                 break;
             case 4:
                 quit=true;
@@ -183,5 +195,68 @@ public class User_Interface_Text implements Constants{
         Siege_Game origin = new Siege_Game();
         User_Interface_Text ui_text = new User_Interface_Text(origin);
         ui_text.run();
+    }
+    
+    private void load_text() {
+        System.out.print("\nName of the file to load:  ");
+        String filename = read_Text();
+        if(filename == null || filename.isEmpty())
+                return;
+        setGame(load_game(filename));
+        System.out.println("\nGame loaded\n");
+    }
+
+    private Siege_Game load_game(String filename) {
+        ObjectInputStream oistream = null;
+        Siege_Game sg = null;
+        
+        try {
+            oistream = new ObjectInputStream(new FileInputStream(filename));
+            sg = (Siege_Game) oistream.readObject();
+        } catch (FileNotFoundException ex) {
+            System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if(oistream != null){
+                try {
+                    oistream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return sg;
+    }
+    private void save_text(){
+        System.out.println("\nName of the file to save: ");
+        String filename = read_Text();
+        if(filename == null || filename.isEmpty())
+            return;
+        save_game(filename);
+        System.out.println("\nGame saved\n");
+    }
+    
+    private void save_game(String filename) {
+        ObjectOutputStream oostream = null;
+        
+        try {
+            oostream = new ObjectOutputStream(new FileOutputStream(filename));
+            oostream.writeObject(this.game);
+        } catch (FileNotFoundException ex) {
+            System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if(oostream != null){
+                try {
+                    oostream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 }

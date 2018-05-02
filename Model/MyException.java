@@ -1,5 +1,7 @@
 package Model;
 
-public class MyException extends Exception{
+import java.io.Serializable;
+
+public class MyException extends Exception implements Serializable{
     
 }
