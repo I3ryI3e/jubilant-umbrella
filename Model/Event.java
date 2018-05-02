@@ -1,6 +1,8 @@
 package Model;
 
-public abstract class Event {
+import java.io.Serializable;
+
+public abstract class Event implements Serializable{
     private final String text;
     
     public Event(String t){

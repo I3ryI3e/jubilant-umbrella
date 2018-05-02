@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day implements Constants{
+public class Day implements Constants, Serializable{
     private final int n_player_actions;
     private final List<Enemy_Attack> enemy_attack;
     private final Event event;

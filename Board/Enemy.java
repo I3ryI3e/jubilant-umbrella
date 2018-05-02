@@ -3,9 +3,10 @@ package Board;
 import Model.Constants;
 import Model.Constants.Enemy_Attack;
 import Model.MyException;
+import java.io.Serializable;
 import java.util.List;
 
-public class Enemy implements Constants {
+public class Enemy implements Constants, Serializable{
     private int trebutchet;
     private Enemy_Track ladder;
     private Enemy_Track battering_ram;

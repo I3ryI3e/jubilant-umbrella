@@ -3,9 +3,10 @@ package Cards;
 import Model.Constants;
 import Model.Day;
 import Model.Game;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Card implements Constants {
+public abstract class Card implements Constants, Serializable{
     private final int card_number;
     private final ArrayList<Day> days;
     

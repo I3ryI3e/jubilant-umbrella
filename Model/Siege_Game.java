@@ -2,8 +2,9 @@ package Model;
 
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
+import java.io.Serializable;
 
-public class Siege_Game implements Constants{
+public class Siege_Game implements Constants, Serializable{
     private Game game;
     private States state;
 

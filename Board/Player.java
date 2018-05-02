@@ -1,10 +1,9 @@
 package Board;
 
 import Model.MyException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
     private final Player_Track supplies;
     private final Player_Track morale;
     private final Player_Track wall;

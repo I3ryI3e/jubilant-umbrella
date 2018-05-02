@@ -4,11 +4,12 @@ import Board.Enemy;
 import Board.Player;
 import Cards.*;
 import Model.Constants.Enemy_Attack;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Game {
+public class Game implements Serializable{
     private Player player;
     private Enemy enemy;
     private int game_day;

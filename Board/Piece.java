@@ -1,6 +1,8 @@
 
 package Board;
 
-public interface Piece {
+import java.io.Serializable;
+
+public interface Piece extends Serializable{
     String getName();
 }
