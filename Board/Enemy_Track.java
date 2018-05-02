@@ -62,7 +62,7 @@ public class Enemy_Track extends Track {
             return 4;
         else if(aux.getPiece() instanceof Ladder)
             return 2;
-        else if (aux.getPiece() instanceof Ram)
+        else if (aux.getPiece() instanceof Battering_Ram)
             return 3;
         else
             return 4;

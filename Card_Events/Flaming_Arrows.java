@@ -1,10 +1,7 @@
 
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
-import Model.Siege_Game;
-
 public class Flaming_Arrows extends Event {
 
     public Flaming_Arrows() {

@@ -1,8 +1,6 @@
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
-import Model.Siege_Game;
 
 public class Death_of_a_Leader extends Event{
 
@@ -12,7 +10,7 @@ public class Death_of_a_Leader extends Event{
 
     @Override
     public void runEvent(Game game) {
-        game.ReduceMoralEvent();
+        game.DecreaseMoralEvent();
     }
     
 }

@@ -1,4 +1,6 @@
-package Model;
+package Card_Events;
+
+import Model.Game;
 
 public abstract class Event {
     private final String text;
@@ -40,6 +42,9 @@ public abstract class Event {
         return 0;
     }
     public int getBoilingWaterMod(){
+        return 0;
+    }
+    public int getAllAttackMod(){
         return 0;
     }
     abstract public void runEvent(Game game);

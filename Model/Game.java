@@ -61,11 +61,11 @@ public class Game {
     }
     public void archers(Enemy_Attack enemy_mov) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
-        switch(enemy_mov){                                  // NOT QUITE RIGHT! DICE MODIFICATIONS DON'T ACCOUNT FOR POSITION
+        switch(enemy_mov){                                  
             case LADDER:
         {
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
             }
@@ -80,7 +80,7 @@ public class Game {
             case BATTERING_RAM:
         {
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
             }
@@ -95,7 +95,7 @@ public class Game {
             case SIEGE_TOWER:
         {
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
             }
@@ -157,7 +157,7 @@ public class Game {
         return (getEnemy().isNumEnemyInCloseCombat(2));
     }
 
-    public void ReduceMoralEvent() {
+    public void DecreaseMoralEvent() {
         getPlayer().decreaseMorale();
     }
 
@@ -180,8 +180,16 @@ public class Game {
 
     private void reputAllCardsIntoDeck() {
         for (int i = 0; i < discard.size(); i++) {
-            deck.add(i,discard.get(discard.size()-i));
+            deck.add(i,discard.get(discard.size()-1-i));
         }
         discard.clear();
+    }
+
+    public void DecreaseSuppliesEvent() {
+        getPlayer().decreaseSupplies();
+    }
+
+    public void addTrebuchetEvent() {
+        getEnemy().increaseNumberOfTrebuchet();
     }
 }

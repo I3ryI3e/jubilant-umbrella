@@ -1,9 +1,7 @@
 
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
-import Model.Siege_Game;
 
 public class Trebuchet_Attack extends Event {
 
@@ -15,16 +13,16 @@ public class Trebuchet_Attack extends Event {
     public void runEvent(Game game) {
         switch(game.getEnemy().getTrebutchet()){
             case 3:
-                game.getPlayer().raiseWall();
-                game.getPlayer().raiseWall();
+                game.getPlayer().decreaseWall();
+                game.getPlayer().decreaseWall();
                 break;
             case 2:
-                game.getPlayer().raiseWall();
+                game.getPlayer().decreaseWall();
                 break;
             case 1:
                 int option = (int)(Math.random()*5+1);
                 if(option == 4 || option == 5 || option == 6)
-                   game.getPlayer().raiseWall();
+                   game.getPlayer().decreaseWall();
                 break;
         }
     }

@@ -156,7 +156,7 @@ public class User_Interface_Text implements Constants{
                 //game.load();
                 break;
             case 4:
-                return;
+                quit=true;
         }
     }
     
@@ -173,6 +173,8 @@ public class User_Interface_Text implements Constants{
                 wait_action_text();
             }else if ( state instanceof Wait_Archers) {
                 archersText();
+//            }else if (state instanceof Game_Over){
+//                gameOver_Text();
             }
         }
     }

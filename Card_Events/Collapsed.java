@@ -1,6 +1,5 @@
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
 import Model.Siege_Game;
 

@@ -1,9 +1,7 @@
 
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
-import Model.Siege_Game;
 
 public class Enemy_Fatigue extends Event {
 

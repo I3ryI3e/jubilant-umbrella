@@ -1,9 +1,7 @@
 
 package Card_Events;
 
-import Model.Event;
 import Model.Game;
-import Model.Siege_Game;
 
 public class Illness extends Event {
 
@@ -13,6 +11,7 @@ public class Illness extends Event {
 
     @Override
     public void runEvent(Game game) {
-        //TODO
+        game.DecreaseMoralEvent();
+        game.DecreaseSuppliesEvent();
     }
 }

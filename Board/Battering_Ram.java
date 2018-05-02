@@ -1,16 +1,16 @@
 
 package Board;
 
-public class Siege implements Weapon {
+public class Battering_Ram implements Weapon {
 
     @Override
     public int getPower() {
-       return 4;
+        return 3;
     }
 
     @Override
     public String getName() {
-        return "Siege Tower";
+        return "Battering Ram";
     }
     
 }

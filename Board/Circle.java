@@ -1,7 +1,7 @@
 
 package Board;
 
-import Model.Event;
+import Card_Events.Event;
 
 public class Circle extends Position {
             

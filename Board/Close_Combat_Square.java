@@ -1,7 +1,7 @@
 
 package Board;
 
-import Model.Event;
+import Card_Events.Event;
 
 public class Close_Combat_Square extends Position {
     

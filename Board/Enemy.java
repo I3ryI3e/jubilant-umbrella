@@ -14,8 +14,8 @@ public class Enemy implements Constants {
     public Enemy(){
         this.trebutchet = 3;
         ladder = new Enemy_Track(new Ladder());
-        battering_ram = new Enemy_Track(new Ram());
-        siege_tower= new Enemy_Track(new Siege());
+        battering_ram = new Enemy_Track(new Battering_Ram());
+        siege_tower= new Enemy_Track(new Siege_Tower());
     }
     public int getTrebutchet() {
         return trebutchet;
@@ -182,5 +182,10 @@ public class Enemy implements Constants {
         aux.append(siege_tower);
         aux.append("Trebuchet = ").append(trebutchet).append("\n");
         return aux.toString();
+    }
+
+    public void increaseNumberOfTrebuchet() {
+        if(this.trebutchet<3)
+            this.trebutchet++;
     }
 }
