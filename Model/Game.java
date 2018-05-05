@@ -41,19 +41,15 @@ public class Game implements Serializable{
         textToOutput.delete(0, textToOutput.length());
         return aux;
     }
-    
     public void setGame_day(int game_day){
         this.game_day = game_day;
     }
-    
     public Player getPlayer() {
         return player;
     }
-
     public Enemy getEnemy() {
         return enemy;
     }
-    
     public void setup() {
         this.player= new Player();
         this.enemy= new Enemy();
@@ -67,69 +63,148 @@ public class Game implements Serializable{
         deck.add(6,new Card7());
         Collections.shuffle(deck);
     }
-    public void archers(Enemy_Attack enemy_mov) { // TODO!! 
+    public void archers(Enemy_Attack ea) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
         textToOutput.append("Dado: ").append(dice);
-        switch(enemy_mov){                                  
+        switch(ea){                                  
             case LADDER:
-        {
             try {
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
             }
-        }
-        {
             try {
                 if(dice > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout");
                 }
             } catch (MyException ex) {}
-        }
-                break;
+            break;
             case BATTERING_RAM:
-        {
             try {
                 dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
             }
-        }
-        {
             try {
                 if(dice > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout");
                 }
             } catch (MyException ex) {}
-        }
-                break;
+            break;
             case SIEGE_TOWER:
-        {
             try {
                 dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
                 dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
             }
-        }
-        {
             try {
                 if(dice > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Siege Tower is going to backout");
                 }
             } catch (MyException ex) {}
+            break;
         }
-                break;
+    }
+    public void boilling(Enemy_Attack ea) {
+        int dice = (int) (Math.random()*5+1);
+        switch(ea){                                  
+            case LADDER:
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
+                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
+            }
+            try {
+                if(dice > getEnemy().getLadderStrength())
+                    enemy.goBackwardLadder();
+            } catch (MyException ex) {}
+            break;
+            case BATTERING_RAM:
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
+                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
+            }
+            try {
+                if(dice > getEnemy().getBatteringRamStrength())
+                    enemy.goBackwardBatteringRam();
+            } catch (MyException ex) {}
+            break;
+            case SIEGE_TOWER:
+            try {
+                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+            } catch (MyException ex) {
+                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
+            }
+            try {
+                if(dice > getEnemy().getSiegeTowerStrength())
+                    enemy.goBackwardSiegeTower();
+            } catch (MyException ex) {}
+            break;
         }
         player.decreasePlayerActions();
     }
-
     public void removeSiegeFromGame() {
         enemy.removeSiegeFromGame();
     }
-
+    public void drawAndResolveCard() {
+        drawCard();
+        resolveCard();
+    }
+    private void drawCard() {
+        discard.add(0, deck.remove(0));
+    }
+    private void resolveCard() {
+        player.doEnemyCheckLine();
+        discard.get(0).resolve(getGame_day(), this);
+    }
+    void setPlayerActions(int n_player_actions) {
+        getPlayer().setActions(n_player_actions);
+    }
+    void enemyAttack(List<Enemy_Attack> enemy_attack) {
+        for(int i=0;i<enemy_attack.size();i++){
+            getEnemy().enemyAttack(enemy_attack.get(i));
+        }
+    }
+    public boolean checkLoss() {
+        return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));
+    }
+    public boolean TwoEnemyLine() {
+        return (getEnemy().isNumEnemyInCloseCombat(2));
+    }
+    public void DecreaseMoralEvent() {
+        getPlayer().decreaseMorale();
+    }
+    public String drawBoards() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(getPlayer()).append("\n\n").append(getEnemy()).append("\n\n");
+        return aux.toString();
+    }
+    public String drawCardDay() {
+        return discard.get(0).getDayX(game_day).toString();
+    }
+    public void endTurn() {
+        if(deck.isEmpty()){
+            reputAllCardsIntoDeck();
+            setGame_day(getGame_day()+1);
+        }
+        this.canUseSupllyToOneMoreAction=true;
+    }
+    private void reputAllCardsIntoDeck() {
+        for (int i = 0; i < discard.size(); i++) {
+            deck.add(i,discard.get(discard.size()-1-i));
+        }
+        discard.clear();
+    }
+    public void DecreaseSuppliesEvent() {
+        getPlayer().decreaseSupplies();
+    }
+    public void addTrebuchetEvent() {
+        getEnemy().increaseNumberOfTrebuchet();
+    }
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
@@ -139,74 +214,5 @@ public class Game implements Serializable{
             aux.append(deck.get(i).toString());
         }
         return aux.toString();
-    }
-
-    public void drawAndResolveCard() {
-        drawCard();
-        resolveCard();
-    }
-
-    private void drawCard() {
-        discard.add(0, deck.remove(0));
-    }
-
-    private void resolveCard() {
-        player.doEnemyCheckLine();
-        discard.get(0).resolve(getGame_day(), this);
-    }
-
-    void setPlayerActions(int n_player_actions) {
-        getPlayer().setActions(n_player_actions);
-    }
-
-    void enemyAttack(List<Enemy_Attack> enemy_attack) {
-        for(int i=0;i<enemy_attack.size();i++){
-            getEnemy().enemyAttack(enemy_attack.get(i));
-        }
-    }
-
-    public boolean checkLoss() {
-        return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));
-    }
-
-    public boolean TwoEnemyLine() {
-        return (getEnemy().isNumEnemyInCloseCombat(2));
-    }
-
-    public void DecreaseMoralEvent() {
-        getPlayer().decreaseMorale();
-    }
-
-    public String drawBoards() {
-        StringBuilder aux = new StringBuilder();
-        aux.append(getPlayer()).append("\n\n").append(getEnemy()).append("\n\n");
-        return aux.toString();
-    }
-
-    public String drawCardDay() {
-        return discard.get(0).getDayX(game_day).toString();
-    }
-
-    public void endTurn() {
-        if(deck.isEmpty()){
-            reputAllCardsIntoDeck();
-            setGame_day(getGame_day()+1);
-        }
-        this.canUseSupllyToOneMoreAction=true;
-    }
-
-    private void reputAllCardsIntoDeck() {
-        for (int i = 0; i < discard.size(); i++) {
-            deck.add(i,discard.get(discard.size()-1-i));
-        }
-        discard.clear();
-    }
-
-    public void DecreaseSuppliesEvent() {
-        getPlayer().decreaseSupplies();
-    }
-
-    public void addTrebuchetEvent() {
-        getEnemy().increaseNumberOfTrebuchet();
     }
 }

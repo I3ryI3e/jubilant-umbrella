@@ -43,9 +43,6 @@ public abstract class Event implements Serializable{
     public int getCloseCombatMod(){
         return 0;
     }
-    public int getBoilingWaterMod(){
-        return 0;
-    }
     public int getAllAttackMod(){
         return 0;
     }
