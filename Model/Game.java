@@ -16,6 +16,7 @@ public class Game implements Serializable{
     private List<Card> deck;
     private List<Card> discard;
     private boolean canUseSupllyToOneMoreAction;
+    private StringBuffer textToOutput;
 
     public Game(){
         this.player= new Player();
@@ -23,6 +24,7 @@ public class Game implements Serializable{
         this.deck = new ArrayList<>();
         this.discard = new ArrayList<>();
         this.canUseSupllyToOneMoreAction=true;
+        this.textToOutput = new StringBuffer();
     }
     
     public int getGame_day(){
@@ -33,6 +35,11 @@ public class Game implements Serializable{
     }
     public void changeCanUseSupply(){
         this.canUseSupllyToOneMoreAction = !this.canUseSupllyToOneMoreAction;
+    }
+    public String getTextToOutput(){
+        String aux = textToOutput.toString();
+        textToOutput.delete(0, textToOutput.length());
+        return aux;
     }
     
     public void setGame_day(int game_day){
@@ -62,6 +69,7 @@ public class Game implements Serializable{
     }
     public void archers(Enemy_Attack enemy_mov) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
+        textToOutput.append("Dado: ").append(dice);
         switch(enemy_mov){                                  
             case LADDER:
         {
@@ -73,8 +81,10 @@ public class Game implements Serializable{
         }
         {
             try {
-                if(dice > getEnemy().getLadderStrength())
+                if(dice > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
+                    textToOutput.append("\nVictory, Ladder is going to backout");
+                }
             } catch (MyException ex) {}
         }
                 break;
@@ -88,8 +98,10 @@ public class Game implements Serializable{
         }
         {
             try {
-                if(dice > getEnemy().getBatteringRamStrength())
+                if(dice > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
+                    textToOutput.append("\nVictory, Battering Ram is going to backout");
+                }
             } catch (MyException ex) {}
         }
                 break;
@@ -103,12 +115,15 @@ public class Game implements Serializable{
         }
         {
             try {
-                if(dice > getEnemy().getSiegeTowerStrength())
+                if(dice > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
+                    textToOutput.append("\nVictory, Siege Tower is going to backout");
+                }
             } catch (MyException ex) {}
         }
                 break;
         }
+        player.decreasePlayerActions();
     }
 
     public void removeSiegeFromGame() {
@@ -136,7 +151,7 @@ public class Game implements Serializable{
     }
 
     private void resolveCard() {
-        //TODO FAZER ENEMY_LINE_CHECK! TALVEZ FAZER A CLASS TUNNEL
+        player.doEnemyCheckLine();
         discard.get(0).resolve(getGame_day(), this);
     }
 
@@ -177,6 +192,7 @@ public class Game implements Serializable{
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
         }
+        this.canUseSupllyToOneMoreAction=true;
     }
 
     private void reputAllCardsIntoDeck() {

@@ -26,8 +26,6 @@ public class Enemy_Track extends Track {
         }
         
     }
-    
-    
     public void goForward() {
         int pos;
         try {
@@ -52,9 +50,15 @@ public class Enemy_Track extends Track {
         }
     }
 
-    Position getPiecePosition(int piecePosition) {
-        return track.get(piecePosition);
+    @Override
+    public boolean onStartingPosition() {
+        try {
+            return getPiecePositionNumber() == TAM_TRACKS_ENEMY-1;
+        } catch (MyException ex) {
+            return false;
+        }
     }
+    
 
     int getStrength() throws MyException {
         Position aux=getPiecePosition(getPiecePositionNumber());

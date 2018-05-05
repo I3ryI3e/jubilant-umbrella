@@ -37,7 +37,7 @@ public class Player implements Serializable{
     public int getWall() throws MyException {
         return wall.getPiecePositionNumber();
     }
-
+    
 
     public int getRaided_supplies() {
         return raided_supplies;
@@ -95,7 +95,12 @@ public class Player implements Serializable{
         } catch (MyException ex) {}
         return (aux > 1);
     }
-    
+    public boolean playerOnEnemyLine(){
+        return tunnel.onEnemyLine();
+    }
+    public void decreasePlayerActions(){
+        actions--;
+    }
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
@@ -105,4 +110,15 @@ public class Player implements Serializable{
         aux.append("Number of Player Actions: ").append(actions).append("\n");
         return aux.toString();
     }    
+
+    public void doEnemyCheckLine() {
+        if(tunnel.onEnemyLine()){
+            int dice = (int) (Math.random()*5 +1);
+            if(dice==1){
+                tunnel.soldiersDiedOnEnemyLines();
+                morale.decrease();
+            }
+        }
+            
+    }
 }

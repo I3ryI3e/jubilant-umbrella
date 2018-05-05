@@ -3,16 +3,18 @@ package UI.text;
 import Model.*;
 import State_Machine.*;
 import java.io.*;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class User_Interface_Text implements Constants{
+public class User_Interface_Text implements Constants, Observer{
     private Siege_Game game;
     private boolean quit = false;
     
-    public User_Interface_Text(Siege_Game g){
-        this.game=g;
+    public User_Interface_Text(){
+        this.game= new Siege_Game(this);
     }
 
     public void setGame(Siege_Game game) {
@@ -192,8 +194,7 @@ public class User_Interface_Text implements Constants{
     }
     
     public static void main(String[] args) {
-        Siege_Game origin = new Siege_Game();
-        User_Interface_Text ui_text = new User_Interface_Text(origin);
+        User_Interface_Text ui_text = new User_Interface_Text();
         ui_text.run();
     }
     
@@ -258,5 +259,10 @@ public class User_Interface_Text implements Constants{
                 }
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println(game.getText());
     }
 }

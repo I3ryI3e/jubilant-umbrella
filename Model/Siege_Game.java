@@ -2,14 +2,19 @@ package Model;
 
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
+import UI.text.User_Interface_Text;
 import java.io.Serializable;
+import java.util.Observable;
 
-public class Siege_Game implements Constants, Serializable{
+public class Siege_Game extends Observable implements Constants, Serializable{
     private Game game;
     private States state;
+    private User_Interface_Text user_interface;
 
-    public Siege_Game(){
+    public Siege_Game(User_Interface_Text ui){
         this.game = new Game();
+        user_interface=ui;
+        this.addObserver(user_interface);
         setState(new Initial_State(game));
     }
     public void setGame(Game game) {
@@ -76,16 +81,16 @@ public class Siege_Game implements Constants, Serializable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean canSupply(){ //TODO
-        return (game.getPlayer().getTunnel() == 3 && game.getPlayer().getRaided_supplies() != 2);
+    public boolean canSupply(){ 
+        return (game.getPlayer().playerOnEnemyLine());
     }
     
     public void supply() { //TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean canSabotage(){ //TODO
-        return (game.getPlayer().getTunnel() == 3);
+    public boolean canSabotage(){ 
+        return (game.getPlayer().playerOnEnemyLine());
     }
     
     public void sabotage() { //TODO
@@ -103,6 +108,8 @@ public class Siege_Game implements Constants, Serializable{
     }
     public void archers(Enemy_Attack ea){
         setState(state.Apply_Action_Rules(ea));
+        setChanged();
+        notifyObservers();
     }
     public void setActions(int na){
         setState(state.setActions(na));
@@ -136,5 +143,10 @@ public class Siege_Game implements Constants, Serializable{
     public void endTurn() { //TODO
        setState(state.endTurn());
     }
+
+    public String getText() {
+        return game.getTextToOutput();
+    }
+    
     
 }
