@@ -9,7 +9,7 @@ public interface States extends Constants, Serializable{
     public States setActions(int na);
     public States archers();
     public States Rally_Troops();
-    public States Boiling();
+    public States boiling();
     public States Tunnel();
     public States Apply_Action_Rules(Enemy_Attack ea);
     public States returnWaitAction();

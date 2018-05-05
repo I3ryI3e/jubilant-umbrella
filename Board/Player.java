@@ -70,10 +70,10 @@ public class Player implements Serializable{
     }
 
     public boolean isWallStartingSpace() throws MyException {
-        return wall.getPiecePositionNumber()== wall.getTrackSize()-1;
+        return wall.onStartingPosition();
     }
     public boolean isMoraleStartingSpace() throws MyException{
-        return morale.getPiecePositionNumber() == morale.getTrackSize()-1;
+        return morale.onStartingPosition();
     }
 
     public boolean checkLoss() {

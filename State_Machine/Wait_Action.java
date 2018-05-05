@@ -18,8 +18,8 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
-    public States Boiling() {
-        return super.Boiling(); //To change body of generated methods, choose Tools | Templates.
+    public States boiling() {
+        return new Wait_Boiling(getGame());
     }
 
     @Override

@@ -46,15 +46,19 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     public void archers(Enemy_Attack ea){
         setState(state.Apply_Action_Rules(ea));
+        setChanged();
+        notifyObservers();
     }
     public boolean can_boilling() throws MyException{
         return (isLadder(N_ENEMY_CIRCLES) || isBatteringRam(N_ENEMY_CIRCLES) || isSiegeTower(N_ENEMY_CIRCLES));
     }
     public void stateBoilling() {
-        setState(state.Boiling());
+        setState(state.boiling());
     }
     public void boilling(Enemy_Attack ea) {
         setState(state.Apply_Action_Rules(ea));
+        setChanged();
+        notifyObservers();
     }
     public boolean can_close_combat() throws MyException{
         return (isLadder(N_ENEMY_CLOSE_COMBAT) || isBatteringRam(N_ENEMY_CLOSE_COMBAT) || isSiegeTower(N_ENEMY_CLOSE_COMBAT));
@@ -63,13 +67,13 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public boolean canCoupure() throws MyException{
-        return game.getPlayer().isWallStartingSpace();
+        return !game.getPlayer().isWallStartingSpace();
     }
     public void coupure() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public boolean canRally() throws MyException{
-        return game.getPlayer().isMoraleStartingSpace();
+        return !game.getPlayer().isMoraleStartingSpace();
     }
     public void rally() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -91,14 +95,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     public void drawCard(){
         setState(state.Draw_Card());
-    }
-    public void stateArchers(){
-        setState(state.archers());
-    }
-    public void archers(Enemy_Attack ea){
-        setState(state.Apply_Action_Rules(ea));
-        setChanged();
-        notifyObservers();
     }
     public void setActions(int na){
         setState(state.setActions(na));

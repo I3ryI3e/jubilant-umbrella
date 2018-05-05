@@ -113,12 +113,8 @@ public class User_Interface_Text implements Constants, Observer{
         try {
             str.append(game.canRally()?"\t5- Rally Troops\n":"");
         } catch (MyException e) {}
-//        try {
-//            str.append(game.canSupply()?"\t7- Supply Raid\n":"");
-//        } catch (MyException e) {}
-//        try {
-//            str.append(game.canSabotage()?"\t8- Sabotage\n":"");
-//        } catch (MyException e) {}
+        str.append(game.canSupply()?"\t7- Supply Raid\n":"");
+        str.append(game.canSabotage()?"\t8- Sabotage\n":"");
         
         str.append("\t9- Save game\n\t10- End Turn\n" + "\n\t11- Quit\n");
         
@@ -179,13 +175,13 @@ public class User_Interface_Text implements Constants, Observer{
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         try {
-            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t1- Ladder\n"));       // -1 BECAUSE THE LIST POSITION ZERO
+            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t1- Ladder\n":""));       // -1 BECAUSE THE LIST POSITION ZERO
         } catch (MyException e) {}
         try {
-            str.append((game.isBatteringRam((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t2- Battering Ram\n"));
+            str.append((game.isBatteringRam((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t2- Battering Ram\n":""));
         } catch (MyException e) {}
         try {
-            str.append((game.isSiegeTower((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t3- Siege Tower\n"));
+            str.append((game.isSiegeTower((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t3- Siege Tower\n":""));
         } catch (MyException e) {}
         str.append("\t4- return\n");
         System.out.println(str.toString());

@@ -18,7 +18,7 @@ public class State_Adapter implements States, Constants {
     @Override
     public States Rally_Troops() {return this;}
     @Override
-    public States Boiling() {return this;}
+    public States boiling() {return this;}
     @Override
     public States Tunnel() {return this;}
     @Override

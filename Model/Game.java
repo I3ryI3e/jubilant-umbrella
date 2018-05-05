@@ -107,9 +107,11 @@ public class Game implements Serializable{
             } catch (MyException ex) {}
             break;
         }
+        player.decreasePlayerActions();
     }
     public void boilling(Enemy_Attack ea) {
         int dice = (int) (Math.random()*5+1);
+        textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
@@ -118,8 +120,10 @@ public class Game implements Serializable{
                 dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
             }
             try {
-                if(dice > getEnemy().getLadderStrength())
+                if(dice > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
+                    textToOutput.append("\nVictory, Ladder is going to backout");
+                }
             } catch (MyException ex) {}
             break;
             case BATTERING_RAM:
@@ -129,8 +133,10 @@ public class Game implements Serializable{
                 dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
             }
             try {
-                if(dice > getEnemy().getBatteringRamStrength())
+                if(dice > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
+                    textToOutput.append("\nVictory, Battering Ram is going to backout");
+                }
             } catch (MyException ex) {}
             break;
             case SIEGE_TOWER:
@@ -140,8 +146,10 @@ public class Game implements Serializable{
                 dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
             }
             try {
-                if(dice > getEnemy().getSiegeTowerStrength())
+                if(dice > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
+                    textToOutput.append("\nVictory, Ladder is going to backout");
+                }
             } catch (MyException ex) {}
             break;
         }
