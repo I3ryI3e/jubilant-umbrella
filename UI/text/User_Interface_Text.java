@@ -62,7 +62,7 @@ public class User_Interface_Text implements Constants{
                 game.stateArchers();
                 break;
             case 2:
-                game.boilling();
+                game.stateBoilling();
                 break;
             case 3:
                 game.closeCombat();
@@ -123,6 +123,25 @@ public class User_Interface_Text implements Constants{
         return str.toString();
     }
     
+    public void draw_card_text(){
+        int option;
+        System.out.println("\n\t1- Draw card\n" + "\t2- Save game\n" + "\t3- Load game\n" + "\t4- Quit\n");
+        option = read_int();
+        switch(option){
+            case 1:
+                game.drawCard();
+                break;
+            case 2:
+                save_text();
+                break;
+            case 3:
+                load_text();
+                break;
+            case 4:
+                quit=true;
+        }
+    }
+    
     private void archersText() {
         int opt;
         StringBuilder str = new StringBuilder();
@@ -152,23 +171,34 @@ public class User_Interface_Text implements Constants{
                 game.returnWaitAction();
         }
     }
-    
-    public void draw_card_text(){
-        int option;
-        System.out.println("\n\t1- Draw card\n" + "\t2- Save game\n" + "\t3- Load game\n" + "\t4- Quit\n");
-        option = read_int();
-        switch(option){
+    // SIMILAR FUNCITONS - REWATCH AND SEE IF ITS POSSIBLE TO JOIN THEM
+    private void boillingText() {
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.getGame().getEnemy());
+        try {
+            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t1- Ladder\n"));       // -1 BECAUSE THE LIST POSITION ZERO
+        } catch (MyException e) {}
+        try {
+            str.append((game.isBatteringRam((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t2- Battering Ram\n"));
+        } catch (MyException e) {}
+        try {
+            str.append((game.isSiegeTower((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"":"\t3- Siege Tower\n"));
+        } catch (MyException e) {}
+        str.append("\t4- return\n");
+        System.out.println(str.toString());
+        
+        opt = read_int();
+        
+        switch(opt){
             case 1:
-                game.drawCard();
-                break;
+                game.boilling(Enemy_Attack.LADDER);
             case 2:
-                save_text();
-                break;
+                game.boilling(Enemy_Attack.BATTERING_RAM);
             case 3:
-                load_text();
-                break;
+                game.boilling(Enemy_Attack.SIEGE_TOWER);
             case 4:
-                quit=true;
+                game.returnWaitAction();
         }
     }
     
@@ -185,6 +215,8 @@ public class User_Interface_Text implements Constants{
                 wait_action_text();
             }else if ( state instanceof Wait_Archers) {
                 archersText();
+            }else if ( state instanceof Wait_Boiling) {
+                boillingText();
 //            }else if (state instanceof Game_Over){
 //                gameOver_Text();
             }
@@ -229,6 +261,7 @@ public class User_Interface_Text implements Constants{
         }
         return sg;
     }
+    
     private void save_text(){
         System.out.println("\nName of the file to save: ");
         String filename = read_Text();
