@@ -94,7 +94,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         setState(state.New_Game());
     }
     public void drawCard(){
-        setState(state.Draw_Card());
+        try {
+            setState(state.Draw_Card());
+        } catch (MyException ex) {
+            setState(new Only_Raid_and_Sab_State(getGame()) );
+        }
     }
     public void setActions(int na){
         setState(state.setActions(na));
@@ -120,6 +124,9 @@ public class Siege_Game extends Observable implements Constants, Serializable{
 
     public String getText() {
         return game.getTextToOutput();
+    }
+    public boolean playerStillHasActionsLeft(){
+        return game.playerStillHasActionsLeft();
     }
     
     @Override

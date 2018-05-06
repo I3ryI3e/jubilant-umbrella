@@ -121,4 +121,8 @@ public class Player implements Serializable{
         }
             
     }
+
+    public boolean playerStillHasActionsLeft() {
+        return actions>0;
+    }
 }

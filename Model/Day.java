@@ -4,6 +4,8 @@ import Card_Events.Event;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Day implements Constants, Serializable{
     private final int n_player_actions;
@@ -28,8 +30,14 @@ public class Day implements Constants, Serializable{
         return event;
     }
     
-    public void resolve(Game game) {
-        getEvent().runEvent(game);
+    public void resolve(Game game) throws MyException {
+        try {
+            getEvent().runEvent(game);
+        } catch (MyException ex) {
+            game.enemyAttack(getEnemy_attack());
+            game.setPlayerActions(getN_player_actions());
+            throw new MyException();
+        }
         game.enemyAttack(getEnemy_attack());
         game.setPlayerActions(getN_player_actions());
     }

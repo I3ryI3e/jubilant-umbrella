@@ -1,6 +1,7 @@
 package Card_Events;
 
 import Model.Game;
+import Model.MyException;
 
 import java.io.Serializable;
 
@@ -46,7 +47,7 @@ public abstract class Event implements Serializable{
     public int getAllAttackMod(){
         return 0;
     }
-    abstract public void runEvent(Game game);
+    abstract public void runEvent(Game game) throws MyException;
 
     @Override
     public String toString() {

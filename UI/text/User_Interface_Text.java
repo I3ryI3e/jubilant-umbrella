@@ -169,7 +169,6 @@ public class User_Interface_Text implements Constants, Observer{
                 game.returnWaitAction();
         }
     }
-    // SIMILAR FUNCITONS - REWATCH AND SEE IF ITS POSSIBLE TO JOIN THEM
     private void boillingText() {
         int opt;
         StringBuilder str = new StringBuilder();
@@ -203,8 +202,8 @@ public class User_Interface_Text implements Constants, Observer{
     public void run(){
         States state =null;
         while(!quit){
-            state = game.getState();
             game.checkLossAnd2Enemy();
+            state = game.getState();
             if( state instanceof Initial_State){
                 initial_text();
             }else if (state instanceof Wait_Draw_Card){
@@ -215,8 +214,10 @@ public class User_Interface_Text implements Constants, Observer{
                 archersText();
             }else if ( state instanceof Wait_Boiling) {
                 boillingText();
-//            }else if (state instanceof Game_Over){
-//                gameOver_Text();
+            }else if (state instanceof Game_Over){
+                gameOver_Text();
+            }else if (state instanceof Only_Raid_and_Sab_State){
+                onlyRaidAndSabText();
             }
         }
     }
@@ -293,5 +294,15 @@ public class User_Interface_Text implements Constants, Observer{
     @Override
     public void update(Observable o, Object arg) {
         System.out.println(game.getText());
+    }
+
+    private void onlyRaidAndSabText() {
+        System.out.println("Only Raid and Sab Text");
+        quit=false;
+    }
+
+    private void gameOver_Text() {
+        System.out.println("GAME OVER!");
+        quit=false;
     }
 }

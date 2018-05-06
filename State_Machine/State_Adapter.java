@@ -10,7 +10,7 @@ public class State_Adapter implements States, Constants {
     }
     public Game getGame(){return game;}
     @Override
-    public States Draw_Card() {return this;}
+    public States Draw_Card()throws MyException {return this;}
     @Override
     public States New_Game() {return this;}
     @Override

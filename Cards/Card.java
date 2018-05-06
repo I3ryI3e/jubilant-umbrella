@@ -3,6 +3,7 @@ package Cards;
 import Model.Constants;
 import Model.Day;
 import Model.Game;
+import Model.MyException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -30,8 +31,8 @@ public abstract class Card implements Constants, Serializable{
         return false;
     }
     
-    public void resolve(int game_day, Game game) {
-        days.get(game_day).resolve(game);
+    public void resolve(int game_day, Game game) throws MyException{
+            days.get(game_day).resolve(game);
     }
 
     @Override

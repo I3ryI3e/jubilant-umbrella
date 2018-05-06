@@ -65,16 +65,18 @@ public class Game implements Serializable{
     }
     public void archers(Enemy_Attack ea) { // TODO!! 
         int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
+        int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus= discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod();
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getLadderStrength()){
+                if(dice+bonus > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout");
                 }
@@ -82,12 +84,13 @@ public class Game implements Serializable{
             break;
             case BATTERING_RAM:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod();
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getBatteringRamStrength()){
+                if(dice + bonus > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout");
                 }
@@ -95,12 +98,13 @@ public class Game implements Serializable{
             break;
             case SIEGE_TOWER:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getSiegeTowerStrength()){
+                if(dice + bonus > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Siege Tower is going to backout");
                 }
@@ -111,16 +115,18 @@ public class Game implements Serializable{
     }
     public void boilling(Enemy_Attack ea) {
         int dice = (int) (Math.random()*5+1);
+        int bonus =0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent()) +1;
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getLadderMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod() +1;
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getLadderStrength()){
+                if(dice + bonus  > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout");
                 }
@@ -128,12 +134,13 @@ public class Game implements Serializable{
             break;
             case BATTERING_RAM:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent())+1;
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getRamMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod()+1;
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getBatteringRamStrength()){
+                if(dice + bonus  > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout");
                 }
@@ -141,31 +148,35 @@ public class Game implements Serializable{
             break;
             case SIEGE_TOWER:
             try {
-                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent())+1;
             } catch (MyException ex) {
-                dice += discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
+                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod()+1;
             }
+            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice > getEnemy().getSiegeTowerStrength()){
+                if(dice + bonus > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Ladder is going to backout");
                 }
             } catch (MyException ex) {}
             break;
         }
+        if(bonus < 2){
+            player.decreaseMorale();
+        }
         player.decreasePlayerActions();
     }
     public void removeSiegeFromGame() {
         enemy.removeSiegeFromGame();
     }
-    public void drawAndResolveCard() {
+    public void drawAndResolveCard()throws MyException {
         drawCard();
         resolveCard();
     }
     private void drawCard() {
         discard.add(0, deck.remove(0));
     }
-    private void resolveCard() {
+    private void resolveCard()throws MyException {
         player.doEnemyCheckLine();
         discard.get(0).resolve(getGame_day(), this);
     }
@@ -222,5 +233,9 @@ public class Game implements Serializable{
             aux.append(deck.get(i).toString());
         }
         return aux.toString();
+    }
+
+    boolean playerStillHasActionsLeft() {
+        return player.playerStillHasActionsLeft();
     }
 }

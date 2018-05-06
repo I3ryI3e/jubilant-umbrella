@@ -1,6 +1,7 @@
 package Card_Events;
 
 import Model.Game;
+import Model.MyException;
 
 public class Bad_Weather extends Event {
 
@@ -9,8 +10,8 @@ public class Bad_Weather extends Event {
     }
 
     @Override
-    public void runEvent(Game game) {
-        //TODO
+    public void runEvent(Game game) throws MyException {
+        throw new MyException();
     }
     
 }
