@@ -18,5 +18,4 @@ public class Wait_Archers extends State_Adapter{
     public States returnWaitAction() {
         return new Wait_Action(getGame());
     }
-    
 }

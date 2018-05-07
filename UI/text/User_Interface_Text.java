@@ -73,7 +73,7 @@ public class User_Interface_Text implements Constants, Observer{
                 game.coupure();
                 break;
             case 5:
-                game.rally();
+                game.stateRally();
                 break;
             case 6:
                 //game.tunnel();
@@ -161,14 +161,18 @@ public class User_Interface_Text implements Constants, Observer{
         switch(opt){
             case 1:
                 game.archers(Enemy_Attack.LADDER);
+                break;
             case 2:
                 game.archers(Enemy_Attack.BATTERING_RAM);
+                break;
             case 3:
                 game.archers(Enemy_Attack.SIEGE_TOWER);
+                break;
             case 4:
                 game.returnWaitAction();
         }
     }
+    
     private void boillingText() {
         int opt;
         StringBuilder str = new StringBuilder();
@@ -188,15 +192,52 @@ public class User_Interface_Text implements Constants, Observer{
         opt = read_int();
         
         switch(opt){
-            case 1:
-                game.boilling(Enemy_Attack.LADDER);
+            case 1:             //TODO A UNICA FORMA PARA NAO FAZER SE NAO PUDER E ASSIM COM DUPLO CHECK
+            try {
+                if(game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1))
+                    game.boilling(Enemy_Attack.LADDER);
+                else
+                    game.returnWaitAction();
+            } catch (MyException ex) {}
+                break;
             case 2:
                 game.boilling(Enemy_Attack.BATTERING_RAM);
+                break;
             case 3:
                 game.boilling(Enemy_Attack.SIEGE_TOWER);
+                break;
             case 4:
                 game.returnWaitAction();
         }
+    }
+    
+    private void rallyText() {      //VER SE O MORALE JA TA A ZEROS OU NAO
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.getGame().getPlayer());
+        str.append("\t1- Spend 1 morale to get +1DRM\n").append("\t2- Normal try\n").append("\t3- return\n");
+        System.out.println(str.toString());
+        
+        opt = read_int();
+        
+        switch(opt){
+            case 1:
+                game.rally(Enemy_Attack.NONE)   //TODO see this
+            case 2:
+                game.rally(Enemy_Attack.NONE);
+            case 3:
+                game.returnWaitAction();
+        }
+    }
+    
+    private void onlyRaidAndSabText() {
+        System.out.println("Only Raid and Sab Text");
+        quit=false;
+    }
+
+    private void gameOver_Text() {
+        System.out.println("GAME OVER!");
+        quit=false;
     }
     
     public void run(){
@@ -214,12 +255,19 @@ public class User_Interface_Text implements Constants, Observer{
                 archersText();
             }else if ( state instanceof Wait_Boiling) {
                 boillingText();
+            }else if ( state instanceof Rally_Troops) {
+                rallyText();
             }else if (state instanceof Game_Over){
                 gameOver_Text();
             }else if (state instanceof Only_Raid_and_Sab_State){
                 onlyRaidAndSabText();
             }
         }
+    }
+    
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println(game.getText());
     }
     
     public static void main(String[] args) {
@@ -289,20 +337,5 @@ public class User_Interface_Text implements Constants, Observer{
                 }
             }
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println(game.getText());
-    }
-
-    private void onlyRaidAndSabText() {
-        System.out.println("Only Raid and Sab Text");
-        quit=false;
-    }
-
-    private void gameOver_Text() {
-        System.out.println("GAME OVER!");
-        quit=false;
     }
 }

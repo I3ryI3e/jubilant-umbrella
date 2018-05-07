@@ -75,8 +75,13 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canRally() throws MyException{
         return !game.getPlayer().isMoraleStartingSpace();
     }
-    public void rally() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void stateRally() {
+        setState(state.Rally_Troops());
+    }
+    public void rally(Enemy_Attack ea) {
+        setState(state.Apply_Action_Rules(ea));
+        setChanged();
+        notifyObservers();
     }
     public boolean canSupply(){ 
         return (game.getPlayer().playerOnEnemyLine());

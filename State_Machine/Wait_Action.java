@@ -24,7 +24,7 @@ public class Wait_Action extends State_Adapter implements Constants{
 
     @Override
     public States Rally_Troops() {
-        return super.Rally_Troops(); //To change body of generated methods, choose Tools | Templates.
+        return new Wait_Action(getGame());
     }
 
     @Override

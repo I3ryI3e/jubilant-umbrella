@@ -20,11 +20,11 @@ public class State_Adapter implements States, Constants {
     @Override
     public States boiling() {return this;}
     @Override
+    public States archers() {return this;}
+    @Override
     public States Tunnel() {return this;}
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
-    @Override
-    public States archers() {return this;}
     @Override
     public States returnWaitAction() {return this;}
     @Override
@@ -35,11 +35,6 @@ public class State_Adapter implements States, Constants {
             return new Two_Enemy_Attack(getGame());
         return this;
     }
-
     @Override
-    public States endTurn() {
-        return this;
-    }
-    
-
+    public States endTurn() {return this;}
 }

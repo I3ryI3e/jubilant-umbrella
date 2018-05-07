@@ -78,7 +78,7 @@ public class Game implements Serializable{
             try {
                 if(dice+bonus > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
-                    textToOutput.append("\nVictory, Ladder is going to backout");
+                    textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -92,7 +92,7 @@ public class Game implements Serializable{
             try {
                 if(dice + bonus > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
-                    textToOutput.append("\nVictory, Battering Ram is going to backout");
+                    textToOutput.append("\nVictory, Battering Ram is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -106,7 +106,7 @@ public class Game implements Serializable{
             try {
                 if(dice + bonus > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
-                    textToOutput.append("\nVictory, Siege Tower is going to backout");
+                    textToOutput.append("\nVictory, Siege Tower is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -115,7 +115,7 @@ public class Game implements Serializable{
     }
     public void boilling(Enemy_Attack ea) {
         int dice = (int) (Math.random()*5+1);
-        int bonus =0;
+        int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
@@ -128,7 +128,7 @@ public class Game implements Serializable{
             try {
                 if(dice + bonus  > getEnemy().getLadderStrength()){
                     enemy.goBackwardLadder();
-                    textToOutput.append("\nVictory, Ladder is going to backout");
+                    textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -142,7 +142,7 @@ public class Game implements Serializable{
             try {
                 if(dice + bonus  > getEnemy().getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
-                    textToOutput.append("\nVictory, Battering Ram is going to backout");
+                    textToOutput.append("\nVictory, Battering Ram is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -156,7 +156,7 @@ public class Game implements Serializable{
             try {
                 if(dice + bonus > getEnemy().getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
-                    textToOutput.append("\nVictory, Ladder is going to backout");
+                    textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
             } catch (MyException ex) {}
             break;
@@ -166,6 +166,14 @@ public class Game implements Serializable{
         }
         player.decreasePlayerActions();
     }
+    public void rally() {
+        int dice = (int) (Math.random()*5+1);
+        int bonus = discard.get(0).getDayX(game_day).getEvent().getMoraleMod();
+        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        if(dice + bonus >= 5)
+            getPlayer().raiseMorale();
+        player.decreasePlayerActions();
+    }    
     public void removeSiegeFromGame() {
         enemy.removeSiegeFromGame();
     }
