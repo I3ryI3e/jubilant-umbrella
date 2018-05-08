@@ -101,10 +101,8 @@ public class User_Interface_Text implements Constants, Observer{
         try {
             str.append((game.can_archers()?"\t1- Archers Attack\n":""));
         } catch (MyException e) {}
-            str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
-        try {
-            str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
-        } catch (MyException e) {}
+        str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
+        str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
         try {
             str.append(game.canCoupure()?"\t4- Coupure\n":"");
         } catch (MyException e) {}
@@ -176,7 +174,7 @@ public class User_Interface_Text implements Constants, Observer{
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         try {
-            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t1- Ladder\n":""));       // -1 BECAUSE THE LIST POSITION ZERO
+            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t1- Ladder\n":""));  
         } catch (MyException e) {}
         try {
             str.append((game.isBatteringRam((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t2- Battering Ram\n":""));

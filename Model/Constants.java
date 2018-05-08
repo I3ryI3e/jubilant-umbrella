@@ -15,4 +15,5 @@ public interface Constants extends Serializable{
     public int TAM_TRACKS_ENEMY=N_ENEMY_CIRCLES+N_ENEMY_CLOSE_COMBAT+N_ENEMY_SQUARES;
     public int N_PLAYER_SQUARES=5;
     public int N_TUNNEL_SPACES=2;
+    public int CLOSE_COMBAT_POSITION_POWER = 4;
 }

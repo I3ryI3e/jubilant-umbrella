@@ -76,11 +76,29 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean can_close_combat() throws MyException{
-        return (isLadder(N_ENEMY_CLOSE_COMBAT) || isBatteringRam(N_ENEMY_CLOSE_COMBAT) || isSiegeTower(N_ENEMY_CLOSE_COMBAT));
+    public boolean can_close_combat(){
+        try {
+            if(isLadder(N_ENEMY_CLOSE_COMBAT))
+                return true;
+            } catch (MyException ex) {}
+        try {
+            if(isBatteringRam(N_ENEMY_CLOSE_COMBAT))
+                return true;
+        } catch (MyException ex){}
+        try {
+            if(isSiegeTower(N_ENEMY_CLOSE_COMBAT))
+                return true;
+        } catch (MyException ex) {}
+        return false;
     }
+    
     public void closeCombat() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(can_close_combat()){
+            setState(state.closeCombate());
+            setChanged();
+            notifyObservers();
+        }
     }
     public boolean canCoupure() throws MyException{
         return !game.getPlayer().isWallStartingSpace();
