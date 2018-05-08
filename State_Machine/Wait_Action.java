@@ -28,6 +28,21 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
+    public States coupure() {
+        getGame().coupure();
+        return this;
+    }
+
+    @Override
+    public States sabotage() {
+        getGame().sabotage();
+        if(getGame().getPlayer().checkLoss())
+            return new Game_Over(getGame());
+        else
+            return this;
+    }
+    
+    @Override
     public States endTurn() { // TODO check if this is ok!
         if(getGame().getGame_day()!= 2){
             getGame().endTurn();
@@ -37,7 +52,7 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
-    public States closeCombate() {
+    public States closeCombat() {
         getGame().closeCombat();
         if(getGame().getPlayer().checkLoss())
             return new Game_Over(getGame());

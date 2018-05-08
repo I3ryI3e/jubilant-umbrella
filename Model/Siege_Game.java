@@ -1,12 +1,11 @@
 package Model;
 
+import Board.*;
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
 import UI.text.User_Interface_Text;
 import java.io.Serializable;
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Siege_Game extends Observable implements Constants, Serializable{
     private Game game;
@@ -40,16 +39,30 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean isSiegeTower(int pos) throws MyException{
         return game.getEnemy().getSiegeTowerNumberPosition()==pos;
     }
-    public boolean can_archers() throws MyException{
-        return !(isLadder(TAM_TRACKS_ENEMY-1) && isBatteringRam(TAM_TRACKS_ENEMY-1) && isSiegeTower(TAM_TRACKS_ENEMY-1));
+    public boolean can_archers() {
+        try {
+            if(isLadder(TAM_TRACKS_ENEMY-1))
+                return true;
+        } catch (MyException ex) {}
+        try {
+            if(isBatteringRam(TAM_TRACKS_ENEMY-1))
+                return true;
+        } catch (MyException ex) {}
+        try {
+            if(isSiegeTower(TAM_TRACKS_ENEMY-1))
+                return true;
+        } catch (MyException ex) {}
+        return false;
     }
     public void stateArchers(){
         setState(state.archers());
     }
     public void archers(Enemy_Attack ea){
-        setState(state.Apply_Action_Rules(ea));
-        setChanged();
-        notifyObservers();
+        if(can_archers()){
+            setState(state.Apply_Action_Rules(ea));
+            setChanged();
+            notifyObservers();
+        }
     }
     public boolean can_boilling() {
         try {
@@ -91,20 +104,22 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         } catch (MyException ex) {}
         return false;
     }
-    
     public void closeCombat() {
-        
         if(can_close_combat()){
-            setState(state.closeCombate());
+            setState(state.closeCombat());
             setChanged();
             notifyObservers();
         }
     }
-    public boolean canCoupure() throws MyException{
+    public boolean canCoupure() {
         return !game.getPlayer().isWallStartingSpace();
     }
     public void coupure() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(canCoupure()){
+            setState(state.coupure());
+            setChanged();
+            notifyObservers();
+        }
     }
     public boolean canRally() throws MyException{
         return !game.getPlayer().isMoraleStartingSpace();
@@ -126,8 +141,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canSabotage(){ 
         return (game.getPlayer().playerOnEnemyLine());
     }
-    public void sabotage() { //TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sabotage() {
+        if(canSabotage()){
+            setState(state.sabotage());
+            setChanged();
+            notifyObservers();
+        }
     }
     public void setup() {
         setState(state.New_Game());
@@ -160,14 +179,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void endTurn() { //TODO
        setState(state.endTurn());
     }
-
     public String getText() {
         return game.getTextToOutput();
     }
     public boolean playerStillHasActionsLeft(){
         return game.playerStillHasActionsLeft();
     }
-    
     @Override
     public String toString() {
         return game.toString();

@@ -5,7 +5,6 @@ import Model.MyException;
 
 public class Wait_Draw_Card extends State_Adapter {
     
-    
     public Wait_Draw_Card(Game g){
         super(g);
     }
@@ -15,14 +14,9 @@ public class Wait_Draw_Card extends State_Adapter {
         getGame().drawAndResolveCard();
         return new Wait_Action(getGame());
     }
-    
-   
-
     @Override
     public States setActions(int na) {
         getGame().getPlayer().setActions(na);
         return this;
     }
-    
-    
 }
