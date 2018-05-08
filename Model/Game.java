@@ -166,9 +166,13 @@ public class Game implements Serializable{
         }
         player.decreasePlayerActions();
     }
-    public void rally() {
+    public void rally(boolean DRMplusOne) {
         int dice = (int) (Math.random()*5+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getMoraleMod();
+        if(DRMplusOne){
+            player.decreaseSupplies();
+            bonus += 1;
+        }
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5)
             getPlayer().raiseMorale();

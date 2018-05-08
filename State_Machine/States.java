@@ -12,6 +12,7 @@ public interface States extends Constants, Serializable{
     public States boiling();
     public States Tunnel();
     public States Apply_Action_Rules(Enemy_Attack ea);
+    public States Apply_Rally_Rules(boolean check);
     public States returnWaitAction();
     public States checkLossAnd2Enemy();
 

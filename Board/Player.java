@@ -2,6 +2,8 @@ package Board;
 
 import Model.MyException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Player implements Serializable{
     private final Player_Track supplies;
@@ -68,14 +70,19 @@ public class Player implements Serializable{
     public void decreaseMorale(){
         morale.decrease();
     }
-
+    public boolean canDecreaseMorale() {
+        try {
+            if(morale.getPiecePositionNumber() == 0)
+                return false;
+        } catch (MyException ex) {}
+        return true;
+    }
     public boolean isWallStartingSpace() throws MyException {
         return wall.onStartingPosition();
     }
     public boolean isMoraleStartingSpace() throws MyException{
         return morale.onStartingPosition();
     }
-
     public boolean checkLoss() {
         int aux=0;
         try {
@@ -101,16 +108,6 @@ public class Player implements Serializable{
     public void decreasePlayerActions(){
         actions--;
     }
-    @Override
-    public String toString() {
-        StringBuilder aux = new StringBuilder();
-        aux.append(wall);
-        aux.append(morale);
-        aux.append(supplies);
-        aux.append("Number of Player Actions: ").append(actions).append("\n");
-        return aux.toString();
-    }    
-
     public void doEnemyCheckLine() {
         if(tunnel.onEnemyLine()){
             int dice = (int) (Math.random()*5 +1);
@@ -119,10 +116,17 @@ public class Player implements Serializable{
                 morale.decrease();
             }
         }
-            
     }
-
     public boolean playerStillHasActionsLeft() {
         return actions>0;
+    }
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(wall);
+        aux.append(morale);
+        aux.append(supplies);
+        aux.append("Number of Player Actions: ").append(actions).append("\n");
+        return aux.toString();
     }
 }

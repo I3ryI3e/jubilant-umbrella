@@ -101,9 +101,7 @@ public class User_Interface_Text implements Constants, Observer{
         try {
             str.append((game.can_archers()?"\t1- Archers Attack\n":""));
         } catch (MyException e) {}
-        try {
             str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
-        } catch (MyException e) {}
         try {
             str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
         } catch (MyException e) {}
@@ -211,20 +209,20 @@ public class User_Interface_Text implements Constants, Observer{
         }
     }
     
-    private void rallyText() {      //VER SE O MORALE JA TA A ZEROS OU NAO
+    private void rallyText() {      //VER SE OS SUPPLIES JA TA A ZEROS OU NAO
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append("\t1- Spend 1 morale to get +1DRM\n").append("\t2- Normal try\n").append("\t3- return\n");
+        str.append(((game.getGame().getPlayer().canDecreaseMorale())?"\t1- Spend 1 morale to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
         System.out.println(str.toString());
         
         opt = read_int();
         
         switch(opt){
             case 1:
-                game.rally(Enemy_Attack.NONE)   //TODO see this
+                game.rally(true);
             case 2:
-                game.rally(Enemy_Attack.NONE);
+                game.rally(false);
             case 3:
                 game.returnWaitAction();
         }

@@ -5,6 +5,8 @@ import State_Machine.*;
 import UI.text.User_Interface_Text;
 import java.io.Serializable;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Siege_Game extends Observable implements Constants, Serializable{
     private Game game;
@@ -49,16 +51,30 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         setChanged();
         notifyObservers();
     }
-    public boolean can_boilling() throws MyException{
-        return (isLadder(N_ENEMY_CIRCLES) || isBatteringRam(N_ENEMY_CIRCLES) || isSiegeTower(N_ENEMY_CIRCLES));
+    public boolean can_boilling() {
+        try {
+            if(isLadder(N_ENEMY_CIRCLES))
+                return true;
+        } catch (MyException ex) {}
+        try {
+            if(isBatteringRam(N_ENEMY_CIRCLES))
+                return true;
+        } catch (MyException ex) {}
+        try {
+            if(isSiegeTower(N_ENEMY_CIRCLES))
+                return true;
+        } catch (MyException ex) {}
+        return false;
     }
     public void stateBoilling() {
         setState(state.boiling());
     }
     public void boilling(Enemy_Attack ea) {
-        setState(state.Apply_Action_Rules(ea));
-        setChanged();
-        notifyObservers();
+        if(can_boilling()){
+            setState(state.Apply_Action_Rules(ea));
+            setChanged();
+            notifyObservers();
+        }
     }
     public boolean can_close_combat() throws MyException{
         return (isLadder(N_ENEMY_CLOSE_COMBAT) || isBatteringRam(N_ENEMY_CLOSE_COMBAT) || isSiegeTower(N_ENEMY_CLOSE_COMBAT));
@@ -78,8 +94,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateRally() {
         setState(state.Rally_Troops());
     }
-    public void rally(Enemy_Attack ea) {
-        setState(state.Apply_Action_Rules(ea));
+    public void rally(boolean check) {
+        setState(state.Apply_Rally_Rules(check));
         setChanged();
         notifyObservers();
     }
