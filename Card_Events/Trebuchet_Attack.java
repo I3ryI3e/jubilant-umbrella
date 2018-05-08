@@ -20,7 +20,7 @@ public class Trebuchet_Attack extends Event {
                 game.getPlayer().decreaseWall();
                 break;
             case 1:
-                int option = (int)(Math.random()*5+1);
+                int option = (int)(Math.random()*6+1);
                 if(option == 4 || option == 5 || option == 6)
                    game.getPlayer().decreaseWall();
                 break;

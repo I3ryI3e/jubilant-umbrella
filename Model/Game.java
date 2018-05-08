@@ -65,7 +65,7 @@ public class Game implements Serializable, Constants{
         Collections.shuffle(deck);
     }
     public void archers(Enemy_Attack ea) { // TODO!! 
-        int dice = (int) (Math.random()*5+1);       //FAZER CLASSE DADO??
+        int dice = (int) (Math.random()*6+1);       //FAZER CLASSE DADO??
         int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
@@ -115,7 +115,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     public void boilling(Enemy_Attack ea) {
-        int dice = (int) (Math.random()*5+1);
+        int dice = (int) (Math.random()*6+1);
         int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
@@ -168,32 +168,27 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     public void closeCombat() {
-        int dice=0,bonus =0;
+        int dice=(int)(Math.random()*6+1);
+        int bonus =discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
         try {
             if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
                 if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                     getEnemy().goBackwardLadder();
                     textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
                 }
             }else if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
                 if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                     getEnemy().goBackwardBatteringRam();
                     textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
                 }
             }else if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
                 if( dice+bonus > CLOSE_COMBAT_POSITION_POWER)
                     getEnemy().goBackwardSiegeTower();
             }
         } catch (MyException ex) {}
     }
     public void rally(boolean DRMplusOne) {
-        int dice = (int) (Math.random()*5+1);
+        int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getMoraleMod();
         if(DRMplusOne){
             player.decreaseSupplies();
@@ -207,7 +202,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     public void coupure(){
-        int dice = (int) (Math.random()*5+1);
+        int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getCoupureMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
@@ -217,7 +212,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     public void sabotage() {
-        int dice = (int) (Math.random()*5+1);
+        int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getSabotageMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
@@ -297,32 +292,6 @@ public class Game implements Serializable, Constants{
 
     boolean playerStillHasActionsLeft() {
         return player.playerStillHasActionsLeft();
-    }
-
-    public void closeCombat() {
-        int dice=0,bonus =0;
-        try {
-            if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                    getEnemy().goBackwardLadder();
-                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
-                }
-            }else if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                    getEnemy().goBackwardBatteringRam();
-                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
-                }
-            }else if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
-                dice = (int)(Math.random()*5+1);
-                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER)
-                    getEnemy().goBackwardSiegeTower();
-            }
-        } catch (MyException ex) {}
     }
 
     public boolean canUseTunnelMovement() {

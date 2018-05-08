@@ -107,7 +107,7 @@ public class Player implements Serializable{
     }
     public void doEnemyCheckLine() {
         if(tunnel.onEnemyLine()){
-            int dice = (int) (Math.random()*5 +1);
+            int dice = (int) (Math.random()*6 +1);
             if(dice==1){
                 tunnel.soldiersDiedOnEnemyLines();
                 morale.decrease();

@@ -41,15 +41,15 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     public boolean can_archers() {
         try {
-            if(isLadder(TAM_TRACKS_ENEMY-1))
+            if(!isLadder(TAM_TRACKS_ENEMY-1))
                 return true;
         } catch (MyException ex) {}
         try {
-            if(isBatteringRam(TAM_TRACKS_ENEMY-1))
+            if(!isBatteringRam(TAM_TRACKS_ENEMY-1))
                 return true;
         } catch (MyException ex) {}
         try {
-            if(isSiegeTower(TAM_TRACKS_ENEMY-1))
+            if(!isSiegeTower(TAM_TRACKS_ENEMY-1))
                 return true;
         } catch (MyException ex) {}
         return false;
