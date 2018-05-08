@@ -2,8 +2,6 @@ package Board;
 
 import Model.MyException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Player implements Serializable{
     private final Player_Track supplies;
@@ -126,7 +124,36 @@ public class Player implements Serializable{
         aux.append(wall);
         aux.append(morale);
         aux.append(supplies);
+        aux.append(tunnel);
         aux.append("Number of Player Actions: ").append(actions).append("\n");
         return aux.toString();
+    }
+
+    public boolean canUseTunnelMovement() {
+        return (tunnel.onStartingPosition() || tunnel.onEnemyLine()) == false;
+    }
+
+    public boolean playerOnCastleSpace() {
+        return tunnel.onStartingPosition();
+    }
+
+    public boolean automaticTunnelMovement() {
+        return tunnel.automaticMovement();
+    }
+
+    public boolean fastTunnelMovement() {
+        if(tunnel.fastTunnelMovement()){
+            decreasePlayerActions();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getInsideTunnelMovement() {
+        if(tunnel.getInsideTunnelMovement()){
+            decreasePlayerActions();
+            return true;
+        }
+        return false;
     }
 }

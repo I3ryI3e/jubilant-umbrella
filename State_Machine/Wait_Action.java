@@ -14,7 +14,7 @@ public class Wait_Action extends State_Adapter implements Constants{
 
     @Override
     public States Tunnel() {
-        return super.Tunnel(); //To change body of generated methods, choose Tools | Templates.
+        return new Wait_Tunnel(getGame());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Wait_Action extends State_Adapter implements Constants{
 
     @Override
     public States Rally_Troops() {
-        return new Wait_Action(getGame());
+        return new Rally_Troops(getGame());
     }
 
     @Override

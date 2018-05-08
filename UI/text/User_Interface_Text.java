@@ -76,7 +76,7 @@ public class User_Interface_Text implements Constants, Observer{
                 game.stateRally();
                 break;
             case 6:
-                //game.tunnel();
+                game.stateTunnel();
                 break;
             case 7:
                 game.supply();
@@ -109,6 +109,7 @@ public class User_Interface_Text implements Constants, Observer{
         try {
             str.append(game.canRally()?"\t5- Rally Troops\n":"");
         } catch (MyException e) {}
+        str.append("\t6- Tunnel Action\n");
         str.append(game.canSupply()?"\t7- Supply Raid\n":"");
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
         
@@ -230,6 +231,28 @@ public class User_Interface_Text implements Constants, Observer{
         System.out.println("Only Raid and Sab Text");
         quit=false;
     }
+    
+    private void tunnelText(){
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.getGame().getPlayer());
+        str.append(game.canUseTunnelMovement()?"\t1- Automatic move\n\t2- Fast move":(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
+        System.out.println(str.toString());
+        opt = read_int();
+        
+        switch(opt){
+            case 1:
+                game.tunnelAuto();
+                break;
+            case 2:
+                game.tunnelFast();
+                break;
+            case 3:
+                game.tunnelGetInside();
+            case 4:
+                game.returnWaitAction();
+        }
+    }
 
     private void gameOver_Text() {
         System.out.println("GAME OVER!");
@@ -257,6 +280,8 @@ public class User_Interface_Text implements Constants, Observer{
                 gameOver_Text();
             }else if (state instanceof Only_Raid_and_Sab_State){
                 onlyRaidAndSabText();
+            }else if (state instanceof Wait_Tunnel){
+                tunnelText();
             }
         }
     }

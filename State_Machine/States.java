@@ -19,4 +19,10 @@ public interface States extends Constants, Serializable{
     public States endTurn();
 
     public States closeCombate();
+
+    public States automaticTunnelMovement();
+
+    public States fastTunnelMovement();
+
+    public States getInsideTunnelMovement();
 }

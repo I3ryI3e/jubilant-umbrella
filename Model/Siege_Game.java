@@ -5,8 +5,6 @@ import State_Machine.*;
 import UI.text.User_Interface_Text;
 import java.io.Serializable;
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Siege_Game extends Observable implements Constants, Serializable{
     private Game game;
@@ -110,7 +108,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return !game.getPlayer().isMoraleStartingSpace();
     }
     public void stateRally() {
-        setState(state.Rally_Troops());
+        try {
+            if(canRally())
+                setState(state.Rally_Troops());
+        } catch (MyException ex) {
+        }
     }
     public void rally(boolean check) {
         setState(state.Apply_Rally_Rules(check));
@@ -171,5 +173,39 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     @Override
     public String toString() {
         return game.toString();
+    }
+
+    public boolean canUseTunnelMovement() {
+        return game.canUseTunnelMovement();
+    }
+
+    public boolean onEnemyLine() {
+        return game.getPlayer().playerOnEnemyLine();
+    }
+
+    public void stateTunnel() {
+        setState(state.Tunnel());
+            
+    }
+
+    public boolean onCastleSpace() {
+        return game.getPlayer().playerOnCastleSpace();
+    }
+
+    public void tunnelAuto() {
+       if(canUseTunnelMovement()){
+           setState(state.automaticTunnelMovement());
+       }
+    }
+
+    public void tunnelFast() {
+        if(canUseTunnelMovement()){
+            setState(state.fastTunnelMovement());
+        }
+    }
+
+    public void tunnelGetInside() {
+        if(onCastleSpace()|| onEnemyLine())
+            setState(state.getInsideTunnelMovement());
     }
 }

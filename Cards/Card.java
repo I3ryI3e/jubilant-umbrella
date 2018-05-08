@@ -38,7 +38,7 @@ public abstract class Card implements Constants, Serializable{
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
-        aux.append("Card Number: ").append(card_number).append("\n");
+        aux.append("{CARD}\nCard Number: ").append(card_number).append("\n");
         for (int i = 0; i < days.size(); i++) {
             aux.append(days.get(i));
         }

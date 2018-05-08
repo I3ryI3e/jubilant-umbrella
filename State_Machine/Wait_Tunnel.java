@@ -8,5 +8,30 @@ public class Wait_Tunnel extends State_Adapter{
         super(g);
     }
 
+    @Override
+    public States automaticTunnelMovement() {
+        if(getGame().automaticTunnelMovement())
+            return new Wait_Action(getGame());
+        return this;
+    }
+
+    @Override
+    public States fastTunnelMovement() {
+        if(getGame().fastTunnelMovement())
+            return new Wait_Action(getGame());
+        return this;
+    }
+
+    @Override
+    public States getInsideTunnelMovement() {
+        if(getGame().getInsidetunnelMovement())
+            return new Wait_Action(getGame());
+        return this;
+    }
+
+    @Override
+    public States returnWaitAction() {
+        return new Wait_Action(getGame());
+    }
     
 }

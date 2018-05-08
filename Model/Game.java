@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game implements Serializable, Constants{
     private Player player;
@@ -278,5 +276,21 @@ public class Game implements Serializable, Constants{
                     getEnemy().goBackwardSiegeTower();
             }
         } catch (MyException ex) {}
+    }
+
+    public boolean canUseTunnelMovement() {
+        return player.canUseTunnelMovement();
+    }
+
+    public boolean automaticTunnelMovement() {
+        return player.automaticTunnelMovement();
+    }
+
+    public boolean fastTunnelMovement() {
+        return player.fastTunnelMovement();
+    }
+
+    public boolean getInsidetunnelMovement() {
+        return player.getInsideTunnelMovement();
     }
 }

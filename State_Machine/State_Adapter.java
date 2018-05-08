@@ -40,6 +40,15 @@ public class State_Adapter implements States, Constants {
 
     @Override
     public States closeCombate() {return this;}
+
+    @Override
+    public States automaticTunnelMovement() {return this;}
+
+    @Override
+    public States fastTunnelMovement() {return this;}
+
+    @Override
+    public States getInsideTunnelMovement() {return this;}
     
     @Override
     public States endTurn() {return this;}
