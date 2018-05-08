@@ -35,6 +35,10 @@ public class State_Adapter implements States, Constants {
             return new Two_Enemy_Attack(getGame());
         return this;
     }
+
+    @Override
+    public States closeCombate() {return this;}
+    
     @Override
     public States endTurn() {return this;}
 }

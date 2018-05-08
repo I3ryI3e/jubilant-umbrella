@@ -1,5 +1,6 @@
 package Model;
 
+import Board.Close_Combat_Square;
 import Board.Enemy;
 import Board.Player;
 import Cards.*;
@@ -8,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Game implements Serializable{
+public class Game implements Serializable, Constants{
     private Player player;
     private Enemy enemy;
     private int game_day;
@@ -245,5 +248,31 @@ public class Game implements Serializable{
 
     boolean playerStillHasActionsLeft() {
         return player.playerStillHasActionsLeft();
+    }
+
+    public void closeCombat() {
+        int dice=0,bonus =0;
+        try {
+            if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
+                dice = (int)(Math.random()*5+1);
+                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
+                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
+                    getEnemy().goBackwardLadder();
+                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
+                }
+            }else if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
+                dice = (int)(Math.random()*5+1);
+                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
+                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
+                    getEnemy().goBackwardBatteringRam();
+                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
+                }
+            }else if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
+                dice = (int)(Math.random()*5+1);
+                bonus = discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
+                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER)
+                    getEnemy().goBackwardSiegeTower();
+            }
+        } catch (MyException ex) {}
     }
 }

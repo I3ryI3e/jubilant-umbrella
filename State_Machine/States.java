@@ -16,4 +16,6 @@ public interface States extends Constants, Serializable{
     public States checkLossAnd2Enemy();
 
     public States endTurn();
+
+    public States closeCombate();
 }

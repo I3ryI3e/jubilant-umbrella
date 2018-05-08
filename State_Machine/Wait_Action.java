@@ -35,6 +35,15 @@ public class Wait_Action extends State_Adapter implements Constants{
         }
         return new Game_Over(getGame());
     }
+
+    @Override
+    public States closeCombate() {
+        getGame().closeCombat();
+        if(getGame().getPlayer().checkLoss())
+            return new Game_Over(getGame());
+        else
+            return this;
+    }
     
 
 }
