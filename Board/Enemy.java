@@ -22,9 +22,13 @@ public class Enemy implements Constants, Serializable{
         return trebutchet;
     }
 
-    public void setTrebutchet(int trebutchet) {
-        if(trebutchet > 0 && trebutchet < 4)
-            this.trebutchet = trebutchet;
+    public void addTrebutchet() {
+        if(trebutchet < 4)
+            ++trebutchet;
+    }
+    public void removeTrebutchet() {
+        if(trebutchet > 0)
+            --trebutchet;
     }
     public void makeAttack(List<Enemy_Attack> ea){
         for (Enemy_Attack enemy_Attack : ea) {

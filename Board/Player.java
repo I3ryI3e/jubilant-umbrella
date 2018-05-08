@@ -49,7 +49,6 @@ public class Player implements Serializable{
         else if(raided_supplies > 2)
             this.raided_supplies = 2;
     }
-
     public void raiseWall() { 
         wall.raise();
     }
@@ -68,17 +67,17 @@ public class Player implements Serializable{
     public void decreaseMorale(){
         morale.decrease();
     }
-    public boolean canDecreaseMorale() {
+    public boolean canDecreaseSupplies() {
         try {
-            if(morale.getPiecePositionNumber() == 0)
+            if(supplies.getPiecePositionNumber() == 0)
                 return false;
         } catch (MyException ex) {}
         return true;
     }
-    public boolean isWallStartingSpace() throws MyException {
+    public boolean isWallStartingSpace() {
         return wall.onStartingPosition();
     }
-    public boolean isMoraleStartingSpace() throws MyException{
+    public boolean isMoraleStartingSpace() {
         return morale.onStartingPosition();
     }
     public boolean checkLoss() {

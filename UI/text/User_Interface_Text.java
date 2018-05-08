@@ -98,14 +98,11 @@ public class User_Interface_Text implements Constants, Observer{
     public String wait_action_text_menu(){
         StringBuilder str = new StringBuilder();
         str.append("\nPlayer Action:\n");
-        try {
-            str.append((game.can_archers()?"\t1- Archers Attack\n":""));
-        } catch (MyException e) {}
+
+        str.append((game.can_archers()?"\t1- Archers Attack\n":""));
         str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
         str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
-        try {
-            str.append(game.canCoupure()?"\t4- Coupure\n":"");
-        } catch (MyException e) {}
+        str.append(game.canCoupure()?"\t4- Coupure\n":"");
         try {
             str.append(game.canRally()?"\t5- Rally Troops\n":"");
         } catch (MyException e) {}
@@ -189,13 +186,8 @@ public class User_Interface_Text implements Constants, Observer{
         opt = read_int();
         
         switch(opt){
-            case 1:             //TODO A UNICA FORMA PARA NAO FAZER SE NAO PUDER E ASSIM COM DUPLO CHECK
-            try {
-                if(game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1))
-                    game.boilling(Enemy_Attack.LADDER);
-                else
-                    game.returnWaitAction();
-            } catch (MyException ex) {}
+            case 1:
+                game.boilling(Enemy_Attack.LADDER);
                 break;
             case 2:
                 game.boilling(Enemy_Attack.BATTERING_RAM);
@@ -212,7 +204,7 @@ public class User_Interface_Text implements Constants, Observer{
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append(((game.getGame().getPlayer().canDecreaseMorale())?"\t1- Spend 1 morale to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
+        str.append(((game.getGame().getPlayer().canDecreaseSupplies())?"\t1- Spend 1 morale to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
         System.out.println(str.toString());
         
         opt = read_int();
