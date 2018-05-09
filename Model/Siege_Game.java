@@ -64,28 +64,36 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         }
     }
     public boolean can_boilling() {
-        try {
-            if(isLadder(N_ENEMY_CIRCLES))
+        if(game.canUseBoiling()){
+            if(isLadderOnCircleSpace())
                 return true;
-        } catch (MyException ex) {}
-        try {
-            if(isBatteringRam(N_ENEMY_CIRCLES))
+            if(isBatteringRamOnCircleSpace())
                 return true;
-        } catch (MyException ex) {}
-        try {
-            if(isSiegeTower(N_ENEMY_CIRCLES))
-                return true;
-        } catch (MyException ex) {}
+            return isSiegeTowerOnCircleSpace();
+        }
         return false;
     }
     public void stateBoilling() {
-        setState(state.boiling());
+        if(game.canUseBoiling())
+            setState(state.boiling());
     }
     public void boilling(Enemy_Attack ea) {
-        if(can_boilling()){
+        if(enemyIsOnCircle(ea) && game.playerStillHasActionsLeft() && game.canUseBoiling()){
             setState(state.Apply_Action_Rules(ea));
             setChanged();
             notifyObservers();
+        }
+    }
+    private boolean enemyIsOnCircle(Enemy_Attack ea) {
+         switch(ea){
+            case LADDER:
+                return isLadderOnCircleSpace();
+            case BATTERING_RAM:
+                return isBatteringRamOnCircleSpace();
+            case SIEGE_TOWER:
+                return isSiegeTowerOnCircleSpace();
+            default:
+                return false;
         }
     }
      public void stateCloseCombat() {
@@ -105,6 +113,18 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             setState(state.Apply_Action_Rules(ea));
             setChanged();
             notifyObservers();
+        }
+    }
+    private boolean enemyIsOnCloseCombat(Enemy_Attack ea) {
+        switch(ea){
+            case LADDER:
+                return isLadderOnCloseCombat();
+            case BATTERING_RAM:
+                return isBatteringRamOnCloseCombat();
+            case SIEGE_TOWER:
+                return isSiegeTowerOnCloseCombat();
+            default:
+                return false;
         }
     }
     public boolean canCoupure() {
@@ -234,18 +254,14 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean isSiegeTowerOnCloseCombat(){
         return game.getEnemy().isSiegeTowerOnCloseCombat();
     }
-
-    private boolean enemyIsOnCloseCombat(Enemy_Attack ea) {
-        switch(ea){
-            case LADDER:
-                return isLadderOnCloseCombat();
-            case BATTERING_RAM:
-                return isBatteringRamOnCloseCombat();
-            case SIEGE_TOWER:
-                return isSiegeTowerOnCloseCombat();
-            default:
-                return false;
-        }
+    private boolean isLadderOnCircleSpace() {
+        return game.getEnemy().isLadderOnCircleSpace();
+    }
+    public boolean isBatteringRamOnCircleSpace(){
+        return game.getEnemy().isBatteringRamOnCircleSpace();
+    }
+    public boolean isSiegeTowerOnCircleSpace(){
+        return game.getEnemy().isSiegeTowerOnCircleSpace();
     }
 
     public boolean canBuyAction() {
@@ -276,6 +292,9 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canDecreaseMorale() {
         return game.getPlayer().canDecreaseMorale();
     }
+
+
+    
 
  
 }
