@@ -29,39 +29,43 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public States getState() {
         return state;
     }
-    public boolean isLadder(int pos) throws MyException{
-        return game.getEnemy().getLadderNumberPosition()==pos;
+    public boolean ladderOnStartingPosition() {
+        return game.ladderOnStartingPosition();
     }
-    public boolean isBatteringRam(int pos) throws MyException{
-        return game.getEnemy().getBatteringRamNumberPosition()==pos;
+    public boolean batteringRamOnStartingPosition() {
+        return game.batteringRamOnStartingPosition();
     }
-    public boolean isSiegeTower(int pos) throws MyException{
-        return game.getEnemy().getSiegeTowerNumberPosition()==pos;
+    public boolean siegeTowerOnStartingPosition() {
+        return game.siegeTowerOnStartingPosition();
     }
     public boolean can_archers() {
-        try {
-            if(!isLadder(TAM_TRACKS_ENEMY-1))
+        if(!ladderOnStartingPosition())
                 return true;
-        } catch (MyException ex) {}
-        try {
-            if(!isBatteringRam(TAM_TRACKS_ENEMY-1))
+        if(!batteringRamOnStartingPosition())
                 return true;
-        } catch (MyException ex) {}
-        try {
-            if(!isSiegeTower(TAM_TRACKS_ENEMY-1))
-                return true;
-        } catch (MyException ex) {}
-        return false;
+        return !siegeTowerOnStartingPosition();
     }
     public void stateArchers(){
-        setState(state.archers());
+        if(game.playerStillHasActionsLeft() && can_archers())
+            setState(state.archers());
     }
     public void archers(Enemy_Attack ea){
-        if(can_archers()){
+        if(canUseArchers(ea)){
             setState(state.Apply_Action_Rules(ea));
             setChanged();
             notifyObservers();
         }
+    }
+    private boolean canUseArchers(Enemy_Attack ea) {
+        switch(ea){
+            case LADDER:
+                return !game.ladderOnStartingPosition();
+            case BATTERING_RAM:
+                return !game.batteringRamOnStartingPosition();
+            case SIEGE_TOWER:
+                return !game.siegeTowerOnStartingPosition();
+        }
+        return false;
     }
     public boolean can_boilling() {
         if(game.canUseBoiling()){
@@ -254,7 +258,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean isSiegeTowerOnCloseCombat(){
         return game.getEnemy().isSiegeTowerOnCloseCombat();
     }
-    private boolean isLadderOnCircleSpace() {
+    public boolean isLadderOnCircleSpace() {
         return game.getEnemy().isLadderOnCircleSpace();
     }
     public boolean isBatteringRamOnCircleSpace(){
@@ -293,8 +297,4 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return game.getPlayer().canDecreaseMorale();
     }
 
-
-    
-
- 
 }

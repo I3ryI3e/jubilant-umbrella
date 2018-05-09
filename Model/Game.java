@@ -364,4 +364,16 @@ public class Game implements Serializable, Constants{
         player.buyAction(opt);
         changeCanUseSupply();
     }
+
+    boolean ladderOnStartingPosition() {
+        return enemy.ladderOnStartingPosition();
+    }
+
+    boolean batteringRamOnStartingPosition() {
+        return enemy.batteringRamOnStartingPosition();
+    }
+
+    boolean siegeTowerOnStartingPosition() {
+        return enemy.siegeTowerOnStartingPosition();
+    }
 }

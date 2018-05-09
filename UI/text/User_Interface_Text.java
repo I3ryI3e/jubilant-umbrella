@@ -102,7 +102,7 @@ public class User_Interface_Text implements Constants, Observer{
         StringBuilder str = new StringBuilder();
         str.append("\nPlayer Action:\n");
 
-        str.append((game.can_archers()?"\t1- Archers Attack\n":""));
+        str.append(game.can_archers()?"\t1- Archers Attack\n":"");
         str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
         str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
         str.append(game.canCoupure()?"\t4- Coupure\n":"");
@@ -139,15 +139,9 @@ public class User_Interface_Text implements Constants, Observer{
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
-        try {
-            str.append((game.isLadder(TAM_TRACKS_ENEMY-1)?"":"\t1- Ladder\n"));
-        } catch (MyException e) {}
-        try {
-            str.append((game.isBatteringRam(TAM_TRACKS_ENEMY-1)?"":"\t2- Battering Ram\n"));
-        } catch (MyException e) {}
-        try {
-            str.append((game.isSiegeTower(TAM_TRACKS_ENEMY-1)?"":"\t3- Siege Tower\n"));
-        } catch (MyException e) {}
+        str.append((game.ladderOnStartingPosition()?"":"\t1- Ladder\n"));
+        str.append((game.batteringRamOnStartingPosition()?"":"\t2- Battering Ram\n"));
+        str.append((game.siegeTowerOnStartingPosition()?"":"\t3- Siege Tower\n"));
         str.append("\t4- return\n");
         System.out.println(str.toString());
         
@@ -172,15 +166,9 @@ public class User_Interface_Text implements Constants, Observer{
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
-        try {
-            str.append((game.isLadder((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t1- Ladder\n":""));  
-        } catch (MyException e) {}
-        try {
-            str.append((game.isBatteringRam((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t2- Battering Ram\n":""));
-        } catch (MyException e) {}
-        try {
-            str.append((game.isSiegeTower((TAM_TRACKS_ENEMY-N_ENEMY_SQUARES)-1)?"\t3- Siege Tower\n":""));
-        } catch (MyException e) {}
+        str.append((game.isLadderOnCircleSpace()?"\t1- Ladder\n":""));
+        str.append((game.isBatteringRamOnCircleSpace()?"\t2- Battering Ram\n":""));
+        str.append((game.isSiegeTowerOnCircleSpace()?"\t3- Siege Tower\n":""));
         str.append("\t4- return\n");
         System.out.println(str.toString());
         
@@ -253,7 +241,9 @@ public class User_Interface_Text implements Constants, Observer{
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" left");
-        str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"").append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"").append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"").append("\n\t4- Return");
+        str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"");
+        str.append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"");
+        str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"").append("\n\t4- Return");
         System.out.println(str.toString());
         opt = read_int();
         

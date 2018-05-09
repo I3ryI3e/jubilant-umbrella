@@ -193,4 +193,14 @@ public class Enemy implements Constants, Serializable{
     public boolean isSiegeTowerOnCircleSpace(){
         return siege_tower.onCircleSpace();
     }
+
+    public boolean ladderOnStartingPosition() {
+        return ladder.onStartingPosition();
+    }
+    public boolean batteringRamOnStartingPosition(){
+        return battering_ram.onStartingPosition();
+    }
+    public boolean siegeTowerOnStartingPosition(){
+        return siege_tower.onStartingPosition();
+    }
 }
