@@ -179,8 +179,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void drawCard(){
         try {
             setState(state.Draw_Card());
+            setChanged();
+            notifyObservers();
         } catch (MyException ex) {
             setState(new Only_Raid_and_Sab_State(getGame()) );
+            setChanged();
+            notifyObservers();
         }
     }
     public void setActions(int na){
@@ -201,8 +205,10 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public String drawCardDay() {
         return game.drawCardDay();
     }
-    public void endTurn() { //TODO
+    public void endTurn() {
        setState(state.endTurn());
+       setChanged();
+       notifyObservers();
     }
     public String getText() {
         return game.getTextToOutput();

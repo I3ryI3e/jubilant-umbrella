@@ -3,6 +3,8 @@ package Board;
 
 import Model.MyException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Tunnel_Track extends Track{
     private boolean going;
@@ -33,7 +35,10 @@ public class Tunnel_Track extends Track{
     }
 
     public void soldiersDiedOnEnemyLines() {
-        track.get(0).setPiece(track.get(N_ENEMY_SQUARES-1).removePiece());
+        try {
+            track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
+        } catch (MyException ex) {
+        }
         going=true;
     }
 
@@ -93,6 +98,14 @@ public class Tunnel_Track extends Track{
             return true;
         }
         return false;
+    }
+
+    void dayEndMovementIntoCastle() {
+        try {
+            track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
+            going=true;
+        } catch (MyException ex) {
+        }
     }
     
 }

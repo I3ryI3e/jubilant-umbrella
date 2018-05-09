@@ -58,7 +58,10 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
     
     @Override
-    public States endTurn() { // TODO check if this is ok!
+    public States endTurn() {
+        if(getGame().victoryOrLoss()){
+            return new Game_Over(getGame());
+        }
         if(getGame().getGame_day()!= 2){
             getGame().endTurn();
             return new Wait_Draw_Card(getGame());

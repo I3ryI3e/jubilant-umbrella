@@ -231,4 +231,8 @@ public class Enemy implements Constants, Serializable{
     public boolean siegeTowerOnStartingPosition(){
         return siege_tower.onStartingPosition();
     }
+
+    public boolean victoryOrLoss() {
+        return isNumEnemyInCloseCombat(2);
+    }
 }

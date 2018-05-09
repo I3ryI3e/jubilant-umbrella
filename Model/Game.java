@@ -280,7 +280,7 @@ public class Game implements Serializable, Constants{
         discard.add(0, deck.remove(0));
     }
     private void resolveCard()throws MyException {
-        player.doEnemyCheckLine();
+        textToOutput.append(player.doEnemyCheckLine());
         discard.get(0).resolve(getGame_day(), this);
     }
     void setPlayerActions(int n_player_actions) {
@@ -310,6 +310,8 @@ public class Game implements Serializable, Constants{
     }
     public void endTurn() {
         if(deck.isEmpty()){
+            DecreaseSuppliesEvent();
+            endOfDayPhaseTunnel();
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
         }
@@ -391,5 +393,17 @@ public class Game implements Serializable, Constants{
 
     boolean getCanMakeAutomaticMove() {
         return canUseAutomaticMovement;
+    }
+
+    public void enemyCheckLine() {
+        player.doEnemyCheckLine();
+    }
+
+    public boolean victoryOrLoss() {
+        return (player.victoryOrLoss() || enemy.victoryOrLoss());
+    }
+
+    public void endOfDayPhaseTunnel() {
+        textToOutput.append(player.endOfDayPhaseTunnel());
     }
 }

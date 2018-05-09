@@ -110,15 +110,20 @@ public class Player implements Serializable{
     public void decreasePlayerActions(){
         actions--;
     }
-    public void doEnemyCheckLine() {
+    public String doEnemyCheckLine() {
+        StringBuilder aux = new StringBuilder();
         if(tunnel.onEnemyLine()){
+            aux.append("Enemy check line\n");
             int dice = (int) (Math.random()*6 +1);
+            aux.append("Dice: ").append(dice);
             if(dice==1){
                 tunnel.soldiersDiedOnEnemyLines();
                 raided_supplies = 0;
                 morale.decrease();
+                aux.append("\nSoldiers were caught in the enemy line");
             }
         }
+        return aux.toString();
     }
     public void soldierCaptured() {
         tunnel.soldiersDiedOnEnemyLines();
@@ -201,5 +206,25 @@ public class Player implements Serializable{
                 raiseAction();
                 break;
         }
+    }
+
+    public boolean victoryOrLoss() {
+        return (morale.onSurrenderPosition() || supplies.onSurrenderPosition() || wall.onSurrenderPosition());
+    }
+
+    public String endOfDayPhaseTunnel() {
+        StringBuilder aux = new StringBuilder();
+        if(tunnel.onEnemyLine()){
+            aux.append("\nSoldiers were on Enemy Lines and because of the end of the day they were caught!\n");
+            tunnel.soldiersDiedOnEnemyLines();
+            raided_supplies=0;
+        }else if(!tunnel.onStartingPosition()){
+            aux.append("\nSoldiers were on tunnel at the end of the day so they are moved into the Castle\n");
+            tunnel.dayEndMovementIntoCastle();
+            aux.append(raided_supplies).append(" are going to be added to your supply\n");
+            addRaided_supplies(raided_supplies);
+            raided_supplies=0;
+        }
+        return aux.toString();
     }
 }

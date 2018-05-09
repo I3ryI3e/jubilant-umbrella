@@ -4,6 +4,8 @@ package Board;
 import static Model.Constants.N_PLAYER_SQUARES;
 import Model.MyException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Player_Track extends Track{
 
@@ -47,5 +49,12 @@ public class Player_Track extends Track{
         } catch (MyException ex) {
             return false;
         }
-    }    
+    }   
+    public boolean onSurrenderPosition(){
+        try {
+            return getPiecePositionNumber() == 0;
+        } catch (MyException ex) {
+            return false;
+        }
+    }
 }

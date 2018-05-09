@@ -210,7 +210,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void onlyRaidAndSabText() { //TODO
         System.out.println("Only Raid and Sab Text");
-        quit=false;
+        quit=true;
     }
     
     private void tunnelText(){
@@ -280,7 +280,7 @@ public class User_Interface_Text implements Constants, Observer{
 
     private void gameOver_Text() {
         System.out.println("GAME OVER!");
-        quit=false;
+        quit=true;
     }
     
     public void run(){
