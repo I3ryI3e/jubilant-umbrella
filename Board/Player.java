@@ -120,6 +120,11 @@ public class Player implements Serializable{
             }
         }
     }
+    public void soldierCaptured() {
+        tunnel.soldiersDiedOnEnemyLines();
+        raided_supplies = 0;
+        morale.decrease();
+    }
     public boolean playerStillHasActionsLeft() {
         return actions>0;
     }
@@ -143,12 +148,27 @@ public class Player implements Serializable{
     }
 
     public boolean automaticTunnelMovement() {
-        return tunnel.automaticMovement();
+        if(tunnel.automaticMovement()){
+            if(tunnel.onStartingPosition()){
+                for(int i=0;i<raided_supplies;i++){
+                    supplies.raise();
+                }
+                raided_supplies = 0;
+            }
+        return true;
+        }
+        return false;
     }
 
     public boolean fastTunnelMovement() {
         if(tunnel.fastTunnelMovement()){
             decreasePlayerActions();
+            if(tunnel.onStartingPosition()){
+                for(int i=0;i<raided_supplies;i++){
+                    supplies.raise();
+                }
+                raided_supplies = 0;
+            }
             return true;
         }
         return false;
