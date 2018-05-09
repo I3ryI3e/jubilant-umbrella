@@ -244,6 +244,9 @@ public class Game implements Serializable, Constants{
         if(dice + bonus >= 5){
             getEnemy().removeTrebutchet();
             textToOutput.append("\nVictory, sabotage successfully done!");
+        }else if(dice == 1){
+            getPlayer().soldierCaptured();
+            textToOutput.append("\nYour soldier as been captured!");
         }
         player.decreasePlayerActions();
     }
@@ -255,7 +258,8 @@ public class Game implements Serializable, Constants{
             getPlayer().addRaided_supplies(2);
             textToOutput.append("\nVictory, 2 supplies successfully done!");
         }else if(dice == 1){
-            //TODO
+            getPlayer().soldierCaptured();
+            textToOutput.append("\nYour soldier as been captured!");
         }else if(!(dice + bonus == 2)){
             getPlayer().addRaided_supplies(1);
             textToOutput.append("\nVictory, 1 supply successfully done!");

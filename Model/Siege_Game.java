@@ -156,7 +156,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canSupply(){ 
         return (game.getPlayer().playerOnEnemyLine());
     }
-    public void supply() { //TODO
+    public void supply() {
         if(canSupply()){
             setState(state.supply());
             setChanged();
