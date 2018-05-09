@@ -21,34 +21,15 @@ public class Enemy implements Constants, Serializable{
     public int getTrebutchet() {
         return trebutchet;
     }
-
-    public void addTrebutchet() {
-        if(trebutchet < 4)
-            ++trebutchet;
+    
+    public void increaseNumberOfTrebuchet() {
+        if(this.trebutchet<3)
+            this.trebutchet++;
     }
+
     public void removeTrebutchet() {
         if(trebutchet > 0)
             --trebutchet;
-    }
-    public void makeAttack(List<Enemy_Attack> ea){
-        for (Enemy_Attack enemy_Attack : ea) {
-            switch(enemy_Attack){
-                case LADDER:
-                    ladder.goForward();
-                    break;
-                case BATTERING_RAM:
-                    battering_ram.goForward();
-                    break;
-                case SIEGE_TOWER:
-                    siege_tower.goForward();
-                    break;
-                case SWORD: 
-                    //TODO!!!!!!
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 
     public int getLadderNumberPosition() throws MyException {
@@ -189,11 +170,6 @@ public class Enemy implements Constants, Serializable{
         return aux.toString();
     }
 
-    public void increaseNumberOfTrebuchet() {
-        if(this.trebutchet<3)
-            this.trebutchet++;
-    }
-
     public boolean anyEnemyOnCloseCombat() {
         return (isNumEnemyInCloseCombat(1) || isNumEnemyInCloseCombat(2));
     }
@@ -206,5 +182,15 @@ public class Enemy implements Constants, Serializable{
     }
     public boolean isSiegeTowerOnCloseCombat(){
         return siege_tower.onCloseCombat();
+    }
+
+    public boolean isLadderOnCircleSpace() {
+        return ladder.onCircleSpace();
+    }
+    public boolean isBatteringRamOnCircleSpace(){
+        return battering_ram.onCircleSpace();
+    }
+    public boolean isSiegeTowerOnCircleSpace(){
+        return siege_tower.onCircleSpace();
     }
 }

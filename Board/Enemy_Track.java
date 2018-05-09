@@ -80,5 +80,13 @@ public class Enemy_Track extends Track {
             return false;
         }  
     }
+
+    boolean onCircleSpace() {
+        try{
+            return (getPiecePosition(getPiecePositionNumber()) instanceof Circle);
+        }catch (MyException ex){
+            return false;
+        }
+    }
     
 }

@@ -170,10 +170,11 @@ public class Game implements Serializable, Constants{
             } catch (MyException ex) {}
             break;
         }
-        if(bonus < 2){
+        if(dice == 1 && bonus < 2){
             player.decreaseMorale();
         }
         player.decreasePlayerActions();
+        canUseBoiling=false;
     }
     public void closeCombat(Enemy_Attack ea) {
         int dice=(int)(Math.random()*6+1);
