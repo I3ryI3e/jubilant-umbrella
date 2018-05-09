@@ -117,15 +117,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean canRally() throws MyException{
+    public boolean canRally() {
         return !game.getPlayer().isMoraleStartingSpace();
     }
     public void stateRally() {
-        try {
-            if(canRally())
-                setState(state.Rally_Troops());
-        } catch (MyException ex) {
-        }
+        if(canRally())
+            setState(state.Rally_Troops());
     }
     public void rally(boolean check) {
         setState(state.Apply_Rally_Rules(check));
@@ -136,7 +133,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return (game.getPlayer().playerOnEnemyLine());
     }
     public void supply() { //TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(canSupply()){
+            setState(state.supply());
+            setChanged();
+            notifyObservers();
+        }
     }
     public boolean canSabotage(){ 
         return (game.getPlayer().playerOnEnemyLine());

@@ -47,6 +47,15 @@ public class Wait_Action extends State_Adapter implements Constants{
         else
             return this;
     }
+
+    @Override
+    public States supply() {
+        getGame().supply();
+        if(getGame().getPlayer().checkLoss())
+            return new Game_Over(getGame());
+        else
+            return this;
+    }
     
     @Override
     public States endTurn() { // TODO check if this is ok!

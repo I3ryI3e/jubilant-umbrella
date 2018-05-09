@@ -13,20 +13,17 @@ public interface States extends Constants, Serializable{
     public States closeCombat();
     public States coupure();
     public States sabotage();
+    public States supply();
     public States Tunnel();
+    public States automaticTunnelMovement();
+    public States fastTunnelMovement();
+    public States getInsideTunnelMovement();
+    public States BuyAction();
+    public States BuyAction(int opt);
     public States Apply_Action_Rules(Enemy_Attack ea);
     public States Apply_Rally_Rules(boolean check);
     public States returnWaitAction();
     public States checkLossAnd2Enemy();
 
     public States endTurn();
-
-    public States automaticTunnelMovement();
-
-    public States fastTunnelMovement();
-
-    public States getInsideTunnelMovement();
-
-    public States BuyAction();
-    public States BuyAction(int opt);
 }

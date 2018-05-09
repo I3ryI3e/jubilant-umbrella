@@ -26,9 +26,21 @@ public class State_Adapter implements States, Constants {
     @Override
     public States sabotage() {return this;}
     @Override
+    public States supply() {return this;}
+    @Override
     public States archers() {return this;}
     @Override
     public States Tunnel() {return this;}
+    @Override
+    public States automaticTunnelMovement() {return this;}
+    @Override
+    public States fastTunnelMovement() {return this;}
+    @Override
+    public States getInsideTunnelMovement() {return this;}
+    @Override
+    public States BuyAction() {return this;}
+    @Override
+    public States BuyAction(int opt) {return this;}
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
     @Override
@@ -43,23 +55,6 @@ public class State_Adapter implements States, Constants {
             return new Close_Combat(getGame());
         return this;
     }
-
-    @Override
-    public States automaticTunnelMovement() {return this;}
-
-    @Override
-    public States fastTunnelMovement() {return this;}
-
-    @Override
-    public States getInsideTunnelMovement() {return this;}
-
     @Override
     public States endTurn() {return this;}
-
-    @Override
-    public States BuyAction() {return this;}
-
-    @Override
-    public States BuyAction(int opt) {return this;}
-    
 }

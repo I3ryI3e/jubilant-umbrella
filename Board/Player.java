@@ -37,17 +37,19 @@ public class Player implements Serializable{
     public int getWall() throws MyException {
         return wall.getPiecePositionNumber();
     }
-    
 
     public int getRaided_supplies() {
         return raided_supplies;
     }
 
-    public void setRaided_supplies(int raided_supplies) {
-        if(raided_supplies >= 0 && raided_supplies < 3)
+    public void addRaided_supplies(int raided_supplies) {
+        if(raided_supplies == 2){
             this.raided_supplies = raided_supplies;
-        else if(raided_supplies > 2)
-            this.raided_supplies = 2;
+        }else if(this.raided_supplies + raided_supplies > 2){
+                this.raided_supplies = 2;
+        }else{
+            this.raided_supplies += raided_supplies;
+        }
     }
     public void raiseAction(){
         actions++;
@@ -113,6 +115,7 @@ public class Player implements Serializable{
             int dice = (int) (Math.random()*6 +1);
             if(dice==1){
                 tunnel.soldiersDiedOnEnemyLines();
+                raided_supplies = 0;
                 morale.decrease();
             }
         }

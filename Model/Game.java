@@ -246,6 +246,21 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
+    public void supply() {
+        int dice = (int) (Math.random()*6+1);
+        int bonus = discard.get(0).getDayX(game_day).getEvent().getSupplyMod();
+        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        if(dice + bonus == 6){
+            getPlayer().addRaided_supplies(2);
+            textToOutput.append("\nVictory, 2 supplies successfully done!");
+        }else if(dice == 1){
+            //TODO
+        }else if(!(dice + bonus == 2)){
+            getPlayer().addRaided_supplies(1);
+            textToOutput.append("\nVictory, 1 supply successfully done!");
+        }
+        player.decreasePlayerActions();
+    }
     public void removeSiegeFromGame() {
         enemy.removeSiegeFromGame();
     }

@@ -106,9 +106,7 @@ public class User_Interface_Text implements Constants, Observer{
         str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
         str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
         str.append(game.canCoupure()?"\t4- Coupure\n":"");
-        try {
-            str.append(game.canRally()?"\t5- Rally Troops\n":"");
-        } catch (MyException e) {}
+        str.append(game.canRally()?"\t5- Rally Troops\n":"");
         str.append("\t6- Tunnel Action\n");
         str.append(game.canSupply()?"\t7- Supply Raid\n":"");
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
@@ -203,7 +201,7 @@ public class User_Interface_Text implements Constants, Observer{
         }
     }
     
-    private void rallyText() {      //VER SE OS SUPPLIES JA TA A ZEROS OU NAO
+    private void rallyText() {
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
@@ -222,7 +220,7 @@ public class User_Interface_Text implements Constants, Observer{
         }
     }
     
-    private void onlyRaidAndSabText() {
+    private void onlyRaidAndSabText() { //TODO
         System.out.println("Only Raid and Sab Text");
         quit=false;
     }
@@ -244,10 +242,12 @@ public class User_Interface_Text implements Constants, Observer{
                 break;
             case 3:
                 game.tunnelGetInside();
+                break;
             case 4:
                 game.returnWaitAction();
         }
     }
+    
     private void closeCombatText() {
         int opt;
         StringBuilder str = new StringBuilder();
