@@ -1,6 +1,5 @@
 package Model;
 
-import Board.*;
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
 import UI.text.User_Interface_Text;
@@ -89,24 +88,21 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean can_close_combat(){
-        try {
-            if(isLadder(N_ENEMY_CLOSE_COMBAT))
-                return true;
-            } catch (MyException ex) {}
-        try {
-            if(isBatteringRam(N_ENEMY_CLOSE_COMBAT))
-                return true;
-        } catch (MyException ex){}
-        try {
-            if(isSiegeTower(N_ENEMY_CLOSE_COMBAT))
-                return true;
-        } catch (MyException ex) {}
-        return false;
-    }
-    public void closeCombat() {
-        if(can_close_combat()){
+     public void stateCloseCombat() {
+        if(game.playerStillHasActionsLeft() && game.enemiesOnCloseCombatPosition())
             setState(state.closeCombat());
+        
+    }
+    public boolean can_close_combat(){
+        if(isLadderOnCloseCombat())
+            return true;
+        if(isBatteringRamOnCloseCombat())
+            return true;
+        return isSiegeTowerOnCloseCombat();
+    }
+    public void closeCombat(Enemy_Attack ea) {
+        if(enemyIsOnCloseCombat(ea) && game.playerStillHasActionsLeft()){
+            setState(state.Apply_Action_Rules(ea));
             setChanged();
             notifyObservers();
         }
@@ -227,4 +223,58 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         if(onCastleSpace()|| onEnemyLine())
             setState(state.getInsideTunnelMovement());
     }
+
+    public boolean isLadderOnCloseCombat() {
+        return game.getEnemy().isLadderOnCloseCombat();
+    }
+    public boolean isBatteringRamOnCloseCombat(){
+        return game.getEnemy().isBatteringRamOnCloseCombat();
+    }
+    public boolean isSiegeTowerOnCloseCombat(){
+        return game.getEnemy().isSiegeTowerOnCloseCombat();
+    }
+
+    private boolean enemyIsOnCloseCombat(Enemy_Attack ea) {
+        switch(ea){
+            case LADDER:
+                return isLadderOnCloseCombat();
+            case BATTERING_RAM:
+                return isBatteringRamOnCloseCombat();
+            case SIEGE_TOWER:
+                return isSiegeTowerOnCloseCombat();
+            default:
+                return false;
+        }
+    }
+
+    public boolean canBuyAction() {
+        return game.getCanUseSupplyOrMorale();
+    }
+
+    public void stateBuyAction() {
+        if(game.getCanUseSupplyOrMorale())
+            setState(state.BuyAction());
+    }
+    public void buyAction(int opt) {
+        switch(opt){
+            case 1:
+                if(canDecreaseSupply())
+                    setState(state.BuyAction(opt));
+                break;
+            case 2:
+                if(canDecreaseSupply())
+                    setState(state.BuyAction(opt));
+        }
+        
+    }
+
+    public boolean canDecreaseSupply() {
+        return game.getPlayer().canDecreaseSupplies();
+    }
+
+    public boolean canDecreaseMorale() {
+        return game.getPlayer().canDecreaseMorale();
+    }
+
+ 
 }

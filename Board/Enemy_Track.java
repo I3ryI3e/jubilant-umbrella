@@ -6,6 +6,8 @@ import static Model.Constants.N_ENEMY_CLOSE_COMBAT;
 import static Model.Constants.TAM_TRACKS_ENEMY;
 import Model.MyException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Enemy_Track extends Track {
 
@@ -60,7 +62,7 @@ public class Enemy_Track extends Track {
     }
     
 
-    int getStrength() throws MyException {
+    public int getStrength() throws MyException {
         Position aux=getPiecePosition(getPiecePositionNumber());
         if(aux instanceof Close_Combat_Square)
             return 4;
@@ -70,6 +72,13 @@ public class Enemy_Track extends Track {
             return 3;
         else
             return 4;
+    }
+    public boolean onCloseCombat(){
+        try {
+            return (getPiecePosition(getPiecePositionNumber()) instanceof Close_Combat_Square);
+        } catch (MyException ex) {
+            return false;
+        }  
     }
     
 }

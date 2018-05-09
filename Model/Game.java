@@ -16,26 +16,34 @@ public class Game implements Serializable, Constants{
     private int game_day;
     private List<Card> deck;
     private List<Card> discard;
-    private boolean canUseSupllyToOneMoreAction;
+    private boolean canUseSupllyOrMoraleToOneMoreAction;
     private StringBuffer textToOutput;
+    private boolean canUseBoiling;
 
     public Game(){
         this.player= new Player();
         this.enemy= new Enemy();
         this.deck = new ArrayList<>();
         this.discard = new ArrayList<>();
-        this.canUseSupllyToOneMoreAction=true;
+        this.canUseSupllyOrMoraleToOneMoreAction=true;
+        this.canUseBoiling=true;
         this.textToOutput = new StringBuffer();
     }
     
     public int getGame_day(){
         return game_day;
     }
-    public boolean getCanUseSupply(){
-        return canUseSupllyToOneMoreAction;
+    public boolean getCanUseSupplyOrMorale(){
+        return canUseSupllyOrMoraleToOneMoreAction;
     }
     public void changeCanUseSupply(){
-        this.canUseSupllyToOneMoreAction = !this.canUseSupllyToOneMoreAction;
+        this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;
+    }
+    public boolean canUseBoiling(){
+        return canUseBoiling;
+    }
+    public void changeUseBoiling(){
+        this.canUseBoiling= !this.canUseBoiling;
     }
     public String getTextToOutput(){
         String aux = textToOutput.toString();
@@ -167,25 +175,42 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
-    public void closeCombat() {
+    public void closeCombat(Enemy_Attack ea) {
         int dice=(int)(Math.random()*6+1);
         int bonus =discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
-        try {
-            if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                    getEnemy().goBackwardLadder();
-                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
-                }
-            }else if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                    getEnemy().goBackwardBatteringRam();
-                    textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
-                }
-            }else if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
-                if( dice+bonus > CLOSE_COMBAT_POSITION_POWER)
-                    getEnemy().goBackwardSiegeTower();
-            }
-        } catch (MyException ex) {}
+        switch(ea){
+            case LADDER:
+                try {
+                    if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
+                        if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
+                            getEnemy().goBackwardLadder();
+                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
+                            player.decreasePlayerActions();
+                        }
+                }} catch (MyException ex) {}
+                break;
+            case BATTERING_RAM:
+                try{
+                    if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
+                        if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
+                            getEnemy().goBackwardBatteringRam();
+                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
+                            player.decreasePlayerActions();
+                        }
+                }}catch (MyException ex) {} 
+                break;
+            case SIEGE_TOWER:
+                try{
+                    if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
+                        if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
+                            getEnemy().goBackwardSiegeTower();
+                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
+                            player.decreasePlayerActions();
+                        }
+                    }
+                } catch (MyException ex) {}
+                break;
+        }
     }
     public void rally(boolean DRMplusOne) {
         int dice = (int) (Math.random()*6+1);
@@ -265,7 +290,8 @@ public class Game implements Serializable, Constants{
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
         }
-        this.canUseSupllyToOneMoreAction=true;
+        this.canUseSupllyOrMoraleToOneMoreAction=true;
+        this.canUseBoiling=true;
     }
     private void reputAllCardsIntoDeck() {
         for (int i = 0; i < discard.size(); i++) {
@@ -308,5 +334,18 @@ public class Game implements Serializable, Constants{
 
     public boolean getInsidetunnelMovement() {
         return player.getInsideTunnelMovement();
+    }
+
+    boolean enemiesOnCloseCombatPosition() {
+        return enemy.anyEnemyOnCloseCombat();
+    }
+
+    public int numberOfActionsAvailable() {
+        return player.getActions();
+    }
+
+    public void buyAction(int opt) {
+        player.buyAction(opt);
+        changeCanUseSupply();
     }
 }

@@ -46,7 +46,7 @@ public class Day implements Constants, Serializable{
     public String toString() {
         StringBuilder aux=new StringBuilder();
         aux.append("{CARD}\nCard number actions: ").append(n_player_actions).append("\n");
-        aux.append("\nEnemy Attacks: ");
+        aux.append("Enemy Attacks: ");
         for (int i = 0; i < enemy_attack.size(); i++) {
             aux.append(enemy_attack.get(i).toString()).append("\n");   
         }

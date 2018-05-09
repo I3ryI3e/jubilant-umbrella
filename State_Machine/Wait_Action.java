@@ -23,6 +23,12 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
+    public States closeCombat() {
+        return new Close_Combat(getGame());
+    }
+    
+
+    @Override
     public States Rally_Troops() {
         return new Rally_Troops(getGame());
     }
@@ -52,13 +58,11 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
-    public States closeCombat() {
-        getGame().closeCombat();
-        if(getGame().getPlayer().checkLoss())
-            return new Game_Over(getGame());
-        else
-            return this;
+    public States BuyAction() {
+        return new Buy_One_Action(getGame());
     }
+
+    
     
 
 }

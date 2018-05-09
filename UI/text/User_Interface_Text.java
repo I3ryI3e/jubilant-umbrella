@@ -67,7 +67,7 @@ public class User_Interface_Text implements Constants, Observer{
                 game.stateBoilling();
                 break;
             case 3:
-                game.closeCombat();
+                game.stateCloseCombat();
                 break;
             case 4:
                 game.coupure();
@@ -85,13 +85,16 @@ public class User_Interface_Text implements Constants, Observer{
                 game.sabotage();
                 break;
             case 9:
-                save_text();
+                game.stateBuyAction();
                 break;
             case 10:
                 game.endTurn();
                 break;
             case 11:
-                quit = true;
+                save_text();
+                break;
+            case 12:
+                quit=true;
         }
     }
     
@@ -109,8 +112,8 @@ public class User_Interface_Text implements Constants, Observer{
         str.append("\t6- Tunnel Action\n");
         str.append(game.canSupply()?"\t7- Supply Raid\n":"");
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
-        
-        str.append("\t9- Save game\n\t10- End Turn\n" + "\n\t11- Quit\n");
+        str.append(game.canBuyAction()?"\t9- Buy Action\n":"");
+        str.append("\t10- End Turn\n\t11- Save game\n" + "\n\t12- Quit\n");
         
         return str.toString();
     }
@@ -245,6 +248,45 @@ public class User_Interface_Text implements Constants, Observer{
                 game.returnWaitAction();
         }
     }
+    private void closeCombatText() {
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.getGame().getEnemy());
+        System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" left");
+        str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"").append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"").append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"").append("\n\t4- Return");
+        System.out.println(str.toString());
+        opt = read_int();
+        
+        switch(opt){
+            case 1:
+                game.closeCombat(Enemy_Attack.LADDER);
+                break;
+            case 2:
+                game.closeCombat(Enemy_Attack.BATTERING_RAM);
+                break;
+            case 3:
+                game.closeCombat(Enemy_Attack.SIEGE_TOWER);
+            case 4:
+                game.returnWaitAction();
+        }
+    }
+    
+    private void buyOneActionText() {
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.getGame().getPlayer());
+        str.append(game.canDecreaseSupply()?"\t1- Use one supply to get one more action\n":"").append(game.canDecreaseMorale()?"\t2- Use one morale to get one more action":"").append("\n\t3- Return");
+        System.out.println(str.toString());
+        opt = read_int();
+        
+        switch(opt){
+            case 1: case 2:
+                game.buyAction(opt);
+                break;
+            case 3:
+                game.returnWaitAction();
+        }
+    }
 
     private void gameOver_Text() {
         System.out.println("GAME OVER!");
@@ -274,6 +316,10 @@ public class User_Interface_Text implements Constants, Observer{
                 onlyRaidAndSabText();
             }else if (state instanceof Wait_Tunnel){
                 tunnelText();
+            }else if (state instanceof Close_Combat){
+                closeCombatText();
+            }else if (state instanceof Buy_One_Action){
+                buyOneActionText();
             }
         }
     }
@@ -351,4 +397,7 @@ public class User_Interface_Text implements Constants, Observer{
             }
         }
     }
+
+
+    
 }

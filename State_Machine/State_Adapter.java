@@ -40,12 +40,9 @@ public class State_Adapter implements States, Constants {
         if(getGame().checkLoss())
             return new Game_Over(getGame());
         if(getGame().TwoEnemyLine())
-            return new Two_Enemy_Attack(getGame());
+            return new Close_Combat(getGame());
         return this;
     }
-
-    @Override
-    public States closeCombate() {return this;}
 
     @Override
     public States automaticTunnelMovement() {return this;}
@@ -58,4 +55,11 @@ public class State_Adapter implements States, Constants {
 
     @Override
     public States endTurn() {return this;}
+
+    @Override
+    public States BuyAction() {return this;}
+
+    @Override
+    public States BuyAction(int opt) {return this;}
+    
 }

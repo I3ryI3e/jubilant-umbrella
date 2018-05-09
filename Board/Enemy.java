@@ -193,4 +193,18 @@ public class Enemy implements Constants, Serializable{
         if(this.trebutchet<3)
             this.trebutchet++;
     }
+
+    public boolean anyEnemyOnCloseCombat() {
+        return (isNumEnemyInCloseCombat(1) || isNumEnemyInCloseCombat(2));
+    }
+
+    public boolean isLadderOnCloseCombat() {
+        return ladder.onCloseCombat();
+    }
+    public boolean isBatteringRamOnCloseCombat(){
+        return battering_ram.onCloseCombat();
+    }
+    public boolean isSiegeTowerOnCloseCombat(){
+        return siege_tower.onCloseCombat();
+    }
 }

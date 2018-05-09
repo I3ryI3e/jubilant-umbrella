@@ -49,6 +49,9 @@ public class Player implements Serializable{
         else if(raided_supplies > 2)
             this.raided_supplies = 2;
     }
+    public void raiseAction(){
+        actions++;
+    }
     public void raiseWall() { 
         wall.raise();
     }
@@ -154,5 +157,26 @@ public class Player implements Serializable{
             return true;
         }
         return false;
+    }
+
+    public boolean canDecreaseMorale() {
+        try {
+            if(morale.getPiecePositionNumber() == 0)
+                return false;
+        } catch (MyException ex) {}
+        return true;
+    }
+
+    public void buyAction(int opt) {
+        switch(opt){
+            case 1:
+                decreaseSupplies();
+                raiseAction();
+                break;
+            case 2:
+                decreaseMorale();
+                raiseAction();
+                break;
+        }
     }
 }
