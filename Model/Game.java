@@ -16,9 +16,10 @@ public class Game implements Serializable, Constants{
     private int game_day;
     private List<Card> deck;
     private List<Card> discard;
-    private boolean canUseSupllyOrMoraleToOneMoreAction;
     private StringBuffer textToOutput;
+    private boolean canUseSupllyOrMoraleToOneMoreAction;
     private boolean canUseBoiling;
+    private boolean canUseAutomaticMovement;
 
     public Game(){
         this.player= new Player();
@@ -26,6 +27,7 @@ public class Game implements Serializable, Constants{
         this.deck = new ArrayList<>();
         this.discard = new ArrayList<>();
         this.canUseSupllyOrMoraleToOneMoreAction=true;
+        this.canUseAutomaticMovement=true;
         this.canUseBoiling=true;
         this.textToOutput = new StringBuffer();
     }
@@ -179,13 +181,14 @@ public class Game implements Serializable, Constants{
     public void closeCombat(Enemy_Attack ea) {
         int dice=(int)(Math.random()*6+1);
         int bonus =discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
+        textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ");
         switch(ea){
             case LADDER:
                 try {
                     if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             getEnemy().goBackwardLadder();
-                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Ladder is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!\n");
                             player.decreasePlayerActions();
                         }
                 }} catch (MyException ex) {}
@@ -195,7 +198,7 @@ public class Game implements Serializable, Constants{
                     if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             getEnemy().goBackwardBatteringRam();
-                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
                             player.decreasePlayerActions();
                         }
                 }}catch (MyException ex) {} 
@@ -205,7 +208,7 @@ public class Game implements Serializable, Constants{
                     if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             getEnemy().goBackwardSiegeTower();
-                            textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ").append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
                             player.decreasePlayerActions();
                         }
                     }
@@ -285,7 +288,7 @@ public class Game implements Serializable, Constants{
     }
     void enemyAttack(List<Enemy_Attack> enemy_attack) {
         for(int i=0;i<enemy_attack.size();i++){
-            getEnemy().enemyAttack(enemy_attack.get(i));
+            getEnemy().enemyAttack(enemy_attack.get(i), this);
         }
     }
     public boolean checkLoss() {
@@ -312,6 +315,7 @@ public class Game implements Serializable, Constants{
         }
         this.canUseSupllyOrMoraleToOneMoreAction=true;
         this.canUseBoiling=true;
+        this.canUseAutomaticMovement=true;
     }
     private void reputAllCardsIntoDeck() {
         for (int i = 0; i < discard.size(); i++) {
@@ -353,7 +357,11 @@ public class Game implements Serializable, Constants{
     }
 
     public boolean getInsidetunnelMovement() {
-        return player.getInsideTunnelMovement();
+        if(player.getInsideTunnelMovement()){
+            this.canUseAutomaticMovement=false;
+            return true;
+        }
+        return false;
     }
 
     boolean enemiesOnCloseCombatPosition() {
@@ -379,5 +387,9 @@ public class Game implements Serializable, Constants{
 
     boolean siegeTowerOnStartingPosition() {
         return enemy.siegeTowerOnStartingPosition();
+    }
+
+    boolean getCanMakeAutomaticMove() {
+        return canUseAutomaticMovement;
     }
 }

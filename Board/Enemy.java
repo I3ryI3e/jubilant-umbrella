@@ -2,6 +2,7 @@ package Board;
 
 import Model.Constants;
 import Model.Constants.Enemy_Attack;
+import Model.Game;
 import Model.MyException;
 import java.io.Serializable;
 import java.util.List;
@@ -66,23 +67,35 @@ public class Enemy implements Constants, Serializable{
         siege_tower.goBackward();
     }
 
-    public void enemyAttack(Enemy_Attack ea) {
+    public void enemyAttack(Enemy_Attack ea, Game game) {
         switch(ea){
             case LADDER:
-                goForwardLadder();
+                if(!ladder.onCloseCombat()){
+                    goForwardLadder();
+                    if(ladder.onCloseCombat())
+                        game.getPlayer().decreaseMorale();
+                }
                 break;
             case BATTERING_RAM:
-                goForwardBatteringRam();
+                if(!battering_ram.onCloseCombat()){
+                    goForwardBatteringRam();
+                    if(battering_ram.onCloseCombat())
+                        game.getPlayer().decreaseMorale();
+                }
                 break;
             case SIEGE_TOWER:
-                goForwardSiegeTower();
+                if(!siege_tower.onCloseCombat()){
+                    goForwardSiegeTower();
+                    if(siege_tower.onCloseCombat())
+                        game.getPlayer().decreaseMorale();
+                }
                 break;
             case SWORD:
-                swordAttack();
+                swordAttack(game);
         }
     }
     
-    private void swordAttack(){
+    private void swordAttack(Game game){
         int lp, bp, sp, aux;
         try {
             lp = getLadderNumberPosition();
@@ -108,12 +121,27 @@ public class Enemy implements Constants, Serializable{
         }else{
             aux = sp;
         }
-        if(lp == aux)
-            goForwardLadder();
-        if(bp == aux)
-            goForwardBatteringRam();
-        if(sp == aux)
-            goForwardSiegeTower();
+        if(lp == aux){
+            if(!ladder.onCloseCombat()){
+                goForwardLadder();
+                if(ladder.onCloseCombat())
+                    game.getPlayer().decreaseMorale();
+            }
+        }
+        if(bp == aux){
+            if(!battering_ram.onCloseCombat()){
+                    goForwardBatteringRam();
+                    if(battering_ram.onCloseCombat())
+                        game.getPlayer().decreaseMorale();
+            }
+        }
+        if(sp == aux){
+            if(!siege_tower.onCloseCombat()){
+                    goForwardSiegeTower();
+                    if(siege_tower.onCloseCombat())
+                        game.getPlayer().decreaseMorale();
+            }
+        }
     }
 
     public Position getLadderPosition() throws MyException {

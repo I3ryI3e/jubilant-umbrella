@@ -78,7 +78,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return false;
     }
     public void stateBoilling() {
-        if(game.canUseBoiling())
+        if(game.canUseBoiling() && game.playerStillHasActionsLeft())
             setState(state.boiling());
     }
     public void boilling(Enemy_Attack ea) {
@@ -135,7 +135,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return !game.getPlayer().isWallStartingSpace();
     }
     public void coupure() {
-        if(canCoupure()){
+        if(canCoupure() && game.playerStillHasActionsLeft()){
             setState(state.coupure());
             setChanged();
             notifyObservers();
@@ -145,7 +145,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return !game.getPlayer().isMoraleStartingSpace();
     }
     public void stateRally() {
-        if(canRally())
+        if(canRally() && game.playerStillHasActionsLeft())
             setState(state.Rally_Troops());
     }
     public void rally(boolean check) {
@@ -157,7 +157,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return (game.getPlayer().playerOnEnemyLine());
     }
     public void supply() {
-        if(canSupply()){
+        if(canSupply() && game.playerStillHasActionsLeft()){
             setState(state.supply());
             setChanged();
             notifyObservers();
@@ -167,7 +167,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return (game.getPlayer().playerOnEnemyLine());
     }
     public void sabotage() {
-        if(canSabotage()){
+        if(canSabotage() && game.playerStillHasActionsLeft()){
             setState(state.sabotage());
             setChanged();
             notifyObservers();
@@ -224,8 +224,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
 
     public void stateTunnel() {
-        setState(state.Tunnel());
-            
+        if(game.playerStillHasActionsLeft())
+            setState(state.Tunnel());
     }
 
     public boolean onCastleSpace() {
@@ -233,13 +233,13 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
 
     public void tunnelAuto() {
-       if(canUseTunnelMovement()){
+       if(canUseTunnelMovement() && game.playerStillHasActionsLeft() && canMakeAutomaticMove()){
            setState(state.automaticTunnelMovement());
        }
     }
 
     public void tunnelFast() {
-        if(canUseTunnelMovement()){
+        if(canUseTunnelMovement() && game.playerStillHasActionsLeft()){
             setState(state.fastTunnelMovement());
         }
     }
@@ -297,4 +297,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return game.getPlayer().canDecreaseMorale();
     }
 
+    public boolean canMakeAutomaticMove(){
+        return game.getCanMakeAutomaticMove();
+    }
 }

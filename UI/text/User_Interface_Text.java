@@ -217,10 +217,9 @@ public class User_Interface_Text implements Constants, Observer{
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append(game.canUseTunnelMovement()?"\t1- Automatic move\n\t2- Fast move":(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
+        str.append(game.canUseTunnelMovement()?(game.canMakeAutomaticMove()?"\t1- Automatic move\n\t2- Fast move":"\t2- Fast move"):(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
         System.out.println(str.toString());
         opt = read_int();
-        
         switch(opt){
             case 1:
                 game.tunnelAuto();
@@ -256,6 +255,7 @@ public class User_Interface_Text implements Constants, Observer{
                 break;
             case 3:
                 game.closeCombat(Enemy_Attack.SIEGE_TOWER);
+                break;
             case 4:
                 game.returnWaitAction();
         }
