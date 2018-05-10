@@ -26,9 +26,6 @@ public abstract class Event implements Serializable{
     public int getMoraleMod(){
         return 0;
     }
-    public int getSupplyMod(){
-        return 0;
-    }
     public int getSabotageMod(){
         return 0;
     }

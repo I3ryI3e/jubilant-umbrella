@@ -62,11 +62,11 @@ public class Wait_Action extends State_Adapter implements Constants{
         if(getGame().victoryOrLoss()){
             return new Game_Over(getGame());
         }
-        if(getGame().getGame_day()!= 2){
-            getGame().endTurn();
+        getGame().endTurn();
+        if(getGame().getGame_day()!= 3){
             return new Wait_Draw_Card(getGame());
         }
-        return new Game_Over(getGame());
+        return new WinGame(getGame());
     }
 
     @Override

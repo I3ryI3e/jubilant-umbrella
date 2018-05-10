@@ -6,8 +6,6 @@ import static Model.Constants.N_ENEMY_CLOSE_COMBAT;
 import static Model.Constants.TAM_TRACKS_ENEMY;
 import Model.MyException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Enemy_Track extends Track {
 

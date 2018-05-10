@@ -35,14 +35,11 @@ public abstract class Card implements Constants, Serializable{
             days.get(game_day).resolve(game);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder aux = new StringBuilder();
-        aux.append("{CARD}\nCard Number: ").append(card_number).append("\n");
-        for (int i = 0; i < days.size(); i++) {
-            aux.append(days.get(i));
-        }
-        return aux.toString();
+    public String printDayX(int game_day, int numberOfCardsPlayed) {
+        StringBuilder str = new StringBuilder();
+        str.append("{CARD}\nCard Number: ").append(card_number).append(" - (").append(numberOfCardsPlayed).append(" of 7)\n");
+        str.append(days.get(game_day));
+        return str.toString();
     }
     
 }

@@ -20,7 +20,7 @@ public class Game implements Serializable, Constants{
     private StringBuffer textToOutput;
     private boolean canUseSupllyOrMoraleToOneMoreAction;
     private boolean canUseBoiling;
-    private boolean canUseAutomaticMovement;
+    private boolean canUseFreeMovement;
 
     public Game(){
         this.player= new Player();
@@ -28,7 +28,7 @@ public class Game implements Serializable, Constants{
         this.deck = new ArrayList<>();
         this.discard = new ArrayList<>();
         this.canUseSupllyOrMoraleToOneMoreAction=true;
-        this.canUseAutomaticMovement=true;
+        this.canUseFreeMovement=true;
         this.canUseBoiling=true;
         this.textToOutput = new StringBuffer();
     }
@@ -75,8 +75,8 @@ public class Game implements Serializable, Constants{
         deck.add(6,new Card7());
         Collections.shuffle(deck);
     }
-    public void archers(Enemy_Attack ea) { // TODO!! 
-        int dice = (int) (Math.random()*6+1);       //FAZER CLASSE DADO??
+    public void archers(Enemy_Attack ea) { 
+        int dice = (int) (Math.random()*6+1); 
         int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
@@ -256,7 +256,7 @@ public class Game implements Serializable, Constants{
     }
     public void supply() {
         int dice = (int) (Math.random()*6+1);
-        int bonus = discard.get(0).getDayX(game_day).getEvent().getSupplyMod();
+        int bonus = discard.get(0).getDayX(game_day).getEvent().getRaidMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus == 6){
             getPlayer().addRaided_supplies(2);
@@ -307,24 +307,27 @@ public class Game implements Serializable, Constants{
         return aux.toString();
     }
     public String drawCardDay() {
-        return discard.get(0).getDayX(game_day).toString();
+        return discard.get(0).printDayX(game_day, discard.size());
     }
     public void endTurn() {
         if(deck.isEmpty()){
+            textToOutput.append(">>End of day ").append(getGame_day()+1).append("<<");
             DecreaseSuppliesEvent();
             endOfDayPhaseTunnel();
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
+            textToOutput.append("\n>>Day ").append(getGame_day()+1).append(" is starting!<<\n");
         }
         this.canUseSupllyOrMoraleToOneMoreAction=true;
         this.canUseBoiling=true;
-        this.canUseAutomaticMovement=true;
+        this.canUseFreeMovement=true;
     }
     private void reputAllCardsIntoDeck() {
         for (int i = 0; i < discard.size(); i++) {
             deck.add(i,discard.get(discard.size()-1-i));
         }
         discard.clear();
+        Collections.shuffle(deck);
     }
     public void DecreaseSuppliesEvent() {
         getPlayer().decreaseSupplies();
@@ -336,10 +339,8 @@ public class Game implements Serializable, Constants{
     public String toString() {
         StringBuilder aux = new StringBuilder();
         aux.append(player);
+        aux.append("\n");
         aux.append(enemy);
-        for (int i = 0; i < deck.size(); i++) {
-            aux.append(deck.get(i).toString());
-        }
         return aux.toString();
     }
 
@@ -352,7 +353,11 @@ public class Game implements Serializable, Constants{
     }
 
     public boolean automaticTunnelMovement() {
-        return player.automaticTunnelMovement();
+        if(player.automaticTunnelMovement()){
+            canUseFreeMovement = false;
+            return true;
+        }
+        return false;
     }
 
     public boolean fastTunnelMovement() {
@@ -361,7 +366,7 @@ public class Game implements Serializable, Constants{
 
     public boolean getInsidetunnelMovement() {
         if(player.getInsideTunnelMovement()){
-            this.canUseAutomaticMovement=false;
+            this.canUseFreeMovement=false;
             return true;
         }
         return false;
@@ -392,8 +397,8 @@ public class Game implements Serializable, Constants{
         return enemy.siegeTowerOnStartingPosition();
     }
 
-    boolean getCanMakeAutomaticMove() {
-        return canUseAutomaticMovement;
+    boolean getCanMakeFreeMove() {
+        return canUseFreeMovement;
     }
 
     public void enemyCheckLine() {

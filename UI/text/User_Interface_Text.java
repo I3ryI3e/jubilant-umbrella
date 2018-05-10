@@ -100,7 +100,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     public String wait_action_text_menu(){
         StringBuilder str = new StringBuilder();
-        str.append("\nPlayer Action:\n");
+        str.append("Player Action:\n");
 
         str.append(game.can_archers()?"\t1- Archers Attack\n":"");
         str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
@@ -208,7 +208,7 @@ public class User_Interface_Text implements Constants, Observer{
         }
     }
     
-    private void onlyRaidAndSabText() { //TODO
+    private void onlyRaidAndSabText() { 
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.drawBoards());
@@ -239,12 +239,12 @@ public class User_Interface_Text implements Constants, Observer{
         int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append(game.canUseTunnelMovement()?(game.canMakeAutomaticMove()?"\t1- Automatic move\n\t2- Fast move":"\t2- Fast move"):(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
+        str.append(game.canUseTunnelMovement()?(game.canMakeFreeMove()?"\t1- Free movement\n\t2- Fast movement":"\t2- Fast movement"):(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
         System.out.println(str.toString());
         opt = read_int();
         switch(opt){
             case 1:
-                game.tunnelAuto();
+                game.tunnelFree();
                 break;
             case 2:
                 game.tunnelFast();
@@ -264,7 +264,10 @@ public class User_Interface_Text implements Constants, Observer{
         System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" left");
         str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"");
         str.append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"");
-        str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"").append("\n\t4- Return");
+        str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"");
+        str.append(game.canBuyAction()?"\n\t4- Buy Action":"");
+        str.append(game.check2Enemy()?"":"\n\t5- Return");
+        str.append(game.playerStillHasActionsLeft()?"":"\n\t6- End Turn");
         System.out.println(str.toString());
         opt = read_int();
         
@@ -279,7 +282,14 @@ public class User_Interface_Text implements Constants, Observer{
                 game.closeCombat(Enemy_Attack.SIEGE_TOWER);
                 break;
             case 4:
-                game.returnWaitAction();
+                game.stateBuyAction();
+                break;
+            case 5:
+                if(game.check2Enemy())
+                    game.returnWaitAction();
+                break;
+            case 6:
+                game.endTurn();
         }
     }
     
@@ -301,8 +311,41 @@ public class User_Interface_Text implements Constants, Observer{
     }
 
     private void gameOver_Text() {
-        System.out.println("GAME OVER!");
-        quit=true;
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.drawBoards());
+        str.append("\t1- Return to menu");
+        str.append("\n\t2- Quit");
+        System.out.println("{Your castle has been overthrown by the enemy!}");
+        System.out.println(str.toString());
+        opt = read_int();
+        switch(opt){
+            case 1:
+                game.returnInitialState();
+                break;
+            case 2:
+                quit=true;
+                break;
+        }
+    }
+    
+    private void winGameText() {
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.drawBoards());
+        str.append("\t1- Return to menu");
+        str.append("\n\t2- Quit");
+        System.out.println("{Congratulations!!! You have successfully repelled the enemy!}");
+        System.out.println(str.toString());
+        opt = read_int();
+        switch(opt){
+            case 1:
+                game.returnInitialState();
+                break;
+            case 2:
+                quit=true;
+                break;
+        }
     }
     
     public void run(){
@@ -332,6 +375,8 @@ public class User_Interface_Text implements Constants, Observer{
                 closeCombatText();
             }else if (state instanceof Buy_One_Action){
                 buyOneActionText();
+            }else if (state instanceof WinGame){
+                winGameText();
             }
         }
     }
@@ -409,6 +454,7 @@ public class User_Interface_Text implements Constants, Observer{
             }
         }
     }
+
 
 
     

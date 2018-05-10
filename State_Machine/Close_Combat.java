@@ -25,4 +25,21 @@ public class Close_Combat extends State_Adapter{
                 return new Wait_Action(getGame());
         }
     }
+    @Override
+    public States BuyAction() {
+        return new Buy_One_Action(getGame());
+    }
+
+    @Override
+    public States endTurn() {
+         if(getGame().victoryOrLoss()){
+            return new Game_Over(getGame());
+        }
+        getGame().endTurn();
+        if(getGame().getGame_day()!= 3){
+            return new Wait_Draw_Card(getGame());
+        }
+        return new WinGame(getGame());
+    }
+    
 }

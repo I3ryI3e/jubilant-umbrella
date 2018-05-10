@@ -200,7 +200,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         setState(state.checkLossAnd2Enemy());
     }
     public String drawBoards() {
-        return game.drawBoards();
+        return game.toString();
     }
     public String drawCardDay() {
         return game.drawCardDay();
@@ -238,9 +238,9 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return game.getPlayer().playerOnCastleSpace();
     }
 
-    public void tunnelAuto() {
-       if(canUseTunnelMovement() && game.playerStillHasActionsLeft() && canMakeAutomaticMove()){
-           setState(state.automaticTunnelMovement());
+    public void tunnelFree() {
+       if(canUseTunnelMovement() && game.playerStillHasActionsLeft() && canMakeFreeMove()){
+           setState(state.freeTunnelMovement());
        }
     }
 
@@ -303,7 +303,14 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return game.getPlayer().canDecreaseMorale();
     }
 
-    public boolean canMakeAutomaticMove(){
-        return game.getCanMakeAutomaticMove();
+    public boolean canMakeFreeMove(){
+        return game.getCanMakeFreeMove();
+    }
+    public boolean check2Enemy(){
+        return game.TwoEnemyLine();
+    }
+
+    public void returnInitialState() {
+        setState(state.returnInitialState());
     }
 }

@@ -32,7 +32,7 @@ public class State_Adapter implements States, Constants {
     @Override
     public States Tunnel() {return this;}
     @Override
-    public States automaticTunnelMovement() {return this;}
+    public States freeTunnelMovement() {return this;}
     @Override
     public States fastTunnelMovement() {return this;}
     @Override
@@ -57,4 +57,8 @@ public class State_Adapter implements States, Constants {
     }
     @Override
     public States endTurn() {return this;}
+
+    @Override
+    public States returnInitialState() {return this;}
+    
 }

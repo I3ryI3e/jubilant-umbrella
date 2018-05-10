@@ -10,8 +10,8 @@ public abstract class Track implements Constants, Serializable{
     protected List<Position> track;
 
     public void removeFromGame() {
-        if(track.get(0).hasPiece())
-                track.get(0).removePiece();
+        if(track.get(TAM_TRACKS_ENEMY-1).hasPiece())
+                track.get(TAM_TRACKS_ENEMY-1).removePiece();
     }
     public int getPiecePositionNumber() throws MyException{                           //If doesn't exists a piece.
         for (int i = 0; i < track.size(); i++) {
@@ -33,7 +33,7 @@ public abstract class Track implements Constants, Serializable{
     @Override
     public String toString() {
         try {
-            return track.get(getPiecePositionNumber()).getPiece().getName() + " is on " + getPiecePositionNumber() + " position\n";
+            return "["+ track.get(getPiecePositionNumber()).getPiece().getName() + " is on " + getPiecePositionNumber() + " position]\t\t";
         } catch (MyException ex) {
             return "";
         }

@@ -11,11 +11,14 @@ public class Only_Raid_and_Sab_State extends State_Adapter{
 
     @Override
     public States endTurn() {
-         if(getGame().getGame_day()!= 2){
-            getGame().endTurn();
+          if(getGame().victoryOrLoss()){
+            return new Game_Over(getGame());
+        }
+        getGame().endTurn();
+        if(getGame().getGame_day()!= 3){
             return new Wait_Draw_Card(getGame());
         }
-        return new Game_Over(getGame());
+        return new WinGame(getGame());
     }
 
     @Override

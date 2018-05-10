@@ -191,6 +191,7 @@ public class Enemy implements Constants, Serializable{
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
+        aux.append("[ENEMY]\n");
         aux.append(ladder);
         aux.append(battering_ram);
         aux.append(siege_tower);

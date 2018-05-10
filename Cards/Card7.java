@@ -13,7 +13,7 @@ public class Card7 extends Card {
         super(7);
         List<Constants.Enemy_Attack> aux = new ArrayList<>();
         aux.add(Constants.Enemy_Attack.BATTERING_RAM);
-        addDay(new Day(3,aux,new Determined_Enemy()));
+        addDay(new Day(2,aux,new Determined_Enemy()));
         aux.clear();
         aux.add(Constants.Enemy_Attack.SIEGE_TOWER);
         addDay(new Day(2,aux,new Iron_Shields()));
@@ -21,7 +21,7 @@ public class Card7 extends Card {
         aux.add(Constants.Enemy_Attack.BATTERING_RAM);
         aux.add(Constants.Enemy_Attack.LADDER);
         aux.add(Constants.Enemy_Attack.SIEGE_TOWER);
-        addDay(new Day(2,aux,new Faith()));
+        addDay(new Day(3,aux,new Faith()));
     }
     
 }

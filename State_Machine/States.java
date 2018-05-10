@@ -15,7 +15,7 @@ public interface States extends Constants, Serializable{
     public States sabotage();
     public States supply();
     public States Tunnel();
-    public States automaticTunnelMovement();
+    public States freeTunnelMovement();
     public States fastTunnelMovement();
     public States getInsideTunnelMovement();
     public States BuyAction();
@@ -24,6 +24,7 @@ public interface States extends Constants, Serializable{
     public States Apply_Rally_Rules(boolean check);
     public States returnWaitAction();
     public States checkLossAnd2Enemy();
+    public States returnInitialState();
 
     public States endTurn();
 }

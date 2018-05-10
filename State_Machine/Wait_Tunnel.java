@@ -9,7 +9,7 @@ public class Wait_Tunnel extends State_Adapter{
     }
 
     @Override
-    public States automaticTunnelMovement() {
+    public States freeTunnelMovement() {
         if(getGame().automaticTunnelMovement())
             return new Wait_Action(getGame());
         return this;

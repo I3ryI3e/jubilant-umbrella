@@ -57,7 +57,7 @@ public class Player implements Serializable{
     public void raiseWall() { 
         wall.raise();
     }
-    public void raiseSuppies(){
+    public void raiseSupplies(){
         supplies.raise();
     }
     public void raiseMorale(){
@@ -136,11 +136,13 @@ public class Player implements Serializable{
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
+        aux.append("[PLAYER]\n");
         aux.append(wall);
         aux.append(morale);
         aux.append(supplies);
         aux.append(tunnel);
         aux.append("Number of Player Actions: ").append(actions).append("\n");
+        aux.append(raided_supplies>0?"Raided supplies = " + raided_supplies :"");
         return aux.toString();
     }
 
@@ -215,14 +217,16 @@ public class Player implements Serializable{
     public String endOfDayPhaseTunnel() {
         StringBuilder aux = new StringBuilder();
         if(tunnel.onEnemyLine()){
-            aux.append("\nSoldiers were on Enemy Lines and because of the end of the day they were caught!\n");
+            aux.append("\nSoldiers were caught on enemy lines!\n");
             tunnel.soldiersDiedOnEnemyLines();
             raided_supplies=0;
         }else if(!tunnel.onStartingPosition()){
-            aux.append("\nSoldiers were on tunnel at the end of the day so they are moved into the Castle\n");
+            aux.append("\nSoldiers inside the tunnel returned to the Castle\n");
             tunnel.dayEndMovementIntoCastle();
-            aux.append(raided_supplies).append(" are going to be added to your supply\n");
-            addRaided_supplies(raided_supplies);
+            aux.append(raided_supplies).append((raided_supplies>1?" supplies":" supply")).append(" were added to your supply\n");
+            for(int i = 0;i < raided_supplies;i++) {
+                raiseSupplies();
+            }
             raided_supplies=0;
         }
         return aux.toString();
