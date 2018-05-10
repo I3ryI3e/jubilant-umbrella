@@ -66,13 +66,13 @@ public class Game implements Serializable, Constants{
         this.player= new Player();
         this.enemy= new Enemy();
         this.game_day = 0;
-//        deck.add(0,new Card1());
-//        deck.add(1,new Card2());
-        deck.add(new Card3());
-//        deck.add(3,new Card4());
-//        deck.add(4,new Card5());
-//        deck.add(5,new Card6());
-//        deck.add(6,new Card7());
+        deck.add(0,new Card1());
+        deck.add(1,new Card2());
+        deck.add(2,new Card3());
+        deck.add(3,new Card4());
+        deck.add(4,new Card5());
+        deck.add(5,new Card6());
+        deck.add(6,new Card7());
         Collections.shuffle(deck);
     }
     public void archers(Enemy_Attack ea) { // TODO!! 
