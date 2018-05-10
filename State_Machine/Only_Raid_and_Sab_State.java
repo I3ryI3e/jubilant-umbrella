@@ -17,6 +17,30 @@ public class Only_Raid_and_Sab_State extends State_Adapter{
         }
         return new Game_Over(getGame());
     }
+
+    @Override
+    public States sabotage() {
+        getGame().sabotage();
+        if(getGame().getPlayer().checkLoss())
+            return new Game_Over(getGame());
+        else
+            return this;
+    }
+
+    @Override
+    public States supply() {
+        getGame().supply();
+        if(getGame().getPlayer().checkLoss())
+            return new Game_Over(getGame());
+        else
+            return this;
+    }
+
+    @Override
+    public States BuyAction() {
+        return new Buy_One_Action(getGame());
+    }
+    
     
     
 }

@@ -209,8 +209,30 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void onlyRaidAndSabText() { //TODO
-        System.out.println("Only Raid and Sab Text");
-        quit=true;
+        int opt;
+        StringBuilder str = new StringBuilder();
+        System.out.println(game.drawBoards());
+        System.out.println(game.drawCardDay());
+        str.append(game.canSupply()?"\t1- Supply Raid\n":"");
+        str.append(game.canSabotage()?"\t2- Sabotage\n":"");
+        str.append(game.canBuyAction()?"\t3-Buy Action\n":"");
+        str.append("\t4- End Turn\n");
+        System.out.println(str.toString());
+        opt = read_int();
+        switch(opt){
+            case 1:
+                game.supply();
+                break;
+            case 2:
+                game.sabotage();
+                break;
+            case 3:
+                game.stateBuyAction();
+                break;
+            case 4:
+                game.endTurn();
+                break;
+        }
     }
     
     private void tunnelText(){

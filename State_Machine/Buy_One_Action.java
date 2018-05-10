@@ -17,6 +17,8 @@ public class Buy_One_Action extends State_Adapter {
     @Override
     public States BuyAction(int opt) {
         getGame().buyAction(opt);
+        if(getGame().isRaidAndSabEventActive())
+            return new Only_Raid_and_Sab_State(getGame());
         return new Wait_Action(getGame());
     }
     
