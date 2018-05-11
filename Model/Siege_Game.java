@@ -17,27 +17,13 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         this.addObserver(user_interface);
         setState(new Initial_State(game));
     }
-    public void setGame(Game game) {
-        this.game = game;
-    }
-    private void setState(States state) {
-        this.state = state;
-    }
-    public Game getGame() {
-        return game;
-    }
-    public States getState() {
-        return state;
-    }
-    public boolean ladderOnStartingPosition() {
-        return game.ladderOnStartingPosition();
-    }
-    public boolean batteringRamOnStartingPosition() {
-        return game.batteringRamOnStartingPosition();
-    }
-    public boolean siegeTowerOnStartingPosition() {
-        return game.siegeTowerOnStartingPosition();
-    }
+    public void setGame(Game game) {this.game = game;}
+    private void setState(States state) {this.state = state;}
+    public Game getGame() {return game;}
+    public States getState() {return state;}
+    public boolean ladderOnStartingPosition() {return game.ladderOnStartingPosition();}
+    public boolean batteringRamOnStartingPosition() {return game.batteringRamOnStartingPosition();}
+    public boolean siegeTowerOnStartingPosition() {return game.siegeTowerOnStartingPosition();}
     public boolean can_archers() {
         if(!ladderOnStartingPosition())
                 return true;
@@ -100,7 +86,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
                 return false;
         }
     }
-     public void stateCloseCombat() {
+    public void stateCloseCombat() {
         if(game.playerStillHasActionsLeft() && game.enemiesOnCloseCombatPosition())
             setState(state.closeCombat());
         
@@ -131,9 +117,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
                 return false;
         }
     }
-    public boolean canCoupure() {
-        return !game.getPlayer().isWallStartingSpace();
-    }
+    public boolean canCoupure() {return !game.getPlayer().isWallStartingSpace();}
     public void coupure() {
         if(canCoupure() && game.playerStillHasActionsLeft()){
             setState(state.coupure());
@@ -141,21 +125,17 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean canRally() {
-        return !game.getPlayer().isMoraleStartingSpace();
-    }
+    public boolean canRally() {return !game.getPlayer().isMoraleStartingSpace();}
     public void stateRally() {
         if(canRally() && game.playerStillHasActionsLeft())
-            setState(state.Rally_Troops());
+            setState(state.rally_Troops());
     }
     public void rally(boolean check) {
         setState(state.Apply_Rally_Rules(check));
         setChanged();
         notifyObservers();
     }
-    public boolean canSupply(){ 
-        return (game.getPlayer().playerOnEnemyLine());
-    }
+    public boolean canSupply(){return (game.getPlayer().playerOnEnemyLine());}
     public void supply() {
         if(canSupply() && game.playerStillHasActionsLeft()){
             setState(state.supply());
@@ -163,9 +143,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean canSabotage(){ 
-        return (game.getPlayer().playerOnEnemyLine());
-    }
+    public boolean canSabotage(){return (game.getPlayer().playerOnEnemyLine());}
     public void sabotage() {
         if(canSabotage() && game.playerStillHasActionsLeft()){
             setState(state.sabotage());
@@ -173,9 +151,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public void setup() {
-        setState(state.New_Game());
-    }
+    public void setup() {setState(state.New_Game());}
     public void drawCard(){
         try {
             setState(state.Draw_Card());
@@ -187,130 +163,69 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public void setActions(int na){
-        setState(state.setActions(na));
-    }
-    public void removeSiegeFromGame() {
-        game.removeSiegeFromGame();
-    }
-    public void returnWaitAction(){
-        setState(state.returnWaitAction());
-    }
-    public void checkLossAnd2Enemy() {
-        setState(state.checkLossAnd2Enemy());
-    }
-    public String drawBoards() {
-        return game.toString();
-    }
-    public String drawCardDay() {
-        return game.drawCardDay();
-    }
+    public void setActions(int na){setState(state.setActions(na));}
+    public void removeSiegeFromGame() {game.removeSiegeFromGame();}
+    public void returnWaitAction(){setState(state.returnWaitAction());}
+    public void checkLossAnd2Enemy() {setState(state.checkLossAnd2Enemy());}
+    public String drawBoards() {return game.toString();}
+    public String drawCardDay() {return game.drawCardDay();}
     public void endTurn() {
        setState(state.endTurn());
        setChanged();
        notifyObservers();
     }
-    public String getText() {
-        return game.getTextToOutput();
-    }
-    public boolean playerStillHasActionsLeft(){
-        return game.playerStillHasActionsLeft();
-    }
-    @Override
-    public String toString() {
-        return game.toString();
-    }
-
-    public boolean canUseTunnelMovement() {
-        return game.canUseTunnelMovement();
-    }
-
-    public boolean onEnemyLine() {
-        return game.getPlayer().playerOnEnemyLine();
-    }
-
+    public String getText() {return game.getTextToOutput();}
+    public boolean playerStillHasActionsLeft(){return game.playerStillHasActionsLeft();}
+    public boolean canUseTunnelMovement() {return game.canUseTunnelMovement();}
+    public boolean onEnemyLine() {return game.getPlayer().playerOnEnemyLine();}
     public void stateTunnel() {
         if(game.playerStillHasActionsLeft())
-            setState(state.Tunnel());
+            setState(state.tunnel());
     }
-
-    public boolean onCastleSpace() {
-        return game.getPlayer().playerOnCastleSpace();
-    }
-
+    public boolean onCastleSpace() {return game.getPlayer().playerOnCastleSpace();}
     public void tunnelFree() {
        if(canUseTunnelMovement() && game.playerStillHasActionsLeft() && canMakeFreeMove()){
            setState(state.freeTunnelMovement());
        }
     }
-
     public void tunnelFast() {
         if(canUseTunnelMovement() && game.playerStillHasActionsLeft()){
             setState(state.fastTunnelMovement());
         }
     }
-
     public void tunnelGetInside() {
         if(onCastleSpace()|| onEnemyLine())
             setState(state.getInsideTunnelMovement());
     }
-
-    public boolean isLadderOnCloseCombat() {
-        return game.getEnemy().isLadderOnCloseCombat();
-    }
-    public boolean isBatteringRamOnCloseCombat(){
-        return game.getEnemy().isBatteringRamOnCloseCombat();
-    }
-    public boolean isSiegeTowerOnCloseCombat(){
-        return game.getEnemy().isSiegeTowerOnCloseCombat();
-    }
-    public boolean isLadderOnCircleSpace() {
-        return game.getEnemy().isLadderOnCircleSpace();
-    }
-    public boolean isBatteringRamOnCircleSpace(){
-        return game.getEnemy().isBatteringRamOnCircleSpace();
-    }
-    public boolean isSiegeTowerOnCircleSpace(){
-        return game.getEnemy().isSiegeTowerOnCircleSpace();
-    }
-
-    public boolean canBuyAction() {
-        return game.getCanUseSupplyOrMorale();
-    }
-
+    public boolean isLadderOnCloseCombat() {return game.getEnemy().isLadderOnCloseCombat();}
+    public boolean isBatteringRamOnCloseCombat(){return game.getEnemy().isBatteringRamOnCloseCombat();}
+    public boolean isSiegeTowerOnCloseCombat(){return game.getEnemy().isSiegeTowerOnCloseCombat();}
+    public boolean isLadderOnCircleSpace() {return game.getEnemy().isLadderOnCircleSpace();}
+    public boolean isBatteringRamOnCircleSpace(){return game.getEnemy().isBatteringRamOnCircleSpace();}
+    public boolean isSiegeTowerOnCircleSpace(){return game.getEnemy().isSiegeTowerOnCircleSpace();}
+    public boolean canBuyAction() {return game.getCanUseSupplyOrMorale();}
     public void stateBuyAction() {
         if(game.getCanUseSupplyOrMorale())
-            setState(state.BuyAction());
+            setState(state.buyAction());
     }
     public void buyAction(int opt) {
         switch(opt){
             case 1:
                 if(canDecreaseSupply())
-                    setState(state.BuyAction(opt));
+                    setState(state.buyAction(opt));
                 break;
             case 2:
                 if(canDecreaseSupply())
-                    setState(state.BuyAction(opt));
-        }
-        
+                    setState(state.buyAction(opt));
+        }    
     }
-
-    public boolean canDecreaseSupply() {
-        return game.getPlayer().canDecreaseSupplies();
-    }
-
-    public boolean canDecreaseMorale() {
-        return game.getPlayer().canDecreaseMorale();
-    }
-
-    public boolean canMakeFreeMove(){
-        return game.getCanMakeFreeMove();
-    }
-    public boolean check2Enemy(){
-        return game.TwoEnemyLine();
-    }
-
-    public void returnInitialState() {
-        setState(state.returnInitialState());
+    public boolean canDecreaseSupply() {return game.getPlayer().canDecreaseSupplies();}
+    public boolean canDecreaseMorale() {return game.getPlayer().canDecreaseMorale();}
+    public boolean canMakeFreeMove(){return game.getCanMakeFreeMove();}
+    public boolean check2Enemy(){return game.TwoEnemyLine();}
+    public void returnInitialState() {setState(state.returnInitialState());}
+    @Override
+    public String toString() {
+        return game.toString();
     }
 }

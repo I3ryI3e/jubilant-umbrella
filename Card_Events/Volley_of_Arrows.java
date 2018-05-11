@@ -8,14 +8,8 @@ public class Volley_of_Arrows extends Event{
     }
 
     @Override
-    public void runEvent(Game game) {
-    }
+    public void runEvent(Game game) {}
 
     @Override
-    public int getAllAttackMod() {
-        return 1;
-    }
-
-   
-
+    public int getAllAttackMod() {return 1;}
 }

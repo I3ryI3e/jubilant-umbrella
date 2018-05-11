@@ -5,9 +5,8 @@ import Model.*;
 public class State_Adapter implements States, Constants {
     private Game game;
 
-    public State_Adapter(Game g){
-        this.game=g;
-    }
+    public State_Adapter(Game g){this.game=g;}
+    
     public Game getGame(){return game;}
     @Override
     public States Draw_Card()throws MyException {return this;}
@@ -16,7 +15,7 @@ public class State_Adapter implements States, Constants {
     @Override
     public States setActions(int na) {return this;}
     @Override
-    public States Rally_Troops() {return this;}
+    public States rally_Troops() {return this;}
     @Override
     public States boiling() {return this;}
     @Override
@@ -30,7 +29,7 @@ public class State_Adapter implements States, Constants {
     @Override
     public States archers() {return this;}
     @Override
-    public States Tunnel() {return this;}
+    public States tunnel() {return this;}
     @Override
     public States freeTunnelMovement() {return this;}
     @Override
@@ -38,15 +37,19 @@ public class State_Adapter implements States, Constants {
     @Override
     public States getInsideTunnelMovement() {return this;}
     @Override
-    public States BuyAction() {return this;}
+    public States buyAction() {return this;}
     @Override
-    public States BuyAction(int opt) {return this;}
+    public States buyAction(int opt) {return this;}
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
     @Override
     public States Apply_Rally_Rules(boolean check) {return this;}
     @Override
     public States returnWaitAction() {return this;}
+    @Override
+    public States endTurn() {return this;}
+    @Override
+    public States returnInitialState() {return this;}
     @Override
     public States checkLossAnd2Enemy() {
         if(getGame().checkLoss())
@@ -55,10 +58,4 @@ public class State_Adapter implements States, Constants {
             return new Close_Combat(getGame());
         return this;
     }
-    @Override
-    public States endTurn() {return this;}
-
-    @Override
-    public States returnInitialState() {return this;}
-    
 }

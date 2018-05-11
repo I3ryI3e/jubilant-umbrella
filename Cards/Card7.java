@@ -1,4 +1,3 @@
-
 package Cards;
 
 import Card_Events.*;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Card7 extends Card {
-    
     public Card7() {
         super(7);
         List<Constants.Enemy_Attack> aux = new ArrayList<>();
@@ -23,5 +21,4 @@ public class Card7 extends Card {
         aux.add(Constants.Enemy_Attack.SIEGE_TOWER);
         addDay(new Day(3,aux,new Faith()));
     }
-    
 }

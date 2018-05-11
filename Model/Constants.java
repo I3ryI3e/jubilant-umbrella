@@ -1,10 +1,8 @@
-
 package Model;
 
 import java.io.Serializable;
 
 public interface Constants extends Serializable{
-    
     public enum Enemy_Attack{
         NONE,LADDER,BATTERING_RAM,SIEGE_TOWER,SWORD
     }

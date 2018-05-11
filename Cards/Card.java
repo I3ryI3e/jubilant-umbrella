@@ -19,8 +19,7 @@ public abstract class Card implements Constants, Serializable{
     public Day getDayX(int day){
         if(day > 0 && day < days.size())
             return days.get(day);
-        //FAZER TRY CATCH THROW SHIT STUFF WHATEVER
-        return days.get(0); //TESTES!
+        return days.get(0);
     }
     
     public final boolean addDay(Day nd){
@@ -41,5 +40,4 @@ public abstract class Card implements Constants, Serializable{
         str.append(days.get(game_day));
         return str.toString();
     }
-    
 }

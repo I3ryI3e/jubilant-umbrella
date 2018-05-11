@@ -8,23 +8,22 @@ public interface States extends Constants, Serializable{
     public States Draw_Card() throws MyException;
     public States setActions(int na);
     public States archers();
-    public States Rally_Troops();
+    public States rally_Troops();
     public States boiling();
     public States closeCombat();
     public States coupure();
     public States sabotage();
     public States supply();
-    public States Tunnel();
+    public States tunnel();
     public States freeTunnelMovement();
     public States fastTunnelMovement();
     public States getInsideTunnelMovement();
-    public States BuyAction();
-    public States BuyAction(int opt);
+    public States buyAction();
+    public States buyAction(int opt);
     public States Apply_Action_Rules(Enemy_Attack ea);
     public States Apply_Rally_Rules(boolean check);
     public States returnWaitAction();
     public States checkLossAnd2Enemy();
     public States returnInitialState();
-
     public States endTurn();
 }

@@ -3,17 +3,15 @@ package State_Machine;
 import Model.*;
 
 public class Wait_Action extends State_Adapter implements Constants{
-
-    public Wait_Action(Game g){
-        super(g);
-    }
+    public Wait_Action(Game g){super(g);}
+    
     @Override
     public States archers() {
         return new Wait_Archers(getGame());
     }
 
     @Override
-    public States Tunnel() {
+    public States tunnel() {
         return new Wait_Tunnel(getGame());
     }
 
@@ -26,10 +24,9 @@ public class Wait_Action extends State_Adapter implements Constants{
     public States closeCombat() {
         return new Close_Combat(getGame());
     }
-    
 
     @Override
-    public States Rally_Troops() {
+    public States rally_Troops() {
         return new Rally_Troops(getGame());
     }
 
@@ -66,15 +63,11 @@ public class Wait_Action extends State_Adapter implements Constants{
         if(getGame().getGame_day()!= 3){
             return new Wait_Draw_Card(getGame());
         }
-        return new WinGame(getGame());
+        return new Win_Game(getGame());
     }
 
     @Override
-    public States BuyAction() {
+    public States buyAction() {
         return new Buy_One_Action(getGame());
     }
-
-    
-    
-
 }

@@ -120,7 +120,9 @@ public class Player implements Serializable{
                 tunnel.soldiersDiedOnEnemyLines();
                 raided_supplies = 0;
                 morale.decrease();
-                aux.append("\nSoldiers were caught in the enemy line");
+                aux.append("\nSoldiers were caught in enemy lines");
+            }else{
+                aux.append("\nSoldiers are still save in enemy lines");
             }
         }
         return aux.toString();

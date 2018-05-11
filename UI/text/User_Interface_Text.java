@@ -6,20 +6,15 @@ import java.io.*;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class User_Interface_Text implements Constants, Observer{
     private Siege_Game game;
     private boolean quit = false;
+    private int opt;
     
-    public User_Interface_Text(){
-        this.game= new Siege_Game(this);
-    }
+    public User_Interface_Text(){this.game= new Siege_Game(this);}
 
-    public void setGame(Siege_Game game) {
-        this.game = game;
-    }
+    public void setGame(Siege_Game game) {this.game = game;}
     
     private int read_int(){
         Scanner in = new Scanner(System.in);
@@ -35,11 +30,10 @@ public class User_Interface_Text implements Constants, Observer{
     }
 
     public void initial_text(){
-        int option;
         System.out.println("\n9 CARD SIEGE!!\n");
         System.out.println("\t1- New Game\n\t2- Load Game\n\t3- Quit");
-        option=read_int();
-        switch(option){
+        opt=read_int();
+        switch(opt){
             case 1:
                 game.setup();
                 break;
@@ -54,12 +48,11 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     public void wait_action_text(){
-        int option;
         System.out.println(game.drawBoards());
         System.out.println(game.drawCardDay());
         System.out.println(wait_action_text_menu());
-        option = read_int();
-        switch(option){
+        opt=read_int();
+        switch(opt){
             case 1:
                 game.stateArchers();
                 break;
@@ -101,7 +94,6 @@ public class User_Interface_Text implements Constants, Observer{
     public String wait_action_text_menu(){
         StringBuilder str = new StringBuilder();
         str.append("Player Action:\n");
-
         str.append(game.can_archers()?"\t1- Archers Attack\n":"");
         str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
         str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
@@ -112,15 +104,13 @@ public class User_Interface_Text implements Constants, Observer{
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
         str.append(game.canBuyAction()?"\t9- Buy Action\n":"");
         str.append("\t10- End Turn\n\t11- Save game\n" + "\n\t12- Quit\n");
-        
         return str.toString();
     }
     
     public void draw_card_text(){
-        int option;
         System.out.println("\n\t1- Draw card\n" + "\t2- Save game\n" + "\t3- Load game\n" + "\t4- Quit\n");
-        option = read_int();
-        switch(option){
+        opt = read_int();
+        switch(opt){
             case 1:
                 game.drawCard();
                 break;
@@ -136,7 +126,6 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void archersText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         str.append((game.ladderOnStartingPosition()?"":"\t1- Ladder\n"));
@@ -144,9 +133,7 @@ public class User_Interface_Text implements Constants, Observer{
         str.append((game.siegeTowerOnStartingPosition()?"":"\t3- Siege Tower\n"));
         str.append("\t4- return\n");
         System.out.println(str.toString());
-        
         opt = read_int();
-        
         switch(opt){
             case 1:
                 game.archers(Enemy_Attack.LADDER);
@@ -163,7 +150,6 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void boillingText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         str.append((game.isLadderOnCircleSpace()?"\t1- Ladder\n":""));
@@ -171,9 +157,7 @@ public class User_Interface_Text implements Constants, Observer{
         str.append((game.isSiegeTowerOnCircleSpace()?"\t3- Siege Tower\n":""));
         str.append("\t4- return\n");
         System.out.println(str.toString());
-        
         opt = read_int();
-        
         switch(opt){
             case 1:
                 game.boilling(Enemy_Attack.LADDER);
@@ -190,14 +174,11 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void rallyText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
         str.append(((game.getGame().getPlayer().canDecreaseSupplies())?"\t1- Spend 1 morale to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
         System.out.println(str.toString());
-        
         opt = read_int();
-        
         switch(opt){
             case 1:
                 game.rally(true);
@@ -208,8 +189,7 @@ public class User_Interface_Text implements Constants, Observer{
         }
     }
     
-    private void onlyRaidAndSabText() { 
-        int opt;
+    private void onlyRaidAndSabText() {
         StringBuilder str = new StringBuilder();
         System.out.println(game.drawBoards());
         System.out.println(game.drawCardDay());
@@ -236,10 +216,10 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void tunnelText(){
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append(game.canUseTunnelMovement()?(game.canMakeFreeMove()?"\t1- Free movement\n\t2- Fast movement":"\t2- Fast movement"):(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
+        str.append(game.canUseTunnelMovement()?(game.canMakeFreeMove()?"\t1- Free movement\n\t2- Fast movement":"\t2- Fast movement")
+                :(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
         System.out.println(str.toString());
         opt = read_int();
         switch(opt){
@@ -258,7 +238,6 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void closeCombatText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
         System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" left");
@@ -270,7 +249,6 @@ public class User_Interface_Text implements Constants, Observer{
         str.append(game.playerStillHasActionsLeft()?"":"\n\t6- End Turn");
         System.out.println(str.toString());
         opt = read_int();
-        
         switch(opt){
             case 1:
                 game.closeCombat(Enemy_Attack.LADDER);
@@ -294,13 +272,11 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void buyOneActionText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
         str.append(game.canDecreaseSupply()?"\t1- Use one supply to get one more action\n":"").append(game.canDecreaseMorale()?"\t2- Use one morale to get one more action":"").append("\n\t3- Return");
         System.out.println(str.toString());
         opt = read_int();
-        
         switch(opt){
             case 1: case 2:
                 game.buyAction(opt);
@@ -311,7 +287,6 @@ public class User_Interface_Text implements Constants, Observer{
     }
 
     private void gameOver_Text() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.drawBoards());
         str.append("\t1- Return to menu");
@@ -330,7 +305,6 @@ public class User_Interface_Text implements Constants, Observer{
     }
     
     private void winGameText() {
-        int opt;
         StringBuilder str = new StringBuilder();
         System.out.println(game.drawBoards());
         str.append("\t1- Return to menu");
@@ -375,7 +349,7 @@ public class User_Interface_Text implements Constants, Observer{
                 closeCombatText();
             }else if (state instanceof Buy_One_Action){
                 buyOneActionText();
-            }else if (state instanceof WinGame){
+            }else if (state instanceof Win_Game){
                 winGameText();
             }
         }
@@ -395,7 +369,7 @@ public class User_Interface_Text implements Constants, Observer{
         System.out.print("\nName of the file to load:  ");
         String filename = read_Text();
         if(filename == null || filename.isEmpty())
-                return;
+            return;
         setGame(load_game(filename));
         System.out.println("\nGame loaded\n");
     }
@@ -403,22 +377,17 @@ public class User_Interface_Text implements Constants, Observer{
     private Siege_Game load_game(String filename) {
         ObjectInputStream oistream = null;
         Siege_Game sg = null;
-        
         try {
             oistream = new ObjectInputStream(new FileInputStream(filename));
             sg = (Siege_Game) oistream.readObject();
         } catch (FileNotFoundException ex) {
             System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (IOException | ClassNotFoundException ex) {}
         finally{
             if(oistream != null){
                 try {
                     oistream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (IOException ex) {}
             }
         }
         return sg;
@@ -435,27 +404,18 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void save_game(String filename) {
         ObjectOutputStream oostream = null;
-        
         try {
             oostream = new ObjectOutputStream(new FileOutputStream(filename));
             oostream.writeObject(this.game);
         } catch (FileNotFoundException ex) {
             System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
-        } catch (IOException ex) {
-            Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (IOException ex) {}
         finally{
             if(oostream != null){
                 try {
                     oostream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(User_Interface_Text.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } catch (IOException ex) {}
             }
         }
-    }
-
-
-
-    
+    }   
 }

@@ -1,13 +1,9 @@
-
 package State_Machine;
 
 import Model.*;
 
 public class Buy_One_Action extends State_Adapter {
-
-    public Buy_One_Action(Game g) {
-        super(g);
-    }
+    public Buy_One_Action(Game g) {super(g);}
 
     @Override
     public States returnWaitAction() {
@@ -15,7 +11,7 @@ public class Buy_One_Action extends State_Adapter {
     }
 
     @Override
-    public States BuyAction(int opt) {
+    public States buyAction(int opt) {
         getGame().buyAction(opt);
         if(getGame().isRaidAndSabEventActive())
             return new Only_Raid_and_Sab_State(getGame());
@@ -23,6 +19,4 @@ public class Buy_One_Action extends State_Adapter {
             return new Close_Combat(getGame());
         return new Wait_Action(getGame());
     }
-    
-    
 }

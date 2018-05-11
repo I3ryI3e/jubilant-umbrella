@@ -1,4 +1,3 @@
-
 package Cards;
 
 import Card_Events.*;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Card4 extends Card{
-    
     public Card4() {
         super(4);
         List<Constants.Enemy_Attack> aux = new ArrayList<>();

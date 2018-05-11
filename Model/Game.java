@@ -33,35 +33,28 @@ public class Game implements Serializable, Constants{
         this.textToOutput = new StringBuffer();
     }
     
-    public int getGame_day(){
-        return game_day;
-    }
-    public boolean getCanUseSupplyOrMorale(){
-        return canUseSupllyOrMoraleToOneMoreAction;
-    }
-    public void changeCanUseSupply(){
-        this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;
-    }
-    public boolean canUseBoiling(){
-        return canUseBoiling;
-    }
-    public void changeUseBoiling(){
-        this.canUseBoiling= !this.canUseBoiling;
-    }
+    public int getGame_day(){return game_day;}
+    
+    public boolean getCanUseSupplyOrMorale(){return canUseSupllyOrMoraleToOneMoreAction;}
+    
+    public void changeCanUseSupply(){this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;}
+    
+    public boolean canUseBoiling(){return canUseBoiling;}
+    
+    public void changeUseBoiling(){this.canUseBoiling= !this.canUseBoiling;}
+    
     public String getTextToOutput(){
         String aux = textToOutput.toString();
         textToOutput.delete(0, textToOutput.length());
         return aux;
     }
-    public void setGame_day(int game_day){
-        this.game_day = game_day;
-    }
-    public Player getPlayer() {
-        return player;
-    }
-    public Enemy getEnemy() {
-        return enemy;
-    }
+    
+    public void setGame_day(int game_day){this.game_day = game_day;}
+    
+    public Player getPlayer() {return player;}
+    
+    public Enemy getEnemy() {return enemy;}
+    
     public void setup() {
         this.player= new Player();
         this.enemy= new Enemy();
@@ -75,6 +68,7 @@ public class Game implements Serializable, Constants{
         deck.add(6,new Card7());
         Collections.shuffle(deck);
     }
+    
     public void archers(Enemy_Attack ea) { 
         int dice = (int) (Math.random()*6+1); 
         int bonus = 0;
@@ -125,6 +119,7 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
+    
     public void boilling(Enemy_Attack ea) {
         int dice = (int) (Math.random()*6+1);
         int bonus = 0;
@@ -179,6 +174,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
         canUseBoiling=false;
     }
+    
     public void closeCombat(Enemy_Attack ea) {
         int dice=(int)(Math.random()*6+1);
         int bonus =discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
@@ -192,7 +188,8 @@ public class Game implements Serializable, Constants{
                             textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!\n");
                             player.decreasePlayerActions();
                         }
-                }} catch (MyException ex) {}
+                    }
+                } catch (MyException ex) {}
                 break;
             case BATTERING_RAM:
                 try{
@@ -202,7 +199,8 @@ public class Game implements Serializable, Constants{
                             textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
                             player.decreasePlayerActions();
                         }
-                }}catch (MyException ex) {} 
+                    }
+                } catch (MyException ex) {} 
                 break;
             case SIEGE_TOWER:
                 try{
@@ -217,6 +215,7 @@ public class Game implements Serializable, Constants{
                 break;
         }
     }
+    
     public void rally(boolean DRMplusOne) {
         int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getMoraleMod();
@@ -231,6 +230,7 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
+    
     public void coupure(){
         int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getCoupureMod();
@@ -241,6 +241,7 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
+    
     public void sabotage() {
         int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getSabotageMod();
@@ -254,6 +255,7 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
+    
     public void supply() {
         int dice = (int) (Math.random()*6+1);
         int bonus = discard.get(0).getDayX(game_day).getEvent().getRaidMod();
@@ -270,45 +272,43 @@ public class Game implements Serializable, Constants{
         }
         player.decreasePlayerActions();
     }
-    public void removeSiegeFromGame() {
-        enemy.removeSiegeFromGame();
-    }
+    
+    public void removeSiegeFromGame() {enemy.removeSiegeFromGame();}
+    
     public void drawAndResolveCard()throws MyException {
         drawCard();
         resolveCard();
     }
-    private void drawCard() {
-        discard.add(0, deck.remove(0));
-    }
+    
+    private void drawCard() {discard.add(0, deck.remove(0));}
+    
     private void resolveCard()throws MyException {
         textToOutput.append(player.doEnemyCheckLine());
         discard.get(0).resolve(getGame_day(), this);
     }
-    void setPlayerActions(int n_player_actions) {
-        getPlayer().setActions(n_player_actions);
-    }
+    
+    void setPlayerActions(int n_player_actions) {getPlayer().setActions(n_player_actions);}
+    
     void enemyAttack(List<Enemy_Attack> enemy_attack) {
         for(int i=0;i<enemy_attack.size();i++){
             getEnemy().enemyAttack(enemy_attack.get(i), this);
         }
     }
-    public boolean checkLoss() {
-        return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));
-    }
-    public boolean TwoEnemyLine() {
-        return (getEnemy().isNumEnemyInCloseCombat(2));
-    }
-    public void DecreaseMoralEvent() {
-        getPlayer().decreaseMorale();
-    }
+    
+    public boolean checkLoss() {return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));}
+    
+    public boolean TwoEnemyLine() {return (getEnemy().isNumEnemyInCloseCombat(2));}
+    
+    public void DecreaseMoralEvent() {getPlayer().decreaseMorale();}
+    
     public String drawBoards() {
         StringBuilder aux = new StringBuilder();
         aux.append(getPlayer()).append("\n\n").append(getEnemy()).append("\n\n");
         return aux.toString();
     }
-    public String drawCardDay() {
-        return discard.get(0).printDayX(game_day, discard.size());
-    }
+    
+    public String drawCardDay() {return discard.get(0).printDayX(game_day, discard.size());}
+    
     public void endTurn() {
         if(deck.isEmpty()){
             textToOutput.append(">>End of day ").append(getGame_day()+1).append("<<");
@@ -322,6 +322,7 @@ public class Game implements Serializable, Constants{
         this.canUseBoiling=true;
         this.canUseFreeMovement=true;
     }
+    
     private void reputAllCardsIntoDeck() {
         for (int i = 0; i < discard.size(); i++) {
             deck.add(i,discard.get(discard.size()-1-i));
@@ -329,28 +330,14 @@ public class Game implements Serializable, Constants{
         discard.clear();
         Collections.shuffle(deck);
     }
-    public void DecreaseSuppliesEvent() {
-        getPlayer().decreaseSupplies();
-    }
-    public void addTrebuchetEvent() {
-        getEnemy().increaseNumberOfTrebuchet();
-    }
-    @Override
-    public String toString() {
-        StringBuilder aux = new StringBuilder();
-        aux.append(player);
-        aux.append("\n");
-        aux.append(enemy);
-        return aux.toString();
-    }
+    
+    public void DecreaseSuppliesEvent() {getPlayer().decreaseSupplies();}
+    
+    public void addTrebuchetEvent() {getEnemy().increaseNumberOfTrebuchet();}
 
-    boolean playerStillHasActionsLeft() {
-        return player.playerStillHasActionsLeft();
-    }
+    boolean playerStillHasActionsLeft() {return player.playerStillHasActionsLeft();}
 
-    public boolean canUseTunnelMovement() {
-        return player.canUseTunnelMovement();
-    }
+    public boolean canUseTunnelMovement() {return player.canUseTunnelMovement();}
 
     public boolean automaticTunnelMovement() {
         if(player.automaticTunnelMovement()){
@@ -360,9 +347,7 @@ public class Game implements Serializable, Constants{
         return false;
     }
 
-    public boolean fastTunnelMovement() {
-        return player.fastTunnelMovement();
-    }
+    public boolean fastTunnelMovement() {return player.fastTunnelMovement();}
 
     public boolean getInsidetunnelMovement() {
         if(player.getInsideTunnelMovement()){
@@ -372,48 +357,37 @@ public class Game implements Serializable, Constants{
         return false;
     }
 
-    boolean enemiesOnCloseCombatPosition() {
-        return enemy.anyEnemyOnCloseCombat();
-    }
+    boolean enemiesOnCloseCombatPosition() {return enemy.anyEnemyOnCloseCombat();}
 
-    public int numberOfActionsAvailable() {
-        return player.getActions();
-    }
+    public int numberOfActionsAvailable() {return player.getActions();}
 
     public void buyAction(int opt) {
         player.buyAction(opt);
         changeCanUseSupply();
     }
 
-    boolean ladderOnStartingPosition() {
-        return enemy.ladderOnStartingPosition();
-    }
+    boolean ladderOnStartingPosition() {return enemy.ladderOnStartingPosition();}
 
-    boolean batteringRamOnStartingPosition() {
-        return enemy.batteringRamOnStartingPosition();
-    }
+    boolean batteringRamOnStartingPosition() {return enemy.batteringRamOnStartingPosition();}
 
-    boolean siegeTowerOnStartingPosition() {
-        return enemy.siegeTowerOnStartingPosition();
-    }
+    boolean siegeTowerOnStartingPosition() {return enemy.siegeTowerOnStartingPosition();}
 
-    boolean getCanMakeFreeMove() {
-        return canUseFreeMovement;
-    }
+    boolean getCanMakeFreeMove() {return canUseFreeMovement;}
 
-    public void enemyCheckLine() {
-        player.doEnemyCheckLine();
-    }
+    public void enemyCheckLine() {player.doEnemyCheckLine();}
 
-    public boolean victoryOrLoss() {
-        return (player.victoryOrLoss() || enemy.victoryOrLoss());
-    }
+    public boolean victoryOrLoss() {return (player.victoryOrLoss() || enemy.victoryOrLoss());}
 
-    public void endOfDayPhaseTunnel() {
-        textToOutput.append(player.endOfDayPhaseTunnel());
-    }
+    public void endOfDayPhaseTunnel() {textToOutput.append(player.endOfDayPhaseTunnel());}
 
-    public boolean isRaidAndSabEventActive() {
-        return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;
+    public boolean isRaidAndSabEventActive() {return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;}
+    
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append(player);
+        aux.append("\n");
+        aux.append(enemy);
+        return aux.toString();
     }
 }
