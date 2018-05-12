@@ -6,5 +6,4 @@ public class Supply implements Piece{
     public String getName() {
         return "Supply";
     }
-    
 }

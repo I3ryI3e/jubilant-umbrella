@@ -19,28 +19,17 @@ public class Player implements Serializable{
         this.raided_supplies = this.actions= 0;
     }
     
-    public int getSupplies() throws MyException {
-        return supplies.getPiecePositionNumber();
-    }
+    public int getSupplies() throws MyException {return supplies.getPiecePositionNumber();}
 
-    public int getActions(){
-        return actions;
-    }
-    public void setActions(int a){
-        actions = a;
-    }
+    public int getActions(){return actions;}
+    
+    public void setActions(int a){actions = a;}
 
-    public int getMorale() throws MyException {
-        return morale.getPiecePositionNumber();
-    }
+    public int getMorale() throws MyException {return morale.getPiecePositionNumber();}
 
-    public int getWall() throws MyException {
-        return wall.getPiecePositionNumber();
-    }
+    public int getWall() throws MyException {return wall.getPiecePositionNumber();}
 
-    public int getRaided_supplies() {
-        return raided_supplies;
-    }
+    public int getRaided_supplies() {return raided_supplies;}
 
     public void addRaided_supplies(int raided_supplies) {
         if(raided_supplies == 2){
@@ -51,27 +40,20 @@ public class Player implements Serializable{
             this.raided_supplies += raided_supplies;
         }
     }
-    public void raiseAction(){
-        actions++;
-    }
-    public void raiseWall() { 
-        wall.raise();
-    }
-    public void raiseSupplies(){
-        supplies.raise();
-    }
-    public void raiseMorale(){
-        morale.raise();
-    }
-    public void decreaseWall(){
-        wall.decrease();
-    }
-    public void decreaseSupplies(){
-        supplies.decrease();
-    }
-    public void decreaseMorale(){
-        morale.decrease();
-    }
+    public void raiseAction(){actions++;}
+    
+    public void raiseWall() {wall.raise();}
+    
+    public void raiseSupplies(){supplies.raise();}
+    
+    public void raiseMorale(){morale.raise();}
+    
+    public void decreaseWall(){wall.decrease();}
+    
+    public void decreaseSupplies(){supplies.decrease();}
+    
+    public void decreaseMorale(){morale.decrease();}
+    
     public boolean canDecreaseSupplies() {
         try {
             if(supplies.getPiecePositionNumber() == 0)
@@ -79,12 +61,11 @@ public class Player implements Serializable{
         } catch (MyException ex) {}
         return true;
     }
-    public boolean isWallStartingSpace() {
-        return wall.onStartingPosition();
-    }
-    public boolean isMoraleStartingSpace() {
-        return morale.onStartingPosition();
-    }
+    
+    public boolean isWallStartingSpace() {return wall.onStartingPosition();}
+    
+    public boolean isMoraleStartingSpace() {return morale.onStartingPosition();}
+    
     public boolean checkLoss() {
         int aux=0;
         try {
@@ -104,12 +85,11 @@ public class Player implements Serializable{
         } catch (MyException ex) {}
         return (aux > 1);
     }
-    public boolean playerOnEnemyLine(){
-        return tunnel.onEnemyLine();
-    }
-    public void decreasePlayerActions(){
-        actions--;
-    }
+    
+    public boolean playerOnEnemyLine(){return tunnel.onEnemyLine();}
+    
+    public void decreasePlayerActions(){actions--;}
+    
     public String doEnemyCheckLine() {
         StringBuilder aux = new StringBuilder();
         if(tunnel.onEnemyLine()){
@@ -127,34 +107,18 @@ public class Player implements Serializable{
         }
         return aux.toString();
     }
+    
     public void soldierCaptured() {
         tunnel.soldiersDiedOnEnemyLines();
         raided_supplies = 0;
         morale.decrease();
     }
-    public boolean playerStillHasActionsLeft() {
-        return actions>0;
-    }
-    @Override
-    public String toString() {
-        StringBuilder aux = new StringBuilder();
-        aux.append("[PLAYER]\n");
-        aux.append(wall);
-        aux.append(morale);
-        aux.append(supplies);
-        aux.append(tunnel);
-        aux.append("Number of Player Actions: ").append(actions).append("\n");
-        aux.append(raided_supplies>0?"Raided supplies = " + raided_supplies :"");
-        return aux.toString();
-    }
+    
+    public boolean playerStillHasActionsLeft() {return actions>0;}
 
-    public boolean canUseTunnelMovement() {
-        return (tunnel.onStartingPosition() || tunnel.onEnemyLine()) == false;
-    }
+    public boolean canUseTunnelMovement() {return (tunnel.onStartingPosition() || tunnel.onEnemyLine()) == false;}
 
-    public boolean playerOnCastleSpace() {
-        return tunnel.onStartingPosition();
-    }
+    public boolean playerOnCastleSpace() {return tunnel.onStartingPosition();}
 
     public boolean automaticTunnelMovement() {
         if(tunnel.automaticMovement()){
@@ -212,9 +176,7 @@ public class Player implements Serializable{
         }
     }
 
-    public boolean victoryOrLoss() {
-        return (morale.onSurrenderPosition() || supplies.onSurrenderPosition() || wall.onSurrenderPosition());
-    }
+    public boolean victoryOrLoss() {return (morale.onSurrenderPosition() || supplies.onSurrenderPosition() || wall.onSurrenderPosition());}
 
     public String endOfDayPhaseTunnel() {
         StringBuilder aux = new StringBuilder();
@@ -231,6 +193,19 @@ public class Player implements Serializable{
             }
             raided_supplies=0;
         }
+        return aux.toString();
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder aux = new StringBuilder();
+        aux.append("[PLAYER]\n");
+        aux.append(wall);
+        aux.append(morale);
+        aux.append(supplies);
+        aux.append(tunnel);
+        aux.append("Number of Player Actions: ").append(actions).append("\n");
+        aux.append(raided_supplies>0?"Raided supplies = " + raided_supplies :"");
         return aux.toString();
     }
 }
