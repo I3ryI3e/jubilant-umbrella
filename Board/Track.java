@@ -1,4 +1,3 @@
-
 package Board;
 
 import Model.Constants;
@@ -13,6 +12,7 @@ public abstract class Track implements Constants, Serializable{
         if(track.get(TAM_TRACKS_ENEMY-1).hasPiece())
                 track.get(TAM_TRACKS_ENEMY-1).removePiece();
     }
+    
     public int getPiecePositionNumber() throws MyException{                           //If doesn't exists a piece.
         for (int i = 0; i < track.size(); i++) {
             if(track.get(i).hasPiece())
@@ -21,14 +21,12 @@ public abstract class Track implements Constants, Serializable{
         throw new MyException();
     }
 
-    public int getTrackSize(){
-        return track.size();
-    }
+    public int getTrackSize(){return track.size();}
     
-    Position getPiecePosition(int piecePosition) {
-        return track.get(piecePosition);
-    }
+    Position getPiecePosition(int piecePosition) {return track.get(piecePosition);}
+    
     public abstract boolean onStartingPosition();
+    
     public boolean exists(){
         for (Position position : track) {
             if(position.getPiece()!= null)
@@ -45,5 +43,4 @@ public abstract class Track implements Constants, Serializable{
             return "";
         }
     }
-    
 }

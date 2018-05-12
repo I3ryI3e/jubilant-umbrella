@@ -1,4 +1,3 @@
-
 package Board;
 
 import java.io.Serializable;

@@ -1,13 +1,11 @@
-
 package Board;
 
 import Model.MyException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Tunnel_Track extends Track{
     private boolean going;
+    
     public Tunnel_Track(Piece p){
         track = new ArrayList<>(N_TUNNEL_SPACES+2);
         track.add(new Castle_Position(p));
@@ -33,7 +31,6 @@ public class Tunnel_Track extends Track{
             return false;
         }
     }
-
     public void soldiersDiedOnEnemyLines() {
         try {
             track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
@@ -41,7 +38,6 @@ public class Tunnel_Track extends Track{
         }
         going=true;
     }
-
     public boolean automaticMovement() {
         int pos;
         try {
@@ -61,7 +57,6 @@ public class Tunnel_Track extends Track{
         }
         return false;
     }
-
     public boolean fastTunnelMovement() {
         int pos;
         try {
@@ -79,9 +74,7 @@ public class Tunnel_Track extends Track{
             return true;
         }
         return false;
-        
     }
-
     public boolean getInsideTunnelMovement() {
         int pos;
         try {
@@ -99,13 +92,10 @@ public class Tunnel_Track extends Track{
         }
         return false;
     }
-
     void dayEndMovementIntoCastle() {
         try {
             track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
             going=true;
-        } catch (MyException ex) {
-        }
+        } catch (MyException ex) {}
     }
-    
 }

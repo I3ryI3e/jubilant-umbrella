@@ -1,11 +1,8 @@
-
 package Board;
 
 import static Model.Constants.N_PLAYER_SQUARES;
 import Model.MyException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Player_Track extends Track{
 
@@ -42,14 +39,16 @@ public class Player_Track extends Track{
             track.get(pos-1).setPiece(track.get(pos).removePiece());
         }
     }
-@Override
+    
+    @Override
     public boolean onStartingPosition() {
         try {
             return getPiecePositionNumber() == N_PLAYER_SQUARES-1;
         } catch (MyException ex) {
             return false;
         }
-    }   
+    }
+    
     public boolean onSurrenderPosition(){
         try {
             return getPiecePositionNumber() == 0;

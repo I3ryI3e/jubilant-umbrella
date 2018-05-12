@@ -5,7 +5,6 @@ import Model.Constants.Enemy_Attack;
 import Model.Game;
 import Model.MyException;
 import java.io.Serializable;
-import java.util.List;
 
 public class Enemy implements Constants, Serializable{
     private int trebutchet;
@@ -19,9 +18,8 @@ public class Enemy implements Constants, Serializable{
         battering_ram = new Enemy_Track(new Battering_Ram());
         siege_tower= new Enemy_Track(new Siege_Tower());
     }
-    public int getTrebutchet() {
-        return trebutchet;
-    }
+    
+    public int getTrebutchet() {return trebutchet;}
     
     public void increaseNumberOfTrebuchet() {
         if(this.trebutchet<3)
@@ -33,39 +31,25 @@ public class Enemy implements Constants, Serializable{
             --trebutchet;
     }
 
-    public int getLadderNumberPosition() throws MyException {
-        return ladder.getPiecePositionNumber();
-    }
+    public int getLadderNumberPosition() throws MyException {return ladder.getPiecePositionNumber();}
 
-    public int getBatteringRamNumberPosition() throws MyException {
-        return battering_ram.getPiecePositionNumber();
-    }
+    public int getBatteringRamNumberPosition() throws MyException {return battering_ram.getPiecePositionNumber();}
 
-    public int getSiegeTowerNumberPosition() throws MyException {
-        return siege_tower.getPiecePositionNumber();
-    }
+    public int getSiegeTowerNumberPosition() throws MyException {return siege_tower.getPiecePositionNumber();}
 
-    public void removeSiegeFromGame() {
-        siege_tower.removeFromGame();
-    }
-    public void goForwardLadder(){
-        ladder.goForward();
-    }
-    public void goForwardBatteringRam(){
-        battering_ram.goForward();
-    }
-    public void goForwardSiegeTower(){
-        siege_tower.goForward();
-    }
-    public void goBackwardLadder(){
-        ladder.goBackward();
-    }
-    public void goBackwardBatteringRam(){
-        battering_ram.goBackward();
-    }
-    public void goBackwardSiegeTower(){
-        siege_tower.goBackward();
-    }
+    public void removeSiegeFromGame() {siege_tower.removeFromGame();}
+    
+    public void goForwardLadder(){ladder.goForward();}
+    
+    public void goForwardBatteringRam(){battering_ram.goForward();}
+    
+    public void goForwardSiegeTower(){siege_tower.goForward();}
+    
+    public void goBackwardLadder(){ladder.goBackward();}
+    
+    public void goBackwardBatteringRam(){battering_ram.goBackward();}
+    
+    public void goBackwardSiegeTower(){siege_tower.goBackward();}
 
     public void enemyAttack(Enemy_Attack ea, Game game) {
         switch(ea){
@@ -144,29 +128,17 @@ public class Enemy implements Constants, Serializable{
         }
     }
 
-    public Position getLadderPosition() throws MyException {
-        return ladder.getPiecePosition(ladder.getPiecePositionNumber());
-    }
+    public Position getLadderPosition() throws MyException {return ladder.getPiecePosition(ladder.getPiecePositionNumber());}
 
-    public int getLadderStrength() throws MyException {
-        return ladder.getStrength();
-    }
+    public int getLadderStrength() throws MyException {return ladder.getStrength();}
 
-    public int getBatteringRamStrength() throws MyException {
-        return battering_ram.getStrength();
-    }
+    public int getBatteringRamStrength() throws MyException {return battering_ram.getStrength();}
 
-    public int getSiegeTowerStrength() throws MyException {
-        return siege_tower.getStrength();
-    }
+    public int getSiegeTowerStrength() throws MyException {return siege_tower.getStrength();}
 
-    public Position getBatteringRamPosition() throws MyException {
-        return battering_ram.getPiecePosition(ladder.getPiecePositionNumber());
-    }
+    public Position getBatteringRamPosition() throws MyException {return battering_ram.getPiecePosition(ladder.getPiecePositionNumber());}
 
-    public Position getSiegeTowerPosition() throws MyException {
-        return siege_tower.getPiecePosition(siege_tower.getPiecePositionNumber());
-    }
+    public Position getSiegeTowerPosition() throws MyException {return siege_tower.getPiecePosition(siege_tower.getPiecePositionNumber());}
 
     public boolean isNumEnemyInCloseCombat(int num) {
         int aux=0;
@@ -187,6 +159,30 @@ public class Enemy implements Constants, Serializable{
         } catch (MyException ex) {}
         return (aux == num);
     }
+
+    public boolean anyEnemyOnCloseCombat() {return (isNumEnemyInCloseCombat(1) || isNumEnemyInCloseCombat(2));}
+
+    public boolean isLadderOnCloseCombat() {return ladder.onCloseCombat();}
+    
+    public boolean isBatteringRamOnCloseCombat(){return battering_ram.onCloseCombat();}
+    
+    public boolean isSiegeTowerOnCloseCombat(){return siege_tower.onCloseCombat();}
+
+    public boolean isLadderOnCircleSpace() {return ladder.onCircleSpace();}
+    
+    public boolean isBatteringRamOnCircleSpace(){return battering_ram.onCircleSpace();}
+    
+    public boolean isSiegeTowerOnCircleSpace(){return siege_tower.onCircleSpace();}
+
+    public boolean ladderOnStartingPosition() {return ladder.onStartingPosition();}
+    
+    public boolean batteringRamOnStartingPosition(){return battering_ram.onStartingPosition();}
+    
+    public boolean siegeTowerOnStartingPosition(){return siege_tower.onStartingPosition();}
+    
+    public boolean siegeTowerExists() {return siege_tower.exists();}
+
+    public boolean victoryOrLoss() {return isNumEnemyInCloseCombat(2);}
     
     @Override
     public String toString() {
@@ -198,47 +194,4 @@ public class Enemy implements Constants, Serializable{
         aux.append("Trebuchet = ").append(trebutchet).append("\n");
         return aux.toString();
     }
-
-    public boolean anyEnemyOnCloseCombat() {
-        return (isNumEnemyInCloseCombat(1) || isNumEnemyInCloseCombat(2));
-    }
-
-    public boolean isLadderOnCloseCombat() {
-        return ladder.onCloseCombat();
-    }
-    public boolean isBatteringRamOnCloseCombat(){
-        return battering_ram.onCloseCombat();
-    }
-    public boolean isSiegeTowerOnCloseCombat(){
-        return siege_tower.onCloseCombat();
-    }
-
-    public boolean isLadderOnCircleSpace() {
-        return ladder.onCircleSpace();
-    }
-    public boolean isBatteringRamOnCircleSpace(){
-        return battering_ram.onCircleSpace();
-    }
-    public boolean isSiegeTowerOnCircleSpace(){
-        return siege_tower.onCircleSpace();
-    }
-
-    public boolean ladderOnStartingPosition() {
-        return ladder.onStartingPosition();
-    }
-    public boolean batteringRamOnStartingPosition(){
-        return battering_ram.onStartingPosition();
-    }
-    public boolean siegeTowerOnStartingPosition(){
-        return siege_tower.onStartingPosition();
-    }
-    public boolean siegeTowerExists() {
-        return siege_tower.exists();
-    }
-
-    public boolean victoryOrLoss() {
-        return isNumEnemyInCloseCombat(2);
-    }
-
-    
 }

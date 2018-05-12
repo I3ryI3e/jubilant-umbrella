@@ -6,5 +6,4 @@ public class Morale implements Piece {
     public String getName() {
         return "Morale";
     }
-    
 }

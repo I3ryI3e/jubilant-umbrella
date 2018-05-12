@@ -1,10 +1,8 @@
-
 package Card_Events;
 
 import Model.Game;
 
 public class Trebuchet_Attack extends Event {
-
     public Trebuchet_Attack() {
         super("{Trebuchet Attack}\n\t{3 Trebuchet} - 2 Damage to wall\n\t{2 Trebutchet} - 1 Damage to wall\n\t{1 Trebutchet} - 1 Damage to wall on D6 roll of 4,5 or 6");
     }
@@ -26,5 +24,4 @@ public class Trebuchet_Attack extends Event {
                 break;
         }
     }
-    
 }

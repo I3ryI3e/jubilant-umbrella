@@ -1,4 +1,3 @@
-
 package Board;
 
 public class Soldier implements Piece {
@@ -7,5 +6,4 @@ public class Soldier implements Piece {
     public String getName() {
         return "Soldier";
     }
-    
 }

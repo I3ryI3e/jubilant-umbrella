@@ -1,9 +1,6 @@
-
 package Board;
 
-import static Model.Constants.N_ENEMY_CIRCLES;
-import static Model.Constants.N_ENEMY_CLOSE_COMBAT;
-import static Model.Constants.TAM_TRACKS_ENEMY;
+import static Model.Constants.*;
 import Model.MyException;
 import java.util.ArrayList;
 
@@ -26,6 +23,7 @@ public class Enemy_Track extends Track {
         }
         
     }
+    
     public void goForward() {
         int pos;
         try {
@@ -59,7 +57,6 @@ public class Enemy_Track extends Track {
         }
     }
     
-
     public int getStrength() throws MyException {
         Position aux=getPiecePosition(getPiecePositionNumber());
         if(aux instanceof Close_Combat_Square)
@@ -71,6 +68,7 @@ public class Enemy_Track extends Track {
         else
             return 4;
     }
+    
     public boolean onCloseCombat(){
         try {
             return (getPiecePosition(getPiecePositionNumber()) instanceof Close_Combat_Square);
@@ -86,5 +84,4 @@ public class Enemy_Track extends Track {
             return false;
         }
     }
-    
 }
