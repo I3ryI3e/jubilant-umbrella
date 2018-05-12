@@ -316,7 +316,8 @@ public class Game implements Serializable, Constants{
             endOfDayPhaseTunnel();
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
-            textToOutput.append("\n>>Day ").append(getGame_day()+1).append(" is starting!<<\n");
+            if(getGame_day()!=4)
+                textToOutput.append("\n>>Day ").append(getGame_day()+1).append(" is starting!<<\n");
         }
         this.canUseSupllyOrMoraleToOneMoreAction=true;
         this.canUseBoiling=true;
@@ -382,6 +383,8 @@ public class Game implements Serializable, Constants{
 
     public boolean isRaidAndSabEventActive() {return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;}
     
+    boolean siegeTowerExists() {return enemy.siegeTowerExists();}
+    
     @Override
     public String toString() {
         StringBuilder aux = new StringBuilder();
@@ -389,5 +392,5 @@ public class Game implements Serializable, Constants{
         aux.append("\n");
         aux.append(enemy);
         return aux.toString();
-    }
+    }   
 }

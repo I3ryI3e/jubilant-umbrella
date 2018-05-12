@@ -49,7 +49,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             case BATTERING_RAM:
                 return !game.batteringRamOnStartingPosition();
             case SIEGE_TOWER:
-                return !game.siegeTowerOnStartingPosition();
+                return (!game.siegeTowerOnStartingPosition() && siegeTowerExists());
         }
         return false;
     }
@@ -204,6 +204,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean isBatteringRamOnCircleSpace(){return game.getEnemy().isBatteringRamOnCircleSpace();}
     public boolean isSiegeTowerOnCircleSpace(){return game.getEnemy().isSiegeTowerOnCircleSpace();}
     public boolean canBuyAction() {return game.getCanUseSupplyOrMorale();}
+    public boolean siegeTowerExists(){ return game.siegeTowerExists();}
     public void stateBuyAction() {
         if(game.getCanUseSupplyOrMorale())
             setState(state.buyAction());

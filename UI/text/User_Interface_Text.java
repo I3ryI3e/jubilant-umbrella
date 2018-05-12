@@ -130,7 +130,7 @@ public class User_Interface_Text implements Constants, Observer{
         System.out.println(game.getGame().getEnemy());
         str.append((game.ladderOnStartingPosition()?"":"\t1- Ladder\n"));
         str.append((game.batteringRamOnStartingPosition()?"":"\t2- Battering Ram\n"));
-        str.append((game.siegeTowerOnStartingPosition()?"":"\t3- Siege Tower\n"));
+        str.append(((game.siegeTowerOnStartingPosition() && (!game.siegeTowerExists()))?"":"\t3- Siege Tower\n"));
         str.append("\t4- return\n");
         System.out.println(str.toString());
         opt = read_int();
@@ -370,11 +370,15 @@ public class User_Interface_Text implements Constants, Observer{
         String filename = read_Text();
         if(filename == null || filename.isEmpty())
             return;
-        setGame(load_game(filename));
-        System.out.println("\nGame loaded\n");
+        try{
+            setGame(load_game(filename));
+            System.out.println("\nGame loaded\n");
+        }catch (FileNotFoundException ex){
+        } catch (IOException ex) {
+        }
     }
 
-    private Siege_Game load_game(String filename) {
+    private Siege_Game load_game(String filename) throws FileNotFoundException, IOException{
         ObjectInputStream oistream = null;
         Siege_Game sg = null;
         try {
@@ -382,6 +386,7 @@ public class User_Interface_Text implements Constants, Observer{
             sg = (Siege_Game) oistream.readObject();
         } catch (FileNotFoundException ex) {
             System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
+            throw  new FileNotFoundException();    
         } catch (IOException | ClassNotFoundException ex) {}
         finally{
             if(oistream != null){

@@ -27,6 +27,4 @@ public class Faith extends Event{
         return 1;
     }
     
-    
-    
 }

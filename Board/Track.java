@@ -29,6 +29,13 @@ public abstract class Track implements Constants, Serializable{
         return track.get(piecePosition);
     }
     public abstract boolean onStartingPosition();
+    public boolean exists(){
+        for (Position position : track) {
+            if(position.getPiece()!= null)
+                return true;
+        }
+        return false;
+    }
     
     @Override
     public String toString() {

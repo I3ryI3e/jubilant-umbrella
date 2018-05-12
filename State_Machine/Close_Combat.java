@@ -30,13 +30,12 @@ public class Close_Combat extends State_Adapter{
 
     @Override
     public States endTurn() {
-         if(getGame().victoryOrLoss()){
-            return new Game_Over(getGame());
+         if(!getGame().victoryOrLoss()){
+            getGame().endTurn();
+            if(getGame().getGame_day()!= 3){
+                return new Wait_Draw_Card(getGame());
+            }
         }
-        getGame().endTurn();
-        if(getGame().getGame_day()!= 3){
-            return new Wait_Draw_Card(getGame());
-        }
-        return new Win_Game(getGame());
+        return new Game_Over(getGame());
     }
 }
