@@ -384,6 +384,7 @@ public class Game implements Serializable, Constants{
     public boolean isRaidAndSabEventActive() {return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;}
     
     boolean siegeTowerExists() {return enemy.siegeTowerExists();}
+    boolean existsTrebuchet() {return enemy.getTrebutchet()>0;}
     
     @Override
     public String toString() {
@@ -393,4 +394,6 @@ public class Game implements Serializable, Constants{
         aux.append(enemy);
         return aux.toString();
     }   
+
+    
 }

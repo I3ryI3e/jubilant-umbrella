@@ -143,9 +143,9 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public boolean canSabotage(){return (game.getPlayer().playerOnEnemyLine());}
+    public boolean canSabotage(){return (game.getPlayer().playerOnEnemyLine() && game.existsTrebuchet());}
     public void sabotage() {
-        if(canSabotage() && game.playerStillHasActionsLeft()){
+        if(canSabotage() && game.playerStillHasActionsLeft() && game.existsTrebuchet()){
             setState(state.sabotage());
             setChanged();
             notifyObservers();
