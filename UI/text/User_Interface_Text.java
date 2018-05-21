@@ -385,7 +385,7 @@ public class User_Interface_Text implements Constants, Observer{
             oistream = new ObjectInputStream(new FileInputStream(filename));
             sg = (Siege_Game) oistream.readObject();
         } catch (FileNotFoundException ex) {
-            System.err.println("Erro: ficheiro inexistente\n" + ex.getMessage());
+            System.err.println("Error: file doesn't exists\n" + ex.getMessage());
             throw  new FileNotFoundException();    
         } catch (IOException | ClassNotFoundException ex) {}
         finally{
