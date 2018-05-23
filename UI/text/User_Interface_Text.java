@@ -98,11 +98,11 @@ public class User_Interface_Text implements Constants, Observer{
         StringBuilder str = new StringBuilder();
         str.append("Player Action:\n");
         str.append(game.can_archers()?"\t1- Archers Attack\n":"");
-        str.append(game.can_boilling()?"\t2- Boilling Water Attack\n":"");
-        str.append(game.can_close_combat()?"\t3- Close Combat Attack\n":"");
+        str.append(game.canBoiling()?"\t2- Boilling Water Attack\n":"");
+        str.append(game.canCloseCombat()?"\t3- Close Combat Attack\n":"");
         str.append(game.canCoupure()?"\t4- Coupure\n":"");
         str.append(game.canRally()?"\t5- Rally Troops\n":"");
-        str.append("\t6- Tunnel Action\n");
+        str.append(game.playerStillHasActionsLeft()?"\t6- Tunnel Action\n":"");
         str.append(game.canSupply()?"\t7- Supply Raid\n":"");
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
         str.append(game.canBuyAction()?"\t9- Buy Action\n":"");
@@ -131,9 +131,9 @@ public class User_Interface_Text implements Constants, Observer{
     private void archersText() {
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
-        str.append((game.ladderOnStartingPosition()?"":"\t1- Ladder\n"));
-        str.append((game.batteringRamOnStartingPosition()?"":"\t2- Battering Ram\n"));
-        str.append(((game.siegeTowerOnStartingPosition() && (!game.siegeTowerExists()))?"":"\t3- Siege Tower\n"));
+        str.append(game.ladderOnStartingPosition()?"":"\t1- Ladder\n");
+        str.append(game.batteringRamOnStartingPosition()?"":"\t2- Battering Ram\n");
+        str.append(game.siegeTowerOnStartingPosition()?"":(game.siegeTowerExists()?"\t3- Siege Tower\n":""));
         str.append("\t4- return\n");
         System.out.println(str.toString());
         opt = read_int();
@@ -163,13 +163,13 @@ public class User_Interface_Text implements Constants, Observer{
         opt = read_int();
         switch(opt){
             case 1:
-                game.boilling(Enemy_Attack.LADDER);
+                game.boiling(Enemy_Attack.LADDER);
                 break;
             case 2:
-                game.boilling(Enemy_Attack.BATTERING_RAM);
+                game.boiling(Enemy_Attack.BATTERING_RAM);
                 break;
             case 3:
-                game.boilling(Enemy_Attack.SIEGE_TOWER);
+                game.boiling(Enemy_Attack.SIEGE_TOWER);
                 break;
             case 4:
                 game.returnWaitAction();
@@ -179,7 +179,7 @@ public class User_Interface_Text implements Constants, Observer{
     private void rallyText() {
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getPlayer());
-        str.append(((game.getGame().getPlayer().canDecreaseSupplies())?"\t1- Spend 1 morale to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
+        str.append(((game.getGame().getPlayer().canDecreaseSupplies())?"\t1- Spend 1 supply to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
         System.out.println(str.toString());
         opt = read_int();
         switch(opt){
@@ -243,7 +243,7 @@ public class User_Interface_Text implements Constants, Observer{
     private void closeCombatText() {
         StringBuilder str = new StringBuilder();
         System.out.println(game.getGame().getEnemy());
-        System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" left");
+        System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" actions left");
         str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"");
         str.append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"");
         str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"");

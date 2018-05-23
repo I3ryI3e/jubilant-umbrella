@@ -7,7 +7,7 @@ public class Wait_Boiling extends State_Adapter{
 
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {
-        getGame().boilling(ea);
+        getGame().boiling(ea);
         return new Wait_Action(getGame());
     }
 

@@ -120,7 +120,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     
-    public void boilling(Enemy_Attack ea) {
+    public void boiling(Enemy_Attack ea) {
         int dice = (int) (Math.random()*6+1);
         int bonus = 0;
         textToOutput.append("Dado: ").append(dice);
@@ -214,6 +214,7 @@ public class Game implements Serializable, Constants{
                 } catch (MyException ex) {}
                 break;
         }
+        player.decreasePlayerActions();
     }
     
     public void rally(boolean DRMplusOne) {
