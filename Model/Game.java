@@ -4,6 +4,7 @@ import Board.Close_Combat_Square;
 import Board.Enemy;
 import Board.Player;
 import Card_Events.Bad_Weather;
+import Card_Events.Event;
 import Cards.*;
 import Model.Constants.Enemy_Attack;
 import java.io.Serializable;
@@ -68,17 +69,21 @@ public class Game implements Serializable, Constants{
         deck.add(6,new Card7());
         Collections.shuffle(deck);
     }
+    private Event getActiveEvent(){
+        return discard.get(0).getDayX(game_day).getEvent();
+    }
     
     public void archers(Enemy_Attack ea) { 
-        int dice = (int) (Math.random()*6+1); 
+        int dice = Dice.rollDice();
         int bonus = 0;
+        Event event = getActiveEvent();
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                bonus= discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus= event.getLadderMod()+ event.getAllAttackMod() + getEnemy().getPositionModifier(ea,event);
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod();
+                bonus = event.getLadderMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -90,9 +95,9 @@ public class Game implements Serializable, Constants{
             break;
             case BATTERING_RAM:
             try {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = event.getRamMod() + event.getAllAttackMod()  + getEnemy().getPositionModifier(ea,event);
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod();
+                bonus = event.getRamMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -104,9 +109,9 @@ public class Game implements Serializable, Constants{
             break;
             case SIEGE_TOWER:
             try {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent());
+                bonus = event.getSiegeMod() + event.getAllAttackMod() + getEnemy().getPositionModifier(ea,event);
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod();
+                bonus = event.getSiegeMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -121,15 +126,16 @@ public class Game implements Serializable, Constants{
     }
     
     public void boiling(Enemy_Attack ea) {
-        int dice = (int) (Math.random()*6+1);
+        int dice = Dice.rollDice();
         int bonus = 0;
+        Event event = getActiveEvent();
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod()+ discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getLadderPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent()) +1;
+                bonus = event.getLadderMod()+ event.getCircleAttackMod() + getEnemy().getPositionModifier(ea,event) +1;
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getLadderMod() +1;
+                bonus = event.getLadderMod() +1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -141,7 +147,7 @@ public class Game implements Serializable, Constants{
             break;
             case BATTERING_RAM:
             try {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod()  + getEnemy().getBatteringRamPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent())+1;
+                bonus = event.getRamMod() + event.getCircleAttackMod()  + getEnemy().getPositionModifier(ea,event)+1;
             } catch (MyException ex) {
                 bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod()+1;
             }
@@ -155,9 +161,9 @@ public class Game implements Serializable, Constants{
             break;
             case SIEGE_TOWER:
             try {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod() + discard.get(0).getDayX(game_day).getEvent().getCircleAttackMod() + getEnemy().getSiegeTowerPosition().getPositionModifier(discard.get(0).getDayX(game_day).getEvent())+1;
+                bonus = event.getSiegeMod() + event.getCircleAttackMod() + getEnemy().getPositionModifier(ea,event)+1;
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getSiegeMod()+1;
+                bonus = event.getSiegeMod()+1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -176,8 +182,9 @@ public class Game implements Serializable, Constants{
     }
     
     public void closeCombat(Enemy_Attack ea) {
-        int dice=(int)(Math.random()*6+1);
-        int bonus =discard.get(0).getDayX(game_day).getEvent().getAllAttackMod() + discard.get(0).getDayX(game_day).getEvent().getCloseCombatMod();
+        int dice = Dice.rollDice();
+        Event event = getActiveEvent();
+        int bonus =event.getAllAttackMod() + event.getCloseCombatMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ");
         switch(ea){
             case LADDER:
@@ -218,8 +225,8 @@ public class Game implements Serializable, Constants{
     }
     
     public void rally(boolean DRMplusOne) {
-        int dice = (int) (Math.random()*6+1);
-        int bonus = discard.get(0).getDayX(game_day).getEvent().getMoraleMod();
+        int dice = Dice.rollDice();
+        int bonus = getActiveEvent().getMoraleMod();
         if(DRMplusOne){
             player.decreaseSupplies();
             bonus += 1;
@@ -233,8 +240,8 @@ public class Game implements Serializable, Constants{
     }
     
     public void coupure(){
-        int dice = (int) (Math.random()*6+1);
-        int bonus = discard.get(0).getDayX(game_day).getEvent().getCoupureMod();
+        int dice = Dice.rollDice();
+        int bonus = getActiveEvent().getCoupureMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             getPlayer().raiseWall();
@@ -244,8 +251,8 @@ public class Game implements Serializable, Constants{
     }
     
     public void sabotage() {
-        int dice = (int) (Math.random()*6+1);
-        int bonus = discard.get(0).getDayX(game_day).getEvent().getSabotageMod();
+        int dice = Dice.rollDice();
+        int bonus = getActiveEvent().getSabotageMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             getEnemy().removeTrebutchet();
@@ -258,8 +265,8 @@ public class Game implements Serializable, Constants{
     }
     
     public void supply() {
-        int dice = (int) (Math.random()*6+1);
-        int bonus = discard.get(0).getDayX(game_day).getEvent().getRaidMod();
+        int dice = Dice.rollDice();
+        int bonus = getActiveEvent().getRaidMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus == 6){
             getPlayer().addRaided_supplies(2);
@@ -284,7 +291,7 @@ public class Game implements Serializable, Constants{
     private void drawCard() {discard.add(0, deck.remove(0));}
     
     private void resolveCard()throws MyException {
-        textToOutput.append(player.doEnemyCheckLine());
+        textToOutput.append(player.doEnemyCheckLine(Dice.rollDice()));
         discard.get(0).resolve(getGame_day(), this);
     }
     
@@ -376,7 +383,7 @@ public class Game implements Serializable, Constants{
 
     boolean getCanMakeFreeMove() {return canUseFreeMovement;}
 
-    public void enemyCheckLine() {player.doEnemyCheckLine();}
+    public void enemyCheckLine() {player.doEnemyCheckLine(Dice.rollDice());}
 
     public boolean victoryOrLoss() {return (player.victoryOrLoss() || enemy.victoryOrLoss());}
 
@@ -384,8 +391,34 @@ public class Game implements Serializable, Constants{
 
     public boolean isRaidAndSabEventActive() {return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;}
     
-    boolean siegeTowerExists() {return enemy.siegeTowerExists();}
-    boolean existsTrebuchet() {return enemy.getTrebutchet()>0;}
+    public boolean siegeTowerExists() {return enemy.siegeTowerExists();}
+    public boolean existsTrebuchet() {return enemy.getTrebutchet()>0;}
+    
+    public int getLastDiceRoll(){ return Dice.lastRoll;}
+
+    public int throwDice() {
+        return Dice.rollDice();
+    }
+
+    public void decreaseWall() {
+        player.decreaseWall();
+    }
+
+    public int getTrebutchet() {
+        return enemy.getTrebutchet();
+    }
+    
+    
+    private static class Dice {
+        private static int lastRoll;
+        private static int rollDice(){
+            lastRoll = (int) ((Math.random()*6)+1);
+            return lastRoll;
+        }
+        public static int getLastRoll(){
+            return lastRoll;
+        }
+    }
     
     @Override
     public String toString() {

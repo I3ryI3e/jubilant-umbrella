@@ -90,11 +90,10 @@ public class Player implements Serializable{
     
     public void decreasePlayerActions(){actions--;}
     
-    public String doEnemyCheckLine() {
+    public String doEnemyCheckLine(int dice) {
         StringBuilder aux = new StringBuilder();
         if(tunnel.onEnemyLine()){
             aux.append("Enemy check line\n");
-            int dice = (int) (Math.random()*6 +1);
             aux.append("Dice: ").append(dice);
             if(dice==1){
                 tunnel.soldiersDiedOnEnemyLines();

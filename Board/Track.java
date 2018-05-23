@@ -23,7 +23,9 @@ public abstract class Track implements Constants, Serializable{
 
     public int getTrackSize(){return track.size();}
     
-    Position getPiecePosition(int piecePosition) {return track.get(piecePosition);}
+    Position getPiecePosition() throws MyException {
+        return track.get(getPiecePositionNumber());
+    }
     
     public abstract boolean onStartingPosition();
     

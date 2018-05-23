@@ -9,18 +9,18 @@ public class Trebuchet_Attack extends Event {
 
     @Override
     public void runEvent(Game game) {
-        switch(game.getEnemy().getTrebutchet()){
+        switch(game.getTrebutchet()){
             case 3:
-                game.getPlayer().decreaseWall();
-                game.getPlayer().decreaseWall();
+                game.decreaseWall();
+                game.decreaseWall();
                 break;
             case 2:
-                game.getPlayer().decreaseWall();
+                game.decreaseWall();
                 break;
             case 1:
-                int option = (int)(Math.random()*6+1);
+                int option = game.throwDice();
                 if(option == 4 || option == 5 || option == 6)
-                   game.getPlayer().decreaseWall();
+                   game.decreaseWall();
                 break;
         }
     }

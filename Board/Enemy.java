@@ -1,5 +1,6 @@
 package Board;
 
+import Card_Events.Event;
 import Model.Constants;
 import Model.Constants.Enemy_Attack;
 import Model.Game;
@@ -128,7 +129,7 @@ public class Enemy implements Constants, Serializable{
         }
     }
 
-    public Position getLadderPosition() throws MyException {return ladder.getPiecePosition(ladder.getPiecePositionNumber());}
+    public Position getLadderPosition() throws MyException {return ladder.getPiecePosition();}
 
     public int getLadderStrength() throws MyException {return ladder.getStrength();}
 
@@ -136,9 +137,9 @@ public class Enemy implements Constants, Serializable{
 
     public int getSiegeTowerStrength() throws MyException {return siege_tower.getStrength();}
 
-    public Position getBatteringRamPosition() throws MyException {return battering_ram.getPiecePosition(ladder.getPiecePositionNumber());}
+    public Position getBatteringRamPosition() throws MyException {return battering_ram.getPiecePosition();}
 
-    public Position getSiegeTowerPosition() throws MyException {return siege_tower.getPiecePosition(siege_tower.getPiecePositionNumber());}
+    public Position getSiegeTowerPosition() throws MyException {return siege_tower.getPiecePosition();}
 
     public boolean isNumEnemyInCloseCombat(int num) {
         int aux=0;
@@ -193,5 +194,17 @@ public class Enemy implements Constants, Serializable{
         aux.append(siege_tower);
         aux.append("Trebuchet = ").append(trebutchet).append("\n");
         return aux.toString();
+    }
+
+    public int getPositionModifier(Enemy_Attack ea, Event event) throws MyException {
+        switch(ea){
+            case LADDER:
+                 return getLadderPosition().getPositionModifier(event);
+            case BATTERING_RAM:
+                return getBatteringRamPosition().getPositionModifier(event);
+            case SIEGE_TOWER:
+                return getSiegeTowerPosition().getPositionModifier(event);
+        }
+        return 0;
     }
 }

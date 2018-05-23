@@ -19,21 +19,21 @@ public class Tunnel_Track extends Track{
     @Override
     public boolean onStartingPosition() {
         try {
-            return getPiecePosition(getPiecePositionNumber()) instanceof Castle_Position;
+            return getPiecePosition() instanceof Castle_Position;
         } catch (MyException ex) {
             return false;
         }
     }
     public boolean onEnemyLine(){
         try {
-            return getPiecePosition(getPiecePositionNumber()) instanceof Enemy_Line_Position;
+            return getPiecePosition() instanceof Enemy_Line_Position;
         } catch (MyException ex) {
             return false;
         }
     }
     public void soldiersDiedOnEnemyLines() {
         try {
-            track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
+            track.get(0).setPiece(getPiecePosition().removePiece());
         } catch (MyException ex) {
         }
         going=true;
@@ -94,7 +94,7 @@ public class Tunnel_Track extends Track{
     }
     void dayEndMovementIntoCastle() {
         try {
-            track.get(0).setPiece(getPiecePosition(getPiecePositionNumber()).removePiece());
+            track.get(0).setPiece(getPiecePosition().removePiece());
             going=true;
         } catch (MyException ex) {}
     }

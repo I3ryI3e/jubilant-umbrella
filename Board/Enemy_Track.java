@@ -58,20 +58,15 @@ public class Enemy_Track extends Track {
     }
     
     public int getStrength() throws MyException {
-        Position aux=getPiecePosition(getPiecePositionNumber());
+        Position aux=getPiecePosition();
         if(aux instanceof Close_Combat_Square)
             return 4;
-        else if(aux.getPiece() instanceof Ladder)
-            return 2;
-        else if (aux.getPiece() instanceof Battering_Ram)
-            return 3;
-        else
-            return 4;
+        return ((Weapon)aux.getPiece()).getPower();
     }
     
     public boolean onCloseCombat(){
         try {
-            return (getPiecePosition(getPiecePositionNumber()) instanceof Close_Combat_Square);
+            return (getPiecePosition() instanceof Close_Combat_Square);
         } catch (MyException ex) {
             return false;
         }  
@@ -79,7 +74,7 @@ public class Enemy_Track extends Track {
 
     boolean onCircleSpace() {
         try{
-            return (getPiecePosition(getPiecePositionNumber()) instanceof Circle);
+            return (getPiecePosition() instanceof Circle);
         }catch (MyException ex){
             return false;
         }
