@@ -21,8 +21,9 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         else if(game.TwoEnemyLine())
             this.state = new Close_Combat(game);
     }
-    public Game getGame() {return game;}
     public States getState() {return state;}
+    public String getEnemy() {return game.getEnemy().toString();}
+    public String getPlayer() {return game.getPlayer().toString();}
     public boolean ladderOnStartingPosition() {return game.ladderOnStartingPosition();}
     public boolean batteringRamOnStartingPosition() {return game.batteringRamOnStartingPosition();}
     public boolean siegeTowerOnStartingPosition() {return game.siegeTowerOnStartingPosition();}
@@ -178,7 +179,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             setChanged();
             notifyObservers();
         } catch (MyException ex) {
-            setState(new Only_Raid_and_Sab_State(getGame()) );
+            setState(new Only_Raid_and_Sab_State(game));
             setChanged();
             notifyObservers();
         }
@@ -195,6 +196,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     public String getText() {return game.getTextToOutput();}
     public boolean playerStillHasActionsLeft(){return game.playerStillHasActionsLeft();}
+    public int numberOfActionsAvailable(){return game.numberOfActionsAvailable();}
     public boolean canUseTunnelMovement() {return game.canUseTunnelMovement();}
     public boolean onEnemyLine() {return game.getPlayer().playerOnEnemyLine();}
     public void stateTunnel() {

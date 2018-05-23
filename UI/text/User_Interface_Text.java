@@ -130,7 +130,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void archersText() {
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getEnemy());
+        System.out.println(game.getEnemy());
         str.append(game.ladderOnStartingPosition()?"":"\t1- Ladder\n");
         str.append(game.batteringRamOnStartingPosition()?"":"\t2- Battering Ram\n");
         str.append(game.siegeTowerOnStartingPosition()?"":(game.siegeTowerExists()?"\t3- Siege Tower\n":""));
@@ -154,7 +154,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void boillingText() {
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getEnemy());
+        System.out.println(game.getEnemy());
         str.append((game.isLadderOnCircleSpace()?"\t1- Ladder\n":""));
         str.append((game.isBatteringRamOnCircleSpace()?"\t2- Battering Ram\n":""));
         str.append((game.isSiegeTowerOnCircleSpace()?"\t3- Siege Tower\n":""));
@@ -178,8 +178,8 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void rallyText() {
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getPlayer());
-        str.append(((game.getGame().getPlayer().canDecreaseSupplies())?"\t1- Spend 1 supply to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
+        System.out.println(game.getPlayer());
+        str.append((game.canDecreaseSupply()?"\t1- Spend 1 supply to get +1DRM\n":"")).append("\t2- Normal try\n").append("\t3- return\n");
         System.out.println(str.toString());
         opt = read_int();
         switch(opt){
@@ -220,7 +220,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void tunnelText(){
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getPlayer());
+        System.out.println(game.getPlayer());
         str.append(game.canUseTunnelMovement()?(game.canMakeFreeMove()?"\t1- Free movement\n\t2- Fast movement":"\t2- Fast movement")
                 :(game.onEnemyLine()||game.onCastleSpace()?"\n\t3- Get inside the Tunnel":"")).append("\n\t4- Return");
         System.out.println(str.toString());
@@ -242,14 +242,14 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void closeCombatText() {
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getEnemy());
-        System.out.println("Still has "+game.getGame().numberOfActionsAvailable()+" actions left");
+        System.out.println(game.getEnemy());
+        System.out.println("Still has " + game.numberOfActionsAvailable()+  " actions left");
         str.append(game.isLadderOnCloseCombat()?"\t1- Attack Ladder\n":"");
         str.append(game.isBatteringRamOnCloseCombat()?"\t2- Attack Battering Ram\n":"");
-        str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower":"");
-        str.append(game.canBuyAction()?"\n\t4- Buy Action":"");
-        str.append(game.check2Enemy()?"":"\n\t5- Return");
-        str.append(game.playerStillHasActionsLeft()?"":"\n\t6- End Turn");
+        str.append(game.isSiegeTowerOnCloseCombat()?"\t1- Attack Siege Tower\n":"");
+        str.append(game.canBuyAction()?"\t4- Buy Action\n":"");
+        str.append(game.check2Enemy()?"":"\t5- Return\n");
+        str.append("\t6- End Turn\n");
         System.out.println(str.toString());
         opt = read_int();
         switch(opt){
@@ -276,7 +276,7 @@ public class User_Interface_Text implements Constants, Observer{
     
     private void buyOneActionText() {
         StringBuilder str = new StringBuilder();
-        System.out.println(game.getGame().getPlayer());
+        System.out.println(game.getPlayer());
         str.append(game.canDecreaseSupply()?"\t1- Use one supply to get one more action\n":"").append(game.canDecreaseMorale()?"\t2- Use one morale to get one more action":"").append("\n\t3- Return");
         System.out.println(str.toString());
         opt = read_int();
