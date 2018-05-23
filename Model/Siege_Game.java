@@ -25,6 +25,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean batteringRamOnStartingPosition() {return game.batteringRamOnStartingPosition();}
     public boolean siegeTowerOnStartingPosition() {return game.siegeTowerOnStartingPosition();}
     public boolean can_archers() {
+        if(!playerStillHasActionsLeft())
+            return false;
         if(!ladderOnStartingPosition())
                 return true;
         if(!batteringRamOnStartingPosition())
@@ -32,7 +34,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return !siegeTowerOnStartingPosition();
     }
     public void stateArchers(){
-        if(game.playerStillHasActionsLeft() && can_archers())
+        if(can_archers())
             setState(state.archers());
     }
     public void archers(Enemy_Attack ea){
@@ -53,8 +55,10 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         }
         return false;
     }
-    public boolean can_boilling() {
+    public boolean canBoiling() {
         if(game.canUseBoiling()){
+            if(!playerStillHasActionsLeft())
+                return false;
             if(isLadderOnCircleSpace())
                 return true;
             if(isBatteringRamOnCircleSpace())
@@ -64,11 +68,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return false;
     }
     public void stateBoilling() {
-        if(game.canUseBoiling() && game.playerStillHasActionsLeft())
+        if(canBoiling())
             setState(state.boiling());
     }
-    public void boilling(Enemy_Attack ea) {
-        if(enemyIsOnCircle(ea) && game.playerStillHasActionsLeft() && game.canUseBoiling()){
+    public void boiling(Enemy_Attack ea) {
+        if(enemyIsOnCircle(ea) && game.canUseBoiling()){
             setState(state.Apply_Action_Rules(ea));
             setChanged();
             notifyObservers();
@@ -87,16 +91,14 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         }
     }
     public void stateCloseCombat() {
-        if(game.playerStillHasActionsLeft() && game.enemiesOnCloseCombatPosition())
+        if(canCloseCombat())
             setState(state.closeCombat());
         
     }
-    public boolean can_close_combat(){
-        if(isLadderOnCloseCombat())
-            return true;
-        if(isBatteringRamOnCloseCombat())
-            return true;
-        return isSiegeTowerOnCloseCombat();
+    public boolean canCloseCombat(){
+        if(!playerStillHasActionsLeft())
+            return false;
+        return game.enemiesOnCloseCombatPosition();
     }
     public void closeCombat(Enemy_Attack ea) {
         if(enemyIsOnCloseCombat(ea) && game.playerStillHasActionsLeft()){
@@ -117,17 +119,25 @@ public class Siege_Game extends Observable implements Constants, Serializable{
                 return false;
         }
     }
-    public boolean canCoupure() {return !game.getPlayer().isWallStartingSpace();}
+    public boolean canCoupure() {
+        if(!playerStillHasActionsLeft())
+            return false;
+        return !game.getPlayer().isWallStartingSpace();
+    }
     public void coupure() {
-        if(canCoupure() && game.playerStillHasActionsLeft()){
+        if(canCoupure()){
             setState(state.coupure());
             setChanged();
             notifyObservers();
         }
     }
-    public boolean canRally() {return !game.getPlayer().isMoraleStartingSpace();}
+    public boolean canRally() {
+        if(!playerStillHasActionsLeft())
+            return false;
+        return !game.getPlayer().isMoraleStartingSpace();
+    }
     public void stateRally() {
-        if(canRally() && game.playerStillHasActionsLeft())
+        if(canRally())
             setState(state.rally_Troops());
     }
     public void rally(boolean check) {
@@ -135,17 +145,25 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         setChanged();
         notifyObservers();
     }
-    public boolean canSupply(){return (game.getPlayer().playerOnEnemyLine());}
+    public boolean canSupply(){
+        if(!playerStillHasActionsLeft())
+            return false;
+        return (game.getPlayer().playerOnEnemyLine());
+    }
     public void supply() {
-        if(canSupply() && game.playerStillHasActionsLeft()){
+        if(canSupply()){
             setState(state.supply());
             setChanged();
             notifyObservers();
         }
     }
-    public boolean canSabotage(){return (game.getPlayer().playerOnEnemyLine() && game.existsTrebuchet());}
+    public boolean canSabotage(){
+        if(!playerStillHasActionsLeft())
+            return false;
+        return (game.getPlayer().playerOnEnemyLine() && game.existsTrebuchet());
+    }
     public void sabotage() {
-        if(canSabotage() && game.playerStillHasActionsLeft() && game.existsTrebuchet()){
+        if(canSabotage() && game.existsTrebuchet()){
             setState(state.sabotage());
             setChanged();
             notifyObservers();
