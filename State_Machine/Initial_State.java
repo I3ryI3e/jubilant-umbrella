@@ -10,4 +10,6 @@ public class Initial_State extends State_Adapter {
         getGame().setup();
         return new Wait_Draw_Card(getGame());
     }
+
+    
 }

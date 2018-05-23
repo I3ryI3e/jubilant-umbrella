@@ -12,7 +12,10 @@ public class User_Interface_Text implements Constants, Observer{
     private boolean quit = false;
     private int opt;
     
-    public User_Interface_Text(){this.game= new Siege_Game(this);}
+    public User_Interface_Text(Siege_Game game){
+        this.game= game;
+        game.addObserver(this);
+    }
 
     public void setGame(Siege_Game game) {this.game = game;}
     
@@ -325,7 +328,6 @@ public class User_Interface_Text implements Constants, Observer{
     public void run(){
         States state =null;
         while(!quit){
-            game.checkLossAnd2Enemy();
             state = game.getState();
             if( state instanceof Initial_State){
                 initial_text();
@@ -358,11 +360,6 @@ public class User_Interface_Text implements Constants, Observer{
     @Override
     public void update(Observable o, Object arg) {
         System.out.println(game.getText());
-    }
-    
-    public static void main(String[] args) {
-        User_Interface_Text ui_text = new User_Interface_Text();
-        ui_text.run();
     }
     
     private void load_text() {

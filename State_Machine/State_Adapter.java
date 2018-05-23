@@ -50,12 +50,12 @@ public class State_Adapter implements States, Constants {
     public States endTurn() {return this;}
     @Override
     public States returnInitialState() {return this;}
-    @Override
-    public States checkLossAnd2Enemy() {
-        if(getGame().checkLoss())
-            return new Game_Over(getGame());
-        if(getGame().TwoEnemyLine())
-            return new Close_Combat(getGame());
-        return this;
-    }
+//    @Override
+//    public States checkLossAnd2Enemy() {
+//        if(getGame().checkLoss())
+//            return new Game_Over(getGame());
+//        if(getGame().TwoEnemyLine())
+//            return new Close_Combat(getGame());
+//        return this;
+//    }
 }

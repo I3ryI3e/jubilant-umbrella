@@ -2,23 +2,25 @@ package Model;
 
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
-import UI.text.User_Interface_Text;
 import java.io.Serializable;
 import java.util.Observable;
 
 public class Siege_Game extends Observable implements Constants, Serializable{
     private Game game;
     private States state;
-    private User_Interface_Text user_interface;
 
-    public Siege_Game(User_Interface_Text ui){
+    public Siege_Game(){
         this.game = new Game();
-        user_interface=ui;
-        this.addObserver(user_interface);
         setState(new Initial_State(game));
     }
     public void setGame(Game game) {this.game = game;}
-    private void setState(States state) {this.state = state;}
+    private void setState(States state) {
+        this.state = state;
+        if(game.checkLoss())
+            this.state = new Game_Over(game);
+        else if(game.TwoEnemyLine())
+            this.state = new Close_Combat(game);
+    }
     public Game getGame() {return game;}
     public States getState() {return state;}
     public boolean ladderOnStartingPosition() {return game.ladderOnStartingPosition();}
@@ -166,7 +168,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void setActions(int na){setState(state.setActions(na));}
     public void removeSiegeFromGame() {game.removeSiegeFromGame();}
     public void returnWaitAction(){setState(state.returnWaitAction());}
-    public void checkLossAnd2Enemy() {setState(state.checkLossAnd2Enemy());}
     public String drawBoards() {return game.toString();}
     public String drawCardDay() {return game.drawCardDay();}
     public void endTurn() {
