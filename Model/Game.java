@@ -242,7 +242,7 @@ public class Game implements Serializable, Constants{
         rally(1);
     }
     
-    public void rally(int DRM) {
+    private void rally(int DRM) {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getMoraleMod() + DRM;
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");

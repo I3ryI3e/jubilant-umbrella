@@ -14,9 +14,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         setState(new Initial_State(game));
     }
     public void setGame(Game game) {this.game = game;}
-    private void setState(States state) {
-        this.state = state;
-    }
+    private void setState(States state) {this.state = state;}
     public States getState() {return state;}
     public String getEnemy() {return game.getEnemy().toString();}
     public String getPlayer() {return game.getPlayer().toString();}
@@ -150,9 +148,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             setState(state.rally_Troops());
     }
     public void rallyPlus1DRM() {
-        setState(state.Apply_RallyPlus1DRM_Rules());
-        setChanged();
-        notifyObservers();
+        if(canDecreaseSupply()){
+            setState(state.Apply_RallyPlus1DRM_Rules());
+            setChanged();
+            notifyObservers();
+        }
     }
     public void normalRally() {
         setState(state.Apply_NormalRally_Rules());
