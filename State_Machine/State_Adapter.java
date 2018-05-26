@@ -43,7 +43,9 @@ public class State_Adapter implements States, Constants {
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {return this;}
     @Override
-    public States Apply_Rally_Rules(boolean check) {return this;}
+    public States Apply_NormalRally_Rules() {return this;}
+    @Override
+    public States Apply_RallyPlus1DRM_Rules() {return this;}
     @Override
     public States returnWaitAction() {return this;}
     @Override

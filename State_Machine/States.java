@@ -21,7 +21,8 @@ public interface States extends Constants, Serializable{
     public States buyAction();
     public States buyAction(int opt);
     public States Apply_Action_Rules(Enemy_Attack ea);
-    public States Apply_Rally_Rules(boolean check);
+    public States Apply_NormalRally_Rules();
+    public States Apply_RallyPlus1DRM_Rules();
     public States returnWaitAction();
     public States returnInitialState();
     public States endTurn();

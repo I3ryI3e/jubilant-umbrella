@@ -184,9 +184,9 @@ public class User_Interface_Text implements Constants, Observer{
         opt = read_int();
         switch(opt){
             case 1:
-                game.rally(true);
+                game.rallyPlus1DRM();
             case 2:
-                game.rally(false);
+                game.normalRally();
             case 3:
                 game.returnWaitAction();
         }
