@@ -149,8 +149,13 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         if(canRally())
             setState(state.rally_Troops());
     }
-    public void rally(boolean check) {
-        setState(state.Apply_Rally_Rules(check));
+    public void rallyPlus1DRM() {
+        setState(state.Apply_RallyPlus1DRM_Rules());
+        setChanged();
+        notifyObservers();
+    }
+    public void normalRally() {
+        setState(state.Apply_NormalRally_Rules());
         setChanged();
         notifyObservers();
     }

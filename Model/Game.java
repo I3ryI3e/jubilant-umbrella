@@ -233,13 +233,18 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     
-    public void rally(boolean DRMplusOne) {
+    public void normalRally() {
+        rally(0);
+    }
+    
+    public void rallyPlus1DRM() {
+        player.decreaseSupplies();
+        rally(1);
+    }
+    
+    public void rally(int DRM) {
         int dice = Dice.rollDice();
-        int bonus = getActiveEvent().getMoraleMod();
-        if(DRMplusOne){
-            player.decreaseSupplies();
-            bonus += 1;
-        }
+        int bonus = getActiveEvent().getMoraleMod() + DRM;
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             player.raiseMorale();
