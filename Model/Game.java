@@ -22,15 +22,11 @@ public class Game implements Serializable, Constants{
     private boolean canUseSupllyOrMoraleToOneMoreAction;
     private boolean canUseBoiling;
     private boolean canUseFreeMovement;
+    private boolean sabAndRaidStateActive;
 
     public Game(){
-        this.player= new Player();
-        this.enemy= new Enemy();
         this.deck = new ArrayList<>();
         this.discard = new ArrayList<>();
-        this.canUseSupllyOrMoraleToOneMoreAction=true;
-        this.canUseFreeMovement=true;
-        this.canUseBoiling=true;
         this.textToOutput = new StringBuffer();
     }
     
@@ -41,6 +37,13 @@ public class Game implements Serializable, Constants{
     public void changeCanUseSupply(){this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;}
     
     public boolean canUseBoiling(){return canUseBoiling;}
+    
+    public void setSabAndRaidStateActive(boolean bool){
+        this.sabAndRaidStateActive=bool;
+    }
+    public boolean getSabAndRaidStateActive(){
+        return sabAndRaidStateActive;
+    }
     
     public void changeUseBoiling(){this.canUseBoiling= !this.canUseBoiling;}
     
@@ -60,6 +63,8 @@ public class Game implements Serializable, Constants{
         this.player= new Player();
         this.enemy= new Enemy();
         this.game_day = 0;
+        deck.clear();
+        discard.clear();
         deck.add(0,new Card1());
         deck.add(1,new Card2());
         deck.add(2,new Card3());
@@ -68,6 +73,10 @@ public class Game implements Serializable, Constants{
         deck.add(5,new Card6());
         deck.add(6,new Card7());
         Collections.shuffle(deck);
+        this.canUseSupllyOrMoraleToOneMoreAction=true;
+        this.canUseFreeMovement=true;
+        this.canUseBoiling=true;
+        this.sabAndRaidStateActive=false;
     }
     private Event getActiveEvent(){
         return discard.get(0).getDayX(game_day).getEvent();
@@ -283,14 +292,14 @@ public class Game implements Serializable, Constants{
     
     public void removeSiegeFromGame() {enemy.removeSiegeFromGame();}
     
-    public void drawAndResolveCard()throws MyException {
+    public void drawAndResolveCard(){
         drawCard();
         resolveCard();
     }
     
     private void drawCard() {discard.add(0, deck.remove(0));}
     
-    private void resolveCard()throws MyException {
+    private void resolveCard(){
         textToOutput.append(player.doEnemyCheckLine(Dice.rollDice()));
         discard.get(0).resolve(getGame_day(), this);
     }
@@ -330,6 +339,7 @@ public class Game implements Serializable, Constants{
         this.canUseSupllyOrMoraleToOneMoreAction=true;
         this.canUseBoiling=true;
         this.canUseFreeMovement=true;
+        this.sabAndRaidStateActive=false;
     }
     
     private void reputAllCardsIntoDeck() {
@@ -344,7 +354,7 @@ public class Game implements Serializable, Constants{
     
     public void addTrebuchetEvent() {enemy.increaseNumberOfTrebuchet();}
 
-    boolean playerStillHasActionsLeft() {return player.playerStillHasActionsLeft();}
+    public boolean playerStillHasActionsLeft() {return player.playerStillHasActionsLeft();}
 
     public boolean canUseTunnelMovement() {return player.canUseTunnelMovement();}
 
@@ -385,14 +395,18 @@ public class Game implements Serializable, Constants{
 
     public void enemyCheckLine() {player.doEnemyCheckLine(Dice.rollDice());}
 
-    public boolean victoryOrLoss() {return (player.victoryOrLoss() || enemy.victoryOrLoss());}
+    public boolean endTurnLoss() {return (player.victoryOrLoss() || enemy.victoryOrLoss());}
 
     public void endOfDayPhaseTunnel() {textToOutput.append(player.endOfDayPhaseTunnel());}
-
-    public boolean isRaidAndSabEventActive() {return discard.get(0).getDayX(game_day).getEvent() instanceof Bad_Weather;}
     
     public boolean siegeTowerExists() {return enemy.siegeTowerExists();}
+    
     public boolean existsTrebuchet() {return enemy.getTrebutchet()>0;}
+
+    public boolean isNumEnemyInCloseCombat(int num) {
+        return enemy.isNumEnemyInCloseCombat(num);
+    }
+    
     
     public int getLastDiceRoll(){ return Dice.lastRoll;}
 

@@ -97,12 +97,12 @@ public class User_Interface_Text implements Constants, Observer{
     public String wait_action_text_menu(){
         StringBuilder str = new StringBuilder();
         str.append("Player Action:\n");
-        str.append(game.can_archers()?"\t1- Archers Attack\n":"");
+        str.append(game.canArchers()?"\t1- Archers Attack\n":"");
         str.append(game.canBoiling()?"\t2- Boilling Water Attack\n":"");
         str.append(game.canCloseCombat()?"\t3- Close Combat Attack\n":"");
         str.append(game.canCoupure()?"\t4- Coupure\n":"");
         str.append(game.canRally()?"\t5- Rally Troops\n":"");
-        str.append(game.playerStillHasActionsLeft()?"\t6- Tunnel Action\n":"");
+        str.append(game.playerStillHasActionsLeft() && (!game.getSabAndRaidStateActive())?"\t6- Tunnel Action\n":"");
         str.append(game.canSupply()?"\t7- Supply Raid\n":"");
         str.append(game.canSabotage()?"\t8- Sabotage\n":"");
         str.append(game.canBuyAction()?"\t9- Buy Action\n":"");
@@ -189,32 +189,6 @@ public class User_Interface_Text implements Constants, Observer{
                 game.rally(false);
             case 3:
                 game.returnWaitAction();
-        }
-    }
-    
-    private void onlyRaidAndSabText() {
-        StringBuilder str = new StringBuilder();
-        System.out.println(game.drawBoards());
-        System.out.println(game.drawCardDay());
-        str.append(game.canSupply()?"\t1- Supply Raid\n":"");
-        str.append(game.canSabotage()?"\t2- Sabotage\n":"");
-        str.append(game.canBuyAction()?"\t3-Buy Action\n":"");
-        str.append("\t4- End Turn\n");
-        System.out.println(str.toString());
-        opt = read_int();
-        switch(opt){
-            case 1:
-                game.supply();
-                break;
-            case 2:
-                game.sabotage();
-                break;
-            case 3:
-                game.stateBuyAction();
-                break;
-            case 4:
-                game.endTurn();
-                break;
         }
     }
     
@@ -343,8 +317,6 @@ public class User_Interface_Text implements Constants, Observer{
                 rallyText();
             }else if (state instanceof Game_Over){
                 gameOver_Text();
-            }else if (state instanceof Only_Raid_and_Sab_State){
-                onlyRaidAndSabText();
             }else if (state instanceof Wait_Tunnel){
                 tunnelText();
             }else if (state instanceof Close_Combat){

@@ -39,7 +39,7 @@ public class Wait_Action extends State_Adapter implements Constants{
     @Override
     public States sabotage() {
         getGame().sabotage();
-        if(getGame().getPlayer().checkLoss())
+        if(getGame().checkLoss())
             return new Game_Over(getGame());
         else
             return this;
@@ -48,7 +48,7 @@ public class Wait_Action extends State_Adapter implements Constants{
     @Override
     public States supply() {
         getGame().supply();
-        if(getGame().getPlayer().checkLoss())
+        if(getGame().checkLoss())
             return new Game_Over(getGame());
         else
             return this;
@@ -56,7 +56,7 @@ public class Wait_Action extends State_Adapter implements Constants{
     
     @Override
     public States endTurn() {
-        if(getGame().victoryOrLoss()){
+        if(getGame().endTurnLoss()){
             return new Game_Over(getGame());
         }
         getGame().endTurn();

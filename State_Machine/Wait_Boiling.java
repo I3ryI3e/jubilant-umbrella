@@ -8,6 +8,8 @@ public class Wait_Boiling extends State_Adapter{
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {
         getGame().boiling(ea);
+        if(getGame().checkLoss())
+            return new Game_Over(getGame());
         return new Wait_Action(getGame());
     }
 

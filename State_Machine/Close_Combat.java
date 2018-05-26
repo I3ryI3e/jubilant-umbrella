@@ -13,10 +13,10 @@ public class Close_Combat extends State_Adapter{
     @Override
     public States Apply_Action_Rules(Enemy_Attack ea) {
         getGame().closeCombat(ea);
-        if(getGame().getPlayer().checkLoss())
+        if(getGame().checkLoss())
             return new Game_Over(getGame());
         else{
-            if(getGame().getEnemy().isNumEnemyInCloseCombat(2) && getGame().getPlayer().playerStillHasActionsLeft())
+            if(getGame().isNumEnemyInCloseCombat(2) && getGame().playerStillHasActionsLeft())
                 return this;
             else   
                 return new Wait_Action(getGame());
@@ -30,7 +30,7 @@ public class Close_Combat extends State_Adapter{
 
     @Override
     public States endTurn() {
-         if(!getGame().victoryOrLoss()){
+         if(!getGame().endTurnLoss()){
             getGame().endTurn();
             if(getGame().getGame_day()!= 3){
                 return new Wait_Draw_Card(getGame());

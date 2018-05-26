@@ -9,5 +9,5 @@ public class Bad_Weather extends Event {
     }
 
     @Override
-    public void runEvent(Game game) throws MyException {throw new MyException();}
+    public void runEvent(Game game) { game.setSabAndRaidStateActive(true);}
 }

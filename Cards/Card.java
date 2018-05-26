@@ -30,7 +30,7 @@ public abstract class Card implements Constants, Serializable{
         return false;
     }
     
-    public void resolve(int game_day, Game game) throws MyException{
+    public void resolve(int game_day, Game game){
             days.get(game_day).resolve(game);
     }
 

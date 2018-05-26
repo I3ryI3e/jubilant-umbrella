@@ -101,7 +101,7 @@ public class Player implements Serializable{
                 morale.decrease();
                 aux.append("\nSoldiers were caught in enemy lines");
             }else{
-                aux.append("\nSoldiers are still save in enemy lines");
+                aux.append("\nSoldiers are still safe in enemy lines");
             }
         }
         return aux.toString();

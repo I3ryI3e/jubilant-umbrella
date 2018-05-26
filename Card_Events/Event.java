@@ -19,7 +19,7 @@ public abstract class Event implements Serializable{
     public int getCircleAttackMod(){return 0;}
     public int getCloseCombatMod(){return 0;}
     public int getAllAttackMod(){return 0;}
-    abstract public void runEvent(Game game) throws MyException;
+    abstract public void runEvent(Game game);
 
     @Override
     public String toString() {

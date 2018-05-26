@@ -22,14 +22,8 @@ public class Day implements Constants, Serializable{
     
     public Event getEvent(){return event;}
     
-    public void resolve(Game game) throws MyException {
-        try {
-            getEvent().runEvent(game);
-        } catch (MyException ex) {
-            game.enemyAttack(getEnemy_attack());
-            game.setPlayerActions(getN_player_actions());
-            throw new MyException();
-        }
+    public void resolve(Game game){
+        getEvent().runEvent(game);
         game.enemyAttack(getEnemy_attack());
         game.setPlayerActions(getN_player_actions());
     }

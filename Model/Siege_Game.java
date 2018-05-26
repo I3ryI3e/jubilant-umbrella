@@ -16,10 +16,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void setGame(Game game) {this.game = game;}
     private void setState(States state) {
         this.state = state;
-        if(game.checkLoss())
-            this.state = new Game_Over(game);
-        else if(game.TwoEnemyLine())
-            this.state = new Close_Combat(game);
     }
     public States getState() {return state;}
     public String getEnemy() {return game.getEnemy().toString();}
@@ -27,8 +23,10 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean ladderOnStartingPosition() {return game.ladderOnStartingPosition();}
     public boolean batteringRamOnStartingPosition() {return game.batteringRamOnStartingPosition();}
     public boolean siegeTowerOnStartingPosition() {return game.siegeTowerOnStartingPosition();}
-    public boolean can_archers() {
+    public boolean canArchers() {
         if(!playerStillHasActionsLeft())
+            return false;
+        if(getSabAndRaidStateActive())
             return false;
         if(!ladderOnStartingPosition())
                 return true;
@@ -37,7 +35,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         return !siegeTowerOnStartingPosition();
     }
     public void stateArchers(){
-        if(can_archers())
+        if(canArchers())
             setState(state.archers());
     }
     public void archers(Enemy_Attack ea){
@@ -61,6 +59,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canBoiling() {
         if(game.canUseBoiling()){
             if(!playerStillHasActionsLeft())
+                return false;
+            if(getSabAndRaidStateActive())
                 return false;
             if(isLadderOnCircleSpace())
                 return true;
@@ -101,6 +101,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canCloseCombat(){
         if(!playerStillHasActionsLeft())
             return false;
+        if(getSabAndRaidStateActive())
+            return false;
         return game.enemiesOnCloseCombatPosition();
     }
     public void closeCombat(Enemy_Attack ea) {
@@ -125,6 +127,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canCoupure() {
         if(!playerStillHasActionsLeft())
             return false;
+        if(getSabAndRaidStateActive())
+            return false;
         return !game.getPlayer().isWallStartingSpace();
     }
     public void coupure() {
@@ -136,6 +140,8 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     public boolean canRally() {
         if(!playerStillHasActionsLeft())
+            return false;
+        if(getSabAndRaidStateActive())
             return false;
         return !game.getPlayer().isMoraleStartingSpace();
     }
@@ -178,17 +184,10 @@ public class Siege_Game extends Observable implements Constants, Serializable{
         notifyObservers();
     }
     public void drawCard(){
-        try {
-            setState(state.Draw_Card());
-            setChanged();
-            notifyObservers();
-        } catch (MyException ex) {
-            setState(new Only_Raid_and_Sab_State(game));
-            setChanged();
-            notifyObservers();
-        }
+        setState(state.Draw_Card());
+        setChanged();
+        notifyObservers();
     }
-    public void setActions(int na){setState(state.setActions(na));}
     public void removeSiegeFromGame() {game.removeSiegeFromGame();}
     public void returnWaitAction(){setState(state.returnWaitAction());}
     public String drawBoards() {return game.toString();}
@@ -204,7 +203,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canUseTunnelMovement() {return game.canUseTunnelMovement();}
     public boolean onEnemyLine() {return game.getPlayer().playerOnEnemyLine();}
     public void stateTunnel() {
-        if(game.playerStillHasActionsLeft())
+        if(game.playerStillHasActionsLeft() && (!getSabAndRaidStateActive()))
             setState(state.tunnel());
     }
     public boolean onCastleSpace() {return game.getPlayer().playerOnCastleSpace();}
@@ -250,6 +249,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean canMakeFreeMove(){return game.getCanMakeFreeMove();}
     public boolean check2Enemy(){return game.TwoEnemyLine();}
     public void returnInitialState() {setState(state.returnInitialState());}
+    public boolean getSabAndRaidStateActive() {return game.getSabAndRaidStateActive();}
     @Override
     public String toString() {
         return game.toString();
