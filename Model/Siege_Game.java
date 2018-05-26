@@ -172,7 +172,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
             notifyObservers();
         }
     }
-    public void setup() {setState(state.New_Game());}
+    public void setup() {
+        setState(state.New_Game());
+        setChanged();
+        notifyObservers();
+    }
     public void drawCard(){
         try {
             setState(state.Draw_Card());

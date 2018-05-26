@@ -76,18 +76,18 @@ public class Game implements Serializable, Constants{
     public void archers(Enemy_Attack ea) { 
         int dice = Dice.rollDice();
         int bonus = 0;
-        Event event = getActiveEvent();
+        Event activeEvent = getActiveEvent();
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                bonus= event.getLadderMod()+ event.getAllAttackMod() + getEnemy().getPositionModifier(ea,event);
+                bonus= activeEvent.getLadderMod()+ activeEvent.getAllAttackMod() + enemy.getPositionModifier(ea,activeEvent);
             } catch (MyException ex) {
-                bonus = event.getLadderMod();
+                bonus = activeEvent.getLadderMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice+bonus > getEnemy().getLadderStrength()){
+                if(dice+bonus > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
@@ -95,13 +95,13 @@ public class Game implements Serializable, Constants{
             break;
             case BATTERING_RAM:
             try {
-                bonus = event.getRamMod() + event.getAllAttackMod()  + getEnemy().getPositionModifier(ea,event);
+                bonus = activeEvent.getRamMod() + activeEvent.getAllAttackMod()  + enemy.getPositionModifier(ea,activeEvent);
             } catch (MyException ex) {
-                bonus = event.getRamMod();
+                bonus = activeEvent.getRamMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice + bonus > getEnemy().getBatteringRamStrength()){
+                if(dice + bonus > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout!");
                 }
@@ -109,13 +109,13 @@ public class Game implements Serializable, Constants{
             break;
             case SIEGE_TOWER:
             try {
-                bonus = event.getSiegeMod() + event.getAllAttackMod() + getEnemy().getPositionModifier(ea,event);
+                bonus = activeEvent.getSiegeMod() + activeEvent.getAllAttackMod() + enemy.getPositionModifier(ea,activeEvent);
             } catch (MyException ex) {
-                bonus = event.getSiegeMod();
+                bonus = activeEvent.getSiegeMod();
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice + bonus > getEnemy().getSiegeTowerStrength()){
+                if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Siege Tower is going to backout!");
                 }
@@ -128,18 +128,18 @@ public class Game implements Serializable, Constants{
     public void boiling(Enemy_Attack ea) {
         int dice = Dice.rollDice();
         int bonus = 0;
-        Event event = getActiveEvent();
+        Event activeEvent = getActiveEvent();
         textToOutput.append("Dado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
-                bonus = event.getLadderMod()+ event.getCircleAttackMod() + getEnemy().getPositionModifier(ea,event) +1;
+                bonus = activeEvent.getLadderMod()+ activeEvent.getCircleAttackMod() + enemy.getPositionModifier(ea,activeEvent) +1;
             } catch (MyException ex) {
-                bonus = event.getLadderMod() +1;
+                bonus = activeEvent.getLadderMod() +1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice + bonus  > getEnemy().getLadderStrength()){
+                if(dice + bonus  > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
@@ -147,13 +147,13 @@ public class Game implements Serializable, Constants{
             break;
             case BATTERING_RAM:
             try {
-                bonus = event.getRamMod() + event.getCircleAttackMod()  + getEnemy().getPositionModifier(ea,event)+1;
+                bonus = activeEvent.getRamMod() + activeEvent.getCircleAttackMod()  + enemy.getPositionModifier(ea,activeEvent)+1;
             } catch (MyException ex) {
                 bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod()+1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice + bonus  > getEnemy().getBatteringRamStrength()){
+                if(dice + bonus  > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout!");
                 }
@@ -161,13 +161,13 @@ public class Game implements Serializable, Constants{
             break;
             case SIEGE_TOWER:
             try {
-                bonus = event.getSiegeMod() + event.getCircleAttackMod() + getEnemy().getPositionModifier(ea,event)+1;
+                bonus = activeEvent.getSiegeMod() + activeEvent.getCircleAttackMod() + enemy.getPositionModifier(ea,activeEvent)+1;
             } catch (MyException ex) {
-                bonus = event.getSiegeMod()+1;
+                bonus = activeEvent.getSiegeMod()+1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
-                if(dice + bonus > getEnemy().getSiegeTowerStrength()){
+                if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Ladder is going to backout!");
                 }
@@ -183,15 +183,15 @@ public class Game implements Serializable, Constants{
     
     public void closeCombat(Enemy_Attack ea) {
         int dice = Dice.rollDice();
-        Event event = getActiveEvent();
-        int bonus =event.getAllAttackMod() + event.getCloseCombatMod();
+        Event activeEvent = getActiveEvent();
+        int bonus =activeEvent.getAllAttackMod() + activeEvent.getCloseCombatMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ");
         switch(ea){
             case LADDER:
                 try {
-                    if(getEnemy().getLadderPosition() instanceof Close_Combat_Square){
+                    if(enemy.getLadderPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                            getEnemy().goBackwardLadder();
+                            enemy.goBackwardLadder();
                             textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!\n");
                             player.decreasePlayerActions();
                         }
@@ -200,9 +200,9 @@ public class Game implements Serializable, Constants{
                 break;
             case BATTERING_RAM:
                 try{
-                    if(getEnemy().getBatteringRamPosition() instanceof Close_Combat_Square){
+                    if(enemy.getBatteringRamPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                            getEnemy().goBackwardBatteringRam();
+                            enemy.goBackwardBatteringRam();
                             textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
                             player.decreasePlayerActions();
                         }
@@ -211,9 +211,9 @@ public class Game implements Serializable, Constants{
                 break;
             case SIEGE_TOWER:
                 try{
-                    if(getEnemy().getSiegeTowerPosition() instanceof Close_Combat_Square){
+                    if(enemy.getSiegeTowerPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
-                            getEnemy().goBackwardSiegeTower();
+                            enemy.goBackwardSiegeTower();
                             textToOutput.append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
                             player.decreasePlayerActions();
                         }
@@ -233,7 +233,7 @@ public class Game implements Serializable, Constants{
         }
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
-            getPlayer().raiseMorale();
+            player.raiseMorale();
             textToOutput.append("\nVictory, rally troops successfully done!");
         }
         player.decreasePlayerActions();
@@ -244,7 +244,7 @@ public class Game implements Serializable, Constants{
         int bonus = getActiveEvent().getCoupureMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
-            getPlayer().raiseWall();
+            player.raiseWall();
             textToOutput.append("\nVictory, coupure successfully done!");
         }
         player.decreasePlayerActions();
@@ -255,10 +255,10 @@ public class Game implements Serializable, Constants{
         int bonus = getActiveEvent().getSabotageMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
-            getEnemy().removeTrebutchet();
+            enemy.removeTrebutchet();
             textToOutput.append("\nVictory, sabotage successfully done!");
         }else if(dice == 1){
-            getPlayer().soldierCaptured();
+            player.soldierCaptured();
             textToOutput.append("\nYour soldier as been captured!");
         }
         player.decreasePlayerActions();
@@ -269,13 +269,13 @@ public class Game implements Serializable, Constants{
         int bonus = getActiveEvent().getRaidMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus == 6){
-            getPlayer().addRaided_supplies(2);
+            player.addRaided_supplies(2);
             textToOutput.append("\nVictory, 2 supplies successfully done!");
         }else if(dice == 1){
-            getPlayer().soldierCaptured();
+            player.soldierCaptured();
             textToOutput.append("\nYour soldier as been captured!");
         }else if(!(dice + bonus == 2)){
-            getPlayer().addRaided_supplies(1);
+            player.addRaided_supplies(1);
             textToOutput.append("\nVictory, 1 supply successfully done!");
         }
         player.decreasePlayerActions();
@@ -295,23 +295,23 @@ public class Game implements Serializable, Constants{
         discard.get(0).resolve(getGame_day(), this);
     }
     
-    void setPlayerActions(int n_player_actions) {getPlayer().setActions(n_player_actions);}
+    void setPlayerActions(int n_player_actions) {player.setActions(n_player_actions);}
     
     void enemyAttack(List<Enemy_Attack> enemy_attack) {
         for(int i=0;i<enemy_attack.size();i++){
-            getEnemy().enemyAttack(enemy_attack.get(i), this);
+            enemy.enemyAttack(enemy_attack.get(i), this);
         }
     }
     
-    public boolean checkLoss() {return (getPlayer().checkLoss() || getEnemy().isNumEnemyInCloseCombat(3));}
+    public boolean checkLoss() {return (player.checkLoss() || enemy.isNumEnemyInCloseCombat(3));}
     
-    public boolean TwoEnemyLine() {return (getEnemy().isNumEnemyInCloseCombat(2));}
+    public boolean TwoEnemyLine() {return (enemy.isNumEnemyInCloseCombat(2));}
     
-    public void DecreaseMoralEvent() {getPlayer().decreaseMorale();}
+    public void DecreaseMoralEvent() {player.decreaseMorale();}
     
     public String drawBoards() {
         StringBuilder aux = new StringBuilder();
-        aux.append(getPlayer()).append("\n\n").append(getEnemy()).append("\n\n");
+        aux.append(player).append("\n\n").append(enemy).append("\n\n");
         return aux.toString();
     }
     
@@ -340,9 +340,9 @@ public class Game implements Serializable, Constants{
         Collections.shuffle(deck);
     }
     
-    public void DecreaseSuppliesEvent() {getPlayer().decreaseSupplies();}
+    public void DecreaseSuppliesEvent() {player.decreaseSupplies();}
     
-    public void addTrebuchetEvent() {getEnemy().increaseNumberOfTrebuchet();}
+    public void addTrebuchetEvent() {enemy.increaseNumberOfTrebuchet();}
 
     boolean playerStillHasActionsLeft() {return player.playerStillHasActionsLeft();}
 
