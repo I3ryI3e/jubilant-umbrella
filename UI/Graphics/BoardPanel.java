@@ -19,7 +19,7 @@ public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
         this.game=game;
         this.boardName=name;
         game.addObserver(this);
-        setVisible(false);
+        setVisible(true);
         update(game,null);
     }
 

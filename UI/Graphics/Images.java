@@ -53,7 +53,6 @@ public class Images implements ConstantsGUI {
     }
     
      public static Image getImage(String name) {
-         System.out.println("Vim buscar ---  " + name);
         return images.get(name);
      }
     public static Map<String, Image> getImages() {

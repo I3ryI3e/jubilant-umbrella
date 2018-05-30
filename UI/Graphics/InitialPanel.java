@@ -36,17 +36,13 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
 
     private void createGraphicsObjects() {
         newGame= new JButton("New Game");
-        //newGame.setSize(25, 25);
         loadGame=new JButton("Load Game");
-        //loadGame.setSize(25, 25);
         saveGame= new JButton("Save Game");
-        //saveGame.setSize(25, 25);
         quit=new JButton("Quit Game");
-        //quit.setSize(25, 25);
-        
     }
 
     private void addGraphicsObjects() {
+        
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -55,13 +51,14 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
         add(loadGame, gbc);
         add(saveGame, gbc);
         add(quit, gbc);
+          
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image teste = Images.getImage(BACKGROUND);
-        g.drawImage(teste, 0, 0, this);
+        g.drawImage(teste, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
 
@@ -96,9 +93,9 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
     @Override
     public void update(Observable o, Object arg) {
        States state=game.getState();
-       if(state instanceof Initial_State)
+       if(state instanceof Initial_State){
            setVisible(true);
-       else
+       }else
            setVisible(false);
     }
 }

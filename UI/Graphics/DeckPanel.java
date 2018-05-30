@@ -8,25 +8,21 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 
-public class CardsPanel extends JPanel implements Observer,ConstantsGUI {
+public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
     private Siege_Game game;
-    private String name;
     
-    
-
-    public CardsPanel(Siege_Game game,String name) {
+    public DeckPanel(Siege_Game game) {
         super();
         this.game=game;
-        this.name=name;
         game.addObserver(this);
-        setVisible(false);
+        setVisible(true);
         update(game,null);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image imageBoard = Images.getImage(name);
+        Image imageBoard = Images.getImage(CARD_BACK);
         g.drawImage(imageBoard, 0, 0,200,260, this);
     }
     

@@ -3,17 +3,19 @@ package Cards;
 import Model.Constants;
 import Model.Day;
 import Model.Game;
-import Model.MyException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Card implements Constants, Serializable{
-    private final int card_number;
+    private final int cardNumber;
     private final ArrayList<Day> days;
     
     public Card(int cn){
-        card_number=cn;
+        cardNumber=cn;
         days= new ArrayList<>();
+    }
+    public int getCardNumber(){
+        return cardNumber;
     }
     
     public Day getDayX(int day){
@@ -36,7 +38,7 @@ public abstract class Card implements Constants, Serializable{
 
     public String printDayX(int game_day, int numberOfCardsPlayed) {
         StringBuilder str = new StringBuilder();
-        str.append("{CARD}\nCard Number: ").append(card_number).append(" - (").append(numberOfCardsPlayed).append(" of 7)\n");
+        str.append("{CARD}\nCard Number: ").append(cardNumber).append(" - (").append(numberOfCardsPlayed).append(" of 7)\n");
         str.append(days.get(game_day));
         return str.toString();
     }

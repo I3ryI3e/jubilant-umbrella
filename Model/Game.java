@@ -3,7 +3,6 @@ package Model;
 import Board.Close_Combat_Square;
 import Board.Enemy;
 import Board.Player;
-import Card_Events.Bad_Weather;
 import Card_Events.Event;
 import Cards.*;
 import Model.Constants.Enemy_Attack;
@@ -15,7 +14,7 @@ import java.util.List;
 public class Game implements Serializable, Constants{
     private Player player;
     private Enemy enemy;
-    private int game_day;
+    private int gameDay;
     private List<Card> deck;
     private List<Card> discard;
     private StringBuffer textToOutput;
@@ -30,7 +29,8 @@ public class Game implements Serializable, Constants{
         this.textToOutput = new StringBuffer();
     }
     
-    public int getGame_day(){return game_day;}
+    public int getGame_day(){return gameDay;}
+    public int getActiveCardNumber(){return discard.size()>0?discard.get(0).getCardNumber():0;}
     
     public boolean getCanUseSupplyOrMorale(){return canUseSupllyOrMoraleToOneMoreAction;}
     
@@ -53,7 +53,7 @@ public class Game implements Serializable, Constants{
         return aux;
     }
     
-    public void setGame_day(int game_day){this.game_day = game_day;}
+    public void setGame_day(int game_day){this.gameDay = game_day;}
     
     public Player getPlayer() {return player;}
     
@@ -62,7 +62,7 @@ public class Game implements Serializable, Constants{
     public void setup() {
         this.player= new Player();
         this.enemy= new Enemy();
-        this.game_day = 0;
+        this.gameDay = 0;
         deck.clear();
         discard.clear();
         deck.add(0,new Card1());
@@ -79,7 +79,7 @@ public class Game implements Serializable, Constants{
         this.sabAndRaidStateActive=false;
     }
     private Event getActiveEvent(){
-        return discard.get(0).getDayX(game_day).getEvent();
+        return discard.get(0).getDayX(gameDay).getEvent();
     }
     
     public void archers(Enemy_Attack ea) { 
@@ -158,7 +158,7 @@ public class Game implements Serializable, Constants{
             try {
                 bonus = activeEvent.getRamMod() + activeEvent.getCircleAttackMod()  + enemy.getPositionModifier(ea,activeEvent)+1;
             } catch (MyException ex) {
-                bonus = discard.get(0).getDayX(game_day).getEvent().getRamMod()+1;
+                bonus = discard.get(0).getDayX(gameDay).getEvent().getRamMod()+1;
             }
             textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
             try {
@@ -329,7 +329,7 @@ public class Game implements Serializable, Constants{
         return aux.toString();
     }
     
-    public String drawCardDay() {return discard.get(0).printDayX(game_day, discard.size());}
+    public String drawCardDay() {return discard.get(0).printDayX(gameDay, discard.size());}
     
     public void endTurn() {
         if(deck.isEmpty()){

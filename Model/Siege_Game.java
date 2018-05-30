@@ -18,6 +18,7 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public States getState() {return state;}
     public String getEnemy() {return game.getEnemy().toString();}
     public String getPlayer() {return game.getPlayer().toString();}
+    public int getActiveCardNumber() {return game.getActiveCardNumber();}    
     public boolean ladderOnStartingPosition() {return game.ladderOnStartingPosition();}
     public boolean batteringRamOnStartingPosition() {return game.batteringRamOnStartingPosition();}
     public boolean siegeTowerOnStartingPosition() {return game.siegeTowerOnStartingPosition();}
