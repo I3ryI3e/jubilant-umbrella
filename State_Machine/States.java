@@ -25,4 +25,6 @@ public interface States extends Constants, Serializable{
     public States returnWaitAction();
     public States returnInitialState();
     public States endTurn();
+
+    public States quit();
 }

@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Siege_Game;
@@ -17,7 +16,6 @@ public class TopBox extends Box {
         setVisible(true);
         createObjs();
         setObjLayout();
-        
     }
 
     private void createObjs() {
@@ -48,5 +46,4 @@ public class TopBox extends Box {
         add(enemy);
         add(Box.createHorizontalStrut(10));
     }
-    
 }

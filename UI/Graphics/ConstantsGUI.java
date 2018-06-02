@@ -1,16 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.Graphics;
 
-/**
- *
- * @author I3ryI3e
- */
 public interface ConstantsGUI {
-    
     
     String INITIAL_PANEL="Initial Panel";
     String DRAW_CARD_PANEL="Draw Card Panel";
@@ -51,6 +41,24 @@ public interface ConstantsGUI {
     String CARD7 = "Card7";
     String PATH_IMG_CARD7 = "Resource/Card7.gif";
     
+    String NEW = "New";
+    String PATH_IMG_NEW = "Resource/New.png";
+
+    String LOAD = "Load";
+    String PATH_IMG_LOAD = "Resource/Load.png";
     
+    String SAVE = "Save";
+    String PATH_IMG_SAVE = "Resource/Save.png";
     
+    String REDCROSS = "RedCross";
+    String PATH_IMG_REDCROSS = "Resource/RedCross.png";
+    
+    String OPTIONS = "Options";
+    String PATH_IMG_OPTIONS = "Resource/Options.gif";
+    
+    String INFO = "Info";
+    String PATH_IMG_INFO = "Resource/Info.png";    
+    
+    String INFO2 = "Info2";
+    String PATH_IMG_INFO2 = "Resource/Info2.png";    
 }

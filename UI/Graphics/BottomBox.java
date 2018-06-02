@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Siege_Game;
@@ -16,10 +15,16 @@ public class BottomBox extends Box {
         setVisible(true);
         createObjects();
         setObjLayout();
-        
     }
 
     private void createObjects() {
+
+        buttonPanel = new ButtonPanel(game);
+        textPanel = new TextAreaPanel(game);
+        dicePanel = new DicePanel(game);
+    }
+
+    private void setObjLayout() {
         Box dice = Box.createVerticalBox();
         Box text= Box.createVerticalBox();
         Box buttons= Box.createVerticalBox();
@@ -28,18 +33,12 @@ public class BottomBox extends Box {
         text.add(textPanel);
         dice.add(dicePanel);
 
+        add(Box.createHorizontalStrut(10));
         add(text);
-        add(Box.createHorizontalStrut(15));
+        add(Box.createHorizontalStrut(10));
         add(buttons);
-        add(Box.createHorizontalStrut(15));
+        add(Box.createHorizontalStrut(10));
         add(dice);
-        add(Box.createHorizontalStrut(15));
-        
+        add(Box.createHorizontalStrut(10));
     }
-
-    private void setObjLayout() {
-        //TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

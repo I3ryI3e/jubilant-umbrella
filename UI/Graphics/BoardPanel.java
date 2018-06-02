@@ -4,11 +4,13 @@ package UI.Graphics;
 import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
     Siege_Game game;
@@ -27,7 +29,8 @@ public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image imageBoard = Images.getImage(boardName);
-        g.drawImage(imageBoard, 0, 0,200,260, this);
+        g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
+        setBorder(new LineBorder(Color.BLACK));
     }
     
     @Override

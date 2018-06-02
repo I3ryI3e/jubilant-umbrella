@@ -2,11 +2,13 @@
 package UI.Graphics;
 
 import Model.Siege_Game;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
     private Siege_Game game;
@@ -16,6 +18,7 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
         this.game=game;
         game.addObserver(this);
         setVisible(true);
+        setBorder(new LineBorder(Color.BLACK));
         update(game,null);
     }
 
@@ -23,7 +26,7 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image imageBoard = Images.getImage(CARD_BACK);
-        g.drawImage(imageBoard, 0, 0,200,260, this);
+        g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
     }
     
 

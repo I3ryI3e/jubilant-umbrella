@@ -17,7 +17,7 @@ public class User_Interface_Text implements Constants, Observer{
         game.addObserver(this);
     }
 
-    public void setGame(Siege_Game game) {this.game = game;}
+    private void setGame(Siege_Game game) {this.game = game;}
     
     private int read_int(){
         Scanner in = new Scanner(System.in);
@@ -339,15 +339,11 @@ public class User_Interface_Text implements Constants, Observer{
         String filename = read_Text();
         if(filename == null || filename.isEmpty())
             return;
-        try{
-            setGame(load_game(filename));
-            System.out.println("\nGame loaded\n");
-        }catch (FileNotFoundException ex){
-        } catch (IOException ex) {
-        }
+        setGame(load_game(filename));
+        System.out.println("\nGame loaded\n");
     }
 
-    private Siege_Game load_game(String filename) throws FileNotFoundException, IOException{
+    private Siege_Game load_game(String filename) {
         ObjectInputStream oistream = null;
         Siege_Game sg = null;
         try {
@@ -355,7 +351,6 @@ public class User_Interface_Text implements Constants, Observer{
             sg = (Siege_Game) oistream.readObject();
         } catch (FileNotFoundException ex) {
             System.err.println("Error: file doesn't exists\n" + ex.getMessage());
-            throw  new FileNotFoundException();    
         } catch (IOException | ClassNotFoundException ex) {}
         finally{
             if(oistream != null){
@@ -367,7 +362,7 @@ public class User_Interface_Text implements Constants, Observer{
         return sg;
     }
     
-    private void save_text(){
+    private void save_text() {
         System.out.println("\nName of the file to save: ");
         String filename = read_Text();
         if(filename == null || filename.isEmpty())

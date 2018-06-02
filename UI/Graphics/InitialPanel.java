@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Siege_Game;
@@ -13,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
@@ -22,7 +22,6 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
     private JButton saveGame;
     private JButton quit;
     
-
     public InitialPanel(Siege_Game game) {
         super();
         this.game=game;
@@ -51,7 +50,6 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
         add(loadGame, gbc);
         add(saveGame, gbc);
         add(quit, gbc);
-          
     }
 
     @Override
@@ -61,7 +59,6 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
         g.drawImage(teste, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
-
     private void registerListeners() {
         newGame.addMouseListener(new MouseAdapter(){
             @Override
@@ -82,12 +79,16 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
 //                super.mousePressed(e);
 //            }
 //        });
-//        quit.addMouseListener(new MouseAdapter(){
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                super.mousePressed(e);
-//            }
-//        });
+        quit.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                if((JOptionPane.showConfirmDialog(InitialPanel.this, "Exit?", "Warning", JOptionPane.YES_NO_OPTION))== 0){
+                    game.quit();
+                    System.exit(0);
+                }
+            }
+        });
     }   
 
     @Override
