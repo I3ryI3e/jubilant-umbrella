@@ -21,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI{
     private Siege_Game game;
@@ -34,7 +35,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
     private boolean quit=false;
 
     public FrameNineCardSiege(Siege_Game game){
-        this(game,560,150,870,600);
+        this(game,560,150,870,592);
     }
     
     public FrameNineCardSiege(Siege_Game game, int x, int y, int largura, int altura){
@@ -100,10 +101,12 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
             @Override
             public void actionPerformed(ActionEvent ae) {
                 JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showOpenDialog(FrameNineCardSiege.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-//                    boolean loaded = game.loadGame(file);
+                    boolean loaded = game.loadGame(file);
                 }
             }
         });
@@ -115,10 +118,12 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
             @Override
             public void actionPerformed(ActionEvent ae) {
                 JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showSaveDialog(FrameNineCardSiege.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-//                    boolean saved = game.saveGame(file);
+                    boolean saved = game.saveGame(file);
                 }
             }
         });
