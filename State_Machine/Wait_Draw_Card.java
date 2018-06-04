@@ -15,4 +15,11 @@ public class Wait_Draw_Card extends State_Adapter {
             return new Close_Combat(getGame());
         return new Wait_Action(getGame());
     }
+
+    @Override
+    public States enemyCheckLine() {
+        getGame().enemyCheckLine();
+        return this;
+    }
+    
 }

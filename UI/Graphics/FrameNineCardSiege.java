@@ -46,7 +46,6 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
 
         createGraphicsObjects(); // cria os objectos graficos 
         addGraphicsObjects();  // faz a montagem visual dos objectos graficos
-        //registarListeners(); // liga os objectos graficos aos respectivos listeners
 
         addMenu();
         
@@ -66,10 +65,6 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         mainGamePanel= new MainGameBoard(game);
     }
 
-//    private void registarListeners() {
-//        //TODO
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     private void addGraphicsObjects() {
         cp.add(cards,BorderLayout.CENTER);
@@ -82,7 +77,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         JMenu menu1 = new JMenu("File");
         
         JMenuItem menuitem1a = new JMenuItem("New");
-//        menuitem1.setMnemonic(KeyEvent.VK_N);         //TODO AINDA NA PERCEBI O QUE FAZ
+        menuitem1a.setMnemonic(KeyEvent.VK_N);
         menuitem1a.setToolTipText("Start a new game");
         menuitem1a.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         menuitem1a.setIcon(new ImageIcon(Images.getImage(NEW)));

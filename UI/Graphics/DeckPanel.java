@@ -25,6 +25,7 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        setOpaque(false);
         Image imageBoard = Images.getImage(CARD_BACK);
         g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
     }

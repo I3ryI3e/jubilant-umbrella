@@ -408,16 +408,13 @@ public class Game implements Serializable, Constants{
     
     public boolean existsTrebuchet() {return enemy.getTrebutchet()>0;}
 
-    public boolean isNumEnemyInCloseCombat(int num) {
-        return enemy.isNumEnemyInCloseCombat(num);
-    }
+    public boolean isNumEnemyInCloseCombat(int num) {return enemy.isNumEnemyInCloseCombat(num);}
     
+    public boolean playerOnEnemyLine() {return player.playerOnEnemyLine();}    
     
     public int getLastDiceRoll(){ return Dice.lastRoll;}
 
-    public int throwDice() {
-        return Dice.rollDice();
-    }
+    public int throwDice() {return Dice.rollDice();}
 
     public void decreaseWall() {
         player.decreaseWall();

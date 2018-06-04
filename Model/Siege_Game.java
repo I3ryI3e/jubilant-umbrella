@@ -223,6 +223,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     
     public void drawCard(){
+        if(game.playerOnEnemyLine()){
+            setState(state.enemyCheckLine());
+            setChanged();
+            notifyObservers();
+        }
         setState(state.Draw_Card());
         setChanged();
         notifyObservers();

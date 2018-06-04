@@ -3,6 +3,7 @@ package UI.Graphics;
 import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
@@ -23,7 +24,6 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
         setVisible(false);
         createGraphicsObjects();
         addGraphicsObjects();
-        registerListeners();
         update(game,null);
     }
 
@@ -47,11 +47,6 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
         add(Box.createVerticalStrut(10));
         add(bottomBox);
         add(Box.createVerticalStrut(10));
-    }
-
-    private void registerListeners() {
-//        //TODO
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

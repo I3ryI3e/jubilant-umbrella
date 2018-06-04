@@ -24,6 +24,7 @@ public interface States extends Constants, Serializable{
     public States Apply_RallyPlus1DRM_Rules();
     public States returnWaitAction();
     public States returnInitialState();
+    public States enemyCheckLine();
     public States endTurn();
 
     public States quit();

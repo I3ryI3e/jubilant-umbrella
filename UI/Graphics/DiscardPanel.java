@@ -27,6 +27,7 @@ public class DiscardPanel extends JPanel implements ConstantsGUI, Observer{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        setOpaque(false);
         Image imageBoard = Images.getImage("Card"+ game.getActiveCardNumber());
         g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
     }

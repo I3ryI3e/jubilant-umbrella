@@ -2,27 +2,32 @@ package UI.Graphics;
 
 import Model.Siege_Game;
 import java.awt.Color;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-class ButtonPanel extends JPanel implements Observer{
+class ButtonPanel extends JPanel{
     private Siege_Game game;
+    private WaitActionPanel waitActionPanel;
+    private WaitDrawCardPanel waitDrawCardPanel;
 
     public ButtonPanel(Siege_Game game){
         super();
         this.game = game;
-        game.addObserver(this);
-        setVisible(true);
-        setBorder(new LineBorder(Color.BLACK));
-        update(game, null);
+        setOpaque(false);
+        createObjects();
+        orderLayout();
+        validate();
     }
-    
-    @Override
-    public void update(Observable o, Object o1) {
-        //TODO
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    private void createObjects() {
+        waitActionPanel= new WaitActionPanel(game);
+        waitDrawCardPanel= new WaitDrawCardPanel(game);
     }
-    
+
+    private void orderLayout() {
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        add(waitActionPanel);
+        add(waitDrawCardPanel);
+    }   
 }
