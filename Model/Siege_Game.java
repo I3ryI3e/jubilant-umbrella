@@ -2,6 +2,8 @@ package Model;
 
 import Model.Constants.Enemy_Attack;
 import State_Machine.*;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Observable;
 
@@ -325,6 +327,20 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void returnInitialState() {setState(state.returnInitialState());}
     
     public boolean getSabAndRaidStateActive() {return game.getSabAndRaidStateActive();}
+    
+    public boolean loadGame(File file) {
+        try {
+            setGame((Game) FileUtility.retrieveGameFromFile(file));
+        } catch (IOException | ClassNotFoundException ex) {}
+        return false;
+    }
+    
+    public boolean saveGame(File file) {
+        try {
+            FileUtility.saveGameToFile(file, game);
+        } catch (IOException ex) {}
+        return false;
+    }
     
     public void quit() {
         setState(state.quit());

@@ -9,11 +9,14 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
     private Siege_Game game;
@@ -67,18 +70,34 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
                 game.setup();
             }
         });
-//        loadGame.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                super.mousePressed(e); 
-//            }      
-//});
-//        saveGame.addMouseListener(new MouseAdapter(){
-//            @Override
-//            public void mousePressed(MouseEvent e) {
-//                super.mousePressed(e);
-//            }
-//        });
+        loadGame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
+                int n = fileChooser.showOpenDialog(InitialPanel.this);
+                if(n == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    boolean loaded = game.loadGame(file);
+                }
+            }      
+        });
+        saveGame.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
+                int n = fileChooser.showSaveDialog(InitialPanel.this);
+                if(n == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    boolean saved = game.saveGame(file);
+                }
+            }
+        });
         quit.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
