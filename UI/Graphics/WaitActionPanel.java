@@ -8,6 +8,8 @@ import State_Machine.Wait_Draw_Card;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
@@ -53,7 +55,7 @@ public class WaitActionPanel extends JPanel implements Observer {
     }
 
     private void orderLayout() {
-        setLayout(new GridLayout(2, 5));
+        setLayout(new GridLayout(5, 2));
         add(archersButton);
         add(boilingButton);
         add(closeCombatButton);
@@ -74,8 +76,52 @@ public class WaitActionPanel extends JPanel implements Observer {
     
 
     private void registerListeners() {
-        //TODO
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        archersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateArchers();
+            }
+        });
+        endTurnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.endTurn();
+            }
+        });
+    }
+    private void setButtons(){
+        if(game.canArchers())
+            archersButton.setEnabled(true);
+        else
+            archersButton.setEnabled(false);
+        if(game.canBoiling())
+            boilingButton.setEnabled(true);
+        else
+            boilingButton.setEnabled(false);
+        if(game.canCloseCombat())
+            closeCombatButton.setEnabled(true);
+        else
+            closeCombatButton.setEnabled(false);
+        if(game.canCoupure())
+            coupureButton.setEnabled(true);
+        else
+            coupureButton.setEnabled(false);
+        if(game.canRally())
+            rallyTroopsButton.setEnabled(true);
+        else 
+            rallyTroopsButton.setEnabled(false);
+        if(game.playerStillHasActionsLeft())
+            tunnelButton.setEnabled(true);
+        else
+            tunnelButton.setEnabled(false);
+        if(game.canSabotage())
+            sabotageButton.setEnabled(true);
+        else
+            sabotageButton.setEnabled(false);
+        if(game.canSupply())
+            supplyRaidButton.setEnabled(true);
+        else
+            supplyRaidButton.setEnabled(false);
     }
 
     
@@ -85,7 +131,11 @@ public class WaitActionPanel extends JPanel implements Observer {
         States state=game.getState();
         if(state instanceof Wait_Action){
             setVisible(true);
+            setButtons();
         }
+        else
+            setVisible(false);
+        
         
     }
 

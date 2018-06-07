@@ -47,8 +47,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     
     public void stateArchers(){
-        if(canArchers())
+        if(canArchers()){
             setState(state.archers());
+            setChanged();
+            notifyObservers();
+        }
     }
     
     public void archers(Enemy_Attack ea){
@@ -87,8 +90,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     
     public void stateBoilling() {
-        if(canBoiling())
+        if(canBoiling()){
             setState(state.boiling());
+            setChanged();
+            notifyObservers();
+        }
+        
     }
     
     public void boiling(Enemy_Attack ea) {
@@ -113,8 +120,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     
     public void stateCloseCombat() {
-        if(canCloseCombat())
+        if(canCloseCombat()){
             setState(state.closeCombat());
+            setChanged();
+            notifyObservers();
+        }
         
     }
     
@@ -172,8 +182,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     }
     
     public void stateRally() {
-        if(canRally())
+        if(canRally()){
             setState(state.rally_Troops());
+            setChanged();
+            notifyObservers();
+        }
     }
     
     public void rallyPlus1DRM() {
@@ -260,8 +273,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean onEnemyLine() {return game.getPlayer().playerOnEnemyLine();}
     
     public void stateTunnel() {
-        if(game.playerStillHasActionsLeft() && (!getSabAndRaidStateActive()))
+        if(game.playerStillHasActionsLeft() && (!getSabAndRaidStateActive())){
             setState(state.tunnel());
+            setChanged();
+            notifyObservers();
+        }
     }
     
     public boolean onCastleSpace() {return game.getPlayer().playerOnCastleSpace();}
@@ -300,8 +316,11 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public boolean siegeTowerExists(){ return game.siegeTowerExists();}
     
     public void stateBuyAction() {
-        if(game.getCanUseSupplyOrMorale())
+        if(game.getCanUseSupplyOrMorale()){
             setState(state.buyAction());
+            setChanged();
+            notifyObservers();
+        }
     }
     
     public void buyAction(int opt) {

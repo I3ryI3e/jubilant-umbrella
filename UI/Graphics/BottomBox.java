@@ -42,12 +42,12 @@ public class BottomBox extends Box {
         dice.setMaximumSize(new Dimension(205,260));
         text.setMaximumSize(new Dimension(205,260));
 
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(text);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(buttons);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(dice);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
     }
 }

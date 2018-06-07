@@ -1,6 +1,7 @@
 package UI.Graphics;
 
 import Model.Siege_Game;
+import java.awt.Dimension;
 import javax.swing.Box;
 
 public class TopBox extends Box {
@@ -26,6 +27,7 @@ public class TopBox extends Box {
     }
 
     private void setObjLayout() {
+        setMaximumSize(new Dimension(870,260));
         Box player = Box.createVerticalBox();
         Box enemy= Box.createVerticalBox();
         Box deck = Box.createVerticalBox();
@@ -36,14 +38,14 @@ public class TopBox extends Box {
         deck.add(deckPanel);
         discard.add(discardPanel);
         
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(player);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(discard);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(deck);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
         add(enemy);
-        add(Box.createHorizontalStrut(10));
+        add(Box.createRigidArea(new Dimension(10,0)));
     }
 }
