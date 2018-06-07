@@ -67,14 +67,7 @@ public class WaitActionPanel extends JPanel implements Observer {
         add(buyActionButton);
         add(endTurnButton);
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        setOpaque(false);
-    }
     
-
     private void registerListeners() {
         archersButton.addActionListener(new ActionListener() {
             @Override

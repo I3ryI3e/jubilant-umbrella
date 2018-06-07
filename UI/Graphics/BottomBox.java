@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import javax.swing.Box;
 import javax.swing.border.LineBorder;
 
-public class BottomBox extends Box {
+public class BottomBox extends Box implements ConstantsGUI{
     private Siege_Game game;
     private ButtonPanelBorder buttonPanelBorder;
     private TextAreaPanel textPanel;
@@ -38,16 +38,16 @@ public class BottomBox extends Box {
         buttons.add(buttonPanelBorder);
         text.add(textPanel);
         dice.add(dicePanel);
-        buttons.setMaximumSize(new Dimension(420, 260));
-        dice.setMaximumSize(new Dimension(205,260));
-        text.setMaximumSize(new Dimension(205,260));
+        buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WEIGHT, CARDS_HEIGHT));
+        dice.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
+        text.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
 
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(text);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(buttons);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(dice);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
     }
 }

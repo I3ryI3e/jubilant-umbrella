@@ -2,6 +2,13 @@ package UI.Graphics;
 
 public interface ConstantsGUI {
     
+    int MARGIN = 10;
+    int CARDS_WEIGHT = 200;
+    int CARDS_HEIGHT = 280;
+    int BUTTONS_SPECIAL_WEIGHT = 410;
+    int MIN_WINDOW_HEIGHT = 652;
+    int MIN_WINDOW_WEIGHT = 872;
+    
     String INITIAL_PANEL="Initial Panel";
     String DRAW_CARD_PANEL="Draw Card Panel";
     
@@ -17,8 +24,11 @@ public interface ConstantsGUI {
     String CARD_BACK = "Card Back";
     String PATH_IMG_CARD_BACK = "Resource/BackOfTheCards.gif";
     
-    String BACKGROUND = "Background Image";
+    String BACKGROUND = "Background";
     String PATH_IMG_BACKGROUND = "Resource/Background.gif";
+    
+    String BACKGROUND2 = "Background2";
+    String PATH_IMG_BACKGROUND2 = "Resource/Background2.gif";
     
     String CARD1 = "Card1";
     String PATH_IMG_CARD1 = "Resource/Card1.gif";

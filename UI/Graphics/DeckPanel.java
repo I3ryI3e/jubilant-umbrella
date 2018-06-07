@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Siege_Game;
@@ -27,7 +26,7 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
         super.paintComponent(g);
         setOpaque(false);
         Image imageBoard = Images.getImage(CARD_BACK);
-        g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
+        g.drawImage(imageBoard, 0, 0, CARDS_WEIGHT, CARDS_HEIGHT, this);
     }
     
 

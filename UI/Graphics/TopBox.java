@@ -4,7 +4,7 @@ import Model.Siege_Game;
 import java.awt.Dimension;
 import javax.swing.Box;
 
-public class TopBox extends Box {
+public class TopBox extends Box implements ConstantsGUI{
     private Siege_Game game;
     private DeckPanel deckPanel;
     private DiscardPanel discardPanel;
@@ -27,7 +27,6 @@ public class TopBox extends Box {
     }
 
     private void setObjLayout() {
-        setMaximumSize(new Dimension(870,260));
         Box player = Box.createVerticalBox();
         Box enemy= Box.createVerticalBox();
         Box deck = Box.createVerticalBox();
@@ -37,15 +36,19 @@ public class TopBox extends Box {
         enemy.add(enemyPanel);
         deck.add(deckPanel);
         discard.add(discardPanel);
+        player.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
+        enemy.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
+        deck.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
+        discard.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
         
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(player);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(discard);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(deck);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(enemy);
-        add(Box.createRigidArea(new Dimension(10,0)));
+        add(Box.createRigidArea(new Dimension(MARGIN,0)));
     }
 }

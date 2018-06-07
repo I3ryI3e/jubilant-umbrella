@@ -30,7 +30,7 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
     @Override
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
-        Image img = Images.getImage(BACKGROUND);
+        Image img = Images.getImage(BACKGROUND2);
         grphcs.drawImage(img, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
@@ -42,11 +42,11 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
     private void addGraphicsObjects() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(MARGIN));
         add(topBox);
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(MARGIN));
         add(bottomBox);
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(MARGIN));
     }
 
     @Override

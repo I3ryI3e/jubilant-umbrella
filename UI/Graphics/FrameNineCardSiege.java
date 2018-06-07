@@ -35,7 +35,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
     private boolean quit=false;
 
     public FrameNineCardSiege(Siege_Game game){
-        this(game,560,150,870,592);
+        this(game,560,150,MIN_WINDOW_WEIGHT,MIN_WINDOW_HEIGHT);
     }
     
     public FrameNineCardSiege(Siege_Game game, int x, int y, int largura, int altura){
@@ -54,7 +54,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         setSize(largura, altura);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(870, 592));
+        setMinimumSize(new Dimension(MIN_WINDOW_WEIGHT, MIN_WINDOW_HEIGHT));
         validate();
         update(game,null);
     }
@@ -72,6 +72,18 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         cards.setLayout(cardManager);
         cards.add(initialpanel,INITIAL_PANEL);
         cards.add(mainGamePanel,DRAW_CARD_PANEL);
+    }
+        
+    @Override
+    public void update(Observable o, Object arg) {
+
+        States state = game.getState();
+        
+        if(state instanceof Initial_State){
+            cardManager.show(cards, INITIAL_PANEL);
+        }else if(state instanceof Wait_Draw_Card){
+            cardManager.show(cards, DRAW_CARD_PANEL);
+        }
     }
     
     private void addMenu() {
@@ -180,18 +192,5 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         menubar.add(menu1);
         menubar.add(menu2);
         this.setJMenuBar(menubar);
-    }
-        
-    @Override
-    public void update(Observable o, Object arg) {
-
-        States state = game.getState();
-        
-        if(state instanceof Initial_State){
-            cardManager.show(cards, INITIAL_PANEL);
-        }else if(state instanceof Wait_Draw_Card){
-            setSize(870, 592);
-            cardManager.show(cards, DRAW_CARD_PANEL);
-        }
     }
 }

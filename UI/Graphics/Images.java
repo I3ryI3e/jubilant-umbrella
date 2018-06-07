@@ -48,6 +48,9 @@ public class Images implements ConstantsGUI {
             try{
                 images.put(BACKGROUND, ImageIO.read(getResourceFile(PATH_IMG_BACKGROUND)));
             } catch (MyException ex){}
+            try{
+                images.put(BACKGROUND2, ImageIO.read(getResourceFile(PATH_IMG_BACKGROUND2)));
+            } catch (MyException ex){}
             try {
                 images.put(NEW, ImageIO.read(getResourceFile(PATH_IMG_NEW)));
             } catch (MyException ex) {}

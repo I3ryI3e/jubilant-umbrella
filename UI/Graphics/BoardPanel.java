@@ -22,6 +22,7 @@ public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
         this.boardName=name;
         game.addObserver(this);
         setVisible(true);
+        setBorder(new LineBorder(Color.BLACK));
         update(game,null);
     }
 
@@ -29,8 +30,7 @@ public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image imageBoard = Images.getImage(boardName);
-        g.drawImage(imageBoard, 0, 0,getParent().getWidth(),getParent().getHeight(), this);
-        setBorder(new LineBorder(Color.BLACK));
+        g.drawImage(imageBoard, 0, 0, CARDS_WEIGHT, CARDS_HEIGHT, this);
     }
     
     @Override
