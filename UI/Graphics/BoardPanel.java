@@ -1,6 +1,7 @@
 
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
@@ -13,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
-    Siege_Game game;
+    ObservableGame game;
     String boardName;
 
-    public BoardPanel(Siege_Game game, String name) {
+    public BoardPanel(ObservableGame game, String name) {
         super();
         this.game=game;
         this.boardName=name;

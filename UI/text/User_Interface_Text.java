@@ -8,16 +8,16 @@ import java.util.Observer;
 import java.util.Scanner;
 
 public class User_Interface_Text implements Constants, Observer{
-    private Siege_Game game;
+    private ObservableGame game;
     private boolean quit = false;
     private int opt;
     
-    public User_Interface_Text(Siege_Game game){
+    public User_Interface_Text(ObservableGame game){
         this.game= game;
         game.addObserver(this);
     }
 
-    private void setGame(Siege_Game game) {this.game = game;}
+    private void setGame(ObservableGame game) {this.game = game;}
     
     private int read_int(){
         Scanner in = new Scanner(System.in);
@@ -339,7 +339,7 @@ public class User_Interface_Text implements Constants, Observer{
         String filename = read_Text();
         if(filename == null || filename.isEmpty())
             return;
-        setGame(load_game(filename));
+        game.setGame(load_game(filename));
         System.out.println("\nGame loaded\n");
     }
 

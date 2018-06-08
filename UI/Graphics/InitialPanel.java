@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import State_Machine.Initial_State;
 import State_Machine.States;
@@ -19,13 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
-    private Siege_Game game;
+    private ObservableGame game;
     private JButton newGame;
     private JButton loadGame;
     private JButton saveGame;
     private JButton quit;
     
-    public InitialPanel(Siege_Game game) {
+    public InitialPanel(ObservableGame game) {
         super();
         this.game=game;
         game.addObserver(this);

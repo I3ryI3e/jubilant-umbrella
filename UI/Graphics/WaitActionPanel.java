@@ -1,6 +1,7 @@
 
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Action;
@@ -16,7 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class WaitActionPanel extends JPanel implements Observer {
-    private Siege_Game game;
+    private ObservableGame game;
     private JButton archersButton;
     private JButton boilingButton;
     private JButton closeCombatButton;
@@ -28,10 +29,10 @@ public class WaitActionPanel extends JPanel implements Observer {
     private JButton buyActionButton;
     private JButton endTurnButton;
     
-    public WaitActionPanel(Siege_Game game) {
+    public WaitActionPanel(ObservableGame game) {
         super();
         this.game=game;
-        game.addObserver(this);
+        this.game.addObserver(this);
         setVisible(false);
         
         createObjects();
@@ -73,6 +74,12 @@ public class WaitActionPanel extends JPanel implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.stateArchers();
+            }
+        });
+        boilingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateBoilling();
             }
         });
         endTurnButton.addActionListener(new ActionListener() {

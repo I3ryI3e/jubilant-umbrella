@@ -1,6 +1,7 @@
 
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
@@ -13,10 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class WaitDrawCardPanel extends JPanel implements Observer {
-    private Siege_Game game;
+    private ObservableGame game;
     private JButton drawCardButton;
 
-    public WaitDrawCardPanel(Siege_Game game) {
+    public WaitDrawCardPanel(ObservableGame game) {
         super();
         this.game = game;
         game.addObserver(this);

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Observable;
 
-public class Siege_Game extends Observable implements Constants, Serializable{
+public class Siege_Game implements Constants, Serializable{
     private Game game;
     private States state;
 
@@ -49,16 +49,12 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateArchers(){
         if(canArchers()){
             setState(state.archers());
-            setChanged();
-            notifyObservers();
         }
     }
     
     public void archers(Enemy_Attack ea){
         if(canUseArchers(ea)){
             setState(state.Apply_Action_Rules(ea));
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -92,8 +88,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateBoilling() {
         if(canBoiling()){
             setState(state.boiling());
-            setChanged();
-            notifyObservers();
         }
         
     }
@@ -101,8 +95,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void boiling(Enemy_Attack ea) {
         if(enemyIsOnCircle(ea) && game.canUseBoiling()){
             setState(state.Apply_Action_Rules(ea));
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -122,8 +114,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateCloseCombat() {
         if(canCloseCombat()){
             setState(state.closeCombat());
-            setChanged();
-            notifyObservers();
         }
         
     }
@@ -139,8 +129,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void closeCombat(Enemy_Attack ea) {
         if(enemyIsOnCloseCombat(ea) && game.playerStillHasActionsLeft()){
             setState(state.Apply_Action_Rules(ea));
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -168,8 +156,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void coupure() {
         if(canCoupure()){
             setState(state.coupure());
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -184,23 +170,17 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateRally() {
         if(canRally()){
             setState(state.rally_Troops());
-            setChanged();
-            notifyObservers();
         }
     }
     
     public void rallyPlus1DRM() {
         if(canDecreaseSupply()){
             setState(state.Apply_RallyPlus1DRM_Rules());
-            setChanged();
-            notifyObservers();
         }
     }
     
     public void normalRally() {
         setState(state.Apply_NormalRally_Rules());
-        setChanged();
-        notifyObservers();
     }
     
     public boolean canSupply(){
@@ -212,8 +192,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void supply() {
         if(canSupply()){
             setState(state.supply());
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -226,31 +204,25 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void sabotage() {
         if(canSabotage() && game.existsTrebuchet()){
             setState(state.sabotage());
-            setChanged();
-            notifyObservers();
         }
     }
     
     public void setup() {
         setState(state.New_Game());
-        setChanged();
-        notifyObservers();
     }
     
     public void drawCard(){
         if(game.playerOnEnemyLine()){
             setState(state.enemyCheckLine());
-            setChanged();
-            notifyObservers();
         }
         setState(state.Draw_Card());
-        setChanged();
-        notifyObservers();
     }
     
     public void removeSiegeFromGame() {game.removeSiegeFromGame();}
     
-    public void returnWaitAction(){setState(state.returnWaitAction());}
+    public void returnWaitAction(){
+        setState(state.returnWaitAction());
+    }
     
     public String drawBoards() {return game.toString();}
     
@@ -258,8 +230,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     
     public void endTurn() {
        setState(state.endTurn());
-       setChanged();
-       notifyObservers();
     }
     
     public String getText() {return game.getTextToOutput();}
@@ -275,8 +245,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateTunnel() {
         if(game.playerStillHasActionsLeft() && (!getSabAndRaidStateActive())){
             setState(state.tunnel());
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -318,8 +286,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     public void stateBuyAction() {
         if(game.getCanUseSupplyOrMorale()){
             setState(state.buyAction());
-            setChanged();
-            notifyObservers();
         }
     }
     
@@ -363,8 +329,6 @@ public class Siege_Game extends Observable implements Constants, Serializable{
     
     public void quit() {
         setState(state.quit());
-        setChanged();
-        notifyObservers();
     }
     
     @Override

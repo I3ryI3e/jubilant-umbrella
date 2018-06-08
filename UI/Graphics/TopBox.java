@@ -1,17 +1,18 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import java.awt.Dimension;
 import javax.swing.Box;
 
 public class TopBox extends Box implements ConstantsGUI{
-    private Siege_Game game;
+    private ObservableGame game;
     private DeckPanel deckPanel;
     private DiscardPanel discardPanel;
     private EnemyBoardPanel enemyPanel;
     private PlayerBoardPanel playerPanel;
     
-    public TopBox(int axis, Siege_Game game) {
+    public TopBox(int axis, ObservableGame game) {
         super(axis);
         this.game=game;
         setVisible(true);

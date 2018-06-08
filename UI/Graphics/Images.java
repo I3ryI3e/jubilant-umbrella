@@ -72,6 +72,9 @@ public class Images implements ConstantsGUI {
             try {
                 images.put(INFO2, ImageIO.read(getResourceFile(PATH_IMG_INFO2)));
             } catch (MyException ex) {}
+            try{
+                images.put(LADDER_ICON, ImageIO.read(getResourceFile(PATH_LADDER_ICON)));
+            } catch (MyException ex) {}
         } catch (IOException e) {
         }
     }

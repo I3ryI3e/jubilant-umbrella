@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import java.awt.Color;
 import java.util.Observable;
@@ -8,9 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 class DicePanel extends JPanel implements Observer{
-    private Siege_Game game;
+    private ObservableGame game;
     
-    public DicePanel(Siege_Game game){
+    public DicePanel(ObservableGame game){
         super();
         this.game = game;
         game.addObserver(this);

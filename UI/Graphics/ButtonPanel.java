@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -7,12 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 class ButtonPanel extends JPanel{
-    private Siege_Game game;
+    private ObservableGame game;
     private WaitActionPanel waitActionPanel;
     private WaitDrawCardPanel waitDrawCardPanel;
     private WaitArchersPanel waitArchersPanel;
+    private WaitBoilingWater waitBoilingWaterPanel;
 
-    public ButtonPanel(Siege_Game game){
+    public ButtonPanel(ObservableGame game){
         super();
         this.game = game;
         setOpaque(false);
@@ -25,6 +27,7 @@ class ButtonPanel extends JPanel{
         waitActionPanel= new WaitActionPanel(game);
         waitDrawCardPanel= new WaitDrawCardPanel(game);
         waitArchersPanel= new WaitArchersPanel(game);
+        waitBoilingWaterPanel= new WaitBoilingWater(game);
     }
 
     private void orderLayout() {
@@ -32,5 +35,6 @@ class ButtonPanel extends JPanel{
         add(waitActionPanel);
         add(waitDrawCardPanel);
         add(waitArchersPanel);
+        add(waitBoilingWaterPanel);
     }   
 }

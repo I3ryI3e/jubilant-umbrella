@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import State_Machine.*;
 import java.awt.BorderLayout;
@@ -24,7 +25,7 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI{
-    private Siege_Game game;
+    private ObservableGame game;
     private Container cp;
     private CardLayout cardManager;
     private JPanel cards;
@@ -34,11 +35,11 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
     private JPanel gameOverPanel; //TODO
     private boolean quit=false;
 
-    public FrameNineCardSiege(Siege_Game game){
+    public FrameNineCardSiege(ObservableGame game){
         this(game,560,150,MIN_WINDOW_WEIGHT,MIN_WINDOW_HEIGHT);
     }
     
-    public FrameNineCardSiege(Siege_Game game, int x, int y, int largura, int altura){
+    public FrameNineCardSiege(ObservableGame game, int x, int y, int largura, int altura){
         super("9 Card Siege Game");
         this.game=game;
         game.addObserver(this);

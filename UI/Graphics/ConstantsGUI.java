@@ -51,6 +51,9 @@ public interface ConstantsGUI {
     String CARD7 = "Card7";
     String PATH_IMG_CARD7 = "Resource/Card7.gif";
     
+    String LADDER_ICON= "Ladder";
+    String PATH_LADDER_ICON = "Resource/ladder.png";
+    
     String NEW = "New";
     String PATH_IMG_NEW = "Resource/New.png";
 

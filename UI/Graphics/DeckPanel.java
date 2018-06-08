@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,9 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
-    private Siege_Game game;
+    private ObservableGame game;
     
-    public DeckPanel(Siege_Game game) {
+    public DeckPanel(ObservableGame game) {
         super();
         this.game=game;
         game.addObserver(this);

@@ -1,5 +1,6 @@
 package UI.Graphics;
 
+import Model.ObservableGame;
 import Model.Siege_Game;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,12 +10,12 @@ import javax.swing.Box;
 import javax.swing.border.LineBorder;
 
 public class BottomBox extends Box implements ConstantsGUI{
-    private Siege_Game game;
+    private ObservableGame game;
     private ButtonPanelBorder buttonPanelBorder;
     private TextAreaPanel textPanel;
     private DicePanel dicePanel;
     
-    public BottomBox(int axis, Siege_Game game) {
+    public BottomBox(int axis, ObservableGame game) {
         super(axis);
         this.game=game;
         setVisible(true);
