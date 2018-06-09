@@ -2,14 +2,13 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 
 public class PlayerBoardPanel extends BoardPanel{
-    private PiecePanel wall;
-    private PiecePanel morale;
-    private PiecePanel supply;
-    private PiecePanel tunnel;
-    private PiecePanel supplyCount;
+    private PlayerPiecePanel wall;
+    private PlayerPiecePanel morale;
+    private PlayerPiecePanel supply;
+    private PlayerPiecePanel tunnel;
+    private PlayerPiecePanel supplyCount;
     
     public PlayerBoardPanel(ObservableGame game) {
         super(game, PLAYER_BOARD);
@@ -18,11 +17,11 @@ public class PlayerBoardPanel extends BoardPanel{
     }
 
     private void createObject() {
-        wall = new PiecePanel(LADDER_ICON);
-        morale= new PiecePanel(LADDER_ICON);
-        supply= new PiecePanel(LADDER_ICON);
-        tunnel= new PiecePanel(LADDER_ICON);
-        supplyCount= new PiecePanel(LADDER_ICON);
+        wall = new PlayerPiecePanel(LADDER_ICON, game);
+        morale= new PlayerPiecePanel(LADDER_ICON,game);
+        supply= new PlayerPiecePanel(LADDER_ICON,game);
+        tunnel= new PlayerPiecePanel(LADDER_ICON,game);
+        supplyCount= new PlayerPiecePanel(LADDER_ICON,game);
     }
 
     private void orderLayout() {

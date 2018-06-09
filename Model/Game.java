@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game implements Serializable, Constants{
     private Player player;
@@ -423,6 +425,7 @@ public class Game implements Serializable, Constants{
     public int getTrebutchet() {
         return enemy.getTrebutchet();
     }
+
     
     
     private static class Dice {

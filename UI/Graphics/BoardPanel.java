@@ -9,22 +9,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
-    ObservableGame game;
-    String boardName;
+public class BoardPanel extends JPanel implements ConstantsGUI{
+    protected ObservableGame game;
+    private String boardName;
 
     public BoardPanel(ObservableGame game, String name) {
         super();
         this.game=game;
         this.boardName=name;
-        game.addObserver(this);
         setVisible(true);
         setBorder(new LineBorder(Color.BLACK));
-        update(game,null);
     }
 
     @Override
@@ -34,14 +31,4 @@ public class BoardPanel extends JPanel implements ConstantsGUI, Observer{
         g.drawImage(imageBoard, 0, 0, CARDS_WEIGHT, CARDS_HEIGHT, this);
     }
     
-    @Override
-    public void update(Observable o, Object arg) {
-//        States state = game.getState();
-//        if(state instanceof Wait_Draw_Card){
-////            JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-////            topFrame.setSize(800, 800);
-//            setVisible(true);
-//        }else
-//            setVisible(false);
-    }
 }

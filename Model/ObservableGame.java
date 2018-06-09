@@ -92,6 +92,10 @@ public class ObservableGame extends Observable {
     }
 
     public void drawCard() {
+        game.enemyCheckLine();
+        setChanged();
+        notifyObservers();
+        
         game.drawCard();
         setChanged();
         notifyObservers();
@@ -312,6 +316,7 @@ public class ObservableGame extends Observable {
         setChanged();
         notifyObservers();
     }
+
     
      
     

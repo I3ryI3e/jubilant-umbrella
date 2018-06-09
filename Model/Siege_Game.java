@@ -210,11 +210,13 @@ public class Siege_Game implements Constants, Serializable{
     public void setup() {
         setState(state.New_Game());
     }
-    
-    public void drawCard(){
+    public void enemyCheckLine(){
         if(game.playerOnEnemyLine()){
             setState(state.enemyCheckLine());
         }
+    }
+    
+    public void drawCard(){
         setState(state.Draw_Card());
     }
     
@@ -335,4 +337,5 @@ public class Siege_Game implements Constants, Serializable{
     public String toString() {
         return game.toString();
     }
+
 }
