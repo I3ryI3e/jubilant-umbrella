@@ -75,8 +75,19 @@ public class Images implements ConstantsGUI {
             try{
                 images.put(LADDER_ICON, ImageIO.read(getResourceFile(PATH_LADDER_ICON)));
             } catch (MyException ex) {}
-        } catch (IOException e) {
-        }
+            try{
+                images.put(BATTERING_RAM_ICON, ImageIO.read(getResourceFile(PATH_BATTERING_RAM_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(SIEGE_TOWER_ICON, ImageIO.read(getResourceFile(PATH_SIEGE_TOWER_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(RED_SQUARE_ICON, ImageIO.read(getResourceFile(PATH_RED_SQUARE_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(SOLDIER_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_ICON)));
+            } catch (MyException ex) {}
+        } catch (IOException e) {}
     }
     
      public static Image getImage(String name) {

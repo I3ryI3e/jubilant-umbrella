@@ -17,11 +17,11 @@ public class PlayerBoardPanel extends BoardPanel{
     }
 
     private void createObject() {
-        wall = new PlayerPiecePanel(LADDER_ICON, game);
-        morale= new PlayerPiecePanel(LADDER_ICON,game);
-        supply= new PlayerPiecePanel(LADDER_ICON,game);
-        tunnel= new PlayerPiecePanel(LADDER_ICON,game);
-        supplyCount= new PlayerPiecePanel(LADDER_ICON,game);
+        wall = new PlayerPiecePanel(SOLDIER_ICON, game);
+        morale= new PlayerPiecePanel(SOLDIER_ICON,game);
+        supply= new PlayerPiecePanel(SOLDIER_ICON,game);
+        tunnel= new PlayerPiecePanel(SOLDIER_ICON,game);
+        supplyCount= new PlayerPiecePanel(SOLDIER_ICON,game);
     }
 
     private void orderLayout() {

@@ -51,9 +51,6 @@ public interface ConstantsGUI {
     String CARD7 = "Card7";
     String PATH_IMG_CARD7 = "Resource/Card7.gif";
     
-    String LADDER_ICON= "Ladder";
-    String PATH_LADDER_ICON = "Resource/ladder.png";
-    
     String NEW = "New";
     String PATH_IMG_NEW = "Resource/New.png";
 
@@ -63,7 +60,7 @@ public interface ConstantsGUI {
     String SAVE = "Save";
     String PATH_IMG_SAVE = "Resource/Save.png";
     
-    String REDCROSS = "RedCross";
+    String REDCROSS = "Red Cross";
     String PATH_IMG_REDCROSS = "Resource/RedCross.png";
     
     String OPTIONS = "Options";
@@ -73,5 +70,20 @@ public interface ConstantsGUI {
     String PATH_IMG_INFO = "Resource/Info.png";    
     
     String INFO2 = "Info2";
-    String PATH_IMG_INFO2 = "Resource/Info2.png";    
+    String PATH_IMG_INFO2 = "Resource/Info2.png";
+    
+    String LADDER_ICON= "Ladder";
+    String PATH_LADDER_ICON = "Resource/ladder.gif";
+    
+    String BATTERING_RAM_ICON= "Battering Ram";
+    String PATH_BATTERING_RAM_ICON = "Resource/bram.gif";
+    
+    String SIEGE_TOWER_ICON= "Siege Tower";
+    String PATH_SIEGE_TOWER_ICON = "Resource/stower.gif";
+    
+    String RED_SQUARE_ICON= "Pawn";
+    String PATH_RED_SQUARE_ICON = "Resource/redSquare.gif";
+    
+    String SOLDIER_ICON= "Soldier";
+    String PATH_SOLDIER_ICON = "Resource/cauldron1.gif";
 }
