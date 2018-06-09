@@ -46,8 +46,8 @@ public class Wait_Action extends State_Adapter implements Constants{
     }
 
     @Override
-    public States supply() {
-        getGame().supply();
+    public States supplyRaid() {
+        getGame().supplyRaid();
         if(getGame().checkLoss())
             return new Game_Over(getGame());
         else

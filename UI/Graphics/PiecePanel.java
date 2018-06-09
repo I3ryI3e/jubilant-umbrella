@@ -19,6 +19,7 @@ public abstract  class PiecePanel extends JPanel implements Observer{
         this.game=game;
         this.type=type;
         this.game.addObserver(this);
+        setOpaque(false);
     }
     public String getType(){
         return type;

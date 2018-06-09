@@ -12,7 +12,7 @@ public interface States extends Constants, Serializable{
     public States closeCombat();
     public States coupure();
     public States sabotage();
-    public States supply();
+    public States supplyRaid();
     public States tunnel();
     public States freeTunnelMovement();
     public States fastTunnelMovement();

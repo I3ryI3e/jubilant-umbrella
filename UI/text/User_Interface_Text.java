@@ -75,7 +75,7 @@ public class User_Interface_Text implements Constants, Observer{
                 game.stateTunnel();
                 break;
             case 7:
-                game.supply();
+                game.supplyRaid();
                 break;
             case 8:
                 game.sabotage();

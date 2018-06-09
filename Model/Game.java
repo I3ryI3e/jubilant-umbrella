@@ -280,7 +280,7 @@ public class Game implements Serializable, Constants{
         player.decreasePlayerActions();
     }
     
-    public void supply() {
+    public void supplyRaid() {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getRaidMod();
         textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");

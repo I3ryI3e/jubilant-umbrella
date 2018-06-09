@@ -23,7 +23,7 @@ public class State_Adapter implements States, Constants {
     @Override
     public States sabotage() {return this;}
     @Override
-    public States supply() {return this;}
+    public States supplyRaid() {return this;}
     @Override
     public States archers() {return this;}
     @Override

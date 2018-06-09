@@ -183,15 +183,15 @@ public class Siege_Game implements Constants, Serializable{
         setState(state.Apply_NormalRally_Rules());
     }
     
-    public boolean canSupply(){
+    public boolean canSupplyRaid(){
         if(!playerStillHasActionsLeft())
             return false;
         return (game.getPlayer().playerOnEnemyLine());
     }
     
-    public void supply() {
-        if(canSupply()){
-            setState(state.supply());
+    public void supplyRaid() {
+        if(canSupplyRaid()){
+            setState(state.supplyRaid());
         }
     }
     

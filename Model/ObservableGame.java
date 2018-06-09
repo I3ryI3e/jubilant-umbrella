@@ -73,8 +73,8 @@ public class ObservableGame extends Observable {
         notifyObservers();
     }
 
-    public void supply() {
-        game.supply();
+    public void supplyRaid() {
+        game.supplyRaid();
         setChanged();
         notifyObservers();
     }
@@ -198,7 +198,7 @@ public class ObservableGame extends Observable {
     }
 
     public boolean canSupply() {
-        return game.canSupply();
+        return game.canSupplyRaid();
     }
 
     public int getActiveCardNumber() {

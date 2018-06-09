@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -82,6 +83,48 @@ public class WaitActionPanel extends JPanel implements Observer {
                 game.stateBoilling();
             }
         });
+        closeCombatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateCloseCombat();
+            }
+        });
+        coupureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.coupure();
+            }
+        });
+        rallyTroopsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateRally();
+            }
+        });
+        tunnelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateTunnel();
+            }
+        });
+        sabotageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.sabotage();
+            }
+        });
+        supplyRaidButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               game.supplyRaid();
+            }
+        });
+        buyActionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.stateBuyAction();
+            }
+        });
         endTurnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,6 +165,11 @@ public class WaitActionPanel extends JPanel implements Observer {
             supplyRaidButton.setEnabled(true);
         else
             supplyRaidButton.setEnabled(false);
+        if(game.canBuyAction())
+            buyActionButton.setEnabled(true);
+        else
+            buyActionButton.setEnabled(false);
+        
     }
 
     
@@ -135,8 +183,6 @@ public class WaitActionPanel extends JPanel implements Observer {
         }
         else
             setVisible(false);
-        
-        
     }
 
     
