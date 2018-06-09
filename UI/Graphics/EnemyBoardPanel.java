@@ -20,9 +20,9 @@ public class EnemyBoardPanel extends BoardPanel {
 
     private void createObjects() {
         ladder= new WeaponPiecePanel(LADDER_ICON, game);
-        batteringRam= new WeaponPiecePanel(LADDER_ICON,game);
-        siegeTower= new WeaponPiecePanel(LADDER_ICON,game);
-        trebuchet= new WeaponPiecePanel(LADDER_ICON, game);
+        batteringRam= new WeaponPiecePanel(BATTERING_RAM_ICON,game);
+        siegeTower= new WeaponPiecePanel(SIEGE_TOWER_ICON,game);
+        trebuchet= new WeaponPiecePanel(RED_SQUARE_ICON, game);
     }
 
     private void orderLayout() {
