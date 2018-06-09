@@ -55,7 +55,7 @@ public class EnemyBoardPanel extends BoardPanel {
         siegeTower.setBounds(inset.left+149, inset.top+187, size.width, size.height);
         add(siegeTower);
         size= trebuchet.getPreferredSize();
-        trebuchet.setBounds(inset.left+149, inset.top+241, size.width, size.height);
+        trebuchet.setBounds(inset.left+152, inset.top+244, size.width, size.height);
         add(trebuchet);
     }
     

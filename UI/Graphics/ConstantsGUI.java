@@ -84,6 +84,18 @@ public interface ConstantsGUI {
     String RED_SQUARE_ICON= "Pawn";
     String PATH_RED_SQUARE_ICON = "Resource/redSquare.gif";
     
+    String WALL_ICON= "Wall";
+    String PATH_WALL_ICON = "Resource/wall.gif";
+    
+    String MORALE_ICON= "Morale";
+    String PATH_MORALE_ICON = "Resource/banner.gif";
+    
+    String SUPPLY_ICON= "Supply";
+    String PATH_SUPPLY_ICON = "Resource/cauldron.gif";
+    
     String SOLDIER_ICON= "Soldier";
-    String PATH_SOLDIER_ICON = "Resource/cauldron1.gif";
+    String PATH_SOLDIER_ICON = "Resource/stickman.gif";
+    
+    String APPLES_ICON= "Appples";
+    String PATH_APPLES_ICON = "Resource/apples.gif";
 }
