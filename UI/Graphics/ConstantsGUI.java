@@ -5,12 +5,14 @@ public interface ConstantsGUI {
     int MARGIN = 10;
     int CARDS_WIDTH = 200;
     int CARDS_HEIGHT = 280;
-    int BUTTONS_SPECIAL_WEIGHT = 410;
+    int BUTTONS_SPECIAL_WITDH = 410;
     int MIN_WINDOW_HEIGHT = 652;
-    int MIN_WINDOW_WEIGHT = 872;
+    int MIN_WINDOW_WIDTH = 872;
     
     String INITIAL_PANEL="Initial Panel";
     String DRAW_CARD_PANEL="Draw Card Panel";
+    String WIN_PANEL="Win panel";
+    String LOSS_PANEL="Loss panel";
     
     String DISCARD="Discard";
     String PATH_IMG_DECK = "";
@@ -107,4 +109,10 @@ public interface ConstantsGUI {
     
     String APPLES_ICON= "Appples";
     String PATH_APPLES_ICON = "Resource/apples.gif";
+    
+    String LOSS_ICON= "Loss";
+    String PATH_LOSS_ICON = "Resource/loss.gif";
+    
+    String WIN_ICON= "Win";
+    String PATH_WIN_ICON = "Resource/win.gif";
 }

@@ -59,8 +59,8 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image teste = Images.getImage(BACKGROUND);
-        g.drawImage(teste, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
+        Image imageBoard = Images.getImage(BACKGROUND);
+        g.drawImage(imageBoard, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
     private void registerListeners() {

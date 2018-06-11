@@ -2,8 +2,10 @@ package UI.Graphics;
 
 import Model.ObservableGame;
 import Model.Siege_Game;
+import State_Machine.Game_Over;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
+import State_Machine.Win_Game;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -55,6 +57,8 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
         States state= game.getState();
         if( state instanceof Wait_Draw_Card){
             setVisible(true);
+        }else if( state instanceof Win_Game || state instanceof Game_Over){
+            setVisible(false);
         }
     }
 }
