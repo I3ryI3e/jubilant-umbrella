@@ -444,6 +444,36 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         }
     }
 
+    public int getPlayerLocation(String type) {
+        switch(type){
+            case MORALE_ICON:
+        {
+            try {
+                return getPlayer().getMorale();
+            } catch (MyException ex) {
+                return 4;
+            }
+        }
+            case WALL_ICON:
+        {
+            try {
+                return getPlayer().getWall();
+            } catch (MyException ex) {
+                return 4;
+            }
+        }
+            case SUPPLY_ICON:
+        {
+            try {
+                return getPlayer().getSupplies();
+            } catch (MyException ex) {
+                return 4;
+            }
+        }
+        }
+        return 4;
+    }
+
     
     
     private static class Dice {

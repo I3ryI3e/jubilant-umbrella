@@ -329,10 +329,6 @@ public class Siege_Game implements Constants, Serializable{
         return false;
     }
     
-    public void quit() {
-        setState(state.quit());
-    }
-    
     @Override
     public String toString() {
         return game.toString();
@@ -344,6 +340,10 @@ public class Siege_Game implements Constants, Serializable{
 
     public int getGameDay() {
         return game.getGame_day();
+    }
+
+    int getPlayerLocation(String type) {
+        return game.getPlayerLocation(type);
     }
 
 }

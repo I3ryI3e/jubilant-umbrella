@@ -104,7 +104,6 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 if((JOptionPane.showConfirmDialog(InitialPanel.this, "Exit?", "Warning", JOptionPane.YES_NO_OPTION))== 0){
-                    game.quit();
                     System.exit(0);
                 }
             }

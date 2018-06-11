@@ -142,7 +142,6 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if((JOptionPane.showConfirmDialog(FrameNineCardSiege.this, "Exit?", "Warning", JOptionPane.YES_NO_OPTION)) == 0){
-                    game.quit();
                     System.exit(0);
                 }
             }

@@ -149,12 +149,6 @@ public class ObservableGame extends Observable {
         notifyObservers();
     }
 
-    public void quit() {
-        game.quit();
-        setChanged();
-        notifyObservers();
-    }
-
     public States getState() {
         return game.getState();
     }
@@ -324,6 +318,10 @@ public class ObservableGame extends Observable {
 
     public int getGameDay() {
         return game.getGameDay();
+    }
+
+    public int getPlayerLocation(String type) {
+        return game.getPlayerLocation(type);
     }
 
     

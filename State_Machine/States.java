@@ -27,5 +27,4 @@ public interface States extends Constants, Serializable{
     public States enemyCheckLine();
     public States endTurn();
 
-    public States quit();
 }
