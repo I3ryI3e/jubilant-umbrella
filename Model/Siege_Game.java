@@ -342,4 +342,8 @@ public class Siege_Game implements Constants, Serializable{
         return game.getWeaponPosNum(type);
     }
 
+    public int getGameDay() {
+        return game.getGame_day();
+    }
+
 }

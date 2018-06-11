@@ -37,10 +37,10 @@ public class TopBox extends Box implements ConstantsGUI{
         enemy.add(enemyPanel);
         deck.add(deckPanel);
         discard.add(discardPanel);
-        player.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
-        enemy.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
-        deck.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
-        discard.setMaximumSize(new Dimension(CARDS_WEIGHT,CARDS_HEIGHT));
+        player.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
+        enemy.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
+        deck.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
+        discard.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
         
         add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(player);

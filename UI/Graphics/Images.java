@@ -99,6 +99,15 @@ public class Images implements ConstantsGUI {
             try{
                 images.put(APPLES_ICON, ImageIO.read(getResourceFile(PATH_APPLES_ICON)));
             } catch (MyException ex) {}
+            try{
+                images.put(LADDER_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_LADDER_ICON_CIRCLE)));
+            } catch (MyException ex) {}
+            try{
+                images.put(BATTERING_RAM_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_BATTERING_RAM_ICON_CIRCLE)));
+            } catch (MyException ex) {}
+            try{
+                images.put(SIEGE_TOWER_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_SIEGE_TOWER_ICON_CIRCLE)));
+            } catch (MyException ex) {}
         } catch (IOException e) {}
     }
     

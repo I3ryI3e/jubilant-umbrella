@@ -322,6 +322,10 @@ public class ObservableGame extends Observable {
         return game.getWeaponPosNum(type);
     }
 
+    public int getGameDay() {
+        return game.getGameDay();
+    }
+
     
      
     

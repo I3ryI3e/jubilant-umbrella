@@ -43,43 +43,74 @@ public abstract  class PiecePanel extends JPanel implements Observer, ConstantsG
     }    
 
     private int getActualPos(String type) throws MyException{
-        return ((game.getWeaponPosNum(type)-4)*45);
+        return 187-(Math.abs(game.getWeaponPosNum(type)-4)*45);
     }
 
     protected void setPosition(){
-        int posicaoAtual;
+        int newPositionOnScreen;
+        int positionOnList=-1;
         switch(type){
-            case LADDER_ICON:
+            case LADDER_ICON: 
+            case LADDER_ICON_CIRCLE:
                 try {
-                    posicaoAtual = getActualPos(LADDER_ICON);
+                    positionOnList= game.getWeaponPosNum(LADDER_ICON);
+                } catch (MyException ex) {}
+                try {
+                    newPositionOnScreen = getActualPos(LADDER_ICON);
                 } catch (MyException ex) {
                     setVisible(false);
                     return;
                 }
-                if(getInsets().top != posicaoAtual){
-                    setBounds(getInsets().left+14, getInsets().top+187+posicaoAtual, getPreferredSize().width, getPreferredSize().height);
+                if(positionOnList==1){
+                    type=LADDER_ICON_CIRCLE;
                 }
+                else{
+                    type=LADDER_ICON;
+                }
+                if(positionOnList==0){
+                    setBounds(65, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
+                }else{
+                    setBounds(14, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
+                }  
                 break;
-            case BATTERING_RAM_ICON:
+            case BATTERING_RAM_ICON: 
+            case BATTERING_RAM_ICON_CIRCLE:
                 try {
-                    posicaoAtual = getActualPos(BATTERING_RAM_ICON);
+                    positionOnList= game.getWeaponPosNum(BATTERING_RAM_ICON);
+                } catch (MyException ex) {}
+                try {
+                    newPositionOnScreen = getActualPos(BATTERING_RAM_ICON);
                 } catch (MyException ex) {
                     setVisible(false);
                     return;
                 }
-                if(getInsets().top != posicaoAtual){
-                    setBounds(getInsets().left+82, getInsets().top+187+posicaoAtual, getPreferredSize().width, getPreferredSize().height);
+                if(positionOnList==1){
+                    type=BATTERING_RAM_ICON_CIRCLE;
+                }else{
+                    type=BATTERING_RAM_ICON;
                 }
+                setBounds(82, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
                 break;
             case SIEGE_TOWER_ICON:
+            case SIEGE_TOWER_ICON_CIRCLE:
                 try {
-                    posicaoAtual = getActualPos(SIEGE_TOWER_ICON);
+                    positionOnList= game.getWeaponPosNum(SIEGE_TOWER_ICON);
+                } catch (MyException ex) {}
+                try {
+                    newPositionOnScreen = getActualPos(SIEGE_TOWER_ICON);
                 } catch (MyException ex) {
                     setVisible(false);
                     return;
                 }
-                if(getInsets().top != posicaoAtual){
-                    setBounds(getInsets().left+150, getInsets().top+187+posicaoAtual, getPreferredSize().width, getPreferredSize().height);
+                if(positionOnList==0){
+                    setBounds(100, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
+                }else{
+                    setBounds(150, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
+                }
+                if(positionOnList==1){
+                    type=SIEGE_TOWER_ICON_CIRCLE;
+                }else{
+                    type=SIEGE_TOWER_ICON;
                 }
                 break;
         }

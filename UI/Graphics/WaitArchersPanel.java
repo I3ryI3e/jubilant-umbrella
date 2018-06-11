@@ -71,20 +71,20 @@ public class WaitArchersPanel extends JPanel implements Observer{
     
     private void setButtons(){
         if(game.ladderOnStartingPosition())
-            setEnabled(false);
+            ladderButton.setEnabled(false);
         else
-            setEnabled(true);
+            ladderButton.setEnabled(true);
         if(game.batteringRamOnStartingPosition())
-            setEnabled(false);
+            batteringRamButton.setEnabled(false);
         else
-            setEnabled(true);
+            batteringRamButton.setEnabled(true);
         if(game.siegeTowerExists()){
             if(game.siegeTowerOnStartingPosition())
-                setEnabled(false);
+                siegeTowerButton.setEnabled(false);
             else
-                setEnabled(true);
+                siegeTowerButton.setEnabled(true);
         }else
-            setEnabled(false);
+            siegeTowerButton.setEnabled(false);
     }
 
     @Override
