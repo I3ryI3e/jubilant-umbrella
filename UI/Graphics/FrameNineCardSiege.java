@@ -31,7 +31,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
     private JPanel cards;
     private InitialPanel initialpanel;
     private MainGameBoard mainGamePanel;
-    private JPanel winnerPanel; //TODO
+    private WinPanel winPanel; //TODO
     private JPanel gameOverPanel; //TODO
     private boolean quit=false;
 
