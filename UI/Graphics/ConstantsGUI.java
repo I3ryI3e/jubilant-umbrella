@@ -3,7 +3,7 @@ package UI.Graphics;
 public interface ConstantsGUI {
     
     int MARGIN = 10;
-    int CARDS_WEIGHT = 200;
+    int CARDS_WIDTH = 200;
     int CARDS_HEIGHT = 280;
     int BUTTONS_SPECIAL_WEIGHT = 410;
     int MIN_WINDOW_HEIGHT = 652;
@@ -75,11 +75,20 @@ public interface ConstantsGUI {
     String LADDER_ICON= "Ladder";
     String PATH_LADDER_ICON = "Resource/ladder.gif";
     
+    String LADDER_ICON_CIRCLE= "Ladder Circle";
+    String PATH_LADDER_ICON_CIRCLE= "Resource/ladder1.gif";
+
     String BATTERING_RAM_ICON= "Battering Ram";
     String PATH_BATTERING_RAM_ICON = "Resource/bram.gif";
     
+    String BATTERING_RAM_ICON_CIRCLE= "Battering Ram Circle";
+    String PATH_BATTERING_RAM_ICON_CIRCLE= "Resource/bram1.gif";
+    
     String SIEGE_TOWER_ICON= "Siege Tower";
     String PATH_SIEGE_TOWER_ICON = "Resource/stower.gif";
+    
+    String SIEGE_TOWER_ICON_CIRCLE= "Siege Tower Circle";
+    String PATH_SIEGE_TOWER_ICON_CIRCLE= "Resource/stower1.gif";
     
     String RED_SQUARE_ICON= "Pawn";
     String PATH_RED_SQUARE_ICON = "Resource/redSquare.gif";

@@ -3,7 +3,6 @@ package UI.Graphics;
 
 import Model.ObservableGame;
 import static UI.Graphics.ConstantsGUI.CARDS_HEIGHT;
-import static UI.Graphics.ConstantsGUI.CARDS_WEIGHT;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import static UI.Graphics.ConstantsGUI.CARDS_WIDTH;
 
 public class PlayerBoardPanel extends JPanel implements Observer, ConstantsGUI{
     private PlayerPiecePanel wall;
@@ -44,7 +44,7 @@ public class PlayerBoardPanel extends JPanel implements Observer, ConstantsGUI{
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         Image imageBoard = Images.getImage(boardName);
-        g.drawImage(imageBoard, 0, 0, CARDS_WEIGHT, CARDS_HEIGHT, this);
+        g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
     }
     
 

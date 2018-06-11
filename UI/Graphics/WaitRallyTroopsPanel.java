@@ -3,6 +3,7 @@ package UI.Graphics;
 
 import Model.ObservableGame;
 import State_Machine.Buy_One_Action;
+import State_Machine.Rally_Troops;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,7 +68,7 @@ public class WaitRallyTroopsPanel extends JPanel implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-       if(game.getState() instanceof Buy_One_Action){
+       if(game.getState() instanceof Rally_Troops){
            setVisible(true);
            setButtons();
        }else{

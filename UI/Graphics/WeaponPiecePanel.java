@@ -2,7 +2,6 @@
 package UI.Graphics;
 
 
-import Model.MyException;
 import Model.ObservableGame;
 import java.util.Observable;
 
@@ -15,6 +14,5 @@ public class WeaponPiecePanel extends PiecePanel {
     @Override
     public void update(Observable o, Object arg) {
         setPosition();
-    }
-    
+    }    
 }
