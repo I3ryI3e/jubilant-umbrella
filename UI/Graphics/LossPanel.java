@@ -1,8 +1,8 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
+import State_Machine.Game_Over;
 import State_Machine.States;
-import State_Machine.Win_Game;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,12 +12,12 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class WinPanel extends JPanel implements Observer, ConstantsGUI{
+public class LossPanel extends JPanel implements Observer, ConstantsGUI{
     private ObservableGame game;
     private JButton newGame;
     private JButton quit;
 
-    public WinPanel(ObservableGame game) {
+    public LossPanel(ObservableGame game) {
         super();
         this.game=game;
         game.addObserver(this);
@@ -44,14 +44,14 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image imageBoard = Images.getImage(WIN_ICON);
+        Image imageBoard = Images.getImage(LOSS_ICON);
         g.drawImage(imageBoard, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
     @Override
     public void update(Observable o, Object o1) {
        States state=game.getState();
-       if(state instanceof Win_Game){
+       if(state instanceof Game_Over){
            setVisible(true);
        }else
            setVisible(false);

@@ -39,7 +39,7 @@ public class BottomBox extends Box implements ConstantsGUI{
         buttons.add(buttonPanelBorder);
         text.add(textPanel);
         dice.add(dicePanel);
-        buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WEIGHT, CARDS_HEIGHT));
+        buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
         dice.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
         text.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
 
