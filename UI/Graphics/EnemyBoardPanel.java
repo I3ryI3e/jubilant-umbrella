@@ -2,22 +2,41 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
+import static UI.Graphics.ConstantsGUI.CARDS_HEIGHT;
+import static UI.Graphics.ConstantsGUI.CARDS_WEIGHT;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
-public class EnemyBoardPanel extends BoardPanel {
+public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
     private WeaponPiecePanel ladder;
     private WeaponPiecePanel batteringRam;
     private WeaponPiecePanel siegeTower;
     private WeaponPiecePanel trebuchet;
+    private ObservableGame game;
+    private final String boardName = ENEMY_BOARD;
     
     public EnemyBoardPanel(ObservableGame game) {
-        super(game, ENEMY_BOARD);
+        this.game=game;
+        setVisible(true);
+        setBorder(new LineBorder(Color.BLACK));
         createObjects();
         orderLayout();
         
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponents(g);
+        Image imageBoard = Images.getImage(boardName);
+        g.drawImage(imageBoard, 0, 0, CARDS_WEIGHT, CARDS_HEIGHT, this);
+    }
+
+    
     private void createObjects() {
         ladder= new WeaponPiecePanel(LADDER_ICON, game);
         batteringRam= new WeaponPiecePanel(BATTERING_RAM_ICON,game);
@@ -26,23 +45,6 @@ public class EnemyBoardPanel extends BoardPanel {
     }
 
     private void orderLayout() {
-//        setLayout(new GridBagLayout());
-//        GridBagConstraints con = new GridBagConstraints();
-//        con.weightx=0.5;
-//        con.gridx=0;
-//        con.gridy=3;
-//        add(ladder,con);
-//        con.weightx=0.5;
-//        con.gridx=1;
-//        con.gridy=3;
-//        add(batteringRam,con);
-//        con.weightx=0.5;
-//        con.gridx=2;
-//        con.gridy=3;
-//        add(siegeTower,con);
-//        con.gridx=3;
-//        con.gridy=4;
-//        add(trebuchet,con);
         setLayout(null);
         Insets inset = getInsets();
         Dimension size = ladder.getPreferredSize();
@@ -52,11 +54,10 @@ public class EnemyBoardPanel extends BoardPanel {
         batteringRam.setBounds(inset.left+82, inset.top+187, size.width, size.height);
         add(batteringRam);
         size = siegeTower.getPreferredSize();
-        siegeTower.setBounds(inset.left+149, inset.top+187, size.width, size.height);
+        siegeTower.setBounds(inset.left+150, inset.top+187, size.width, size.height);
         add(siegeTower);
         size= trebuchet.getPreferredSize();
         trebuchet.setBounds(inset.left+152, inset.top+244, size.width, size.height);
         add(trebuchet);
     }
-    
 }

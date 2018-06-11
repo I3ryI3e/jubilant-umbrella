@@ -6,6 +6,7 @@ import Board.Player;
 import Card_Events.Event;
 import Cards.*;
 import Model.Constants.Enemy_Attack;
+import UI.Graphics.ConstantsGUI;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Game implements Serializable, Constants{
+public class Game implements Serializable, Constants, ConstantsGUI{
     private Player player;
     private Enemy enemy;
     private int gameDay;
@@ -424,6 +425,23 @@ public class Game implements Serializable, Constants{
 
     public int getTrebutchet() {
         return enemy.getTrebutchet();
+    }
+
+    public int getLadderPos() throws MyException {
+        return enemy.getLadderNumberPosition();
+    }
+
+    public int getWeaponPosNum(String type) throws MyException {
+        switch(type){
+            case LADDER_ICON:
+                return getEnemy().getLadderNumberPosition();
+            case BATTERING_RAM_ICON:
+                return getEnemy().getBatteringRamNumberPosition();
+            case SIEGE_TOWER_ICON:
+                return getEnemy().getSiegeTowerNumberPosition();
+            default:
+                throw new MyException();
+        }
     }
 
     

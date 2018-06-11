@@ -338,4 +338,8 @@ public class Siege_Game implements Constants, Serializable{
         return game.toString();
     }
 
+    public int getWeaponPosNum(String type) throws MyException {
+        return game.getWeaponPosNum(type);
+    }
+
 }

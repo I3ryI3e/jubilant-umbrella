@@ -317,6 +317,11 @@ public class ObservableGame extends Observable {
         notifyObservers();
     }
 
+
+    public int getWeaponPosNum(String type) throws MyException {
+        return game.getWeaponPosNum(type);
+    }
+
     
      
     
