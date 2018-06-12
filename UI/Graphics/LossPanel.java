@@ -7,9 +7,12 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class LossPanel extends JPanel implements Observer, ConstantsGUI{
@@ -24,6 +27,7 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
         setVisible(false);
         createGraphicsObjects();
         addGraphicsObjects();
+        registerListeners();
         update(game,null);
     }
     
@@ -40,6 +44,22 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
         add(newGame, gbc);
         add(quit, gbc);
     }
+    private void registerListeners() {
+        newGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.returnInitialState();
+            }
+        });
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if((JOptionPane.showConfirmDialog(LossPanel.this, "Exit?", "Warning", JOptionPane.YES_NO_OPTION))== 0){
+                    System.exit(0);
+                }
+            }
+        });
+    }
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -47,6 +67,7 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
         Image imageBoard = Images.getImage(LOSS_ICON);
         g.drawImage(imageBoard, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
+    
     
     @Override
     public void update(Observable o, Object o1) {
@@ -56,4 +77,6 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
        }else
            setVisible(false);
     }
+
+    
 }

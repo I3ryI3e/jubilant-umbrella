@@ -346,4 +346,24 @@ public class Siege_Game implements Constants, Serializable{
         return game.getPlayerLocation(type);
     }
 
+    int getSoldierLocation() {
+        return game.getSoldierLocation();
+    }
+
+    public boolean getSoldierGoing() {
+        return game.getSoldierGoing();
+    }
+
+    public int getNumberOfCardsInDeck() {
+        return game.getNumberOfCardsInDeck();
+    }
+
+    public int getNumberOfSupplies() {
+        return game.getNumberOfSupplies();
+    }
+
+    public int getDiceResult() {
+       return game.getLastDiceRoll();
+    }
+
 }

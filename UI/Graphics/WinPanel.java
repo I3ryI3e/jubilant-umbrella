@@ -7,9 +7,12 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class WinPanel extends JPanel implements Observer, ConstantsGUI{
@@ -24,6 +27,7 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
         setVisible(false);
         createGraphicsObjects();
         addGraphicsObjects();
+        registerListeners();
         update(game,null);
     }
     
@@ -39,6 +43,22 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(newGame, gbc);
         add(quit, gbc);
+    }
+    private void registerListeners() {
+        newGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.returnInitialState();
+            }
+        });
+        quit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if((JOptionPane.showConfirmDialog(WinPanel.this, "Exit?", "Warning", JOptionPane.YES_NO_OPTION))== 0){
+                    System.exit(0);
+                }
+            }
+        });
     }
     
     @Override
@@ -56,4 +76,6 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
        }else
            setVisible(false);
     }
+
+    
 }

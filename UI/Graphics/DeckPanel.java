@@ -18,6 +18,7 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
         this.game=game;
         game.addObserver(this);
         setVisible(true);
+        setOpaque(false);
         setBorder(new LineBorder(Color.BLACK));
         update(game,null);
     }
@@ -27,14 +28,17 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
         super.paintComponent(g);
         setOpaque(false);
         Image imageBoard = Images.getImage(CARD_BACK);
-        g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
+        if(game.getNumberOfCardsInDeck()>0){
+            g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
+        }else{
+            g.drawImage(null, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
+        }      
     }
     
 
     @Override
     public void update(Observable o, Object arg) {
-        //TODO
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repaint();
     }
     
 }

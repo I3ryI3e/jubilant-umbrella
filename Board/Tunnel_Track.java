@@ -98,4 +98,8 @@ public class Tunnel_Track extends Track{
             going=true;
         } catch (MyException ex) {}
     }
+
+    public boolean getSoldierGoing() {
+        return going;
+    }
 }

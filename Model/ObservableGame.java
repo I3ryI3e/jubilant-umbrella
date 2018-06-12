@@ -324,6 +324,26 @@ public class ObservableGame extends Observable {
         return game.getPlayerLocation(type);
     }
 
+    public int getSoldierLocation() {
+        return game.getSoldierLocation();
+    }
+
+    public boolean getSoldierGoing() {
+        return game.getSoldierGoing();
+    }
+
+    public int getNumberOfCardsInDeck() {
+       return game.getNumberOfCardsInDeck();
+    }
+
+    public int getNumberOfSupplies() {
+        return game.getNumberOfSupplies();
+    }
+
+    public int getDiceResult() {
+        return game.getDiceResult();
+    }
+
     
      
     

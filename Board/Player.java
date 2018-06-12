@@ -2,6 +2,8 @@ package Board;
 
 import Model.MyException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Player implements Serializable{
     private final Player_Track supplies;
@@ -206,5 +208,17 @@ public class Player implements Serializable{
         aux.append("Number of Player Actions: ").append(actions).append("\n");
         aux.append(raided_supplies>0?"Raided supplies = " + raided_supplies :"");
         return aux.toString();
+    }
+
+    public int getSoldierLocation() {
+        try {
+            return tunnel.getPiecePositionNumber();
+        } catch (MyException ex) {
+        }
+        return 0;
+    }
+
+    public boolean getSoldierGoing() {
+        return tunnel.getSoldierGoing();
     }
 }

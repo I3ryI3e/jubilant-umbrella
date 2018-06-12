@@ -109,10 +109,34 @@ public class Images implements ConstantsGUI {
                 images.put(SIEGE_TOWER_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_SIEGE_TOWER_ICON_CIRCLE)));
             } catch (MyException ex) {}
             try{
-                images.put(LOSS_ICON, ImageIO.read(getResourceFile(LOSS_ICON)));
+                images.put(LOSS_ICON, ImageIO.read(getResourceFile(PATH_LOSS_ICON)));
             } catch (MyException ex) {}
             try{
-                images.put(WIN_ICON, ImageIO.read(getResourceFile(WIN_ICON)));
+                images.put(WIN_ICON, ImageIO.read(getResourceFile(PATH_WIN_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(SOLDIER_RUN_FORWARD_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_RUN_FORWARD_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(SOLDIER_RUN_BACKWARD_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_RUN_BACKWARD_ICON)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE1, ImageIO.read(getResourceFile(PATH_DICE1)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE2, ImageIO.read(getResourceFile(PATH_DICE2)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE3, ImageIO.read(getResourceFile(PATH_DICE3)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE4, ImageIO.read(getResourceFile(PATH_DICE4)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE5, ImageIO.read(getResourceFile(PATH_DICE5)));
+            } catch (MyException ex) {}
+            try{
+                images.put(DICE6, ImageIO.read(getResourceFile(PATH_DICE6)));
             } catch (MyException ex) {}
         } catch (IOException e) {}
     }

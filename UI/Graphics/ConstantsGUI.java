@@ -32,6 +32,24 @@ public interface ConstantsGUI {
     String BACKGROUND2 = "Background2";
     String PATH_IMG_BACKGROUND2 = "Resource/Background2.gif";
     
+    String DICE1 = "Dice1";
+    String PATH_DICE1 = "Resource/Dice1.gif";
+    
+    String DICE2 = "Dice2";
+    String PATH_DICE2 = "Resource/Dice2.gif";
+    
+    String DICE3 = "Dice3";
+    String PATH_DICE3 = "Resource/Dice3.gif";
+    
+    String DICE4 = "Dice4";
+    String PATH_DICE4 = "Resource/Dice4.gif";
+    
+    String DICE5 = "Dice5";
+    String PATH_DICE5 = "Resource/Dice5.gif";
+    
+    String DICE6 = "Dice6";
+    String PATH_DICE6 = "Resource/Dice6.gif";
+    
     String CARD1 = "Card1";
     String PATH_IMG_CARD1 = "Resource/Card1.gif";
     
@@ -106,6 +124,12 @@ public interface ConstantsGUI {
     
     String SOLDIER_ICON= "Soldier";
     String PATH_SOLDIER_ICON = "Resource/stickman.gif";
+    
+    String SOLDIER_RUN_FORWARD_ICON= "Soldier Going Forward";
+    String PATH_SOLDIER_RUN_FORWARD_ICON= "Resource/runForward.gif";
+    
+    String SOLDIER_RUN_BACKWARD_ICON= "Soldier Going BACKWARDS";
+    String PATH_SOLDIER_RUN_BACKWARD_ICON= "Resource/runBack.gif";
     
     String APPLES_ICON= "Appples";
     String PATH_APPLES_ICON = "Resource/apples.gif";

@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game implements Serializable, Constants, ConstantsGUI{
     private Player player;
@@ -308,7 +306,6 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     private void drawCard() {discard.add(0, deck.remove(0));}
     
     private void resolveCard(){
-        textToOutput.append(player.doEnemyCheckLine(Dice.rollDice()));
         discard.get(0).resolve(getGame_day(), this);
     }
     
@@ -401,7 +398,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
 
     boolean getCanMakeFreeMove() {return canUseFreeMovement;}
 
-    public void enemyCheckLine() {player.doEnemyCheckLine(Dice.rollDice());}
+    public void enemyCheckLine() {textToOutput.append(player.doEnemyCheckLine(Dice.rollDice()));}
 
     public boolean endTurnLoss() {return (player.victoryOrLoss() || enemy.victoryOrLoss());}
 
@@ -474,10 +471,27 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         return 4;
     }
 
+    public int getSoldierLocation() {
+        return getPlayer().getSoldierLocation();
+    }
+
+    public boolean getSoldierGoing() {
+       return getPlayer().getSoldierGoing();
+    }
+
+    public int getNumberOfCardsInDeck() {
+        return deck.size();
+    }
+
+    public int getNumberOfSupplies() {
+        return player.getRaided_supplies();
+    }
+
     
     
     private static class Dice {
         private static int lastRoll;
+        
         private static int rollDice(){
             lastRoll = (int) ((Math.random()*6)+1);
             return lastRoll;

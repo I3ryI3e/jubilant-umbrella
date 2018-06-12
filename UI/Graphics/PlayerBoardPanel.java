@@ -14,18 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import static UI.Graphics.ConstantsGUI.CARDS_WIDTH;
 
-public class PlayerBoardPanel extends JPanel implements Observer, ConstantsGUI{
+public class PlayerBoardPanel extends JPanel implements ConstantsGUI{
     private PlayerPiecePanel wall;
     private PlayerPiecePanel morale;
     private PlayerPiecePanel supply;
-    private PlayerPiecePanel tunnel;
-    private PlayerPiecePanel supplyCount;
+    private TunnelPiecePanel tunnel;
+    private RSupplyPiecePanel supplyCount;
     private final String boardName = PLAYER_BOARD;
     private ObservableGame game;
     
     public PlayerBoardPanel(ObservableGame game) {
         this.game=game;
-        this.game.addObserver(this);
         setVisible(true);
         setBorder(new LineBorder(Color.BLACK));
         createObject();
@@ -36,8 +35,8 @@ public class PlayerBoardPanel extends JPanel implements Observer, ConstantsGUI{
         wall = new PlayerPiecePanel(WALL_ICON, game);
         morale= new PlayerPiecePanel(MORALE_ICON,game);
         supply= new PlayerPiecePanel(SUPPLY_ICON,game);
-        tunnel= new PlayerPiecePanel(SOLDIER_ICON,game);
-        supplyCount= new PlayerPiecePanel(APPLES_ICON,game);
+        tunnel= new TunnelPiecePanel(game);
+        supplyCount= new RSupplyPiecePanel(game);
     }
 
     @Override
@@ -68,9 +67,5 @@ public class PlayerBoardPanel extends JPanel implements Observer, ConstantsGUI{
         add(supplyCount);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        
-    }
     
 }
