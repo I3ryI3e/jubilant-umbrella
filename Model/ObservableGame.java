@@ -3,6 +3,7 @@ package Model;
 
 import State_Machine.States;
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 
 
@@ -163,8 +164,12 @@ public class ObservableGame extends Observable {
     
     
 
-    public boolean loadGame(File file) {
-        return game.loadGame(file);
+    public void loadGame(File file) {
+        try {
+            setGame(game.loadGame(file));
+        } catch (ClassNotFoundException | IOException ex) {
+            System.out.println("LOL");
+        }
     }
 
     public boolean saveGame(File file) {

@@ -86,13 +86,12 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         
         if(state instanceof Initial_State){
             cardManager.show(cards, INITIAL_PANEL);
-        }else if(state instanceof Wait_Draw_Card){
-            cardManager.show(cards, DRAW_CARD_PANEL);
         }else if(state instanceof Win_Game){
             cardManager.show(cards, LOSS_PANEL);
         }else if(state instanceof Game_Over){
             cardManager.show(cards, LOSS_PANEL);
-        }
+        }else
+            cardManager.show(cards, DRAW_CARD_PANEL);
     }
     
     private void addMenu() {
@@ -122,7 +121,7 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
                 int n = fileChooser.showOpenDialog(FrameNineCardSiege.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    boolean loaded = game.loadGame(file);
+                    game.loadGame(file);
                 }
             }
         });

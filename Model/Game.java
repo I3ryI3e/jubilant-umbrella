@@ -49,9 +49,10 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     public void changeUseBoiling(){this.canUseBoiling= !this.canUseBoiling;}
     
     public String getTextToOutput(){
-        String aux = textToOutput.toString();
-        textToOutput.delete(0, textToOutput.length());
-        return aux;
+//        String aux = textToOutput.toString();
+//        textToOutput.delete(0, textToOutput.length());
+//        return aux;
+        return textToOutput.toString();
     }
     
     public void setGame_day(int game_day){this.gameDay = game_day;}
@@ -99,8 +100,9 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             try {
                 if(dice+bonus > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
-                    textToOutput.append("\nVictory, Ladder is going to backout!");
-                }
+                    textToOutput.append("\nVictory, Ladder is going to backout!\n");
+                }else
+                    textToOutput.append("\nYour archers are too inexperienced and missed! You lost the battle!\n");
             } catch (MyException ex) {}
             break;
             case BATTERING_RAM:
@@ -114,7 +116,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                 if(dice + bonus > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout!");
-                }
+                }else 
+                    textToOutput.append("\nYour archers were drunk! You lost the battle!\n");
             } catch (MyException ex) {}
             break;
             case SIEGE_TOWER:
@@ -128,7 +131,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                 if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Siege Tower is going to backout!");
-                }
+                }else
+                    textToOutput.append("\nThe Tower is too strong! You lost the battle!\n");
             } catch (MyException ex) {}
             break;
         }
@@ -152,7 +156,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                 if(dice + bonus  > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
                     textToOutput.append("\nVictory, Ladder is going to backout!");
-                }
+                }else
+                    textToOutput.append("\nThe oil was not hot enough, you lost the battle!");
             } catch (MyException ex) {}
             break;
             case BATTERING_RAM:
@@ -166,7 +171,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                 if(dice + bonus  > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout!");
-                }
+                }else
+                    textToOutput.append("\nYou missed the target and lost the battle!");
             } catch (MyException ex) {}
             break;
             case SIEGE_TOWER:
@@ -180,7 +186,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                 if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Ladder is going to backout!");
-                }
+                }else
+                    textToOutput.append("\nYou coulnd't break the Tower defenses and lost the battle!");
             } catch (MyException ex) {}
             break;
         }
@@ -204,6 +211,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                             enemy.goBackwardLadder();
                             textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!\n");
                             player.decreasePlayerActions();
+                        }else{
+                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
                         }
                     }
                 } catch (MyException ex) {}
@@ -215,6 +224,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                             enemy.goBackwardBatteringRam();
                             textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
                             player.decreasePlayerActions();
+                        }else{
+                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
                         }
                     }
                 } catch (MyException ex) {} 
@@ -226,6 +237,8 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                             enemy.goBackwardSiegeTower();
                             textToOutput.append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
                             player.decreasePlayerActions();
+                        }else{
+                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
                         }
                     }
                 } catch (MyException ex) {}
@@ -246,53 +259,57 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     private void rally(int DRM) {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getMoraleMod() + DRM;
-        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             player.raiseMorale();
             textToOutput.append("\nVictory, rally troops successfully done!");
-        }
+        }else
+            textToOutput.append("\nYou made a poor speech and your soldiers didn't care! You weren't able to raise morale!");
         player.decreasePlayerActions();
     }
     
     public void coupure(){
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getCoupureMod();
-        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             player.raiseWall();
             textToOutput.append("\nVictory, coupure successfully done!");
-        }
+        }else
+            textToOutput.append("\nYour worked were tired for lack of sleep! You weren't able raise the wall!");
         player.decreasePlayerActions();
     }
     
     public void sabotage() {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getSabotageMod();
-        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus >= 5){
             enemy.removeTrebutchet();
             textToOutput.append("\nVictory, sabotage successfully done!");
         }else if(dice == 1){
             player.soldierCaptured();
-            textToOutput.append("\nYour soldier as been captured!");
-        }
+            textToOutput.append("\nYour soldier as been captured! You lost morale!");
+        }else
+            textToOutput.append("\nThe enemy watch was too tight and your soldiers weren't able to get near the trebuchets!");
         player.decreasePlayerActions();
     }
     
     public void supplyRaid() {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getRaidMod();
-        textToOutput.append("Dado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
         if(dice + bonus == 6){
             player.addRaided_supplies(2);
             textToOutput.append("\nVictory, 2 supplies successfully done!");
         }else if(dice == 1){
             player.soldierCaptured();
-            textToOutput.append("\nYour soldier as been captured!");
+            textToOutput.append("\nYour soldier as been captured! You lost morale!");
         }else if(!(dice + bonus == 2)){
             player.addRaided_supplies(1);
             textToOutput.append("\nVictory, 1 supply successfully done!");
-        }
+        }else
+            textToOutput.append("\nThe enemy watch was too tight and your soldiers weren't able to get near the supplies!");
         player.decreasePlayerActions();
     }
     

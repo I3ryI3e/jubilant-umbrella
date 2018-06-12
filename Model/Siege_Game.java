@@ -315,16 +315,13 @@ public class Siege_Game implements Constants, Serializable{
     
     public boolean getSabAndRaidStateActive() {return game.getSabAndRaidStateActive();}
     
-    public boolean loadGame(File file) {
-        try {
-            setGame((Game) FileUtility.retrieveGameFromFile(file));
-        } catch (IOException | ClassNotFoundException ex) {}
-        return false;
+    public Siege_Game loadGame(File file) throws ClassNotFoundException, IOException {
+        return ((Siege_Game) FileUtility.retrieveGameFromFile(file));   
     }
     
     public boolean saveGame(File file) {
         try {
-            FileUtility.saveGameToFile(file, game);
+            FileUtility.saveGameToFile(file, this);
         } catch (IOException ex) {}
         return false;
     }

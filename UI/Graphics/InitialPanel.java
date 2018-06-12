@@ -1,7 +1,6 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import State_Machine.Initial_State;
 import State_Machine.States;
 import java.awt.Graphics;
@@ -76,12 +75,12 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 JFileChooser fileChooser = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
-                fileChooser.setFileFilter(filter);
+//                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+//                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showOpenDialog(InitialPanel.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    boolean loaded = game.loadGame(file);
+                    game.loadGame(file);
                 }
             }      
         });
@@ -90,8 +89,8 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 JFileChooser fileChooser = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
-                fileChooser.setFileFilter(filter);
+//                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+//                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showSaveDialog(InitialPanel.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();

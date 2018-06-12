@@ -1,13 +1,10 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import javax.swing.Box;
-import javax.swing.border.LineBorder;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class BottomBox extends Box implements ConstantsGUI{
     private ObservableGame game;
@@ -37,7 +34,7 @@ public class BottomBox extends Box implements ConstantsGUI{
         Box buttons= Box.createVerticalBox();
         
         buttons.add(buttonPanelBorder);
-        text.add(textPanel);
+        text.add(new JScrollPane(textPanel));
         dice.add(dicePanel);
         buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
         dice.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
