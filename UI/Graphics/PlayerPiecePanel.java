@@ -40,7 +40,7 @@ public class PlayerPiecePanel extends JPanel implements Observer, ConstantsGUI {
                 if(newPositionOnScreen<180)
                     setBounds(11, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
                 else
-                    setBounds(60,newPositionOnScreen,getPreferredSize().width,getPreferredSize().height);
+                    setBounds(75,newPositionOnScreen,getPreferredSize().width,getPreferredSize().height);
                 break;
             case MORALE_ICON:
                 newPositionOnScreen = getActualPos(MORALE_ICON);
@@ -51,7 +51,7 @@ public class PlayerPiecePanel extends JPanel implements Observer, ConstantsGUI {
                 if(newPositionOnScreen<180)
                     setBounds(140, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
                 else
-                    setBounds(95, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
+                    setBounds(75, newPositionOnScreen, getPreferredSize().width, getPreferredSize().height);
                 break;
         }
     }

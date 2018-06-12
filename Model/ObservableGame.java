@@ -344,6 +344,10 @@ public class ObservableGame extends Observable {
         return game.getDiceResult();
     }
 
+    public int getTrebutchetNumber() {
+        return game.getTrebutchetNumber();
+    }
+
     
      
     

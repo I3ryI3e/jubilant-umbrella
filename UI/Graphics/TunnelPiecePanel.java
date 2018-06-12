@@ -33,18 +33,23 @@ public class TunnelPiecePanel extends JPanel implements Observer, ConstantsGUI{
         g.drawImage(piece, 0, 0, this);
     }
     private int getActualPos(){
-            return 8+(game.getSoldierLocation()*30);
+            return 8+(game.getSoldierLocation()*31);
     }
     private void setPosition() {
         int newPositionOnScreen;
+        int yPos=0;
         newPositionOnScreen=getActualPos();
         if(game.getSoldierLocation() == 0 || game.getSoldierLocation() == 3){
             type=SOLDIER_ICON;
-        }else if(game.getSoldierGoing())
+            newPositionOnScreen+=3;
+        }else if(game.getSoldierGoing()){
             type= SOLDIER_RUN_FORWARD_ICON;
-        else
+            yPos+=3;
+        }else{
             type= SOLDIER_RUN_BACKWARD_ICON;
-        setBounds(newPositionOnScreen, 243, getPreferredSize().width, getPreferredSize().height);
+            yPos+=3;
+        }
+        setBounds(newPositionOnScreen, 243+yPos, getPreferredSize().width, getPreferredSize().height);
     }
     
 

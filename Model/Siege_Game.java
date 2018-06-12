@@ -366,4 +366,8 @@ public class Siege_Game implements Constants, Serializable{
        return game.getLastDiceRoll();
     }
 
+    public int getTrebutchetNumber() {
+       return game.getTrebutchet();
+    }
+
 }

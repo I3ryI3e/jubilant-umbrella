@@ -16,7 +16,7 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
     private WeaponPiecePanel ladder;
     private WeaponPiecePanel batteringRam;
     private WeaponPiecePanel siegeTower;
-    private WeaponPiecePanel trebuchet;
+    private TrebuchetPiecePanel trebuchet;
     private ObservableGame game;
     private final String boardName = ENEMY_BOARD;
     
@@ -31,7 +31,7 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
         Image imageBoard = Images.getImage(boardName);
         g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
     }
@@ -41,7 +41,7 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
         ladder= new WeaponPiecePanel(LADDER_ICON, game);
         batteringRam= new WeaponPiecePanel(BATTERING_RAM_ICON,game);
         siegeTower= new WeaponPiecePanel(SIEGE_TOWER_ICON,game);
-        trebuchet= new WeaponPiecePanel(RED_SQUARE_ICON, game);
+        trebuchet= new TrebuchetPiecePanel(game);
     }
 
     private void orderLayout() {

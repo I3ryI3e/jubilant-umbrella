@@ -41,7 +41,7 @@ public class PlayerBoardPanel extends JPanel implements ConstantsGUI{
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
         Image imageBoard = Images.getImage(boardName);
         g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
     }
