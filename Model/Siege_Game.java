@@ -367,4 +367,12 @@ public class Siege_Game implements Constants, Serializable{
        return game.getTrebutchet();
     }
 
+    public boolean diceWasRolled() {
+        return game.diceWasRolled();
+    }
+
+    public int getNumberOfActions() {
+        return game.getNumberOfActions();
+    }
+
 }

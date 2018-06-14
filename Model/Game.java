@@ -88,7 +88,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         int dice = Dice.rollDice();
         int bonus = 0;
         Event activeEvent = getActiveEvent();
-        textToOutput.append("Dado: ").append(dice);
+        textToOutput.append("\nDado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
@@ -143,7 +143,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         int dice = Dice.rollDice();
         int bonus = 0;
         Event activeEvent = getActiveEvent();
-        textToOutput.append("Dado: ").append(dice);
+        textToOutput.append("\nDado: ").append(dice);
         switch(ea){                                  
             case LADDER:
             try {
@@ -202,7 +202,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         int dice = Dice.rollDice();
         Event activeEvent = getActiveEvent();
         int bonus =activeEvent.getAllAttackMod() + activeEvent.getCloseCombatMod();
-        textToOutput.append("Dado: ").append(dice).append("\nBonus to dice: ");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to dice: ");
         switch(ea){
             case LADDER:
                 try {
@@ -276,7 +276,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             player.raiseWall();
             textToOutput.append("\nVictory, coupure successfully done!");
         }else
-            textToOutput.append("\nYour worked were tired for lack of sleep! You weren't able raise the wall!");
+            textToOutput.append("\nYour workers were tired for lack of sleep! You weren't able raise the wall!");
         player.decreasePlayerActions();
     }
     
@@ -504,14 +504,29 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         return player.getRaided_supplies();
     }
 
+    boolean diceWasRolled() {
+        return Dice.getChanged();
+    }
+
+    public int getNumberOfActions() {
+        return player.getActions();
+    }
+
     
     
     private static class Dice {
         private static int lastRoll;
+        private static boolean wasRolled=false;
         
         private static int rollDice(){
             lastRoll = (int) ((Math.random()*6)+1);
+            wasRolled=true;
             return lastRoll;
+        }
+        public static boolean getChanged(){
+            boolean aux = wasRolled;
+            wasRolled=false;
+            return aux;
         }
         public static int getLastRoll(){
             return lastRoll;

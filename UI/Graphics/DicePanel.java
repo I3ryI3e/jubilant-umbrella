@@ -2,26 +2,39 @@ package UI.Graphics;
 
 import Model.ObservableGame;
 import State_Machine.Initial_State;
-import java.awt.Color;
+import static UI.Graphics.ConstantsGUI.DICE1;
+import static UI.Graphics.ConstantsGUI.DICE2;
+import static UI.Graphics.ConstantsGUI.DICE3;
+import static UI.Graphics.ConstantsGUI.DICE4;
+import static UI.Graphics.ConstantsGUI.DICE5;
+import static UI.Graphics.ConstantsGUI.DICE6;
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
+import javax.swing.Timer;
 
 class DicePanel extends JPanel implements Observer, ConstantsGUI{
     private ObservableGame game;
     private String type;
+    private ActionLabelPanel actionLabel;
+    private Timer timer;
     
     public DicePanel(ObservableGame game){
         super();
         this.game = game;
         type= null;
+        timer=new Timer(10, new TesteListener(this));
         game.addObserver(this);
+        actionLabel= new ActionLabelPanel(game);
+        setLayout(new BorderLayout());
+        add(actionLabel,BorderLayout.NORTH);
         setVisible(true);
         setOpaque(false);
-//        setBorder(new LineBorder(Color.BLACK));
         update(game, null);
     }
 
@@ -37,26 +50,74 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
     @Override
     public void update(Observable o, Object o1) {
         if(!(game.getState() instanceof Initial_State)){
-            switch(game.getDiceResult()){
-                case 1:
-                    type= DICE1;
-                    break;
-                case 2:
-                    type= DICE2;
-                    break;
-                case 3:
-                    type= DICE3;
-                    break;
-                case 4:
-                    type= DICE4;
-                    break;
-                case 5:
-                    type= DICE5;
-                    break;
-                case 6:
-                    type= DICE6;           
-            }
-            repaint();
+            if(game.diceWasRolled())
+                timer.start();
         }
     }
+    public String getStringDiceName(int num){
+        switch(num){
+                case 1:
+                    return DICE1;
+                case 2:
+                    return DICE2;
+                case 3:
+                    return DICE3;
+                case 4:
+                    return DICE4;
+                case 5:
+                    return DICE5;
+                case 6:
+                    return DICE6;           
+            }
+        return null;
+    }
+
+    class TesteListener implements ActionListener{
+        private int countdown;
+        private boolean on;
+        private DicePanel panel;
+
+        public TesteListener(DicePanel panel) {
+            this.panel=panel;
+            this.countdown=50;
+            this.on=false;
+        }
+        public String getStringDiceName(int num){
+        switch(num){
+                case 1:
+                    return DICE1;
+                case 2:
+                    return DICE2;
+                case 3:
+                    return DICE3;
+                case 4:
+                    return DICE4;
+                case 5:
+                    return DICE5;
+                case 6:
+                    return DICE6;           
+            }
+        return null;
+    }
+        
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(countdown==0 && on){
+                type = getStringDiceName(game.getDiceResult());
+                on=false;
+                countdown=50;
+                timer.stop();
+                panel.repaint();
+            }else if(on){
+                countdown--;
+                type= getStringDiceName((int)(Math.random()*6)+1);
+                panel.repaint();
+            }else{
+                on=true;
+            }
+        }
+        
+    }
+        
 }

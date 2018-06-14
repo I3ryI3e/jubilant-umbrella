@@ -353,6 +353,14 @@ public class ObservableGame extends Observable {
         return game.getTrebutchetNumber();
     }
 
+    public boolean diceWasRolled() {
+        return game.diceWasRolled();
+    }
+
+    public int getNumberOfActions() {
+       return game.getNumberOfActions();
+    }
+
     
      
     
