@@ -46,6 +46,7 @@ public class MainGameBoard extends JPanel implements Observer, ConstantsGUI {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
         add(Box.createVerticalStrut(MARGIN));
+        topBox.setMinimumSize(new Dimension(CARDS_WIDTH, CARDS_HEIGHT+(2*MARGIN)));
         add(topBox);
         add(Box.createVerticalStrut(MARGIN));
         add(bottomBox);

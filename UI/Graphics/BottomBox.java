@@ -33,12 +33,17 @@ public class BottomBox extends Box implements ConstantsGUI{
         Box text= Box.createVerticalBox();
         Box buttons= Box.createVerticalBox();
         
+        text.setMinimumSize(new Dimension(CARDS_WIDTH, CARDS_HEIGHT));
+        text.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
         buttons.add(buttonPanelBorder);
         text.add(new JScrollPane(textPanel));
         dice.add(dicePanel);
-        buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
+        dice.setMinimumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
         dice.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
-        text.setMaximumSize(new Dimension(CARDS_WIDTH,CARDS_HEIGHT));
+        buttons.setMinimumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
+        buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
+        
+        
 
         add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(text);

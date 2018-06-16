@@ -42,7 +42,7 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image imageBoard = Images.getImage(type);
-        g.drawImage(imageBoard, 50, 50, this);
+        g.drawImage(imageBoard, 25, 50, this);
     }
 
     

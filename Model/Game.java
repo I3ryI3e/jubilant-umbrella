@@ -100,9 +100,9 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             try {
                 if(dice+bonus > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
-                    textToOutput.append("\nVictory, Ladder is going to backout!\n");
+                    textToOutput.append("\nVictory, Ladder is going to backout!");
                 }else
-                    textToOutput.append("\nYour archers are too inexperienced and missed! You lost the battle!\n");
+                    textToOutput.append("\nYour archers are too inexperienced and missed! You lost the battle!");
             } catch (MyException ex) {}
             break;
             case BATTERING_RAM:
@@ -117,7 +117,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                     enemy.goBackwardBatteringRam();
                     textToOutput.append("\nVictory, Battering Ram is going to backout!");
                 }else 
-                    textToOutput.append("\nYour archers were drunk! You lost the battle!\n");
+                    textToOutput.append("\nYour archers were drunk! You lost the battle!");
             } catch (MyException ex) {}
             break;
             case SIEGE_TOWER:
@@ -132,7 +132,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                     enemy.goBackwardSiegeTower();
                     textToOutput.append("\nVictory, Siege Tower is going to backout!");
                 }else
-                    textToOutput.append("\nThe Tower is too strong! You lost the battle!\n");
+                    textToOutput.append("\nThe Tower is too strong! You lost the battle!");
             } catch (MyException ex) {}
             break;
         }
@@ -209,10 +209,10 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                     if(enemy.getLadderPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             enemy.goBackwardLadder();
-                            textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Ladder is going to backout!");
                             player.decreasePlayerActions();
                         }else{
-                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
+                            textToOutput.append("\nThe enemies were too strong in close combat!\nYou lost the battle!");
                         }
                     }
                 } catch (MyException ex) {}
@@ -222,10 +222,10 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                     if(enemy.getBatteringRamPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             enemy.goBackwardBatteringRam();
-                            textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Battering Ram is going to backout!");
                             player.decreasePlayerActions();
                         }else{
-                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
+                            textToOutput.append("\nThe enemies were too strong in close combat!\nYou lost the battle!");
                         }
                     }
                 } catch (MyException ex) {} 
@@ -235,10 +235,10 @@ public class Game implements Serializable, Constants, ConstantsGUI{
                     if(enemy.getSiegeTowerPosition() instanceof Close_Combat_Square){
                         if( dice+bonus > CLOSE_COMBAT_POSITION_POWER){
                             enemy.goBackwardSiegeTower();
-                            textToOutput.append(bonus).append("\nVictory, Siege Tower is going to backout!\n");
+                            textToOutput.append(bonus).append("\nVictory, Siege Tower is going to backout!");
                             player.decreasePlayerActions();
                         }else{
-                            textToOutput.append("\nThe enemies were too strong in close combat! You lost the battle!");
+                            textToOutput.append("\nThe enemies were too strong in close combat!\nYou lost the battle!");
                         }
                     }
                 } catch (MyException ex) {}
@@ -264,7 +264,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             player.raiseMorale();
             textToOutput.append("\nVictory, rally troops successfully done!");
         }else
-            textToOutput.append("\nYou made a poor speech and your soldiers didn't care! You weren't able to raise morale!");
+            textToOutput.append("\nYou made a poor speech and your soldiers didn't care!\nYou weren't able to raise morale!");
         player.decreasePlayerActions();
     }
     
@@ -276,7 +276,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             player.raiseWall();
             textToOutput.append("\nVictory, coupure successfully done!");
         }else
-            textToOutput.append("\nYour workers were tired for lack of sleep! You weren't able raise the wall!");
+            textToOutput.append("\nYour workers were tired for lack of sleep!\nYou weren't able raise the wall!");
         player.decreasePlayerActions();
     }
     
@@ -350,13 +350,13 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     
     public void endTurn() {
         if(deck.isEmpty()){
-            textToOutput.append(">>End of day ").append(getGame_day()+1).append("<<");
+            textToOutput.append("\n>>End of day ").append(getGame_day()+1).append("<<");
             DecreaseSuppliesEvent();
             endOfDayPhaseTunnel();
             reputAllCardsIntoDeck();
             setGame_day(getGame_day()+1);
             if(getGame_day()!=4)
-                textToOutput.append("\n>>Day ").append(getGame_day()+1).append(" is starting!<<\n");
+                textToOutput.append("\n>>Day ").append(getGame_day()+1).append(" is starting!<<");
         }
         this.canUseSupllyOrMoraleToOneMoreAction=true;
         this.canUseBoiling=true;

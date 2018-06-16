@@ -6,7 +6,7 @@ public interface ConstantsGUI {
     int CARDS_WIDTH = 200;
     int CARDS_HEIGHT = 280;
     int BUTTONS_SPECIAL_WITDH = 410;
-    int MIN_WINDOW_HEIGHT = 652;
+    int MIN_WINDOW_HEIGHT = 660;
     int MIN_WINDOW_WIDTH = 872;
     
     String INITIAL_PANEL="Initial Panel";

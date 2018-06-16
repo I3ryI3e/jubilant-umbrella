@@ -153,7 +153,7 @@ public class WaitActionPanel extends JPanel implements Observer {
             rallyTroopsButton.setEnabled(true);
         else 
             rallyTroopsButton.setEnabled(false);
-        if(game.playerStillHasActionsLeft())
+        if((game.playerStillHasActionsLeft() || (game.canMakeFreeMove()&& game.canUseTunnelMovement())) && (!game.getSabAndRaidStateActive()))
             tunnelButton.setEnabled(true);
         else
             tunnelButton.setEnabled(false);

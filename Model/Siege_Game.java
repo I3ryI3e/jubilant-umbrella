@@ -247,13 +247,14 @@ public class Siege_Game implements Constants, Serializable{
     public void stateTunnel() {
         if(game.playerStillHasActionsLeft() && (!getSabAndRaidStateActive())){
             setState(state.tunnel());
-        }
+        }else if ((!game.playerStillHasActionsLeft()) && (!getSabAndRaidStateActive()) && game.getCanMakeFreeMove())
+            setState(state.tunnel());
     }
     
     public boolean onCastleSpace() {return game.getPlayer().playerOnCastleSpace();}
     
     public void tunnelFree() {
-       if(canUseTunnelMovement() && game.playerStillHasActionsLeft() && canMakeFreeMove()){
+       if(canUseTunnelMovement() && canMakeFreeMove()){
            setState(state.freeTunnelMovement());
        }
     }

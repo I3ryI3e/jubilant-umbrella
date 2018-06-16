@@ -72,11 +72,11 @@ public class WaitTunnelPanel extends JPanel implements Observer{
             freeMovement.setEnabled(true);
         else
             freeMovement.setEnabled(false);
-        if(game.canUseTunnelMovement())
+        if(game.canUseTunnelMovement() && game.playerStillHasActionsLeft())
             fastMovement.setEnabled(true);
         else
             fastMovement.setEnabled(false);
-        if(game.onCastleSpace() || game.onEnemyLine())
+        if((game.onCastleSpace() || game.onEnemyLine()) && game.playerStillHasActionsLeft())
             getInMovement.setEnabled(true);
         else
             getInMovement.setEnabled(false);
