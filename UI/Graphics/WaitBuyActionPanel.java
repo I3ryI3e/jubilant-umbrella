@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -24,6 +23,7 @@ public class WaitBuyActionPanel extends JPanel implements Observer {
         orderLayout();
         addlisteners();
     }
+    
     private void createObjects() {
         supplyOptionButton= new JButton("Trade One Supply");
         moraleOptionButton= new JButton("Trade One Morale");
@@ -72,7 +72,6 @@ public class WaitBuyActionPanel extends JPanel implements Observer {
             supplyOptionButton.setEnabled(false);
             moraleOptionButton.setEnabled(false);
         }
-        
     }
     
     @Override
@@ -84,9 +83,4 @@ public class WaitBuyActionPanel extends JPanel implements Observer {
             setVisible(false);
         }
     }
-
-    
-
-    
-    
 }

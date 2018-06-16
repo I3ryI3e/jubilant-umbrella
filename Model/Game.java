@@ -35,7 +35,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     
     public boolean getCanUseSupplyOrMorale(){return canUseSupllyOrMoraleToOneMoreAction;}
     
-    public void changeCanUseSupply(){this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;}
+    public void changeCanUseSupplyOrMorale(){this.canUseSupllyOrMoraleToOneMoreAction = !this.canUseSupllyOrMoraleToOneMoreAction;}
     
     public boolean canUseBoiling(){return canUseBoiling;}
     
@@ -79,6 +79,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         this.canUseFreeMovement=true;
         this.canUseBoiling=true;
         this.sabAndRaidStateActive=false;
+        textToOutput.delete(0, textToOutput.length());
     }
     private Event getActiveEvent(){
         return discard.get(0).getDayX(gameDay).getEvent();
@@ -92,11 +93,11 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         switch(ea){                                  
             case LADDER:
             try {
-                bonus= activeEvent.getLadderMod()+ activeEvent.getAllAttackMod() + enemy.getPositionModifier(ea,activeEvent);
+                bonus = activeEvent.getLadderMod()+ activeEvent.getAllAttackMod() + enemy.getPositionModifier(ea,activeEvent);
             } catch (MyException ex) {
                 bonus = activeEvent.getLadderMod();
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice+bonus > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
@@ -111,7 +112,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             } catch (MyException ex) {
                 bonus = activeEvent.getRamMod();
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice + bonus > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
@@ -126,7 +127,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             } catch (MyException ex) {
                 bonus = activeEvent.getSiegeMod();
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
@@ -151,7 +152,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             } catch (MyException ex) {
                 bonus = activeEvent.getLadderMod() +1;
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice + bonus  > enemy.getLadderStrength()){
                     enemy.goBackwardLadder();
@@ -166,7 +167,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             } catch (MyException ex) {
                 bonus = discard.get(0).getDayX(gameDay).getEvent().getRamMod()+1;
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice + bonus  > enemy.getBatteringRamStrength()){
                     enemy.goBackwardBatteringRam();
@@ -181,7 +182,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
             } catch (MyException ex) {
                 bonus = activeEvent.getSiegeMod()+1;
             }
-            textToOutput.append("\nBonus to Dice: ").append(bonus).append("\n");
+            textToOutput.append("\nBonus to Dice: ").append(bonus);
             try {
                 if(dice + bonus > enemy.getSiegeTowerStrength()){
                     enemy.goBackwardSiegeTower();
@@ -259,7 +260,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     private void rally(int DRM) {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getMoraleMod() + DRM;
-        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus);
         if(dice + bonus >= 5){
             player.raiseMorale();
             textToOutput.append("\nVictory, rally troops successfully done!");
@@ -271,7 +272,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     public void coupure(){
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getCoupureMod();
-        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus);
         if(dice + bonus >= 5){
             player.raiseWall();
             textToOutput.append("\nVictory, coupure successfully done!");
@@ -283,7 +284,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     public void sabotage() {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getSabotageMod();
-        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus);
         if(dice + bonus >= 5){
             enemy.removeTrebutchet();
             textToOutput.append("\nVictory, sabotage successfully done!");
@@ -298,7 +299,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     public void supplyRaid() {
         int dice = Dice.rollDice();
         int bonus = getActiveEvent().getRaidMod();
-        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus).append("\n");
+        textToOutput.append("\nDado: ").append(dice).append("\nBonus to Dice: ").append(bonus);
         if(dice + bonus == 6){
             player.addRaided_supplies(2);
             textToOutput.append("\nVictory, 2 supplies successfully done!");
@@ -404,7 +405,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
 
     public void buyAction(int opt) {
         player.buyAction(opt);
-        changeCanUseSupply();
+        changeCanUseSupplyOrMorale();
     }
 
     boolean ladderOnStartingPosition() {return enemy.ladderOnStartingPosition();}

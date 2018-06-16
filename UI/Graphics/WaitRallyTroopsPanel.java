@@ -1,8 +1,6 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
-import State_Machine.Buy_One_Action;
 import State_Machine.Rally_Troops;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -26,6 +24,7 @@ public class WaitRallyTroopsPanel extends JPanel implements Observer{
         registerListeners();
         update(game,null);
     }
+    
     private void createObjects() {
         supplyDRMButton= new JButton("Rally Troops +1DRM(Use one Supply)");
         rallyTroopsNormalButton= new JButton("Rally Troops");
@@ -38,6 +37,7 @@ public class WaitRallyTroopsPanel extends JPanel implements Observer{
         add(rallyTroopsNormalButton);
         add(returnButton);
     }
+    
     private void registerListeners() {
         supplyDRMButton.addActionListener(new ActionListener() {
             @Override
@@ -58,6 +58,7 @@ public class WaitRallyTroopsPanel extends JPanel implements Observer{
             }
         });
     }
+    
     private void setButtons() {
         if(game.canDecreaseSupply())
             supplyDRMButton.setEnabled(true);
@@ -65,14 +66,13 @@ public class WaitRallyTroopsPanel extends JPanel implements Observer{
             supplyDRMButton.setEnabled(false);
     }
     
-
     @Override
     public void update(Observable o, Object arg) {
-       if(game.getState() instanceof Rally_Troops){
-           setVisible(true);
-           setButtons();
-       }else{
-           setVisible(false);
-       }
+        if(game.getState() instanceof Rally_Troops){
+            setVisible(true);
+            setButtons();
+        }else{
+            setVisible(false);
+        }
     }  
 }

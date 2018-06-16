@@ -1,7 +1,6 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import State_Machine.*;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -68,7 +67,6 @@ public class FrameNineCardSiege extends JFrame implements Observer, ConstantsGUI
         winPanel= new WinPanel(game);
         lossPanel= new LossPanel(game);
     }
-
 
     private void addGraphicsObjects() {
         cp.add(cards,BorderLayout.CENTER);

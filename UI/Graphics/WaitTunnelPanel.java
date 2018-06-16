@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -26,6 +25,7 @@ public class WaitTunnelPanel extends JPanel implements Observer{
         registerListeners();
         update(game,null);
     }
+    
     private void createObjects() {
         freeMovement= new JButton("Make Free Movement");
         fastMovement= new JButton("Make Fast Movement");
@@ -40,6 +40,7 @@ public class WaitTunnelPanel extends JPanel implements Observer{
         add(getInMovement);
         add(returnButton);
     }
+    
     private void registerListeners() {
         freeMovement.addActionListener(new ActionListener() {
             @Override
@@ -81,6 +82,7 @@ public class WaitTunnelPanel extends JPanel implements Observer{
         else
             getInMovement.setEnabled(false);
     }
+    
     @Override
     public void update(Observable o, Object arg) {
         if(game.getState() instanceof Wait_Tunnel){

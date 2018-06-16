@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.MyException;
@@ -45,12 +44,12 @@ public class Images implements ConstantsGUI {
             try {
                 images.put(CARD7, ImageIO.read(getResourceFile(PATH_IMG_CARD7)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(BACKGROUND, ImageIO.read(getResourceFile(PATH_IMG_BACKGROUND)));
-            } catch (MyException ex){}
-            try{
+            } catch (MyException ex) {}
+            try {
                 images.put(BACKGROUND2, ImageIO.read(getResourceFile(PATH_IMG_BACKGROUND2)));
-            } catch (MyException ex){}
+            } catch (MyException ex) {}
             try {
                 images.put(NEW, ImageIO.read(getResourceFile(PATH_IMG_NEW)));
             } catch (MyException ex) {}
@@ -72,81 +71,83 @@ public class Images implements ConstantsGUI {
             try {
                 images.put(INFO2, ImageIO.read(getResourceFile(PATH_IMG_INFO2)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(LADDER_ICON, ImageIO.read(getResourceFile(PATH_LADDER_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(BATTERING_RAM_ICON, ImageIO.read(getResourceFile(PATH_BATTERING_RAM_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SIEGE_TOWER_ICON, ImageIO.read(getResourceFile(PATH_SIEGE_TOWER_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(RED_SQUARE_ICON, ImageIO.read(getResourceFile(PATH_RED_SQUARE_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(WALL_ICON, ImageIO.read(getResourceFile(PATH_WALL_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(MORALE_ICON, ImageIO.read(getResourceFile(PATH_MORALE_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SUPPLY_ICON, ImageIO.read(getResourceFile(PATH_SUPPLY_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SOLDIER_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(APPLES_ICON, ImageIO.read(getResourceFile(PATH_APPLES_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(LADDER_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_LADDER_ICON_CIRCLE)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(BATTERING_RAM_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_BATTERING_RAM_ICON_CIRCLE)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SIEGE_TOWER_ICON_CIRCLE, ImageIO.read(getResourceFile(PATH_SIEGE_TOWER_ICON_CIRCLE)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(LOSS_ICON, ImageIO.read(getResourceFile(PATH_LOSS_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(WIN_ICON, ImageIO.read(getResourceFile(PATH_WIN_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SOLDIER_RUN_FORWARD_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_RUN_FORWARD_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(SOLDIER_RUN_BACKWARD_ICON, ImageIO.read(getResourceFile(PATH_SOLDIER_RUN_BACKWARD_ICON)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE1, ImageIO.read(getResourceFile(PATH_DICE1)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE2, ImageIO.read(getResourceFile(PATH_DICE2)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE3, ImageIO.read(getResourceFile(PATH_DICE3)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE4, ImageIO.read(getResourceFile(PATH_DICE4)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE5, ImageIO.read(getResourceFile(PATH_DICE5)));
             } catch (MyException ex) {}
-            try{
+            try {
                 images.put(DICE6, ImageIO.read(getResourceFile(PATH_DICE6)));
             } catch (MyException ex) {}
         } catch (IOException e) {}
     }
     
-     public static Image getImage(String name) {
+    public static Image getImage(String name) {
         return images.get(name);
-     }
+    }
+    
     public static Map<String, Image> getImages() {
         return images;
     }
+    
     private static URL getResourceFile(String name) throws MyException{
         URL url= Images.class.getResource(name);
         if(url == null)

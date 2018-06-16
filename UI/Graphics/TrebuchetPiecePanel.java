@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -21,10 +20,12 @@ public class TrebuchetPiecePanel extends JPanel implements Observer,ConstantsGUI
         setOpaque(false);
         update(game,null);
     }
+    
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(30, 30);
     }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,14 +43,10 @@ public class TrebuchetPiecePanel extends JPanel implements Observer,ConstantsGUI
         }
     }
     
-
     @Override
     public void update(Observable o, Object arg) {
         if(!(game.getState() instanceof Initial_State)){
             setPosition();
         }
     }
-
-    
-    
 }

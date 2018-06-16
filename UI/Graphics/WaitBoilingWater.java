@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Constants;
@@ -94,9 +93,4 @@ public class WaitBoilingWater extends JPanel implements Observer {
         }else
             setVisible(false);
     }
-
-    
-
-    
-    
 }

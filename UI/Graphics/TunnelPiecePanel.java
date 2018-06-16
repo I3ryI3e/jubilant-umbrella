@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -21,6 +20,7 @@ public class TunnelPiecePanel extends JPanel implements Observer, ConstantsGUI{
         setOpaque(false);
         update(game,null);
     }
+    
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(30, 30);
@@ -32,9 +32,11 @@ public class TunnelPiecePanel extends JPanel implements Observer, ConstantsGUI{
         Image piece = Images.getImage(type);
         g.drawImage(piece, 0, 0, this);
     }
+    
     private int getActualPos(){
             return 8+(game.getSoldierLocation()*31);
     }
+    
     private void setPosition() {
         int newPositionOnScreen;
         int yPos=0;
@@ -52,11 +54,9 @@ public class TunnelPiecePanel extends JPanel implements Observer, ConstantsGUI{
         setBounds(newPositionOnScreen, 243+yPos, getPreferredSize().width, getPreferredSize().height);
     }
     
-
     @Override
     public void update(Observable o, Object arg) {
         if(!(game.getState() instanceof Initial_State))
             setPosition();
     }
-    
 }

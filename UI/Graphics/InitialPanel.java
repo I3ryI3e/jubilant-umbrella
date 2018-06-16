@@ -44,7 +44,6 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
     }
 
     private void addGraphicsObjects() {
-        
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -70,13 +69,14 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
                 game.setup();
             }
         });
+        
         loadGame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 JFileChooser fileChooser = new JFileChooser();
-//                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
-//                fileChooser.setFileFilter(filter);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showOpenDialog(InitialPanel.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
@@ -84,13 +84,14 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
                 }
             }      
         });
+        
         saveGame.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 JFileChooser fileChooser = new JFileChooser();
-//                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
-//                fileChooser.setFileFilter(filter);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Game file only", "g");
+                fileChooser.setFileFilter(filter);
                 int n = fileChooser.showSaveDialog(InitialPanel.this);
                 if(n == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
@@ -98,6 +99,7 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
                 }
             }
         });
+        
         quit.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
@@ -111,10 +113,10 @@ public class InitialPanel extends JPanel implements Observer, ConstantsGUI{
 
     @Override
     public void update(Observable o, Object arg) {
-       States state=game.getState();
-       if(state instanceof Initial_State){
-           setVisible(true);
-       }else
-           setVisible(false);
+        States state=game.getState();
+        if(state instanceof Initial_State){
+            setVisible(true);
+        }else
+            setVisible(false);
     }
 }

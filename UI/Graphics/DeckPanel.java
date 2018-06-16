@@ -1,7 +1,6 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -35,10 +34,8 @@ public class DeckPanel extends JPanel implements Observer,ConstantsGUI {
         }      
     }
     
-
     @Override
     public void update(Observable o, Object arg) {
         repaint();
     }
-    
 }
