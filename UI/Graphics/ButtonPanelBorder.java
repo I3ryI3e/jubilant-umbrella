@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -23,11 +22,7 @@ public class ButtonPanelBorder extends JPanel {
     }
 
     private void orderLayout() {
-        
         setLayout(new BorderLayout());
         add(buttonPanel,BorderLayout.SOUTH);
     }
-    
-    
-    
 }

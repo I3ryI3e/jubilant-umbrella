@@ -1,19 +1,13 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Action;
-import State_Machine.Wait_Draw_Card;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -41,8 +35,8 @@ public class WaitActionPanel extends JPanel implements Observer {
         registerListeners();
         
         update(game,null);
-        
     }
+    
     private void createObjects() {
         archersButton= new JButton("Archers Attack");
         boilingButton= new JButton("Boiling Attack");
@@ -132,6 +126,7 @@ public class WaitActionPanel extends JPanel implements Observer {
             }
         });
     }
+    
     private void setButtons(){
         if(game.canArchers())
             archersButton.setEnabled(true);
@@ -169,10 +164,7 @@ public class WaitActionPanel extends JPanel implements Observer {
             buyActionButton.setEnabled(true);
         else
             buyActionButton.setEnabled(false);
-        
     }
-
-    
 
     @Override
     public void update(Observable o, Object arg) {
@@ -180,12 +172,7 @@ public class WaitActionPanel extends JPanel implements Observer {
         if(state instanceof Wait_Action){
             setVisible(true);
             setButtons();
-        }
-        else
+        }else
             setVisible(false);
     }
-
-    
-    
-    
 }

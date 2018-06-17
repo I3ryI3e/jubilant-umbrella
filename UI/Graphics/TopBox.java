@@ -1,7 +1,6 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import java.awt.Dimension;
 import javax.swing.Box;
 

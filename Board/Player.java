@@ -95,8 +95,8 @@ public class Player implements Serializable{
     public String doEnemyCheckLine(int dice) {
         StringBuilder aux = new StringBuilder();
         if(tunnel.onEnemyLine()){
-            aux.append("Enemy check line\n");
-            aux.append("Dice: ").append(dice);
+            aux.append("\nEnemy check line");
+            aux.append("\nDice: ").append(dice);
             if(dice==1){
                 tunnel.soldiersDiedOnEnemyLines();
                 raided_supplies = 0;

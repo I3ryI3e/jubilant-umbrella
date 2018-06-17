@@ -44,6 +44,7 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
         add(newGame, gbc);
         add(quit, gbc);
     }
+    
     private void registerListeners() {
         newGame.addActionListener(new ActionListener() {
             @Override
@@ -70,12 +71,10 @@ public class WinPanel extends JPanel implements Observer, ConstantsGUI{
     
     @Override
     public void update(Observable o, Object o1) {
-       States state=game.getState();
-       if(state instanceof Win_Game){
-           setVisible(true);
-       }else
-           setVisible(false);
+        States state=game.getState();
+        if(state instanceof Win_Game){
+            setVisible(true);
+        }else
+            setVisible(false);
     }
-
-    
 }

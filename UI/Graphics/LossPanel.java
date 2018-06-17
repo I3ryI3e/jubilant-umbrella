@@ -44,6 +44,7 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
         add(newGame, gbc);
         add(quit, gbc);
     }
+    
     private void registerListeners() {
         newGame.addActionListener(new ActionListener() {
             @Override
@@ -51,6 +52,7 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
                 game.returnInitialState();
             }
         });
+        
         quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,15 +70,12 @@ public class LossPanel extends JPanel implements Observer, ConstantsGUI{
         g.drawImage(imageBoard, 0, 0, getParent().getWidth(),getParent().getHeight(), this);
     }
     
-    
     @Override
     public void update(Observable o, Object o1) {
-       States state=game.getState();
-       if(state instanceof Game_Over){
-           setVisible(true);
-       }else
-           setVisible(false);
-    }
-
-    
+        States state=game.getState();
+        if(state instanceof Game_Over){
+            setVisible(true);
+        }else
+            setVisible(false);
+    } 
 }

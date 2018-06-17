@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Constants;
@@ -27,14 +26,15 @@ public class WaitArchersPanel extends JPanel implements Observer{
         orderLayout();
         registerListeners();
         update(game,null);
-        
     }
+    
     private void createObjects(){
         ladderButton= new JButton("Attack Ladder");
         batteringRamButton= new JButton("Attack Battering Ram");
         siegeTowerButton= new JButton("Attack Siege Tower");
         returnToMenuButton= new JButton("Return");
     }
+    
     private void orderLayout() {
         setLayout(new GridLayout(4, 1));
         add(ladderButton);
@@ -42,6 +42,7 @@ public class WaitArchersPanel extends JPanel implements Observer{
         add(siegeTowerButton);
         add(returnToMenuButton);
     }
+    
     private void registerListeners() {
         ladderButton.addActionListener(new ActionListener() {
             @Override

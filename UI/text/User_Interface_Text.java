@@ -16,8 +16,6 @@ public class User_Interface_Text implements Constants, Observer{
         this.game= game;
         game.addObserver(this);
     }
-
-    private void setGame(ObservableGame game) {this.game = game;}
     
     private int read_int(){
         Scanner in = new Scanner(System.in);

@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -8,8 +7,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-import java.util.Observable;
-import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import static UI.Graphics.ConstantsGUI.CARDS_WIDTH;
@@ -45,7 +42,6 @@ public class PlayerBoardPanel extends JPanel implements ConstantsGUI{
         Image imageBoard = Images.getImage(boardName);
         g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
     }
-    
 
     private void orderLayout() {
         setLayout(null);

@@ -3,7 +3,6 @@ package UI.Graphics;
 import Model.ObservableGame;
 import java.awt.Dimension;
 import javax.swing.Box;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class BottomBox extends Box implements ConstantsGUI{
@@ -21,13 +20,11 @@ public class BottomBox extends Box implements ConstantsGUI{
     }
 
     private void createObjects() {
-
         buttonPanelBorder = new ButtonPanelBorder(game);
         textPanel = new TextAreaPanel(game);
         dicePanel = new DicePanel(game);
     }
     
-
     private void setObjLayout() {
         Box dice = Box.createVerticalBox();
         Box text= Box.createVerticalBox();
@@ -43,8 +40,6 @@ public class BottomBox extends Box implements ConstantsGUI{
         buttons.setMinimumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
         buttons.setMaximumSize(new Dimension(BUTTONS_SPECIAL_WITDH, CARDS_HEIGHT));
         
-        
-
         add(Box.createRigidArea(new Dimension(MARGIN,0)));
         add(text);
         add(Box.createRigidArea(new Dimension(MARGIN,0)));

@@ -1,15 +1,7 @@
-
 package UI.Graphics;
-
 
 import Model.MyException;
 import Model.ObservableGame;
-import static UI.Graphics.ConstantsGUI.BATTERING_RAM_ICON;
-import static UI.Graphics.ConstantsGUI.BATTERING_RAM_ICON_CIRCLE;
-import static UI.Graphics.ConstantsGUI.LADDER_ICON;
-import static UI.Graphics.ConstantsGUI.LADDER_ICON_CIRCLE;
-import static UI.Graphics.ConstantsGUI.SIEGE_TOWER_ICON;
-import static UI.Graphics.ConstantsGUI.SIEGE_TOWER_ICON_CIRCLE;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,7 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
 
-public class WeaponPiecePanel extends JPanel implements Observer {
+public class WeaponPiecePanel extends JPanel implements Observer, ConstantsGUI{
     private String type;
     private ObservableGame game;
 
@@ -32,12 +24,14 @@ public class WeaponPiecePanel extends JPanel implements Observer {
     public Dimension getPreferredSize() {
         return new Dimension(30, 30);
     }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image piece = Images.getImage(type);
         g.drawImage(piece, 0, 0, this);
-    }   
+    }
+    
     private int getActualPos(String type) throws MyException{
         return 187-(Math.abs(game.getWeaponPosNum(type)-4)*45);
     }
@@ -59,8 +53,7 @@ public class WeaponPiecePanel extends JPanel implements Observer {
                 }
                 if(positionOnList==1){
                     type=LADDER_ICON_CIRCLE;
-                }
-                else{
+                }else{
                     type=LADDER_ICON;
                 }
                 if(positionOnList==0){

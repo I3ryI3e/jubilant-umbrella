@@ -14,6 +14,4 @@ public interface Constants extends Serializable{
     final int N_PLAYER_SQUARES=5;
     final int N_TUNNEL_SPACES=2;
     final int CLOSE_COMBAT_POSITION_POWER = 4;
-    
-    
 }

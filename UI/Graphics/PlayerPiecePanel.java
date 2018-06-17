@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -19,19 +18,23 @@ public class PlayerPiecePanel extends JPanel implements Observer, ConstantsGUI {
         this.game.addObserver(this);
         setOpaque(false);
     }
+    
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(30, 30);
     }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image piece = Images.getImage(type);
         g.drawImage(piece, 0, 0, this);
     }
+    
     private int getActualPos(String type){
             return 9+(Math.abs(game.getPlayerLocation(type)-4)*46);
     }
+    
     private void setPosition() {
         int newPositionOnScreen;
         switch(type){

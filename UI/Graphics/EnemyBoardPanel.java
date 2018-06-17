@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
@@ -26,7 +25,6 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
         setBorder(new LineBorder(Color.BLACK));
         createObjects();
         orderLayout();
-        
     }
 
     @Override
@@ -35,7 +33,6 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
         Image imageBoard = Images.getImage(boardName);
         g.drawImage(imageBoard, 0, 0, CARDS_WIDTH, CARDS_HEIGHT, this);
     }
-
     
     private void createObjects() {
         ladder= new WeaponPiecePanel(LADDER_ICON, game);

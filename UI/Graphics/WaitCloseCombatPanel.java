@@ -1,4 +1,3 @@
-
 package UI.Graphics;
 
 import Model.Constants;
@@ -26,6 +25,7 @@ public class WaitCloseCombatPanel extends JPanel implements Observer {
         orderLayout();
         registerListeners();
     }
+    
     private void createObjects() {
         ladderButton= new JButton("Attack Ladder");
         batteringRamButton= new JButton("Attack Battering Ram");

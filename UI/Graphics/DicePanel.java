@@ -2,12 +2,6 @@ package UI.Graphics;
 
 import Model.ObservableGame;
 import State_Machine.Initial_State;
-import static UI.Graphics.ConstantsGUI.DICE1;
-import static UI.Graphics.ConstantsGUI.DICE2;
-import static UI.Graphics.ConstantsGUI.DICE3;
-import static UI.Graphics.ConstantsGUI.DICE4;
-import static UI.Graphics.ConstantsGUI.DICE5;
-import static UI.Graphics.ConstantsGUI.DICE6;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -44,8 +38,6 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
         Image imageBoard = Images.getImage(type);
         g.drawImage(imageBoard, 25, 50, this);
     }
-
-    
     
     @Override
     public void update(Observable o, Object o1) {
@@ -54,6 +46,7 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
                 timer.start();
         }
     }
+    
     public String getStringDiceName(int num){
         switch(num){
                 case 1:
@@ -82,8 +75,9 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
             this.countdown=50;
             this.on=false;
         }
+        
         public String getStringDiceName(int num){
-        switch(num){
+            switch(num){
                 case 1:
                     return DICE1;
                 case 2:
@@ -97,10 +91,9 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
                 case 6:
                     return DICE6;           
             }
-        return null;
-    }
+            return null;
+        }
         
-
         @Override
         public void actionPerformed(ActionEvent e) {
             if(countdown==0 && on){
@@ -117,7 +110,5 @@ class DicePanel extends JPanel implements Observer, ConstantsGUI{
                 on=true;
             }
         }
-        
     }
-        
 }

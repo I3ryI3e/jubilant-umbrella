@@ -44,6 +44,4 @@ public class DiscardPanel extends JPanel implements Observer, ConstantsGUI{
     public void update(Observable o, Object arg) {
         repaint();
     }
-    
-    
 }

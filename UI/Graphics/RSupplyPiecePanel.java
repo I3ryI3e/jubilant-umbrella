@@ -5,12 +5,9 @@ import State_Machine.Initial_State;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 public class RSupplyPiecePanel extends JPanel implements Observer, ConstantsGUI {
     private ObservableGame game;
@@ -23,10 +20,12 @@ public class RSupplyPiecePanel extends JPanel implements Observer, ConstantsGUI 
         setOpaque(false);
         update(game,null);
     }
-@Override
+    
+    @Override
     public Dimension getPreferredSize() {
         return new Dimension(30, 30);
     }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,7 +41,6 @@ public class RSupplyPiecePanel extends JPanel implements Observer, ConstantsGUI 
             setVisible(true);
             setBounds(145, 242-((numberOfSupplies-1)*33), getPreferredSize().width, getPreferredSize().height);
         }
-        
     }
 
     @Override
@@ -50,6 +48,4 @@ public class RSupplyPiecePanel extends JPanel implements Observer, ConstantsGUI 
         if(!(game.getState() instanceof Initial_State))
             setPosition();
     }
-
-    
 }

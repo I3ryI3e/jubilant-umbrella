@@ -1,7 +1,6 @@
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import State_Machine.Game_Over;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;

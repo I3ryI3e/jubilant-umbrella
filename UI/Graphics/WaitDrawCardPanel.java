@@ -1,8 +1,6 @@
-
 package UI.Graphics;
 
 import Model.ObservableGame;
-import Model.Siege_Game;
 import State_Machine.States;
 import State_Machine.Wait_Draw_Card;
 import java.awt.BorderLayout;
@@ -25,7 +23,6 @@ public class WaitDrawCardPanel extends JPanel implements Observer {
         createObjects();
         orderLayout();
         registerListeners();
-        
     }
     
     private void createObjects() {
@@ -36,6 +33,7 @@ public class WaitDrawCardPanel extends JPanel implements Observer {
         setLayout(new BorderLayout());
         add(drawCardButton, BorderLayout.CENTER);
     }
+    
     private void registerListeners() {
         drawCardButton.addActionListener(new ActionListener() {
             @Override
@@ -53,6 +51,4 @@ public class WaitDrawCardPanel extends JPanel implements Observer {
         else 
             setVisible(false);
     }
-
-  
 }
