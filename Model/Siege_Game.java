@@ -376,4 +376,8 @@ public class Siege_Game implements Constants, Serializable{
         return game.getNumberOfActions();
     }
 
+    public void resetDice() {
+        game.resetDice();
+    }
+
 }

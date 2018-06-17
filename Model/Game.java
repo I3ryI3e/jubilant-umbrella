@@ -510,6 +510,10 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         return player.getActions();
     }
 
+    void resetDice() {
+        Dice.resetDice();
+    }
+
     
     
     private static class Dice {
@@ -528,6 +532,9 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         }
         public static int getLastRoll(){
             return lastRoll;
+        }
+        public static void resetDice(){
+            lastRoll=-1;
         }
     }
     

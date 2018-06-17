@@ -13,8 +13,10 @@ public class Buy_One_Action extends State_Adapter {
     @Override
     public States buyAction(int opt) {
         getGame().buyAction(opt);
+        if(getGame().checkLoss())
+            return new Game_Over(getGame());
         if (getGame().TwoEnemyLine())
             return new Close_Combat(getGame());
-        return new Wait_Action(getGame());
+        return new Wait_Action(getGame());   
     }
 }

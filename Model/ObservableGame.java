@@ -311,6 +311,7 @@ public class ObservableGame extends Observable {
     public void setGame(Siege_Game load_game) {
         if( load_game != null){
             this.game=load_game;
+            game.resetDice();
             setChanged();
             notifyObservers();
         }
