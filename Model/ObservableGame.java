@@ -167,9 +167,7 @@ public class ObservableGame extends Observable {
     public void loadGame(File file) {
         try {
             setGame(game.loadGame(file));
-        } catch (ClassNotFoundException | IOException ex) {
-            System.out.println("LOL");
-        }
+        } catch (ClassNotFoundException | IOException ex) {}
     }
 
     public boolean saveGame(File file) {
@@ -311,9 +309,11 @@ public class ObservableGame extends Observable {
     }
 
     public void setGame(Siege_Game load_game) {
-        this.game=load_game;
-        setChanged();
-        notifyObservers();
+        if( load_game != null){
+            this.game=load_game;
+            setChanged();
+            notifyObservers();
+        }
     }
 
 

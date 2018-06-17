@@ -49,9 +49,6 @@ public class Game implements Serializable, Constants, ConstantsGUI{
     public void changeUseBoiling(){this.canUseBoiling= !this.canUseBoiling;}
     
     public String getTextToOutput(){
-//        String aux = textToOutput.toString();
-//        textToOutput.delete(0, textToOutput.length());
-//        return aux;
         return textToOutput.toString();
     }
     
@@ -79,6 +76,7 @@ public class Game implements Serializable, Constants, ConstantsGUI{
         this.canUseFreeMovement=true;
         this.canUseBoiling=true;
         this.sabAndRaidStateActive=false;
+        textToOutput.delete(0, textToOutput.length());
     }
     private Event getActiveEvent(){
         return discard.get(0).getDayX(gameDay).getEvent();
