@@ -47,19 +47,19 @@ public class PlayerBoardPanel extends JPanel implements ConstantsGUI{
         setLayout(null);
         Insets inset = getInsets();
         Dimension size = wall.getPreferredSize();
-        wall.setBounds(inset.left+11, inset.top+9, size.width, size.height);
+        wall.setBounds(inset.left+PLAYER_X_START_WALL, inset.top+PLAYER_Y_START_POSITION, size.width, size.height);
         add(wall);
         size = morale.getPreferredSize();
-        morale.setBounds(inset.left+75, inset.top+9, size.width, size.height);
+        morale.setBounds(inset.left+PLAYER_X_START_MORALE, inset.top+PLAYER_Y_START_POSITION, size.width, size.height);
         add(morale);
         size = supply.getPreferredSize();
-        supply.setBounds(inset.left+140, inset.top+9, size.width, size.height);
+        supply.setBounds(inset.left+PLAYER_X_START_SUPPLY, inset.top+PLAYER_Y_START_POSITION, size.width, size.height);
         add(supply);
         size = tunnel.getPreferredSize();
-        tunnel.setBounds(inset.left+8, inset.top+243, size.width, size.height);
+        tunnel.setBounds(inset.left+PLAYER_X_START_TUNNEL, inset.top+PLAYER_Y_START_TUNNEL, size.width, size.height);
         add(tunnel);
         size = supplyCount.getPreferredSize();
-        supplyCount.setBounds(inset.left+145, inset.top+242, size.width, size.height);
+        supplyCount.setBounds(inset.left+PLAYER_X_START_RSUPPLIES, inset.top+PLAYER_Y_START_RSUPPLIES, size.width, size.height);
         add(supplyCount);
     }
 

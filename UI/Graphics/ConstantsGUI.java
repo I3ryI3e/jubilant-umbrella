@@ -9,6 +9,26 @@ public interface ConstantsGUI {
     int MIN_WINDOW_HEIGHT = 660;
     int MIN_WINDOW_WIDTH = 872;
     
+    int ENEMY_Y_START_POSITION = 187;
+    int ENEMY_X_START_LADDER= 14;
+    int ENEMY_X_START_BRAM= 82;
+    int ENEMY_X_START_STOWER= 150;
+    int ENEMY_X_START_TREB= 152;
+    int ENEMY_Y_START_TREB= 244;
+    
+    int PLAYER_Y_START_POSITION= 9;
+    int PLAYER_X_START_WALL = 11;
+    int PLAYER_X_START_MORALE = 75;
+    int PLAYER_X_START_SUPPLY = 140;
+    int PLAYER_X_START_TUNNEL = 8;
+    int PLAYER_Y_START_TUNNEL = 243;
+    int PLAYER_X_START_RSUPPLIES = 145;
+    int PLAYER_Y_START_RSUPPLIES = 242;
+    
+    
+    
+    
+    
     String INITIAL_PANEL="Initial Panel";
     String DRAW_CARD_PANEL="Draw Card Panel";
     String WIN_PANEL="Win panel";

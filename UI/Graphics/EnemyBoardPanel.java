@@ -45,16 +45,16 @@ public class EnemyBoardPanel extends JPanel implements ConstantsGUI {
         setLayout(null);
         Insets inset = getInsets();
         Dimension size = ladder.getPreferredSize();
-        ladder.setBounds(inset.left+14, inset.top+187, size.width, size.height);
+        ladder.setBounds(inset.left+ENEMY_X_START_LADDER, inset.top+ENEMY_Y_START_POSITION, size.width, size.height);
         add(ladder);
         size = batteringRam.getPreferredSize();
-        batteringRam.setBounds(inset.left+82, inset.top+187, size.width, size.height);
+        batteringRam.setBounds(inset.left+ENEMY_X_START_BRAM, inset.top+ENEMY_Y_START_POSITION, size.width, size.height);
         add(batteringRam);
         size = siegeTower.getPreferredSize();
-        siegeTower.setBounds(inset.left+150, inset.top+187, size.width, size.height);
+        siegeTower.setBounds(inset.left+ENEMY_X_START_STOWER, inset.top+ENEMY_Y_START_POSITION, size.width, size.height);
         add(siegeTower);
         size= trebuchet.getPreferredSize();
-        trebuchet.setBounds(inset.left+152, inset.top+244, size.width, size.height);
+        trebuchet.setBounds(inset.left+ENEMY_X_START_TREB, inset.top+ENEMY_Y_START_TREB, size.width, size.height);
         add(trebuchet);
     }
 }
